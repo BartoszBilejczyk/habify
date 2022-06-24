@@ -1,23 +1,14 @@
 <template>
-  <v-app>
-    <v-main>
-      <HelloWorld/>
-    </v-main>
-  </v-app>
+  <div>
+    <nav class="flex justify-center my-8">
+      <router-link to="/">Home</router-link>
+      <span class="block mx-3">|</span>
+      <router-link to="/stats">Stats</router-link>
+    </nav>
+    <router-view />
+  </div>
 </template>
 
-<script>
-import HelloWorld from './components/HelloWorld.vue'
+<script setup></script>
 
-export default {
-  name: 'App',
-
-  components: {
-    HelloWorld,
-  },
-
-  data: () => ({
-    //
-  }),
-}
-</script>
+<style></style>
