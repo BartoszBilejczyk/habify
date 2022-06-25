@@ -3,7 +3,7 @@ import App from './App.vue';
 import router from './router';
 import './index.css';
 
-import useFirebase from './use-firebase';
+// import useFirebase from './use-firebase';
 
 const app = createApp(App);
 

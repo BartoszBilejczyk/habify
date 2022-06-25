@@ -1,5 +1,5 @@
 <template>
-  <div class="m-5 pb-10">SIEMANO</div>
+  <div class="">PROFILE</div>
 </template>
 
 <script setup lang="ts"></script>

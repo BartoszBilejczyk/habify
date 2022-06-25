@@ -1,14 +1,12 @@
 <template>
   <div>
-    <nav class="flex justify-center my-8">
-      <router-link to="/">Home</router-link>
-      <span class="block mx-3">|</span>
-      <router-link to="/stats">Stats</router-link>
-    </nav>
     <router-view />
+    <Menu />
   </div>
 </template>
 
-<script setup></script>
+<script setup lang="ts">
+  import Menu from '@/components/Menu.vue';
+</script>
 
 <style></style>
