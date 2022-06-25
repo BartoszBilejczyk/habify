@@ -1,13 +1,13 @@
 <template>
   <div class="fixed bottom-0 pt-2 pb-6 px-10 w-full">
-    <div class="flex justify-between">
+    <div class="flex justify-center">
       <div
         v-for="item in menuItems"
-        class="flex flex-col items-center text-xxs text-white-700"
+        class="flex flex-col items-center text-xxs text-white-700 mx-4"
         :class="{ 'text-coral font-semibold': active === item.name }"
         @click="handleRouteChange(item.route)"
       >
-        <component :is="item.icon" class="w-4 h-4 mb-0.5" />
+        <component :is="item.icon" class="w-5 h-5 mb-1" />
         {{ item.title }}
       </div>
     </div>
