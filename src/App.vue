@@ -1,6 +1,6 @@
 <template>
-  <div>
-    <router-view />
+  <div class="p-safe">
+    <div class="p-3"><router-view /></div>
     <Menu />
   </div>
 </template>

@@ -1,3 +1,5 @@
+const defaultTheme = require('tailwindcss/defaultTheme');
+
 module.exports = {
   content: ['./index.html', './src/**/*.{vue,js,ts,jsx,tsx}'],
   theme: {
@@ -13,8 +15,8 @@ module.exports = {
         300: 'rgba(#080708, 0.3)',
         400: 'rgba(#080708, 0.4)',
         500: 'rgba(#080708, 0.5)',
-        600: 'rgba(#080708, 0.6)',
-        700: 'rgba(#080708, 0.7)',
+        600: 'rgba(8,7,8, 0.6)',
+        700: 'rgba(8,7,8, 0.7)',
         800: 'rgba(#080708, 0.8)',
         900: 'rgba(#080708, 0.9)',
         DEFAULT: '#080708'
@@ -104,6 +106,12 @@ module.exports = {
         DEFAULT: '#FDCA40'
       }
     },
+    extend: {
+      fontSize: {
+        ...defaultTheme.fontSize,
+        xxs: ['.625rem', '.75rem']
+      }
+    },
     screens: {
       sm: '576px',
       md: '768px',
@@ -120,5 +128,5 @@ module.exports = {
       backgroundColor: ['odd']
     }
   },
-  plugins: []
+  plugins: [require('tailwindcss-safe-area')]
 };

@@ -1,13 +1,13 @@
 <template>
-  <div class="fixed bottom-0 py-3 px-10 w-full">
+  <div class="fixed bottom-0 pt-2 pb-6 px-10 w-full">
     <div class="flex justify-between">
       <div
         v-for="item in menuItems"
-        class="flex flex-col items-center"
-        @click="handleRouteChange"
+        class="flex flex-col items-center text-xxs text-white-700"
         :class="{ 'text-coral font-semibold': active === item.name }"
+        @click="handleRouteChange(item.route)"
       >
-        <component :is="item.icon" class="w-5 h-5" />
+        <component :is="item.icon" class="w-4 h-4 mb-0.5" />
         {{ item.title }}
       </div>
     </div>
@@ -30,7 +30,7 @@
     icon: String;
     title: String;
     name: String;
-    routePath: RouteName;
+    route: RouteName;
   }
 
   const active = ref<RouteName>('home');
@@ -40,29 +40,30 @@
       icon: ShieldSearch,
       title: 'Home',
       name: 'home',
-      routePath: 'home'
+      route: 'home'
     },
     {
       icon: ShieldStar,
       title: 'Challenges',
       name: 'challenges',
-      routePath: 'challenges'
+      route: 'challenges'
     },
     {
       icon: UserMultiple,
       title: 'Friends',
       name: 'friends',
-      routePath: 'friends'
+      route: 'friends'
     },
     {
       icon: UserSingle,
       title: 'Profile',
       name: 'profile',
-      routePath: 'profile'
+      route: 'profile'
     }
   ]);
 
   const handleRouteChange = (name: RouteName) => {
+    console.log(name);
     push({ name });
   };
 </script>
