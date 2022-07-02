@@ -5,12 +5,12 @@ import { useRouter } from 'vue-router';
 
 if (firebase.apps.length === 0) {
   const firebaseConfig = {
-    apiKey: 'AIzaSyAVi9vOV_PPi3j-6Vc04mTO6M50vIjG_jM',
-    authDomain: 'my-diet-ccddc.firebaseapp.com',
-    projectId: 'my-diet-ccddc',
-    storageBucket: 'my-diet-ccddc.appspot.com',
-    messagingSenderId: '117517693090',
-    appId: '1:117517693090:web:8079d93ef5d3124dcaa7fb'
+    apiKey: process.env.VUE_APP_FIREBASE_API_KEY,
+    authDomain: process.env.VUE_APP_FIREBASE_AUTH_DOMAIN,
+    projectId: process.env.VUE_APP_FIREBASE_PROJECT_ID,
+    storageBucket: process.env.VUE_APP_FIREBASE_STORAGE_BUCKET,
+    messagingSenderId: process.env.VUE_APP_FIREBASE_MESSAGING_SENDER_ID,
+    appId: process.env.VUE_APP_FIREBASE_APP_ID
   };
   firebase.initializeApp(firebaseConfig);
 }
@@ -38,18 +38,8 @@ export default function () {
       });
   };
 
-  const saveData = async data => {
-    await db.doc(`data/data`).set({ data });
-  };
-
-  const saveBackup = async data => {
-    await db.doc(`data/backupData`).set({ data });
-  };
-
   return {
     getCurrentUser,
-    getData,
-    saveData,
-    saveBackup
+    getData
   };
 }
