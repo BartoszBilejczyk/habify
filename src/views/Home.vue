@@ -3,26 +3,28 @@
     <BaseTopNav title="Home" icon="menu">
       <NotificationIcon class="w-5 h-5" />
     </BaseTopNav>
-    <div class="px-3 py-4 mt-4 bg-primary text-white flex justify-between">
-      <span class="text-lg">
-        Create your first challenge.
-        <br />
-        Build good habits.
-      </span>
-      <button @click="handleStart">START</button>
+    <div class="px-6">
+      <div class="px-3 py-4 mt-4 bg-primary text-white flex justify-between">
+        <span class="text-lg">
+          Create your first challenge.
+          <br />
+          Build good habits.
+        </span>
+        <button @click="handleStart">START</button>
+      </div>
+      <BaseSection title="Your friends" route-name="friends">
+        <div class="bg-white-100 px-10 py-16">slot</div>
+      </BaseSection>
+      <BaseSection title="Challenge examples" route-name="challenge-examples">
+        <div class="bg-white-100 px-10 py-16">slot</div>
+      </BaseSection>
+      <BaseSection title="How it works" route-name="how-it-works">
+        <div class="bg-white-100 px-10 py-16">slot</div>
+      </BaseSection>
+      <BaseSection title="Charities we recommend" route-name="charities">
+        <div class="bg-white-100 px-10 py-16">slot</div>
+      </BaseSection>
     </div>
-    <BaseSection title="Your friends" route-name="friends">
-      <div class="bg-white-100 px-10 py-16">slot</div>
-    </BaseSection>
-    <BaseSection title="Challenge examples" route-name="challenge-examples">
-      <div class="bg-white-100 px-10 py-16">slot</div>
-    </BaseSection>
-    <BaseSection title="How it works" route-name="how-it-works">
-      <div class="bg-white-100 px-10 py-16">slot</div>
-    </BaseSection>
-    <BaseSection title="Charities we recommend" route-name="charities">
-      <div class="bg-white-100 px-10 py-16">slot</div>
-    </BaseSection>
   </div>
 </template>
 

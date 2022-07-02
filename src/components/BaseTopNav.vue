@@ -58,6 +58,7 @@
 <style>
   .nav {
     padding-left: env(safe-inset-area-left) !important;
+    padding-top: env(safe-inset-area-top) !important;
     padding-right: env(safe-inset-area-right) !important;
   }
 </style>

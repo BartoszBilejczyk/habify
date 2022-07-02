@@ -1,5 +1,5 @@
 <template>
-  <div class="px-6 max-h-fit h-screen w-screen app">
+  <div class="p-safe max-h-fit h-screen w-screen app">
     <div class="h-full"><router-view /></div>
     <Menu />
   </div>
