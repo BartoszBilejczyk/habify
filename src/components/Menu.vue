@@ -1,11 +1,11 @@
 <template>
-  <div class="fixed bottom-0 pt-2 pb-6 px-10 w-full">
+  <div class="fixed bottom-0 py-2 px-10 w-full">
     <div class="flex justify-center">
       <div
         v-for="item in menuItems"
-        class="flex flex-col items-center text-xxs text-white-700 mx-4"
+        class="flex flex-col items-center text-xxs text-white-700 mx-5 cursor-pointer"
         :class="{ 'text-coral font-semibold': active === item.name }"
-        @click="handleRouteChange(item.route)"
+        @click="handleRouteChange(item.name)"
       >
         <component :is="item.icon" class="w-5 h-5 mb-1" />
         {{ item.title }}
@@ -29,8 +29,7 @@
   interface MenuItem {
     icon: String;
     title: String;
-    name: String;
-    route: RouteName;
+    name: RouteName;
   }
 
   const active = ref<RouteName>('home');
@@ -39,31 +38,27 @@
     {
       icon: ShieldSearch,
       title: 'Home',
-      name: 'home',
-      route: 'home'
+      name: 'home'
     },
     {
       icon: ShieldStar,
       title: 'Challenges',
-      name: 'challenges',
-      route: 'challenges'
+      name: 'active-challenges'
     },
     {
       icon: UserMultiple,
       title: 'Friends',
-      name: 'friends',
-      route: 'friends'
+      name: 'friends'
     },
     {
       icon: UserSingle,
       title: 'Profile',
-      name: 'profile',
-      route: 'profile'
+      name: 'profile'
     }
   ]);
 
   const handleRouteChange = (name: RouteName) => {
-    console.log(name);
+    active.value = name;
     push({ name });
   };
 </script>

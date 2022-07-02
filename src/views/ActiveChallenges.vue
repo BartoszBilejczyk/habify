@@ -1,5 +1,9 @@
 <template>
-  <div class="">Active Challenges</div>
+  <div class="w-full h-full">
+    <BaseTopNav title="Active Challenges">slot</BaseTopNav>
+  </div>
 </template>
 
-<script setup lang="ts"></script>
+<script setup lang="ts">
+  import BaseTopNav from '../components/BaseTopNav.vue';
+</script>

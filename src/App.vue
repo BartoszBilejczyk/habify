@@ -1,6 +1,6 @@
 <template>
-  <div class="p-safe">
-    <div class="p-3"><router-view /></div>
+  <div class="p-safe max-h-fit h-screen w-screen">
+    <div class="h-full"><router-view /></div>
     <Menu />
   </div>
 </template>

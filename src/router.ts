@@ -1,9 +1,25 @@
 import { createRouter, createWebHistory } from 'vue-router';
+import Home from './views/Home.vue';
+import Login from './views/Login.vue';
+import Friends from './views/Friends.vue';
+import Profile from './views/Profile.vue';
+import ActiveChallenges from './views/ActiveChallenges.vue';
+import Challenge from './views/Challenge.vue';
+import ForgotPassword from './views/ForgotPassword.vue';
+import HowItWorks from './views/HowItWorks.vue';
+import NewChallenge from './views/NewChallenge.vue';
+import Onboarding from './views/Onboarding.vue';
+import ChallengeExamples from './views/ChallengeExamples.vue';
+import ProfileChallengeHistory from './views/ProfileChallengeHistory.vue';
+import ProfileFriendsManagement from './views/ProfileFriendsManagement.vue';
+import ProfileInviteFriend from './views/ProfileInviteFriend.vue';
+import ProfileSettings from './views/ProfileSettings.vue';
+import ProfileNotificationSettings from './views/ProfileNotificationSettings.vue';
+import ProfileTaskCenter from './views/ProfileTaskCenter.vue';
 
 export type RouteName =
   | 'home'
   | 'login'
-  | 'challenges'
   | 'friends'
   | 'profile'
   | 'active-challenges'
@@ -26,87 +42,87 @@ const router = createRouter({
     {
       path: '/',
       name: 'home',
-      component: () => import('./views/Home.vue')
+      component: Home
     },
     {
       path: '/login',
       name: 'login',
-      component: () => import('./views/Login.vue')
+      component: Login
     },
     {
       path: '/friends',
       name: 'friends',
-      component: () => import('./views/Friends.vue')
+      component: Friends
     },
     {
       path: '/profile',
       name: 'profile',
-      component: () => import('./views/Profile.vue')
+      component: Profile
     },
     {
       path: '/active-challenges',
       name: 'active-challenges',
-      component: () => import('./views/ActiveChallenges.vue')
+      component: ActiveChallenges
     },
     {
       path: '/challenge',
       name: 'challenge',
-      component: () => import('./views/Challenge.vue')
+      component: Challenge
     },
     {
       path: '/forgot-password',
       name: 'forgot-password',
-      component: () => import('./views/ForgotPassword.vue')
+      component: ForgotPassword
     },
     {
       path: '/how-it-works',
       name: 'how-it-works',
-      component: () => import('./views/HowItWorks.vue')
+      component: HowItWorks
     },
     {
       path: '/new-challenge',
       name: 'new-challenge',
-      component: () => import('./views/NewChallenge.vue')
+      component: NewChallenge
     },
     {
       path: '/onboarding',
       name: 'onboarding',
-      component: () => import('./views/Onboarding.vue')
+      component: Onboarding
     },
     {
       path: '/challenge-examples',
       name: 'challenge-examples',
-      component: () => import('./views/ChallengeExamples.vue')
+      component: ChallengeExamples
     },
     {
       path: '/profile-challenge-history',
       name: 'profile-challenge-history',
-      component: () => import('./views/ProfileChallengeHistory.vue')
+      component: ProfileChallengeHistory
     },
     {
       path: '/profile-friends',
       name: 'profile-friends',
-      component: () => import('./views/ProfileFriendsManagement.vue')
+      component: ProfileFriendsManagement
     },
     {
       path: '/profile-invite',
       name: 'profile-invite',
-      component: () => import('./views/ProfileInviteFriend.vue')
+      component: ProfileInviteFriend
     },
     {
       path: '/profile-settings',
       name: 'profile-settings',
-      component: () => import('./views/ProfileSettings.vue')
+      component: ProfileSettings
     },
     {
       path: '/profile-notification-settings',
       name: 'profile-notification-settings',
-      component: () => import('./views/ProfileNotificationSettings.vue')
+      component: ProfileNotificationSettings
     },
     {
       path: '/profile-task-center',
       name: 'profile-task-center',
-      component: () => import('./views/ProfileTaskCenter.vue')
+      component: ProfileTaskCenter
     }
   ]
 });
