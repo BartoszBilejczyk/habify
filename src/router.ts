@@ -1,21 +1,4 @@
 import { createRouter, createWebHistory } from 'vue-router';
-import Home from './views/Home.vue';
-import Login from './views/Login.vue';
-import Friends from './views/Friends.vue';
-import Profile from './views/Profile.vue';
-import ActiveChallenges from './views/ActiveChallenges.vue';
-import Challenge from './views/Challenge.vue';
-import ForgotPassword from './views/ForgotPassword.vue';
-import HowItWorks from './views/HowItWorks.vue';
-import NewChallenge from './views/NewChallenge.vue';
-import Onboarding from './views/Onboarding.vue';
-import ChallengeExamples from './views/ChallengeExamples.vue';
-import ProfileChallengeHistory from './views/ProfileChallengeHistory.vue';
-import ProfileFriendsManagement from './views/ProfileFriendsManagement.vue';
-import ProfileInviteFriend from './views/ProfileInviteFriend.vue';
-import ProfileSettings from './views/ProfileSettings.vue';
-import ProfileNotificationSettings from './views/ProfileNotificationSettings.vue';
-import ProfileTaskCenter from './views/ProfileTaskCenter.vue';
 
 export type RouteName =
   | 'home'
@@ -42,87 +25,87 @@ const router = createRouter({
     {
       path: '/',
       name: 'home',
-      component: Home
+      component: () => import('./views/Home.vue')
     },
     {
       path: '/login',
       name: 'login',
-      component: Login
+      component: () => import('./views/Login.vue')
     },
     {
       path: '/friends',
       name: 'friends',
-      component: Friends
+      component: () => import('./views/Friends.vue')
     },
     {
       path: '/profile',
       name: 'profile',
-      component: Profile
+      component: () => import('./views/Profile.vue')
     },
     {
       path: '/active-challenges',
       name: 'active-challenges',
-      component: ActiveChallenges
+      component: () => import('./views/ActiveChallenges.vue')
     },
     {
       path: '/challenge',
       name: 'challenge',
-      component: Challenge
+      component: () => import('./views/Challenge.vue')
     },
     {
       path: '/forgot-password',
       name: 'forgot-password',
-      component: ForgotPassword
+      component: () => import('./views/ForgotPassword.vue')
     },
     {
       path: '/how-it-works',
       name: 'how-it-works',
-      component: HowItWorks
+      component: () => import('./views/HowItWorks.vue')
     },
     {
       path: '/new-challenge',
       name: 'new-challenge',
-      component: NewChallenge
+      component: () => import('./views/NewChallenge.vue')
     },
     {
       path: '/onboarding',
       name: 'onboarding',
-      component: Onboarding
+      component: () => import('./views/Onboarding.vue')
     },
     {
       path: '/challenge-examples',
       name: 'challenge-examples',
-      component: ChallengeExamples
+      component: () => import('./views/ChallengeExamples.vue')
     },
     {
       path: '/profile-challenge-history',
       name: 'profile-challenge-history',
-      component: ProfileChallengeHistory
+      component: () => import('./views/ProfileChallengeHistory.vue')
     },
     {
       path: '/profile-friends',
       name: 'profile-friends',
-      component: ProfileFriendsManagement
+      component: () => import('./views/ProfileFriendsManagement.vue')
     },
     {
       path: '/profile-invite',
       name: 'profile-invite',
-      component: ProfileInviteFriend
+      component: () => import('./views/ProfileInviteFriend.vue')
     },
     {
       path: '/profile-settings',
       name: 'profile-settings',
-      component: ProfileSettings
+      component: () => import('./views/ProfileSettings.vue')
     },
     {
       path: '/profile-notification-settings',
       name: 'profile-notification-settings',
-      component: ProfileNotificationSettings
+      component: () => import('./views/ProfileNotificationSettings.vue')
     },
     {
       path: '/profile-task-center',
       name: 'profile-task-center',
-      component: ProfileTaskCenter
+      component: () => import('./views/ProfileTaskCenter.vue')
     }
   ]
 });
