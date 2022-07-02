@@ -1,5 +1,5 @@
 <template>
-  <div class="fixed bottom-0 py-2 px-10 w-full menu">
+  <div class="fixed bottom-0 pt-4 px-10 w-full menu">
     <div class="flex justify-center">
       <div
         v-for="item in menuItems"
@@ -65,6 +65,6 @@
 
 <style>
   .menu {
-    padding-bottom: env(safe-area-inset-bottom) !important;
+    padding-bottom: env(safe-inset-area-bottom) !important;
   }
 </style>

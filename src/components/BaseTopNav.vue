@@ -42,7 +42,6 @@
 
 <style>
   .nav {
-    /*padding: env(safe-area-inset-top) env(safe-area-inset-right) 0 env(safe-area-inset-left) !important;*/
-    padding-top: max(env(safe-inset-area-top), 1.8rem);
+    padding: 0 env(safe-inset-area-right) 0 env(safe-inset-area-left) !important;
   }
 </style>
