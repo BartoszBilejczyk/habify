@@ -18,10 +18,15 @@ export type RouteName =
   | 'profile-settings'
   | 'profile-notification-settings'
   | 'profile-task-center'
+  | 'components'
   | 'charities';
 
 const router = createRouter({
   history: createWebHistory(),
+  scrollBehavior(to, from, savedPosition) {
+    // always scroll to top
+    return { top: 0 };
+  },
   routes: [
     {
       path: '/',
@@ -112,6 +117,11 @@ const router = createRouter({
       path: '/charities',
       name: 'charities',
       component: () => import('./views/Charities.vue')
+    },
+    {
+      path: '/components',
+      name: 'components',
+      component: () => import('./views/Components.vue')
     }
   ]
 });

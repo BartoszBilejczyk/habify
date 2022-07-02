@@ -3,8 +3,8 @@
     <BaseTopNav title="Home" icon="menu">
       <NotificationIcon class="w-5 h-5" />
     </BaseTopNav>
-    <div class="px-6">
-      <div class="px-3 py-4 mt-4 bg-primary text-white flex justify-between">
+    <div class="px-6 pb-12">
+      <div class="px-3 py-4 mt-4 bg-primary text-white flex justify-between rounded-lg">
         <span class="text-lg">
           Create your first challenge.
           <br />
@@ -13,16 +13,16 @@
         <button @click="handleStart">START</button>
       </div>
       <BaseSection title="Your friends" route-name="friends">
-        <div class="bg-white-100 px-10 py-16">slot</div>
+        <div class="bg-white-100 px-10 py-16 rounded-lg">slot</div>
       </BaseSection>
       <BaseSection title="Challenge examples" route-name="challenge-examples">
-        <div class="bg-white-100 px-10 py-16">slot</div>
+        <div class="bg-white-100 px-10 py-16 rounded-lg">slot</div>
       </BaseSection>
       <BaseSection title="How it works" route-name="how-it-works">
-        <div class="bg-white-100 px-10 py-16">slot</div>
+        <div class="bg-white-100 px-10 py-16 rounded-lg">slot</div>
       </BaseSection>
       <BaseSection title="Charities we recommend" route-name="charities">
-        <div class="bg-white-100 px-10 py-16">slot</div>
+        <div class="bg-white-100 px-10 py-16 rounded-lg">slot</div>
       </BaseSection>
     </div>
   </div>

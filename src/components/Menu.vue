@@ -1,6 +1,6 @@
 <template>
-  <div class="fixed left-0 bottom-0 pt-3 px-10 w-full border-t border-t-white-50 bg-white">
-    <div class="flex justify-center menu">
+  <div class="fixed left-0 bottom-0 pb-4 pt-3 px-10 w-full border-t border-t-white-50 bg-white menu">
+    <div class="flex justify-center">
       <div
         v-for="item in menuItems"
         class="flex flex-col items-center text-xxs text-white-700 mx-5 cursor-pointer"
@@ -29,8 +29,8 @@
   const { push, currentRoute } = useRouter();
 
   interface MenuItem {
-    icon: String;
-    title: String;
+    icon?: string;
+    title: string;
     name: RouteNameEnhanced;
   }
 
@@ -60,6 +60,10 @@
       icon: UserSingle,
       title: 'Profile',
       name: 'profile'
+    },
+    {
+      title: 'Admin',
+      name: 'components'
     }
   ]);
 
@@ -71,6 +75,6 @@
 
 <style>
   .menu {
-    padding-bottom: env(safe-inset-area-bottom) !important;
+    padding-bottom: max(env(safe-inset-area-top), 12px) !important;
   }
 </style>
