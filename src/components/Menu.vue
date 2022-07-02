@@ -1,5 +1,5 @@
 <template>
-  <div class="fixed bottom-0 pt-3 px-10 w-full border-t border-t-white-50">
+  <div class="fixed bottom-0 pt-3 px-10 w-full border-t border-t-white-50 bg-white">
     <div class="flex justify-center menu">
       <div
         v-for="item in menuItems"
