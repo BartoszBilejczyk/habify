@@ -4,7 +4,7 @@
     <span class="underline text-sm text-white-700">Give feedback</span>
     <span class="underline text-sm text-white-700 ml-6">Log out</span>
   </div>
-  <div class="px-10 mt-8 text-white-500 text-xs text-center">
+  <div class="px-10 mt-8 text-white-400 text-xs text-center">
     Copyright Web Development Bilejczyk, 2022
     <br />
     version 1.22

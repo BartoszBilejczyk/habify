@@ -1,12 +1,15 @@
 <template>
   <div class="w-full nav pb-3" :class="background && 'bg-primary text-white'">
-    <div class="w-full flex items-center relative" :class="{ 'justify-between': showIcon, 'justify-end': !showIcon }">
+    <div
+      class="px-6 w-full flex items-center relative"
+      :class="{ 'justify-between': showIcon, 'justify-end': !showIcon }"
+    >
       <span v-if="showIcon" class="">
         <BackIcon v-if="icon === 'back'" class="w-4 h-4" @click="handleBack" />
         <CloseIcon v-if="icon === 'close'" class="w-5 h-5" />
         <MenuIcon v-if="icon === 'menu'" class="w-5 h-5" />
       </span>
-      <span class="font-semibold absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
+      <span class="font-bold text-lg absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
         {{ title }}
       </span>
       <div v-if="$slots.default">

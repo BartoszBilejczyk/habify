@@ -13,16 +13,16 @@
         <button @click="handleStart">START</button>
       </div>
       <BaseSection title="Your friends" route-name="friends">
-        <div class="bg-white-100 px-10 py-16 rounded-lg">slot</div>
+        <div class="bg-white p-16 shadow-sm rounded-3xl">slot</div>
       </BaseSection>
       <BaseSection title="Challenge examples" route-name="challenge-examples">
-        <div class="bg-white-100 px-10 py-16 rounded-lg">slot</div>
+        <div class="bg-white p-16 shadow-sm rounded-3xl">slot</div>
       </BaseSection>
       <BaseSection title="How it works" route-name="how-it-works">
-        <div class="bg-white-100 px-10 py-16 rounded-lg">slot</div>
+        <div class="bg-white p-16 shadow-sm rounded-3xl">slot</div>
       </BaseSection>
       <BaseSection title="Charities we recommend" route-name="charities">
-        <div class="bg-white-100 px-10 py-16 rounded-lg">slot</div>
+        <div class="bg-white p-16 shadow-sm rounded-3xl">slot</div>
       </BaseSection>
     </div>
   </div>
