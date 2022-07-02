@@ -1,7 +1,5 @@
 import firebase from 'firebase';
 import 'firebase/firestore';
-import { onMounted } from 'vue';
-import { useRouter } from 'vue-router';
 
 if (firebase.apps.length === 0) {
   const firebaseConfig = {
@@ -19,15 +17,6 @@ export default function () {
   const db = firebase.firestore();
 
   const getCurrentUser = () => firebase.auth().currentUser;
-  const { push } = useRouter();
-
-  onMounted(() => {
-    firebase.auth().onAuthStateChanged(_user => {
-      if (!_user?.email) {
-        push({ name: 'login' });
-      }
-    });
-  });
 
   const getData = async () => {
     return await db

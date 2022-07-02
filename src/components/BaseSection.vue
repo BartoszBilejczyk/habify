@@ -2,7 +2,7 @@
   <div class="my-6">
     <div class="flex justify-between items-center my-4">
       <h2 class="text-xl text-white-900">{{ title }}</h2>
-      <button @click="handleClick" class="text-sm text-white-600">See more</button>
+      <button @click="handleClick" class="text-sm text-white-600" v-if="seeMore">See more</button>
     </div>
     <slot></slot>
   </div>
@@ -13,7 +13,8 @@
 
   const props = defineProps<{
     title: string;
-    routeName: string;
+    routeName?: string;
+    seeMore?: boolean;
   }>();
 
   const { push } = useRouter();

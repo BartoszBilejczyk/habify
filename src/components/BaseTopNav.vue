@@ -1,7 +1,7 @@
 <template>
   <div class="w-full nav pb-3" :class="background && 'bg-primary text-white'">
     <div
-      class="px-6 w-full flex items-center relative"
+      class="px-4 w-full flex items-center relative"
       :class="{ 'justify-between': showIcon, 'justify-end': !showIcon }"
     >
       <span v-if="showIcon" class="">

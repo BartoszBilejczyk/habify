@@ -1,5 +1,26 @@
 <template>
-  <div class="">BaseCheckbox</div>
+  <div class="flex">
+    <input
+      type="checkbox"
+      class="h-5 w-5 border outline-none focus:outline-none border-white-600 hover:border-white-800 checked:border-primary"
+      :value="modelValue"
+      @change="updateValue"
+    />
+    <label v-if="label" class="ml-1.5 text-white-800 leading-5 text-sm">{{ label }}</label>
+  </div>
 </template>
 
-<script setup lang="ts"></script>
+<script setup lang="ts">
+  defineProps<{
+    label?: string;
+    modelValue: string;
+  }>();
+
+  const emit = defineEmits(['update:modelValue']);
+
+  const updateValue = (event: KeyboardEvent) => {
+    emit('update:modelValue', (event.target as HTMLInputElement).value);
+  };
+</script>
+
+<style scoped></style>

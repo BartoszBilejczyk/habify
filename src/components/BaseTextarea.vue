@@ -1,13 +1,13 @@
 <template>
   <div class="flex flex-col">
     <label v-if="label" class="text-white-800 mb-1">{{ label }}</label>
-    <input
+    <textarea
       :placeholder="placeholder"
-      class="h-10 border outline-none focus:outline-none border-white-600 hover:border-white-800 focus:border-primary rounded-lg w-auto px-3 text-white-800"
+      class="border outline-none focus:outline-none border-white-600 hover:border-white-800 focus:border-primary rounded-lg w-auto px-3 pt-2 text-white-800"
       :class="{ 'w-full': full, 'w-fit': !full }"
-      :type="type || 'text'"
       :value="modelValue"
       @input="updateValue"
+      :rows="rows || 3"
     />
   </div>
 </template>
@@ -16,9 +16,9 @@
   defineProps<{
     label?: string;
     modelValue: string;
-    type?: string;
     full?: boolean;
     placeholder?: boolean;
+    rows?: number;
   }>();
 
   const emit = defineEmits(['update:modelValue']);

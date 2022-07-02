@@ -1,7 +1,7 @@
 <template>
   <div class="w-full h-full">
     <BaseTopNav title="Invite Friend" back-route="profile" background />
-    <div class="px-6 pt-4 w-full h-full bg-primary text-white">
+    <div class="px-4 pt-4 w-full h-full bg-primary text-white">
       <div class="text-sm text-center">
         Lorem ipsum dolor sit amet, consectetur adipisicing elit. A ab ad, aperiam eius esse, exercitationem fuga harum
       </div>

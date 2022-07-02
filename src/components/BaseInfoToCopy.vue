@@ -1,5 +1,7 @@
 <template>
-  <div class="">BaseInfoToCopy</div>
+  <div class="border border-2 border-dashed border-primary rounded-3xl px-8 py-4 text-center font-semibold">
+    <slot></slot>
+  </div>
 </template>
 
 <script setup lang="ts"></script>

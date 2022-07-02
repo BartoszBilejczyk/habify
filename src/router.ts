@@ -3,6 +3,7 @@ import { createRouter, createWebHistory } from 'vue-router';
 export type RouteName =
   | 'home'
   | 'login'
+  | 'register'
   | 'friends'
   | 'profile'
   | 'active-challenges'
@@ -37,6 +38,11 @@ const router = createRouter({
       path: '/login',
       name: 'login',
       component: () => import('./views/Login.vue')
+    },
+    {
+      path: '/register',
+      name: 'register',
+      component: () => import('./views/Register.vue')
     },
     {
       path: '/friends',

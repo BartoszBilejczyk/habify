@@ -110,3 +110,12 @@ export interface ChallengeExample {
   type: ChallengeType | null;
   points: string;
 }
+
+// collections
+
+// 1. Challenges -> any subcollections? Challenges / Invitations / invitations where inviter == userId. Challenges where inviter === userId || invitee === userId.
+// 2. Users
+// 3. Challenge Examples
+// 4. Charities
+// 5. Invitations?
+// 6.
