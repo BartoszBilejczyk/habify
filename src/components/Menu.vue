@@ -1,5 +1,5 @@
 <template>
-  <div class="fixed bottom-0 pt-3 px-10 w-full border-t border-t-white-50 bg-white">
+  <div class="fixed left-0 bottom-0 pt-3 px-10 w-full border-t border-t-white-50 bg-white">
     <div class="flex justify-center menu">
       <div
         v-for="item in menuItems"
@@ -37,7 +37,6 @@
   const active = ref<RouteNameEnhanced>('home');
 
   onMounted(() => {
-    console.log(currentRoute.value);
     active.value = currentRoute.value.name;
   });
 
