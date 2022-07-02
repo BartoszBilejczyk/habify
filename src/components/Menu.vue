@@ -1,10 +1,13 @@
 <template>
-  <div class="fixed left-0 bottom-0 pb-4 pt-3 px-10 w-full border-t border-t-white-50 bg-white menu">
+  <div class="fixed left-0 bottom-0 pb-3 pt-3 px-10 w-full border-t border-t-white-50 bg-white menu">
     <div class="flex justify-center">
       <div
         v-for="item in menuItems"
-        class="flex flex-col items-center text-xxs text-white-700 mx-5 cursor-pointer"
-        :class="{ 'text-coral font-semibold': active === item.name }"
+        class="flex flex-col items-center text-xxs mx-5 cursor-pointer"
+        :class="{
+          'text-primary font-black': active === item.name,
+          'text-white-600': active !== item.name
+        }"
         @click="handleRouteChange(item.name)"
       >
         <component :is="item.icon" class="w-5 h-5 mb-1" />
@@ -74,7 +77,7 @@
 </script>
 
 <style>
-  .menu {
-    padding-bottom: max(env(safe-inset-area-top), 12px) !important;
-  }
+  /*.menu {*/
+  /*  padding-bottom: max(env(safe-inset-area-top), 12px) !important;*/
+  /*}*/
 </style>

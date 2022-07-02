@@ -1,7 +1,7 @@
 <template>
   <div class="w-full h-full">
     <BaseTopNav title="Profile" background />
-    <div class="h-32 w-full bg-gradient-to-t from-primary-800 to-primary relative">
+    <div class="h-32 w-full bg-gradient-to-t from-primary-900 to-primary relative">
       <ProfileImageBox />
     </div>
     <div class="flex flex-col px-10 mt-16">

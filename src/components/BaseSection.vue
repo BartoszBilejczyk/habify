@@ -1,8 +1,8 @@
 <template>
   <div class="my-6">
     <div class="flex justify-between items-center my-4">
-      <h2 class="text-xl text-white-900 uppe">{{ title }}</h2>
-      <button @click="handleClick" class="text-sm underline text-white-700">See more</button>
+      <h2 class="text-xl text-white-900">{{ title }}</h2>
+      <button @click="handleClick" class="text-sm text-white-600">See more</button>
     </div>
     <slot></slot>
   </div>
