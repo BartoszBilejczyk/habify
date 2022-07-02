@@ -1,5 +1,5 @@
 <template>
-  <div class="fixed w-full nav">
+  <div class="w-full nav">
     <div class="w-full flex justify-between items-center relative">
       <span v-if="showIcon" class="">
         <BackIcon v-if="icon === 'back'" class="w-5 h-5" />
@@ -9,7 +9,7 @@
       <span class="font-semibold absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
         {{ title }}
       </span>
-      <div v-if="$slots.default" class="right-0">
+      <div v-if="$slots.default">
         <slot></slot>
       </div>
     </div>

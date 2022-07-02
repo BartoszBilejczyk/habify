@@ -1,6 +1,6 @@
 <template>
-  <div class="fixed bottom-0 pt-4 px-10 w-full menu">
-    <div class="flex justify-center">
+  <div class="fixed bottom-0 pt-3 px-10 w-full border-t border-t-white-50">
+    <div class="flex justify-center menu">
       <div
         v-for="item in menuItems"
         class="flex flex-col items-center text-xxs text-white-700 mx-5 cursor-pointer"
