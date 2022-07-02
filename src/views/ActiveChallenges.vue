@@ -1,6 +1,6 @@
 <template>
   <div class="w-full h-full">
-    <BaseTopNav title="Active Challenges">slot</BaseTopNav>
+    <BaseTopNav title="Active Challenges" />
   </div>
 </template>
 

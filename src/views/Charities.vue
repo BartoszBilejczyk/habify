@@ -1,6 +1,6 @@
 <template>
   <div class="w-full h-full">
-    <BaseTopNav title="Task Center" back-route="profile" />
+    <BaseTopNav title="Charities" back-route="home" />
   </div>
 </template>
 

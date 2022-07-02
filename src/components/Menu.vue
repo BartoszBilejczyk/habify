@@ -20,19 +20,26 @@
   import UserMultiple from '../assets/icons/user-multiple.svg';
   import UserSingle from '../assets/icons/user-single.svg';
 
-  import { ref } from 'vue';
-  import { useRouter } from 'vue-router';
+  import { ref, onMounted } from 'vue';
+  import { RouteRecordName, useRouter } from 'vue-router';
   import { RouteName } from '../router';
 
-  const { push } = useRouter();
+  type RouteNameEnhanced = RouteName | RouteRecordName | null | undefined;
+
+  const { push, currentRoute } = useRouter();
 
   interface MenuItem {
     icon: String;
     title: String;
-    name: RouteName;
+    name: RouteNameEnhanced;
   }
 
-  const active = ref<RouteName>('home');
+  const active = ref<RouteNameEnhanced>('home');
+
+  onMounted(() => {
+    console.log(currentRoute.value);
+    active.value = currentRoute.value.name;
+  });
 
   const menuItems = ref<MenuItem[]>([
     {

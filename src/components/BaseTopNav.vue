@@ -1,8 +1,8 @@
 <template>
-  <div class="w-full nav">
-    <div class="w-full flex justify-between items-center relative">
+  <div class="w-full nav pb-3" :class="background && 'bg-primary text-white'">
+    <div class="w-full flex items-center relative" :class="{ 'justify-between': showIcon, 'justify-end': !showIcon }">
       <span v-if="showIcon" class="">
-        <BackIcon v-if="icon === 'back'" class="w-5 h-5" />
+        <BackIcon v-if="icon === 'back'" class="w-4 h-4" @click="handleBack" />
         <CloseIcon v-if="icon === 'close'" class="w-5 h-5" />
         <MenuIcon v-if="icon === 'menu'" class="w-5 h-5" />
       </span>
@@ -18,13 +18,16 @@
 
 <script setup lang="ts">
   import { PropType } from 'vue';
-  import BackIcon from '../assets/icons/back.svg?component';
+  import BackIcon from '../assets/icons/chevron-left.svg?component';
   import CloseIcon from '../assets/icons/close.svg?component';
   import MenuIcon from '../assets/icons/menu.svg?component';
+  import { useRouter } from 'vue-router';
 
   type TopNavIcon = 'close' | 'back' | 'menu';
 
-  defineProps({
+  const { push } = useRouter();
+
+  const props = defineProps({
     icon: {
       type: String as PropType<TopNavIcon>,
       default: 'back'
@@ -33,15 +36,28 @@
       type: Boolean,
       default: true
     },
+    background: {
+      type: Boolean,
+      default: false
+    },
     title: {
       type: String,
       default: 'Home'
+    },
+    backRoute: {
+      type: String,
+      default: 'home'
     }
   });
+
+  const handleBack = () => {
+    push({ name: props.backRoute });
+  };
 </script>
 
 <style>
   .nav {
-    padding: 0 env(safe-inset-area-right) 0 env(safe-inset-area-left) !important;
+    padding-left: env(safe-inset-area-left) !important;
+    padding-right: env(safe-inset-area-right) !important;
   }
 </style>

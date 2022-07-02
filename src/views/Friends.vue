@@ -1,6 +1,6 @@
 <template>
   <div class="w-full h-full">
-    <BaseTopNav title="Friends">slot</BaseTopNav>
+    <BaseTopNav title="Friends" back-route="home" />
   </div>
 </template>
 

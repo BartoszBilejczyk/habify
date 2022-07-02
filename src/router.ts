@@ -17,7 +17,8 @@ export type RouteName =
   | 'profile-invite'
   | 'profile-settings'
   | 'profile-notification-settings'
-  | 'profile-task-center';
+  | 'profile-task-center'
+  | 'charities';
 
 const router = createRouter({
   history: createWebHistory(),
@@ -106,6 +107,11 @@ const router = createRouter({
       path: '/profile-task-center',
       name: 'profile-task-center',
       component: () => import('./views/ProfileTaskCenter.vue')
+    },
+    {
+      path: '/charities',
+      name: 'charities',
+      component: () => import('./views/Charities.vue')
     }
   ]
 });
