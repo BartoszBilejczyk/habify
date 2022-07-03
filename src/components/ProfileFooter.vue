@@ -1,8 +1,8 @@
 <template>
   <div class="flex justify-end text-white-300 text-xs px-10 mt-8">
     <!--      Change to button TODO-->
-    <BaseButton text-primary @click="logOut">Give feedback</BaseButton>
-    <BaseButton text-primary class="ml-6" @click="logOut">Log out</BaseButton>
+    <BaseButton primary @click="logOut">Give feedback</BaseButton>
+    <BaseButton primary class="ml-6" @click="logOut">Log out</BaseButton>
   </div>
   <div class="px-10 mt-8 text-white-400 text-xs text-center">
     Copyright Web Development Bilejczyk, 2022
@@ -19,6 +19,7 @@
   const { push } = useRouter();
 
   const logOut = async () => {
+    alert('log out clicked');
     await firebase
       .auth()
       .signOut()
