@@ -70,6 +70,6 @@
   }
 
   .nav-content {
-    padding-top: 8px;
+    padding-top: 12px;
   }
 </style>

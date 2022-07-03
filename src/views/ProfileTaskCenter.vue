@@ -1,5 +1,5 @@
 <template>
-  <div class="w-full h-full">
+  <div class="w-full h-full flex flex-col flex-1">
     <BaseTopNav title="Task Center" back-route="profile" />
   </div>
 </template>

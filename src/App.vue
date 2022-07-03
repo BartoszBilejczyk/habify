@@ -5,7 +5,9 @@
       'min-safe-h-screen max-safe-h-screen': !authRoutes.includes(currentRoute.name),
       'min-safe-h-fullscreen': authRoutes.includes(currentRoute.name),
       'bg-primary':
-        currentRoute.name === 'profile' || (currentRoute.name === 'onboarding' && currentRoute.query.step === '2'),
+        currentRoute.name === 'profile' ||
+        currentRoute.name === 'profile-invite' ||
+        (currentRoute.name === 'onboarding' && currentRoute.query.step === '2'),
       'bg-green': currentRoute.name === 'onboarding' && currentRoute.query.step === '3',
       'bg-coral': currentRoute.name === 'onboarding' && currentRoute.query.step === '4',
     }"

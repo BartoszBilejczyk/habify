@@ -1,5 +1,5 @@
 <template>
-  <div class="w-full h-full">
+  <div class="w-full h-full flex flex-col flex-1">
     <BaseTopNav title="New Challenge" />
     <div class="px-4">
       <NewChallengeMenu class="mt-3 mb-5" :step="step" />

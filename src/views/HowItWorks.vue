@@ -1,5 +1,5 @@
 <template>
-  <div class="w-full h-full">
+  <div class="w-full h-full flex flex-col flex-1">
     <BaseTopNav title="How it works" back-route="home" />
   </div>
 </template>

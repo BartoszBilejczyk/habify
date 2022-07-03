@@ -9,11 +9,6 @@ body {
   font-family: 'Lato', sans-serif;
 }
 
-.min-safe-h-fullscreen {
-  min-height: 100vh;
-  max-height: 100vh;
-}
-
 .min-safe-h-screen {
   min-height: calc(100vh - env(safe-area-inset-bottom, 0));
   max-height: calc(100vh - env(safe-area-inset-bottom, 0));
@@ -32,6 +27,19 @@ body {
     max-height: calc(100vh - env(safe-area-inset-bottom, 0));
   }
 }
+
+.min-safe-h-fullscreen {
+  min-height: calc(100vh - 85px);
+  max-height: calc(100vh - 85px);
+}
+
+@media (display-mode: standalone) {
+  .min-safe-h-fullscreen {
+    min-height: 100vh;
+    max-height: 100vh;
+  }
+}
+
 
 h1, h2, h3, h4, h5, h6 {
   font-family: 'Lato', 'Poppins', sans-serif;

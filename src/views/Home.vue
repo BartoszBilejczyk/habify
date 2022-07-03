@@ -1,9 +1,9 @@
 <template>
-  <div class="w-full h-full">
+  <div class="w-full h-full flex flex-col flex-1">
     <BaseTopNav title="Home" icon="menu">
       <NotificationIcon class="w-5 h-5" />
     </BaseTopNav>
-    <div class="px-4">
+    <div class="px-4 pb-6">
       <div class="px-5 py-4 mt-4 bg-primary text-white font-bold flex justify-between rounded-lg shadow-lg">
         <span class="text-lg">
           Create your first challenge.

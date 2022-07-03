@@ -1,5 +1,5 @@
 <template>
-  <div class="w-full h-full flex flex-col flex-1 justify-between pb-20">
+  <div class="w-full h-full justify-between pb-20">
     <div class="">
       <BaseTopNav title="Profile" background />
       <div class="h-32 w-full bg-gradient-to-t from-primary-900 to-primary relative">
