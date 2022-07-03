@@ -8,9 +8,7 @@
       <BaseButton class="mt-3 ml-auto" @click="push({ name: 'register' })" text-primary>
         Don't have an account?
       </BaseButton>
-      <BaseButton class="mt-2 ml-auto" @click="push({ name: 'forgot-password' })" text-primary>
-        Forgot password?
-      </BaseButton>
+      <BaseButton class="ml-auto" @click="push({ name: 'forgot-password' })" text-primary>Forgot password?</BaseButton>
     </div>
   </div>
 </template>

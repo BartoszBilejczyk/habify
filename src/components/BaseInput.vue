@@ -1,6 +1,6 @@
 <template>
   <div class="flex flex-col">
-    <label v-if="label" class="text-white-800 mb-1" :class="required && 'font-semibold'">{{ label }}</label>
+    <label v-if="label" class="text-white-800 mb-1" :class="required && 'font-bold'">{{ label }}</label>
     <input
       :placeholder="placeholder"
       class="h-10 border outline-none focus:outline-none border-white-600 hover:border-white-800 focus:border-primary rounded-lg w-auto px-3 text-white-800"

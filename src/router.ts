@@ -2,6 +2,7 @@ import { createRouter, createWebHistory } from 'vue-router';
 
 export type RouteName =
   | 'home'
+  | 'auth-start'
   | 'login'
   | 'register'
   | 'friends'
@@ -32,104 +33,109 @@ const router = createRouter({
     {
       path: '/',
       name: 'home',
-      component: () => import('./views/Home.vue')
+      component: () => import('./views/Home.vue'),
+    },
+    {
+      path: '/auth-start',
+      name: 'auth-start',
+      component: () => import('./views/AuthStart.vue'),
     },
     {
       path: '/login',
       name: 'login',
-      component: () => import('./views/Login.vue')
+      component: () => import('./views/Login.vue'),
     },
     {
       path: '/register',
       name: 'register',
-      component: () => import('./views/Register.vue')
+      component: () => import('./views/Register.vue'),
     },
     {
       path: '/friends',
       name: 'friends',
-      component: () => import('./views/Friends.vue')
+      component: () => import('./views/Friends.vue'),
     },
     {
       path: '/profile',
       name: 'profile',
-      component: () => import('./views/Profile.vue')
+      component: () => import('./views/Profile.vue'),
     },
     {
       path: '/active-challenges',
       name: 'active-challenges',
-      component: () => import('./views/ActiveChallenges.vue')
+      component: () => import('./views/ActiveChallenges.vue'),
     },
     {
       path: '/challenge',
       name: 'challenge',
-      component: () => import('./views/Challenge.vue')
+      component: () => import('./views/Challenge.vue'),
     },
     {
       path: '/forgot-password',
       name: 'forgot-password',
-      component: () => import('./views/ForgotPassword.vue')
+      component: () => import('./views/ForgotPassword.vue'),
     },
     {
       path: '/how-it-works',
       name: 'how-it-works',
-      component: () => import('./views/HowItWorks.vue')
+      component: () => import('./views/HowItWorks.vue'),
     },
     {
       path: '/new-challenge',
       name: 'new-challenge',
-      component: () => import('./views/NewChallenge.vue')
+      component: () => import('./views/NewChallenge.vue'),
     },
     {
       path: '/onboarding',
       name: 'onboarding',
-      component: () => import('./views/Onboarding.vue')
+      component: () => import('./views/Onboarding.vue'),
     },
     {
       path: '/challenge-examples',
       name: 'challenge-examples',
-      component: () => import('./views/ChallengeExamples.vue')
+      component: () => import('./views/ChallengeExamples.vue'),
     },
     {
       path: '/profile-challenge-history',
       name: 'profile-challenge-history',
-      component: () => import('./views/ProfileChallengeHistory.vue')
+      component: () => import('./views/ProfileChallengeHistory.vue'),
     },
     {
       path: '/profile-friends',
       name: 'profile-friends',
-      component: () => import('./views/ProfileFriendsManagement.vue')
+      component: () => import('./views/ProfileFriendsManagement.vue'),
     },
     {
       path: '/profile-invite',
       name: 'profile-invite',
-      component: () => import('./views/ProfileInviteFriend.vue')
+      component: () => import('./views/ProfileInviteFriend.vue'),
     },
     {
       path: '/profile-settings',
       name: 'profile-settings',
-      component: () => import('./views/ProfileSettings.vue')
+      component: () => import('./views/ProfileSettings.vue'),
     },
     {
       path: '/profile-notification-settings',
       name: 'profile-notification-settings',
-      component: () => import('./views/ProfileNotificationSettings.vue')
+      component: () => import('./views/ProfileNotificationSettings.vue'),
     },
     {
       path: '/profile-task-center',
       name: 'profile-task-center',
-      component: () => import('./views/ProfileTaskCenter.vue')
+      component: () => import('./views/ProfileTaskCenter.vue'),
     },
     {
       path: '/charities',
       name: 'charities',
-      component: () => import('./views/Charities.vue')
+      component: () => import('./views/Charities.vue'),
     },
     {
       path: '/components',
       name: 'components',
-      component: () => import('./views/Components.vue')
-    }
-  ]
+      component: () => import('./views/Components.vue'),
+    },
+  ],
 });
 
 export default router;

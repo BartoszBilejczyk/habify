@@ -1,6 +1,6 @@
 <template>
-  <div class="p-safe min-safe-h-screen w-screen app flex flex-col">
-    <div class="flex flex-col flex-1">
+  <div class="p-safe min-safe-h-screen max-safe-h-screen overflow-auto w-screen app flex flex-col bg-primary">
+    <div class="flex flex-col flex-1 bg-white">
       <router-view />
     </div>
     <Menu v-if="!authRoutes.includes(currentRoute.name)" />
@@ -12,7 +12,7 @@
   import { useRouter } from 'vue-router';
   import firebase from 'firebase';
 
-  const authRoutes = ['login', 'register', 'forgot-password', 'onboarding'];
+  const authRoutes = ['login', 'register', 'forgot-password', 'onboarding', 'auth-start'];
   import { onMounted } from 'vue';
 
   const { currentRoute } = useRouter();
@@ -22,7 +22,7 @@
   onMounted(() => {
     firebase.auth().onAuthStateChanged(_user => {
       if (!_user?.email) {
-        push({ name: 'login' });
+        push({ name: 'auth-start' });
       }
     });
   });

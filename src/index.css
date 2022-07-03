@@ -7,20 +7,25 @@ body {
   -webkit-user-select: none;
   -webkit-touch-callout: none;
   font-family: 'Lato', sans-serif;
-  padding: env(safe-inset-area-top) env(safe-inset-area-right) env(safe-inset-area-bottom) env(safe-inset-area-left);
 }
 
 .min-safe-h-screen {
   /* equivalent to 100dvh in major browsers */
-  min-height: calc(
-    100vh - env(safe-area-inset-bottom, 0) - env(safe-area-inset-top, 0)
-  );
+  min-height: calc(100vh - env(safe-area-inset-bottom, 0));
+  max-height: calc(100vh - env(safe-area-inset-bottom, 0));
 }
 
 @supports (-webkit-touch-callout: none) {
   .min-safe-h-screen {
-    /* for ios safari 15, safe-area-inset-bottom is 0, so a special fix apply here */
     min-height: -webkit-fill-available;
+    max-height: -webkit-fill-available;
+  }
+}
+
+@media (display-mode: standalone) {
+  .min-safe-h-screen {
+    min-height: calc(100vh - env(safe-area-inset-bottom, 0));
+    max-height: calc(100vh - env(safe-area-inset-bottom, 0));
   }
 }
 
@@ -29,54 +34,22 @@ h1, h2, h3, h4, h5, h6 {
   font-weight: 700;
 }
 
-@font-face {
-  font-family: 'Poppins';
-  src: url('./fonts/Poppins/Poppins-Regular.woff2') format('woff2');
-  font-weight: 400;
-  font-style: normal;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: 'Poppins';
-  src: url('./fonts/Poppins/Poppins-SemiBold.woff2') format('woff2');
-  font-weight: 600;
-  font-style: normal;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: 'Lora';
-  src: url('./fonts/Lora/Lora-Regular.woff2') format('woff2');
-  font-weight: 400;
-  font-style: normal;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: 'Lora';
-  src: url('./fonts/Lora/Lora-SemiBold.woff2') format('woff2');
-  font-weight: 400;
-  font-style: normal;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: 'Lato';
-  src: url('./fonts/Lato/Lato-Thin.woff2') format('woff2');
-  font-weight: 200;
-  font-style: normal;
-  font-display: swap;
-}
+/*@font-face {*/
+/*  font-family: 'Lato';*/
+/*  src: url('./fonts/Lato/Lato-Thin.woff2') format('woff2');*/
+/*  font-weight: 200;*/
+/*  font-style: normal;*/
+/*  font-display: swap;*/
+/*}*/
 
 
-@font-face {
-  font-family: 'Lato';
-  src: url('./fonts/Lato/Lato-Light.woff2') format('woff2');
-  font-weight: 300;
-  font-style: normal;
-  font-display: swap;
-}
+/*@font-face {*/
+/*  font-family: 'Lato';*/
+/*  src: url('./fonts/Lato/Lato-Light.woff2') format('woff2');*/
+/*  font-weight: 300;*/
+/*  font-style: normal;*/
+/*  font-display: swap;*/
+/*}*/
 
 @font-face {
   font-family: 'Lato';

@@ -1,16 +1,18 @@
 <template>
-  <div class="w-full h-full">
-    <BaseTopNav title="Profile" background />
-    <div class="h-32 w-full bg-gradient-to-t from-primary-900 to-primary relative">
-      <ProfileImageBox />
-    </div>
-    <div class="flex flex-col px-10 mt-16">
-      <div
-        v-for="item in menuItems"
-        class="flex items-center justify-between text-white-700 cursor-pointer border-b border-b-white-100 py-2"
-        @click="handleRouteChange(item.name)"
-      >
-        <ProfileItem :item="item" />
+  <div class="w-full h-full flex flex-col flex-1 justify-between pb-20">
+    <div class="">
+      <BaseTopNav title="Profile" background />
+      <div class="h-32 w-full bg-gradient-to-t from-primary-900 to-primary relative">
+        <ProfileImageBox />
+      </div>
+      <div class="flex flex-col px-10 mt-16">
+        <div
+          v-for="item in menuItems"
+          class="flex items-center justify-between text-white-700 cursor-pointer border-b border-b-white-100 py-2"
+          @click="handleRouteChange(item.name)"
+        >
+          <ProfileItem :item="item" />
+        </div>
       </div>
     </div>
     <ProfileFooter />
@@ -42,33 +44,33 @@
     {
       icon: UserSingle,
       title: 'Profile Settings',
-      name: 'profile-settings'
+      name: 'profile-settings',
     },
     {
       icon: UserMultiple,
       title: 'Invite Friends',
-      name: 'profile-invite'
+      name: 'profile-invite',
     },
     {
       icon: ShieldSearch,
       title: 'Challenge History',
-      name: 'profile-challenge-history'
+      name: 'profile-challenge-history',
     },
     {
       icon: ShieldStar,
       title: 'Friends',
-      name: 'profile-friends'
+      name: 'profile-friends',
     },
     {
       icon: UserSingle,
       title: 'Notification Settings',
-      name: 'profile-notification-settings'
+      name: 'profile-notification-settings',
     },
     {
       icon: UserSingle,
       title: 'Task Center',
-      name: 'profile-task-center'
-    }
+      name: 'profile-task-center',
+    },
   ]);
 
   const handleRouteChange = (name: RouteName) => {

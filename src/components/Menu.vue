@@ -1,12 +1,12 @@
 <template>
-  <div class="fixed left-0 bottom-0 pb-3 pt-3 px-10 w-full border-t border-t-white-50 bg-white menu">
+  <div class="fixed left-0 bottom-0 pt-3 px-10 w-full border-t border-t-white-50 bg-white menu">
     <div class="flex justify-center">
       <div
         v-for="item in menuItems"
-        class="flex flex-col items-center text-xxs mx-5 cursor-pointer"
+        class="flex flex-col items-center text-xs px-5 cursor-pointer"
         :class="{
           'text-primary font-black': active === item.name,
-          'text-white-600': active !== item.name
+          'text-white-600': active !== item.name,
         }"
         @click="handleRouteChange(item.name)"
       >
@@ -47,27 +47,27 @@
     {
       icon: ShieldSearch,
       title: 'Home',
-      name: 'home'
+      name: 'home',
     },
     {
       icon: ShieldStar,
       title: 'Challenges',
-      name: 'active-challenges'
+      name: 'active-challenges',
     },
     {
       icon: UserMultiple,
       title: 'Friends',
-      name: 'friends'
+      name: 'friends',
     },
     {
       icon: UserSingle,
       title: 'Profile',
-      name: 'profile'
+      name: 'profile',
     },
-    {
-      title: 'Admin',
-      name: 'components'
-    }
+    // {
+    //   title: 'Admin',
+    //   name: 'components',
+    // },
   ]);
 
   const handleRouteChange = (name: RouteName) => {
@@ -77,7 +77,13 @@
 </script>
 
 <style>
-  /*.menu {*/
-  /*  padding-bottom: max(env(safe-inset-area-top), 12px) !important;*/
-  /*}*/
+  .menu {
+    padding-bottom: calc(env(safe-inset-area-bottom) - 8px);
+  }
+
+  @media (display-mode: browser) {
+    .menu {
+      padding-bottom: 12px;
+    }
+  }
 </style>
