@@ -3,7 +3,7 @@
   "arrowParens": "avoid",
   "singleQuote": true,
   "tabWidth": 2,
-  "trailingComma": "none",
+  "trailingComma": "es5",
   "printWidth": 120,
   "htmlWhitespaceSensitivity": "ignore",
   "vueIndentScriptAndStyle": true

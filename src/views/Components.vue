@@ -9,7 +9,7 @@
     <BaseButton outline>Register</BaseButton>
   </div>
   <div class="m-1">
-    <BaseButton text>Register</BaseButton>
+    <BaseButton text-primary>Register</BaseButton>
   </div>
   <div class="m-1">
     <BaseButton primary small>Register</BaseButton>

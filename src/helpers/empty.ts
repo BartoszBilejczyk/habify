@@ -8,7 +8,7 @@ import {
   Notification,
   Invitation,
   InvitationForChallenge,
-  ChallengeExample
+  ChallengeExample,
 } from '../types';
 
 export const emptyUser: User = {
@@ -21,9 +21,14 @@ export const emptyUser: User = {
   friends: [],
   notifications: [], // TODO check if it should be here
   notificationSettings: [],
+  allowEmails: false,
   tasks: [],
   challenges: [],
-  feedbackSent: []
+  feedbackSent: [],
+  profileFinished: false,
+  onboarded: false,
+  referralCode: '',
+  usedReferralCode: '',
 };
 
 export const emptyUserBasic: UserBasic = {
@@ -32,7 +37,7 @@ export const emptyUserBasic: UserBasic = {
   phone: '',
   name: '',
   points: 0,
-  image: ''
+  image: '',
 };
 
 export const emptyFriend: Friend = {
@@ -40,7 +45,7 @@ export const emptyFriend: Friend = {
   email: '',
   phone: '',
   name: '',
-  addedDate: ''
+  addedDate: '',
 };
 
 export const emptyChallenge: Challenge = {
@@ -59,7 +64,7 @@ export const emptyChallenge: Challenge = {
   proposedChanges: null, // TODO
   status: null,
   confirmationPhotos: [],
-  confirmationType: null
+  confirmationType: null,
 };
 
 export const emptyCharity: Charity = {
@@ -69,7 +74,7 @@ export const emptyCharity: Charity = {
   link: '',
   description: '',
   image: '',
-  category: ''
+  category: '',
 };
 
 export const emptyTask: Task = {
@@ -80,7 +85,7 @@ export const emptyTask: Task = {
   expirationDate: '',
   finishDate: '',
   category: 'other',
-  status: 'active'
+  status: 'active',
 };
 
 export const emptyNotification: Notification = {
@@ -89,19 +94,19 @@ export const emptyNotification: Notification = {
   description: '',
   points: 0,
   category: 'other',
-  status: 'active'
+  status: 'active',
 };
 
 export const emptyInvitation: Invitation = {
   id: '',
   referralCode: '',
   invitee: { ...emptyUserBasic },
-  inviter: { ...emptyUserBasic }
+  inviter: { ...emptyUserBasic },
 };
 
 export const emptyInvitationForChallenge: InvitationForChallenge = {
   ...emptyInvitation,
-  challenge: { ...emptyChallenge }
+  challenge: { ...emptyChallenge },
 };
 
 export const emptyChallengeExample: ChallengeExample = {
@@ -109,5 +114,5 @@ export const emptyChallengeExample: ChallengeExample = {
   title: '',
   durationInDays: '',
   type: null,
-  points: ''
+  points: '',
 };

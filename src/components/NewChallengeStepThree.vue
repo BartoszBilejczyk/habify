@@ -27,7 +27,7 @@
     <BaseSection title="Share">
       <BaseInfoToCopy>https://habify.com/sad7891789ds</BaseInfoToCopy>
       <div class="flex justify-center mt-4 mb-10">
-        <BaseButton text>Copy share link</BaseButton>
+        <BaseButton text-primary>Copy share link</BaseButton>
       </div>
     </BaseSection>
   </div>

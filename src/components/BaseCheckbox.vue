@@ -2,9 +2,9 @@
   <div class="flex">
     <input
       type="checkbox"
-      class="h-5 w-5 border outline-none focus:outline-none border-white-600 hover:border-white-800 checked:border-primary"
+      class="h-8 w-8 border outline-none focus:outline-none border-white-600 hover:border-white-800 checked:border-primary"
       :value="modelValue"
-      @change="updateValue"
+      @input="updateValue"
     />
     <label v-if="label" class="ml-1.5 text-white-800 leading-5 text-sm">{{ label }}</label>
   </div>
@@ -19,7 +19,8 @@
   const emit = defineEmits(['update:modelValue']);
 
   const updateValue = (event: KeyboardEvent) => {
-    emit('update:modelValue', (event.target as HTMLInputElement).value);
+    // @ts-ignore
+    emit('update:modelValue', event.target.checked);
   };
 </script>
 

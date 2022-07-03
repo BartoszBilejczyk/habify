@@ -1,8 +1,8 @@
 <template>
   <div class="flex justify-end text-white-300 text-xs px-10 mt-8">
     <!--      Change to button TODO-->
-    <span class="underline text-sm text-white-700">Give feedback</span>
-    <span class="underline text-sm text-white-700 ml-6">Log out</span>
+    <BaseButton text-primary>Give feedback</BaseButton>
+    <BaseButton text-primary class="ml-6" @click="logOut">Log out</BaseButton>
   </div>
   <div class="px-10 mt-8 text-white-400 text-xs text-center">
     Copyright Web Development Bilejczyk, 2022
@@ -11,4 +11,18 @@
   </div>
 </template>
 
-<script setup lang="ts"></script>
+<script setup lang="ts">
+  import firebase from 'firebase';
+  import { useRouter } from 'vue-router';
+  const { push } = useRouter();
+  import BaseButton from './BaseButton.vue';
+
+  const logOut = () => {
+    firebase
+      .auth()
+      .signOut()
+      .then(() => {
+        push({ name: 'login' });
+      });
+  };
+</script>

@@ -1,16 +1,21 @@
 export interface User {
-  id: string;
-  email: string;
-  phone: string;
-  name: string;
+  id: string | undefined;
+  email: string | null | undefined;
+  phone: string | null | undefined;
+  name: string | null | undefined;
   points: number;
-  image: string;
+  image: string | null | undefined;
   friends: Friend[];
   notifications: Notification[]; // TODO check if it should be here
   notificationSettings: string[];
+  allowEmails: boolean;
   tasks: Task[];
   challenges: Challenge[];
   feedbackSent: string[];
+  profileFinished: boolean;
+  onboarded: boolean;
+  referralCode: string;
+  usedReferralCode: string;
 }
 
 export interface UserBasic {

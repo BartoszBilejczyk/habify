@@ -1,6 +1,6 @@
 <template>
-  <div class="p-safe max-h-fit min-h-screen w-screen app">
-    <div class="min-h-screen">
+  <div class="p-safe min-safe-h-screen w-screen app flex flex-col">
+    <div class="flex flex-col flex-1">
       <router-view />
     </div>
     <Menu v-if="!authRoutes.includes(currentRoute.name)" />

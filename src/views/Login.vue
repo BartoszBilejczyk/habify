@@ -5,8 +5,12 @@
       <BaseInput class="mb-2" full type="text" label="Email" placeholder="Email" v-model="email" />
       <BaseInput class="mb-2" full type="password" label="Password" placeholder="Password" v-model="password" />
       <BaseButton class="mt-4" @click="login" primary>Sign in</BaseButton>
-      <BaseButton class="mt-3 ml-auto" @click="push({ name: 'register' })" text>Don't have an account?</BaseButton>
-      <BaseButton class="mt-2 ml-auto" @click="push({ name: 'forgot-password' })" text>Forgot password?</BaseButton>
+      <BaseButton class="mt-3 ml-auto" @click="push({ name: 'register' })" text-primary>
+        Don't have an account?
+      </BaseButton>
+      <BaseButton class="mt-2 ml-auto" @click="push({ name: 'forgot-password' })" text-primary>
+        Forgot password?
+      </BaseButton>
     </div>
   </div>
 </template>
