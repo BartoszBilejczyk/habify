@@ -1,5 +1,5 @@
 <template>
-  <div class="flex flex-col justify-center items-center h-screen pb-16">
+  <div class="flex flex-col justify-center items-center h-screen pb-16 px-6">
     <h1 class="text-2xl text-center text-white-800">Forgot your password?</h1>
     <div class="mt-8 flex flex-col w-full">
       <BaseInput class="mb-2" full type="text" label="Email" placeholder="Email" v-model="email" />
