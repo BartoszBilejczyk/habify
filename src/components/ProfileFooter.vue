@@ -20,11 +20,12 @@
 
   const logOut = async () => {
     alert('log out clicked');
-    await firebase
+    firebase
       .auth()
       .signOut()
       .then(async () => {
-        await push({ name: 'login' });
+        alert('log out clicked then');
+        await push('/login');
       })
       .catch(error => {
         alert(error);
