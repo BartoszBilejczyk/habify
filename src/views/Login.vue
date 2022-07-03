@@ -1,5 +1,5 @@
 <template>
-  <div class="flex flex-col justify-center items-center h-screen pb-16 px-4">
+  <div class="flex flex-col justify-center items-center h-screen px-4">
     <h1 class="text-2xl text-center text-white-800">Login to Your Account</h1>
     <div class="mt-8 flex flex-col w-full">
       <BaseInput class="mb-2" full type="text" label="Email" placeholder="Email" v-model="email" />
@@ -29,7 +29,7 @@
       .auth()
       .signInWithEmailAndPassword(email.value, password.value)
       .then(() => {
-        push({ name: 'home' });
+        push({ name: 'onboarding', query: { step: '1' } });
       });
   };
 </script>

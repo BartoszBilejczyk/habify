@@ -20,21 +20,21 @@ module.exports = {
         700: 'rgba(8,7,8, 0.7)',
         800: 'rgba(8,7,8, 0.8)',
         900: 'rgba(8,7,8, 0.9)',
-        DEFAULT: '#FFFFFF'
+        DEFAULT: '#FFFFFF',
       },
 
       primary: {
-        50: 'rgba(47,88,210, 0.05)',
-        100: 'rgba(47,88,210, 0.1)',
-        200: 'rgba(47,88,210, 0.2)',
-        300: 'rgba(47,88,210, 0.3)',
-        400: 'rgba(47,88,210, 0.4)',
-        500: 'rgba(47,88,210, 0.5)',
-        600: 'rgba(47,88,210, 0.6)',
-        700: 'rgba(47,88,210, 0.7)',
-        800: 'rgba(47,88,210, 0.8)',
-        900: 'rgba(47,88,210, 0.9)',
-        DEFAULT: '#2F58D2'
+        50: 'rgba(144,115,237, 0.05)',
+        100: 'rgba(144,115,237, 0.1)',
+        200: 'rgba(144,115,237, 0.2)',
+        300: 'rgba(144,115,237, 0.3)',
+        400: 'rgba(144,115,237, 0.4)',
+        500: 'rgba(144,115,237, 0.5)',
+        600: 'rgba(144,115,237, 0.6)',
+        700: 'rgba(144,115,237, 0.7)',
+        800: 'rgba(144,115,237, 0.8)',
+        900: 'rgba(144,115,237, 0.9)',
+        DEFAULT: '#9073ED',
       },
 
       blue: {
@@ -48,7 +48,7 @@ module.exports = {
         700: 'rgba(66,191,221, 0.7)',
         800: 'rgba(66,191,221, 0.8)',
         900: 'rgba(66,191,221, 0.9)',
-        DEFAULT: '#42BFDD'
+        DEFAULT: '#42BFDD',
       },
 
       green: {
@@ -62,7 +62,7 @@ module.exports = {
         700: 'rgba(0,163,161, 0.7)',
         800: 'rgba(0,163,161, 0.8)',
         900: 'rgba(0,163,161, 0.9)',
-        DEFAULT: '#00A3A1'
+        DEFAULT: '#00A3A1',
       },
 
       coral: {
@@ -76,7 +76,7 @@ module.exports = {
         700: 'rgba(246,147,128, 0.7)',
         800: 'rgba(246,147,128, 0.8)',
         900: 'rgba(246,147,128, 0.9)',
-        DEFAULT: '#F69380'
+        DEFAULT: '#F69380',
       },
 
       red: {
@@ -90,7 +90,7 @@ module.exports = {
         700: 'rgba(136,41,47, 0.7)',
         800: 'rgba(136,41,47, 0.8)',
         900: 'rgba(136,41,47, 0.9)',
-        DEFAULT: '#88292F'
+        DEFAULT: '#88292F',
       },
 
       yellow: {
@@ -104,30 +104,30 @@ module.exports = {
         700: 'rgba(253,202,64, 0.7)',
         800: 'rgba(253,202,64, 0.8)',
         900: 'rgba(253,202,64, 0.9)',
-        DEFAULT: '#FDCA40'
-      }
+        DEFAULT: '#FDCA40',
+      },
     },
     extend: {
       fontSize: {
         ...defaultTheme.fontSize,
-        xxs: ['.625rem', '.75rem']
-      }
+        xxs: ['.625rem', '.75rem'],
+      },
     },
     screens: {
       sm: '576px',
       md: '768px',
       lg: '992px',
       xl: '1200px',
-      standalone: { raw: '(display-mode: standalone)' }
-    }
+      standalone: { raw: '(display-mode: standalone)' },
+    },
   },
   variants: {
     extend: {
       outline: ['focus-visible'],
       margin: ['first', 'last'],
       padding: ['first', 'last'],
-      backgroundColor: ['odd']
-    }
+      backgroundColor: ['odd'],
+    },
   },
-  plugins: [require('tailwindcss-safe-area')]
+  plugins: [require('tailwindcss-safe-area')],
 };

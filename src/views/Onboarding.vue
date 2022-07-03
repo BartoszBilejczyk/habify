@@ -1,6 +1,6 @@
 <template>
   <div class="w-full flex-1 flex flex-col">
-    <div v-if="loading">Loading</div>
+    <div v-if="loading">Loading...</div>
     <div v-else class="flex-1 flex flex-col items-center justify-center">
       <OnboardingFinishProfile v-if="step === 1" @update-profile="updateProfile" />
       <OnboardingBase
@@ -15,7 +15,7 @@
       <OnboardingBase
         v-if="step === 3"
         :step="step"
-        class="bg-blue"
+        class="bg-green"
         title="Onboarding 2"
         description="Lorem ipsum dolor sit amet sdajl qoipasncvusqad jasdklj"
         @next="handleNext"
@@ -43,14 +43,16 @@
   import { useRouter } from 'vue-router';
 
   const { getCurrentUser, updateDoc, getDoc } = useFirebase();
-  const { push } = useRouter();
+  const { push, replace, currentRoute } = useRouter();
 
   const step = ref(1);
   const loading = ref(true);
 
   const handleNext = () => {
+    replace({ query: { ...currentRoute.value.query, step: String(step.value + 1) } });
     step.value++;
   };
+
   const handleSkip = async () => {
     await push({ name: 'home' });
   };
@@ -90,6 +92,7 @@
       })
       .catch(err => console.error(err));
     await updateDoc(`users/${user?.uid}`, { name, allowEmails, profileFinished: true });
-    step.value++;
+
+    handleNext();
   };
 </script>
