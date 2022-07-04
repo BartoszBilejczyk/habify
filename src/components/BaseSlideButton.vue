@@ -1,13 +1,22 @@
 <template>
   <div class="swipe-button">
-    <div class="container bg-primary-300" :class="unlocked && 'container-unlocked'" ref="container">
-      <div class="slider bg-primary-800" ref="slider" @touchstart="startDrag">
+    <div
+      class="container bg-primary-300"
+      :class="{ 'container-unlocked': unlocked, 'bg-white-300': onDark, 'bg-primary-300': !onDark }"
+      ref="container"
+    >
+      <div
+        class="slider bg-primary-800"
+        ref="slider"
+        :class="onDark ? 'bg-white-200' : 'bg-primary-800'"
+        @touchstart="startDrag"
+      >
         <span class="slider-text"></span>
-        <span class="slider-arrow"></span>
-        <span v-if="!unlocked" class="slider-circle bg-primary"></span>
+        <span class="slider-arrow border border-2" :class="onDark ? 'border-primary' : 'border-white'"></span>
+        <span v-if="!unlocked" class="slider-circle" :class="onDark ? 'bg-white' : 'bg-primary'"></span>
       </div>
       <div class="text font-bold font-xl" :class="unlocked ? 'text-high text-white' : 'text-primary'">
-        {{ unlocked ? 'DONE' : 'SLIDE TO START' }}
+        {{ unlocked ? doneText : slideText }}
       </div>
     </div>
   </div>
@@ -25,6 +34,12 @@
   const isDragging = ref(false);
   const startX = ref(0);
   const isTouchDevice = ref(false);
+
+  const props = defineProps<{
+    doneText: string;
+    slideText: string;
+    onDark?: boolean;
+  }>();
 
   onMounted(() => {
     isTouchDevice.value = 'ontouchstart' in document.documentElement;
@@ -183,7 +198,6 @@
     float: left;
     position: absolute;
     transform: rotate(45deg);
-    border: 2px solid #fff;
     height: 12px;
     width: 12px;
     top: 50%;

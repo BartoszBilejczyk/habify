@@ -10,7 +10,10 @@
           <CloseIcon v-if="icon === 'close'" class="w-5 h-5" />
           <MenuIcon v-if="icon === 'menu'" class="w-5 h-5" />
         </span>
-        <span class="font-bold text-lg absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
+        <span
+          class="font-bold absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-center"
+          :class="{ 'text-base': title.length > 12, ' text-lg ': title.length <= 12 }"
+        >
           {{ title }}
         </span>
         <div v-if="$slots.default">
