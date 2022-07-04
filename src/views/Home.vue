@@ -3,7 +3,7 @@
     <BaseTopNav title="Home" icon="menu">
       <NotificationIcon class="w-5 h-5" />
     </BaseTopNav>
-    <div class="px-4 pb-6">
+    <div class="px-4 pb-20">
       <div class="px-5 py-4 mt-4 bg-primary text-white font-bold flex justify-between rounded-lg shadow-lg">
         <span class="text-lg">
           Create your first challenge.
@@ -24,6 +24,7 @@
       <BaseSection see-more title="Charities we recommend" route-name="charities">
         <div class="bg-white p-16 shadow-lg rounded-3xl">slot</div>
       </BaseSection>
+      <BaseSlideButton></BaseSlideButton>
     </div>
   </div>
 </template>
@@ -31,6 +32,7 @@
 <script setup lang="ts">
   import BaseTopNav from '../components/BaseTopNav.vue';
   import BaseSection from '../components/BaseSection.vue';
+  import BaseSlideButton from '../components/BaseSlideButton.vue';
   import NotificationIcon from '../assets/icons/bell.svg?component';
   import { useRouter } from 'vue-router';
 

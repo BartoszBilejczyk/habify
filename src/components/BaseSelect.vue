@@ -7,8 +7,7 @@
       :value="modelValue"
       @change="updateValue"
     >
-      <option value="A">A</option>
-      <option value="B">B</option>
+      <option v-for="option in options" :value="option.value">{{ option.label }}</option>
     </select>
   </div>
 </template>
@@ -18,6 +17,10 @@
     label?: string;
     modelValue: string;
     full?: boolean;
+    options?: {
+      value: string;
+      label: string;
+    }[];
   }>();
 
   const emit = defineEmits(['update:modelValue']);
