@@ -43,9 +43,13 @@ export type ChallengeCategory = 'social' | 'financial' | 'sport' | 'other';
 export interface Challenge {
   id: string;
   inviter: UserBasic;
+  inviterId: string;
   invitee: UserBasic;
+  inviteeId: string;
   winner: UserBasic;
+  winnerId: string;
   loser: UserBasic;
+  loserId: string;
   title: string;
   durationInDays: string;
   type: ChallengeType | null;

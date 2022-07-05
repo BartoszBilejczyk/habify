@@ -51,9 +51,13 @@ export const emptyFriend: Friend = {
 export const emptyChallenge: Challenge = {
   id: '',
   inviter: { ...emptyUserBasic },
+  inviterId: '',
   invitee: { ...emptyUserBasic },
+  inviteeId: '',
   winner: { ...emptyUserBasic },
+  winnerId: '',
   loser: { ...emptyUserBasic },
+  loserId: '',
   title: '',
   durationInDays: '',
   type: null,

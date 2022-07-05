@@ -1,13 +1,34 @@
 <template>
   <div class="">
     <BaseSection title="Challenge">
-      <BaseInput v-model="input1" class="mb-3" placeholder="e.g. Who will make more pushups?" label="Challenge" full />
-      <BaseSelect v-model="input5" class="mb-3" placeholder="Type" label="Type" full />
-      <BaseSelect v-if="input5 === 'B'" v-model="input2" class="mb-3" placeholder="Duration" label="Duration" full />
+      <BaseInput
+        v-model="stepOne.title"
+        class="mb-3"
+        placeholder="e.g. Who will make more pushups?"
+        label="Challenge"
+        full
+      />
+      <BaseSelect v-model="stepOne.type" class="mb-3" placeholder="Type" label="Type" full :options="typeOptions" />
+      <BaseSelect
+        v-if="stepOne.duration === 'B'"
+        v-model="stepOne.duration"
+        class="mb-3"
+        placeholder="Duration"
+        label="Duration"
+        full
+        :options="durationOptions"
+      />
     </BaseSection>
     <BaseSection title="Bet">
-      <BaseSelect v-model="input3" class="mb-3" placeholder="Category" label="Category" full />
-      <BaseTextarea v-model="input4" class="mb-3" placeholder="Details" label="Details" full />
+      <BaseSelect
+        v-model="stepOne.betCategory"
+        class="mb-3"
+        placeholder="Category"
+        label="Category"
+        full
+        :options="betCategoryOptions"
+      />
+      <BaseTextarea v-model="stepOne.betDetails" class="mb-3" placeholder="Details" label="Details" full />
     </BaseSection>
   </div>
 </template>
@@ -18,10 +39,21 @@
   import BaseSelect from '../components/BaseSelect.vue';
   import { ref } from 'vue';
   import BaseTextarea from './BaseTextarea.vue';
+  import useNewChallenge from '../composables/useNewChallenge';
 
-  const input1 = ref('');
-  const input2 = ref('');
-  const input3 = ref('');
-  const input4 = ref('');
-  const input5 = ref('');
+  const { stepOne } = useNewChallenge();
+
+  const typeOptions = ref([
+    { label: 'One occurrence', value: 'oneTime' },
+    { label: 'Time-boxed', value: 'duration' },
+  ]);
+
+  const durationOptions = ref(Array.from({ length: 14 }, (v, i) => ({ label: `${i + 1} days`, value: i + 1 })));
+
+  const betCategoryOptions = ref([
+    { label: 'Social', value: 'social' },
+    { label: 'Financial', value: 'financial' },
+    { label: 'Sport', value: 'sport' },
+    { label: 'Other', value: 'other' },
+  ]);
 </script>

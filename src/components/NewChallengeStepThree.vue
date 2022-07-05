@@ -1,7 +1,8 @@
 <template>
   <div class="">
     <BaseSection title="Confirm Details">
-      <ChallengeDetails></ChallengeDetails>
+      {{ stepOne }}
+      <ChallengeDetails :data="stepOne"></ChallengeDetails>
     </BaseSection>
     <BaseSection title="Share">
       <BaseInfoToCopy>https://habify.com/sad7891789ds</BaseInfoToCopy>
@@ -17,4 +18,7 @@
   import BaseInfoToCopy from './BaseInfoToCopy.vue';
   import BaseButton from './BaseButton.vue';
   import ChallengeDetails from './ChallengeDetails.vue';
+  import useNewChallenge from '../composables/useNewChallenge';
+
+  const { stepOne } = useNewChallenge();
 </script>
