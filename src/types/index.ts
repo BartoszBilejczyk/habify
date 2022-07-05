@@ -51,7 +51,7 @@ export interface Challenge {
   loser: UserBasic;
   loserId: string;
   title: string;
-  durationInDays: string;
+  duration: string;
   type: ChallengeType | null;
   betCategory: ChallengeCategory | null; // TODO add more
   betDetails: any; // TODO
@@ -115,7 +115,7 @@ export interface InvitationForChallenge extends Invitation {
 export interface ChallengeExample {
   id: string;
   title: string;
-  durationInDays: string;
+  duration: string;
   type: ChallengeType | null;
   points: string;
 }

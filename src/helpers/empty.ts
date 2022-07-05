@@ -59,7 +59,7 @@ export const emptyChallenge: Challenge = {
   loser: { ...emptyUserBasic },
   loserId: '',
   title: '',
-  durationInDays: '',
+  duration: '',
   type: null,
   betCategory: null,
   betDetails: null, // TODO
@@ -116,7 +116,7 @@ export const emptyInvitationForChallenge: InvitationForChallenge = {
 export const emptyChallengeExample: ChallengeExample = {
   id: '',
   title: '',
-  durationInDays: '',
+  duration: '',
   type: null,
   points: '',
 };

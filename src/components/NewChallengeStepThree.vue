@@ -19,6 +19,23 @@
   import BaseButton from './BaseButton.vue';
   import ChallengeDetails from './ChallengeDetails.vue';
   import useNewChallenge from '../composables/useNewChallenge';
+  import { emptyChallenge } from '../helpers/empty';
 
   const { stepOne } = useNewChallenge();
+
+  const submit = () => {
+    // firebase
+
+    const challenge = {
+      ...emptyChallenge,
+      ...stepOne,
+      status: 'waitsForConfirm',
+      confirmationType: 'manual',
+      points: 500,
+      // id: nanoid
+      // inviterId: '' firebase auth currentUser.uid
+      // inviter: get user from users (keep a separate composable for it during load).
+      // inviteLink: do some generation through jwt?
+    };
+  };
 </script>
