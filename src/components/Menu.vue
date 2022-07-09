@@ -1,12 +1,12 @@
 <template>
-  <div class="fixed left-0 bottom-0 pt-3 px-10 w-full border-t border-t-white-50 bg-white menu">
+  <div class="fixed left-0 bottom-0 pt-3 px-10 w-full border-t border-t-white-50 bg-white dark:bg-dark-900 menu">
     <div class="flex justify-center">
       <div
         v-for="item in menuItems"
         class="flex flex-col items-center text-xs px-5 cursor-pointer"
         :class="{
           'text-primary font-black': active === item.name,
-          'text-white-600': active !== item.name,
+          'text-white-600 dark:text-white': active !== item.name,
         }"
         @click="handleRouteChange(item.name)"
       >
@@ -49,7 +49,7 @@
   const menuItems = ref<MenuItem[]>([
     {
       icon: ShieldSearch,
-      title: 'Home',
+      title: 'Dashboard',
       name: 'home',
     },
     {

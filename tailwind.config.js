@@ -1,6 +1,7 @@
 const defaultTheme = require('tailwindcss/defaultTheme');
 
 module.exports = {
+  darkMode: 'class',
   content: ['./index.html', './src/**/*.{vue,js,ts,jsx,tsx}'],
   theme: {
     colors: {
@@ -9,6 +10,7 @@ module.exports = {
       black: '#000000',
 
       white: {
+        10: '#333',
         20: '#F2F5F9',
         50: 'rgba(8,7,8, 0.05)',
         100: 'rgba(8,7,8, 0.1)',
@@ -20,7 +22,7 @@ module.exports = {
         700: 'rgba(8,7,8, 0.7)',
         800: 'rgba(8,7,8, 0.8)',
         900: 'rgba(8,7,8, 0.9)',
-        DEFAULT: '#FFFFFF',
+        DEFAULT: '#eee',
       },
 
       primary: {
@@ -105,6 +107,11 @@ module.exports = {
         800: 'rgba(253,202,64, 0.8)',
         900: 'rgba(253,202,64, 0.9)',
         DEFAULT: '#FDCA40',
+      },
+
+      dark: {
+        900: '#1e1e1e',
+        DEFAULT: '#202023',
       },
     },
     extend: {

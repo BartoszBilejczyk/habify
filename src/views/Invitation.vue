@@ -1,7 +1,7 @@
 <template>
   <div class="w-full h-full flex flex-col flex-1">
     <BaseTopNav title="You have been challenged by Paulina!" back-route="home" background />
-    <div class="px-4 pt-4 w-full h-full flex-1 flex flex-col justify-center pb-8 bg-primary text-white">
+    <div class="px-4 pt-4 w-full h-full flex-1 flex flex-col justify-center pb-8 bg-primary :dark-bg-dark text-white">
       <div class="text-sm text-center">
         Lorem ipsum dolor sit amet, consectetur adipisicing elit. A ab ad, aperiam eius esse, exercitationem fuga harum
       </div>

@@ -4,7 +4,7 @@
     :class="{
       'min-safe-h-screen max-safe-h-screen': !noMenu.includes(currentRoute.name),
       'min-safe-h-fullscreen': noMenu.includes(currentRoute.name),
-      'bg-primary':
+      'bg-primary dark:bg-dark':
         currentRoute.name === 'profile' ||
         currentRoute.name === 'invitation' ||
         currentRoute.name === 'profile-invite' ||
@@ -13,7 +13,7 @@
       'bg-coral': currentRoute.name === 'onboarding' && currentRoute.query.step === '4',
     }"
   >
-    <div class="flex flex-col flex-1 bg-white">
+    <div class="flex flex-col flex-1">
       <div v-if="loading"></div>
       <router-view v-else />
     </div>
@@ -29,9 +29,11 @@
   import { useFirebase } from './useFirebase';
   import { emptyUser } from './helpers/empty';
   import { User } from './types';
+  import { useDark } from '@vueuse/core';
 
   const noMenu = ['login', 'register', 'forgot-password', 'onboarding', 'auth-start', 'invitation'];
 
+  const isDark = useDark();
   const { currentRoute, push } = useRouter();
   const { userProfile, firebaseUser, getDoc } = useFirebase();
   const loading = ref(true);

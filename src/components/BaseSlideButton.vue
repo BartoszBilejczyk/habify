@@ -16,7 +16,7 @@
           'text-high': unlocked,
           'pl-6': !unlocked,
           'text-white': (unlocked && !onDark) || (onDark && !unlocked),
-          'text-primary': (!onDark && !unlocked) || (unlocked && onDark),
+          'text-primary dark:text-white': (!onDark && !unlocked) || (unlocked && onDark),
         }"
       >
         {{ unlocked ? doneText : slideText }}

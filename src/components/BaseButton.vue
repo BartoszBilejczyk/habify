@@ -6,7 +6,7 @@
       'h-10 bg-gradient-to-r from-coral-900 to-coral text-white': secondary,
       'h-10 border border-primary bg-transparent text-primary': outline,
       'h-10 border border-white bg-transparent text-white': outlineWhite,
-      'h-10 border border-white bg-white text-primary': white,
+      'h-10 border border-white bg-white text-white-800': white,
       'p-1 h-auto underline text-white-900 text-sm font-normal': textPrimary,
       'p-1 h-auto underline text-coral text-sm font-normal': textSecondary,
       'p-1 h-auto underline text-white text-sm font-normal': textWhite,
