@@ -1,8 +1,8 @@
 <template>
   <div class="flex flex-col items-center justify-between w-full flex-1 pt-8 px-6 pb-8">
     <div class="flex flex-col flex-1 items-center">
-      <img :src="imagePath" alt="Onboarding illustration" class="w-64 h-auto" />
-      <h2 class="mt-10 text-3xl">Welcome to Habify</h2>
+      <img :src="imagePath" alt="Onboarding illustration" class="w-48 h-auto" />
+      <h2 class="mt-10 text-3xl">Welcome to Habbi</h2>
       <div class="mt-5 px-6 text-center">
         Build bla bla Build bla bla bla bla Build bla blabla bla Build bla blabla bla Build bla bla
       </div>
@@ -19,7 +19,7 @@
     <BaseButton primary full class="mt-10" @click="push({ name: 'register' })">Register</BaseButton>
     <div class="mt-5 text-center text-sm">
       <span class="text-white-700">Already have an account?</span>
-      <BaseButton text-primary @click="push({ name: 'login' })">Sign in</BaseButton>
+      <BaseButton text-secondary @click="push({ name: 'login' })">Sign in</BaseButton>
     </div>
   </div>
 </template>

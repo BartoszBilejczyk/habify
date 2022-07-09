@@ -1,6 +1,6 @@
 <template>
   <div class="w-full h-full flex flex-col flex-1">
-    <BaseTopNav title="Home" icon="menu">
+    <BaseTopNav title="Home" :icon="null">
       <NotificationIcon class="w-5 h-5" />
     </BaseTopNav>
     <div class="px-4 pb-20">
@@ -24,7 +24,6 @@
       <BaseSection see-more title="Charities we recommend" route-name="charities">
         <div class="bg-white p-16 shadow-lg rounded-3xl">slot</div>
       </BaseSection>
-      <BaseSlideButton></BaseSlideButton>
     </div>
   </div>
 </template>
@@ -32,7 +31,6 @@
 <script setup lang="ts">
   import BaseTopNav from '../components/BaseTopNav.vue';
   import BaseSection from '../components/BaseSection.vue';
-  import BaseSlideButton from '../components/BaseSlideButton.vue';
   import NotificationIcon from '../assets/icons/bell.svg?component';
   import { useRouter } from 'vue-router';
 

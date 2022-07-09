@@ -2,7 +2,9 @@
   <div class="my-6">
     <div class="flex justify-between items-center my-4">
       <h2 class="text-xl text-white-900">{{ title }}</h2>
-      <BaseButton text-primary @click="handleClick" class="text-sm text-white-600" v-if="seeMore">See more</BaseButton>
+      <BaseButton text-secondary @click="handleClick" class="text-sm text-white-600" v-if="seeMore">
+        See more
+      </BaseButton>
     </div>
     <slot></slot>
   </div>

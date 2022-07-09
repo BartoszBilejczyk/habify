@@ -2,7 +2,7 @@
   <div class="flex">
     <input
       type="checkbox"
-      class="h-8 w-8 border outline-none focus:outline-none border-white-600 hover:border-white-800 checked:border-primary"
+      class="h-5 w-5 border outline-none focus:outline-none border-white-600 hover:border-white-800 checked:border-primary"
       :value="modelValue"
       @input="updateValue"
     />

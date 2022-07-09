@@ -1,11 +1,8 @@
 <template>
   <div class="w-full nav pb-3" :class="background && 'bg-primary text-white'">
     <div class="nav-content">
-      <div
-        class="px-4 w-full flex items-center relative"
-        :class="{ 'justify-between': showIcon, 'justify-end': !showIcon }"
-      >
-        <span v-if="showIcon" class="">
+      <div class="px-4 w-full flex items-center relative" :class="{ 'justify-between': icon, 'justify-end': !icon }">
+        <span v-if="icon" class="">
           <BackIcon v-if="icon === 'back'" class="w-4 h-4" @click="handleBack" />
           <CloseIcon v-if="icon === 'close'" class="w-5 h-5" />
           <MenuIcon v-if="icon === 'menu'" class="w-5 h-5" />
@@ -39,10 +36,6 @@
     icon: {
       type: String as PropType<TopNavIcon>,
       default: 'back',
-    },
-    showIcon: {
-      type: Boolean,
-      default: true,
     },
     background: {
       type: Boolean,

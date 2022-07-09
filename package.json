@@ -8,6 +8,8 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@vueuse/core": "^8.9.1",
+    "@vueuse/firebase": "^8.9.1",
     "dayjs": "^1.11.2",
     "firebase": "8.8.0",
     "nanoid": "^3.3.4",

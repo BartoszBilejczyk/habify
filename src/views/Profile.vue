@@ -2,7 +2,22 @@
   <div class="w-full h-full justify-between pb-20">
     <div class="">
       <BaseTopNav title="Profile" background />
-      <div class="h-32 w-full bg-gradient-to-t from-primary-900 to-primary relative">
+      <div class="h-40 w-full bg-gradient-to-t from-primary-900 to-primary relative">
+        <div class="text-white px-10 pt-5 flex flex-col items-center">
+          <div class="text-xl">{{ userProfile.name }}</div>
+          <div class="mt-2">
+            Points:
+            <b>{{ userProfile.points }}</b>
+          </div>
+          <!--          <div class="mt-1">-->
+          <!--            All challenges started:-->
+          <!--            <b>{{ userProfile.challenges.length }}</b>-->
+          <!--          </div>-->
+          <!--          <div class="mt-1">-->
+          <!--            Challenges finished:-->
+          <!--            <b>{{ userProfile.challenges.filter(ch => ch.status === 'done').length }}</b>-->
+          <!--          </div>-->
+        </div>
         <ProfileImageBox />
       </div>
       <div class="flex flex-col px-10 mt-16">
@@ -31,6 +46,7 @@
   import UserMultiple from '../assets/icons/user-multiple.svg';
   import UserSingle from '../assets/icons/user-single.svg';
   import { useRouter } from 'vue-router';
+  import { useFirebase } from '../useFirebase';
 
   export interface MenuItem {
     icon: String;
@@ -39,6 +55,7 @@
   }
 
   const { push } = useRouter();
+  const { userProfile } = useFirebase();
 
   const menuItems = ref<MenuItem[]>([
     {

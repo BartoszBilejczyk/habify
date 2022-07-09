@@ -1,8 +1,8 @@
 <template>
   <div>
     <div class="flex justify-end text-white-300 text-xs px-10 mt-8">
-      <BaseButton text-primary>Give feedback</BaseButton>
-      <BaseButton text-primary class="ml-6" @click="logOut">Log out</BaseButton>
+      <BaseButton text-secondary>Give feedback</BaseButton>
+      <BaseButton text-secondary class="ml-6" @click="logOut">Log out</BaseButton>
     </div>
     <div class="px-10 mt-8 text-white-400 text-xs text-center">
       Copyright Web Development Bilejczyk, 2022

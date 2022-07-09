@@ -12,6 +12,9 @@
     <BaseButton text-primary>Register</BaseButton>
   </div>
   <div class="m-1">
+    <BaseButton text-secondary>Register</BaseButton>
+  </div>
+  <div class="m-1">
     <BaseButton primary small>Register</BaseButton>
   </div>
   <div class="m-1">

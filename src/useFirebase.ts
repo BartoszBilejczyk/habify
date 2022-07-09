@@ -1,22 +1,28 @@
 import firebase from 'firebase';
 import 'firebase/firestore';
+import { User } from './types';
+import { ref } from 'vue';
+import { emptyUser } from './helpers/empty';
+import { User as FirebaseUser } from '@firebase/auth-types';
+import { useFirestore } from '@vueuse/firebase/useFirestore';
+import { createGlobalState } from '@vueuse/core';
 
-if (firebase.apps.length === 0) {
-  const firebaseConfig = {
+const db = firebase
+  .initializeApp({
     apiKey: import.meta.env.VITE_APP_FIREBASE_API_KEY,
     authDomain: import.meta.env.VITE_APP_FIREBASE_AUTH_DOMAIN,
     projectId: import.meta.env.VITE_APP_FIREBASE_PROJECT_ID,
     storageBucket: import.meta.env.VITE_APP_FIREBASE_STORAGE_BUCKET,
     messagingSenderId: import.meta.env.VITE_APP_FIREBASE_MESSAGING_SENDER_ID,
     appId: import.meta.env.VITE_APP_FIREBASE_APP_ID,
-  };
-  firebase.initializeApp(firebaseConfig);
-}
+  })
+  .firestore();
 
-export default function () {
-  const db = firebase.firestore();
-
-  const getCurrentUser = () => firebase.auth().currentUser;
+export const useFirebase = createGlobalState(() => {
+  const userProfile = ref<User>({ ...emptyUser });
+  const firebaseUser = ref<FirebaseUser | null>(null);
+  const test = useFirestore(db.collection('test'));
+  const users = useFirestore(db.collection('users'));
 
   const getDoc = async (path: string) => {
     return await db
@@ -78,18 +84,6 @@ export default function () {
       })
       .then(docRef => {
         return docRef.get();
-      });
-  };
-
-  const addDocId = async (path: string, object: any) => {
-    return await db
-      .collection(path)
-      .add({
-        ...object,
-        createdOn: Date.now(),
-      })
-      .then(docRef => {
-        return docRef.get();
       })
       .then(doc => {
         return doc.id;
@@ -97,14 +91,18 @@ export default function () {
   };
 
   return {
-    getCurrentUser,
+    test,
+    users,
+    firebaseUser,
     getDoc,
     getCollection,
     getCollectionFirstItem,
     updateDoc,
     addDoc,
-    addDocId,
     setDoc,
     getCollectionWhere,
+    userProfile,
   };
-}
+});
+
+// export { useFirebase };

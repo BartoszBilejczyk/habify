@@ -1,6 +1,6 @@
 <template>
   <div class="flex flex-col justify-center items-center h-screen pb-16">
-    <h1 class="text-2xl text-center text-white-800">Register for Habify</h1>
+    <h1 class="text-2xl text-center text-white-800">Register for Habbi</h1>
     <div class="mt-8 flex flex-col w-full px-6">
       <BaseInput class="mb-2" full type="text" label="Email" placeholder="Email" v-model="email" />
       <BaseInput class="mb-2" full type="password" label="Password" placeholder="Password" v-model="password" />
@@ -16,7 +16,7 @@
       <BaseButton class="mt-4" @click="register" primary>Register</BaseButton>
       <div class="mt-3 text-center text-sm ml-auto">
         <span class="text-white-700">Already have an account?</span>
-        <BaseButton text-primary @click="push({ name: 'login' })">Sign in</BaseButton>
+        <BaseButton text-secondary @click="push({ name: 'login' })">Sign in</BaseButton>
       </div>
     </div>
   </div>
@@ -28,7 +28,7 @@
   import { useRouter } from 'vue-router';
   import BaseButton from '../components/BaseButton.vue';
   import BaseInput from '../components/BaseInput.vue';
-  import useFirebase from '../use-firebase';
+  import { useFirebase } from '../useFirebase';
   import { emptyUser } from '../helpers/empty';
   import { User } from '../types';
 

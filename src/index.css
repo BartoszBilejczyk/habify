@@ -29,8 +29,8 @@ body {
 }
 
 .min-safe-h-fullscreen {
-  min-height: calc(100vh - 85px);
-  max-height: calc(100vh - 85px);
+  min-height: calc(100vh - 70px);
+  max-height: calc(100vh - 70px);
 }
 
 @media (display-mode: standalone) {

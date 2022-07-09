@@ -4,7 +4,7 @@
     <div class="mt-8 flex flex-col w-full">
       <BaseInput class="mb-2" full type="text" label="Email" placeholder="Email" v-model="email" />
       <BaseButton class="mt-4" @click="resetPassword" primary>Reset password</BaseButton>
-      <BaseButton class="mt-2 ml-auto" @click="push({ name: 'login' })" text-primary>Back to sign in</BaseButton>
+      <BaseButton class="mt-2 ml-auto" @click="push({ name: 'login' })" text-secondary>Back to sign in</BaseButton>
     </div>
   </div>
 </template>

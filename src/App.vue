@@ -14,9 +14,10 @@
     }"
   >
     <div class="flex flex-col flex-1 bg-white">
-      <router-view />
+      <div v-if="loading"></div>
+      <router-view v-else />
     </div>
-    <Menu v-if="!noMenu.includes(currentRoute.name)" />
+    <Menu v-if="!loading && !noMenu.includes(currentRoute.name)" />
   </div>
 </template>
 
@@ -24,16 +25,28 @@
   import Menu from './components/Menu.vue';
   import { useRouter } from 'vue-router';
   import firebase from 'firebase';
+  import { onMounted, ref } from 'vue';
+  import { useFirebase } from './useFirebase';
+  import { emptyUser } from './helpers/empty';
+  import { User } from './types';
 
   const noMenu = ['login', 'register', 'forgot-password', 'onboarding', 'auth-start', 'invitation'];
-  import { onMounted } from 'vue';
 
   const { currentRoute, push } = useRouter();
+  const { userProfile, firebaseUser, getDoc } = useFirebase();
+  const loading = ref(true);
 
-  onMounted(() => {
-    firebase.auth().onAuthStateChanged(_user => {
-      if (!_user?.email) {
-        push({ name: 'auth-start' });
+  onMounted(async () => {
+    await firebase.auth().onAuthStateChanged(async user => {
+      if (!user?.email) {
+        userProfile.value = { ...emptyUser };
+        firebaseUser.value = null;
+        await push({ name: 'auth-start' });
+        loading.value = false;
+      } else {
+        userProfile.value = (await getDoc(`users/${user.uid}`)) as User;
+        firebaseUser.value = user;
+        loading.value = false;
       }
     });
   });

@@ -7,9 +7,10 @@
       </div>
       <div class="flex flex-col items-center">
         <img :src="image" alt="Invite friend illustration" class="mt-12 mb-8 h-40" />
-        <div class="border-dashed border border-white p-4 rounded-xl w-48 text-center font-black">SJDAS79</div>
+        <div class="border-dashed border border-white p-4 rounded-xl w-48 text-center font-black">{{ code }}</div>
         <div class="mt-8 flex flex-col items-center">
-          <BaseButton class="underline">Copy referral code</BaseButton>
+          <div v-if="copied" class="text-lg font-semibold text-white">Copied</div>
+          <BaseButton v-else white @click="copy(code)">Copy referral code</BaseButton>
         </div>
       </div>
     </div>
@@ -19,7 +20,12 @@
 <script setup lang="ts">
   import BaseTopNav from '../components/BaseTopNav.vue';
   import BaseButton from '../components/BaseButton.vue';
-  import { computed } from 'vue';
+  import { computed, ref } from 'vue';
+  import { useClipboard } from '@vueuse/core';
+
+  const code = ref('SJDAS79');
+
+  const { copy, copied } = useClipboard();
 
   const image = computed(() => {
     return new URL('../assets/auth-start.png', import.meta.url);

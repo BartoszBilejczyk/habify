@@ -1,7 +1,6 @@
 <template>
   <div class="w-full flex-1 flex flex-col">
-    <div v-if="loading">Loading...</div>
-    <div v-else class="flex-1 flex flex-col items-center justify-center">
+    <div class="flex-1 flex flex-col items-center justify-center">
       <OnboardingFinishProfile v-if="step === 1" @update-profile="updateProfile" />
       <OnboardingBase
         v-if="step === 2"
@@ -37,20 +36,23 @@
   import { onMounted, ref } from 'vue';
   import OnboardingFinishProfile from '../components/onboarding/OnboardingFinishProfile.vue';
   import OnboardingBase from '../components/onboarding/OnboardingBase.vue';
-  import useFirebase from '../use-firebase';
+  import { useFirebase } from '../useFirebase';
   import firebase from 'firebase';
   import { User } from '../types';
   import { useRouter } from 'vue-router';
 
-  const { getCurrentUser, updateDoc, getDoc } = useFirebase();
+  const { firebaseUser, updateDoc, getDoc, userProfile } = useFirebase();
   const { push, replace, currentRoute } = useRouter();
 
   const step = ref(1);
-  const loading = ref(true);
 
   const handleNext = () => {
     replace({ query: { ...currentRoute.value.query, step: String(step.value + 1) } });
     step.value++;
+  };
+
+  const handleSetInitialQuery = () => {
+    replace({ query: { ...currentRoute.value.query, step: String(step.value) } });
   };
 
   const handleSkip = async () => {
@@ -58,40 +60,41 @@
   };
 
   const handleFinish = async () => {
-    console.log(getCurrentUser());
-    const user = getCurrentUser();
-
-    console.log('finish');
-    await updateDoc(`users/${user?.uid}`, { onboarded: true });
-    await push({ name: 'home' });
+    setTimeout(async () => {
+      console.log('finish');
+      await updateDoc(`users/${firebaseUser.value?.uid}`, { onboarded: true });
+      await push({ name: 'home' });
+    }, 800);
   };
 
   onMounted(async () => {
-    // show loading state
-    firebase.auth().onAuthStateChanged(async user => {
-      if (user) {
-        const userDoc: Partial<User> = await getDoc(`users/${user?.uid}`);
+    if (firebaseUser.value) {
+      const userDoc: Partial<User> = await getDoc(`users/${firebaseUser.value?.uid}`);
 
-        if (userDoc.profileFinished) {
-          step.value = 2;
-        }
-
-        if (userDoc.onboarded) {
-          await push({ name: 'home' });
-        }
+      if (userDoc.profileFinished) {
+        step.value = 2;
       }
-      loading.value = false;
-    });
+
+      if (userDoc.onboarded) {
+        await push({ name: 'home', query: {} });
+      }
+
+      handleSetInitialQuery();
+    }
   });
 
   const updateProfile = async ({ name, allowEmails }: { name: string; allowEmails: boolean }) => {
-    const user = getCurrentUser();
-    await user
-      ?.updateProfile({
-        displayName: name,
-      })
-      .catch(err => console.error(err));
-    await updateDoc(`users/${user?.uid}`, { name, allowEmails, profileFinished: true });
+    if (!firebaseUser.value) {
+      return;
+    }
+
+    await firebaseUser.value.updateProfile({ displayName: name }).catch(err => console.error(err));
+    await updateDoc(`users/${firebaseUser.value?.uid}`, { name, allowEmails, profileFinished: true });
+
+    userProfile.value = {
+      ...userProfile.value,
+      ...{ name, allowEmails, profileFinished: true },
+    };
 
     handleNext();
   };

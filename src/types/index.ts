@@ -43,7 +43,7 @@ export type ChallengeCategory = 'social' | 'financial' | 'sport' | 'other';
 export interface Challenge {
   id: string;
   inviter: UserBasic;
-  inviterId: string;
+  inviterId: string | undefined;
   invitee: UserBasic;
   inviteeId: string;
   winner: UserBasic;
@@ -55,7 +55,7 @@ export interface Challenge {
   type: ChallengeType | null;
   betCategory: ChallengeCategory | null; // TODO add more
   betDetails: any; // TODO
-  points: string;
+  points: number;
   inviteLink: string;
   proposedChanges: any; // TODO
   status: ChallengeStatus | null;
@@ -117,8 +117,10 @@ export interface ChallengeExample {
   title: string;
   duration: string;
   type: ChallengeType | null;
-  points: string;
+  points: number;
 }
+
+export type ChallengeCreateStep = 'basics' | 'invite' | 'confirm';
 
 // collections
 

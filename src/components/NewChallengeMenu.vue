@@ -1,13 +1,24 @@
 <template>
-  <div class="flex justify-around">
-    <div :class="{ 'font-bold': step >= 1, 'text-green': step > 1 }">1. Basics</div>
-    <div :class="{ 'font-bold': step >= 2, 'text-green': step > 2 }">2. Invite</div>
-    <div :class="{ 'font-bold': step === 3 }">3. Confirm</div>
+  <div class="flex justify-center">
+    <div class="mx-2 py-1 px-5 rounded-2xl" :class="{ 'bg-primary text-white font-bold': step === 'basics' }">
+      1. Basics
+    </div>
+    <div
+      class="mx-2 py-1 px-5 rounded-2xl"
+      v-if="hasFriends"
+      :class="{ 'bg-primary text-white font-bold': step === 'invite' }"
+    >
+      2. Invite
+    </div>
+    <div class="mx-2 py-1 px-5 rounded-2xl" :class="{ 'bg-primary text-white font-bold': step === 'confirm' }">
+      {{ hasFriends ? '3. Confirm' : '2. Confirm' }}
+    </div>
   </div>
 </template>
 
 <script setup lang="ts">
   defineProps<{
-    step: number;
+    step: string;
+    hasFriends: boolean;
   }>();
 </script>

@@ -1,12 +1,12 @@
 {
-  "theme_color": "#9073ED",
-  "background_color": "#9073ED",
+  "theme_color": "#ffffff",
+  "background_color": "#ffffff",
   "display": "standalone",
   "scope": "/",
   "start_url": "/",
-  "name": "Habify",
-  "short_name": "Habify",
-  "description": "Habify",
+  "name": "Habbi",
+  "short_name": "Habbi",
+  "description": "Habbi",
   "icons": [
     {
       "src": "manifest-icon-192.maskable.png",

@@ -40,7 +40,10 @@
   const active = ref<RouteNameEnhanced>('home');
 
   onMounted(() => {
-    active.value = currentRoute.value.name;
+    setTimeout(() => {
+      console.log(currentRoute.value);
+      active.value = currentRoute.value.name;
+    });
   });
 
   const menuItems = ref<MenuItem[]>([

@@ -1,11 +1,12 @@
-import { ref, reactive } from 'vue';
+import { reactive } from 'vue';
+import { Challenge } from '../types';
 
-const stepOne = reactive({
+const stepOne = reactive<Partial<Challenge>>({
   title: '',
   duration: '',
-  betCategory: '',
+  betCategory: null,
   betDetails: '',
-  type: '',
+  type: null,
 });
 
 export default function useNewChallenge() {
