@@ -11,14 +11,14 @@
           v-for="i in 3"
           :key="i"
           class="h-3 w-3 m-1 rounded-full"
-          :class="i === 1 ? 'bg-primary' : 'bg-white-100'"
+          :class="i === 1 ? 'bg-primary' : 'bg-white-20 dark:bg-white'"
         ></div>
       </div>
     </div>
 
     <BaseButton primary full class="mt-10" @click="push({ name: 'register' })">Register</BaseButton>
     <div class="mt-5 text-center text-sm">
-      <span class="text-white-700">Already have an account?</span>
+      <span class="text-white-700 dark:text-white">Already have an account?</span>
       <BaseButton text-secondary @click="push({ name: 'login' })">Sign in</BaseButton>
     </div>
   </div>

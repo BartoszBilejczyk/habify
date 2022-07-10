@@ -15,7 +15,7 @@
       <BaseInput class="mb-2" full type="text" label="Referral" placeholder="Referral" v-model="usedReferralCode" />
       <BaseButton class="mt-4" @click="register" primary>Register</BaseButton>
       <div class="mt-3 text-center text-sm ml-auto">
-        <span class="text-white-700">Already have an account?</span>
+        <span class="text-white-700 dark:text-white">Already have an account?</span>
         <BaseButton text-secondary @click="push({ name: 'login' })">Sign in</BaseButton>
       </div>
     </div>

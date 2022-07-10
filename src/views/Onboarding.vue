@@ -68,8 +68,10 @@
   };
 
   onMounted(async () => {
-    if (firebaseUser.value) {
-      const userDoc: Partial<User> = await getDoc(`users/${firebaseUser.value?.uid}`);
+    const user = firebase.auth().currentUser;
+
+    if (user) {
+      const userDoc: Partial<User> = await getDoc(`users/${user?.uid}`);
 
       if (userDoc.profileFinished) {
         step.value = 2;

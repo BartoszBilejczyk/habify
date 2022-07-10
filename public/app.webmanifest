@@ -7,6 +7,15 @@
   "name": "Habbi",
   "short_name": "Habbi",
   "description": "Habbi",
+  "share_target": {
+    "action": "/share-target/",
+    "method": "GET",
+    "params": {
+      "title": "title",
+      "text": "text",
+      "url": "url"
+    }
+  },
   "icons": [
     {
       "src": "manifest-icon-192.maskable.png",

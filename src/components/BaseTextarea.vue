@@ -3,7 +3,7 @@
     <label v-if="label" class="text-white-800 dark:text-white mb-1">{{ label }}</label>
     <textarea
       :placeholder="placeholder"
-      class="border outline-none focus:outline-none border-white-600 hover:border-white-800 focus:border-primary rounded-lg w-auto px-3 pt-2 text-white-800 dark:bg-white-10 dark:text-white dark:border-white-10 dark:hover:border-white dark:focus:border-white"
+      class="border outline-none focus:outline-none border-white-600 hover:border-white-800 focus:border-primary rounded-lg w-auto px-3 pt-2 text-white-800 dark:bg-white-400 dark:text-white dark:border-white-400 dark:hover:border-white dark:focus:border-white"
       :class="{ 'w-full': full, 'w-fit': !full }"
       :value="modelValue"
       @input="updateValue"

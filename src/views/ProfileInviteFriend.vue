@@ -10,7 +10,10 @@
         <div class="border-dashed border border-white p-4 rounded-xl w-48 text-center font-black">{{ code }}</div>
         <div class="mt-8 flex flex-col items-center">
           <div v-if="copied" class="text-lg font-semibold text-white">Copied</div>
-          <BaseButton v-else white @click="copy(code)">Copy referral code</BaseButton>
+          <BaseButton v-else white @click="copy(`https://habifyapp.netlify.app?invite=${code}`)">
+            Copy referral code
+          </BaseButton>
+          <BaseButton white @click="invite">Invite</BaseButton>
         </div>
       </div>
     </div>
@@ -30,4 +33,12 @@
   const image = computed(() => {
     return new URL('../assets/auth-start.png', import.meta.url);
   });
+
+  const invite = () => {
+    if (navigator.share) {
+      navigator.share({ text: 'check out', url: `https://habifyapp.netlify.app?invite=${code.value}` });
+    } else {
+      copy(`https://habifyapp.netlify.app?invite=${code.value}`);
+    }
+  };
 </script>

@@ -6,7 +6,7 @@
       :value="modelValue"
       @input="updateValue"
     />
-    <label v-if="label" class="ml-1.5 text-white-800 leading-5 text-sm">{{ label }}</label>
+    <label v-if="label" class="ml-1.5 text-white-800 dark:text-white leading-5 text-sm">{{ label }}</label>
   </div>
 </template>
 

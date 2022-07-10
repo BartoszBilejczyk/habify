@@ -5,7 +5,7 @@
     </label>
     <input
       :placeholder="placeholder"
-      class="h-10 border outline-none focus:outline-none border-white-600 hover:border-white-800 focus:border-primary rounded-lg w-auto px-3 text-white-800 dark:bg-white-10 dark:text-white dark:border-white-10 dark:hover:border-white dark:focus:border-white"
+      class="h-10 border outline-none focus:outline-none border-white-600 hover:border-white-800 focus:border-primary rounded-lg w-auto px-3 text-white-800 dark:bg-white-400 dark:text-white dark:border-white-400 dark:hover:border-white dark:focus:border-white"
       :class="{ 'w-full': full, 'w-fit': !full }"
       :type="type || 'text'"
       :value="modelValue"

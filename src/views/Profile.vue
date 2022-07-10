@@ -2,7 +2,7 @@
   <div class="w-full h-full justify-between pb-20">
     <div class="">
       <BaseTopNav title="Profile" background />
-      <div class="h-40 w-full bg-gradient-to-t from-primary-900 to-primary from-dark-900 to-dark relative">
+      <div class="h-40 w-full bg-gradient-to-t from-primary-700 to-primary from-dark-900 to-dark relative">
         <div class="text-white px-10 pt-5 flex flex-col items-center">
           <div class="text-xl">{{ userProfile.name }}</div>
           <div class="mt-2">
@@ -23,7 +23,7 @@
       <div class="flex flex-col px-10 mt-16">
         <div
           v-for="item in menuItems"
-          class="flex items-center justify-between text-white-700 dark:text-white cursor-pointer border-b border-b-white-100 py-2"
+          class="flex items-center justify-between text-white-700 dark:text-white cursor-pointer border-b border-b-white-20 py-2"
           @click="handleRouteChange(item.name)"
         >
           <ProfileItem :item="item" />
