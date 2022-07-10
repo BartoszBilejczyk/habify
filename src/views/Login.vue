@@ -15,23 +15,32 @@
   </div>
 </template>
 
-<script setup>
+<script setup lang="ts">
   import { ref } from 'vue';
   import firebase from 'firebase';
   import { useRouter } from 'vue-router';
   import BaseButton from '../components/BaseButton.vue';
   import BaseInput from '../components/BaseInput.vue';
+  import { User } from '../types';
+  import { useFirebase } from '../useFirebase';
 
   const email = ref('');
   const password = ref('');
   const { push } = useRouter();
+  const { updateDoc, getDoc, userProfile } = useFirebase();
 
   const login = () => {
     firebase
       .auth()
       .signInWithEmailAndPassword(email.value, password.value)
-      .then(() => {
-        push({ name: 'onboarding', query: { step: '1' } });
+      .then(async user => {
+        userProfile.value = (await getDoc(`users/${user.user?.uid}`)) as User;
+
+        if (!userProfile.value.profileFinished || !userProfile.value.onboarded) {
+          push({ name: 'onboarding', query: { step: '1' } });
+        } else {
+          push({ name: 'home' });
+        }
       });
   };
 </script>

@@ -42,13 +42,19 @@ export const useFirebase = createGlobalState(() => {
       });
   };
 
-  const getCollectionWhere = async (path: string, where: any[]) => {
+  const getCollectionItemsWhere = async (path: string, where: any[]) => {
     return await db
       .collection(path)
       .where(where[0], where[1], where[2])
       .get()
-      .then((doc: any) => {
-        return { id: doc.id, ...doc.data() };
+      .then((querySnapshot: any) => {
+        const resultArray: any = [];
+
+        querySnapshot.forEach((doc: any) => {
+          resultArray.push({ id: doc.id, ...doc.data() });
+        });
+
+        return resultArray[0];
       });
   };
 
@@ -100,7 +106,7 @@ export const useFirebase = createGlobalState(() => {
     updateDoc,
     addDoc,
     setDoc,
-    getCollectionWhere,
+    getCollectionItemsWhere,
     userProfile,
   };
 });

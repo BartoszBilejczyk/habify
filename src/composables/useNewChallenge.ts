@@ -9,6 +9,6 @@ const stepOne = reactive<Partial<Challenge>>({
   type: null,
 });
 
-export default function useNewChallenge() {
+export default function useStore() {
   return { stepOne };
 }

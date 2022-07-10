@@ -31,10 +31,10 @@
   import { useFirebase } from '../useFirebase';
   import { Challenge, ChallengeCreateStep } from '../types';
   import { emptyChallenge } from '../helpers/empty';
-  import useNewChallenge from '../composables/useNewChallenge';
+  import { useStore } from '../composables/useStore';
 
   const { userProfile, firebaseUser, test, users } = useFirebase();
-  const { stepOne } = useNewChallenge();
+  const { stepOne } = useStore();
 
   const hasFriends = computed(() => Boolean(userProfile.value.friends.length));
 
@@ -61,7 +61,6 @@
   };
 
   const handleFinish = () => {
-    console.log('finish');
     const challenge: Challenge = {
       ...emptyChallenge,
       ...stepOne,

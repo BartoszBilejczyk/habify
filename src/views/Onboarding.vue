@@ -40,11 +40,13 @@
   import firebase from 'firebase';
   import { User } from '../types';
   import { useRouter } from 'vue-router';
+  import { useStore } from '../composables/useStore';
 
   const { firebaseUser, updateDoc, getDoc, userProfile } = useFirebase();
   const { push, replace, currentRoute } = useRouter();
 
   const step = ref(1);
+  const { referrer } = useStore();
 
   const handleNext = () => {
     replace({ query: { ...currentRoute.value.query, step: String(step.value + 1) } });
@@ -61,7 +63,6 @@
 
   const handleFinish = async () => {
     setTimeout(async () => {
-      console.log('finish');
       await updateDoc(`users/${firebaseUser.value?.uid}`, { onboarded: true });
       await push({ name: 'home' });
     }, 800);
@@ -91,7 +92,35 @@
     }
 
     await firebaseUser.value.updateProfile({ displayName: name }).catch(err => console.error(err));
-    await updateDoc(`users/${firebaseUser.value?.uid}`, { name, allowEmails, profileFinished: true });
+
+    if (referrer.value.id) {
+      await updateDoc(`users/${firebaseUser.value?.uid}`, {
+        name,
+        allowEmails,
+        profileFinished: true,
+        friends: [
+          {
+            id: referrer.value.id,
+            name: referrer.value.name,
+          },
+        ],
+      });
+    } else {
+      await updateDoc(`users/${firebaseUser.value?.uid}`, { name, allowEmails, profileFinished: true });
+    }
+
+    // TODO refactor to be safer and better and have new user's name. Move finish profile to here, from onboarding
+    if (referrer.value.id) {
+      await updateDoc(`users/${referrer.value.id}`, {
+        friends: [
+          ...referrer.value.friends,
+          {
+            id: userProfile.value.id,
+            name,
+          },
+        ],
+      });
+    }
 
     userProfile.value = {
       ...userProfile.value,

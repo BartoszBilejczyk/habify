@@ -2,7 +2,7 @@
   <div class="swipe-button">
     <div
       class="container"
-      :class="{ 'container-unlocked': unlocked, 'bg-white-200': onDark, 'bg-primary-300': !onDark }"
+      :class="{ 'container-unlocked': unlocked, 'bg-white': onDark, 'bg-primary-300': !onDark }"
       ref="container"
     >
       <div class="slider" ref="slider" :class="onDark ? 'bg-white' : 'bg-primary-800'" @touchstart="startDrag">
@@ -15,8 +15,8 @@
         :class="{
           'text-high': unlocked,
           'pl-6': !unlocked,
-          'text-white': (unlocked && !onDark) || (onDark && !unlocked),
-          'text-primary dark:text-white': (!onDark && !unlocked) || (unlocked && onDark),
+          'text-primary': (unlocked && !onDark) || (onDark && !unlocked),
+          'text-white dark:text-primary': (!onDark && !unlocked) || (unlocked && onDark),
         }"
       >
         {{ unlocked ? doneText : slideText }}
@@ -94,7 +94,6 @@
   };
 
   const onSuccess = () => {
-    console.log('onSuccess');
     // @ts-ignore
     container.value.style.width = container.value.clientWidth + 'px';
     // @ts-ignore

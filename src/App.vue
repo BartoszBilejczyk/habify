@@ -25,7 +25,7 @@
   import Menu from './components/Menu.vue';
   import { useRouter } from 'vue-router';
   import firebase from 'firebase';
-  import { onMounted, ref } from 'vue';
+  import { onMounted, ref, watch } from 'vue';
   import { useFirebase } from './useFirebase';
   import { emptyUser } from './helpers/empty';
   import { User } from './types';
@@ -38,12 +38,11 @@
   const { userProfile, firebaseUser, getDoc } = useFirebase();
   const loading = ref(true);
 
-  onMounted(async () => {
-    await firebase.auth().onAuthStateChanged(async user => {
+  onMounted(() => {
+    firebase.auth().onAuthStateChanged(async user => {
       if (!user?.email) {
         userProfile.value = { ...emptyUser };
         firebaseUser.value = null;
-        await push({ name: 'auth-start' });
         loading.value = false;
       } else {
         userProfile.value = (await getDoc(`users/${user.uid}`)) as User;
@@ -51,5 +50,13 @@
         loading.value = false;
       }
     });
+  });
+
+  watch(loading, async newValue => {
+    if (!newValue) {
+      if (!firebaseUser.value && currentRoute.value.path === '/') {
+        await push({ name: 'auth-start' });
+      }
+    }
   });
 </script>

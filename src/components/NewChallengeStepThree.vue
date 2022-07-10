@@ -17,7 +17,7 @@
   import BaseInfoToCopy from './BaseInfoToCopy.vue';
   import BaseButton from './BaseButton.vue';
   import ChallengeDetails from './ChallengeDetails.vue';
-  import useNewChallenge from '../composables/useNewChallenge';
+  import { useStore } from '../composables/useStore';
 
-  const { stepOne } = useNewChallenge();
+  const { stepOne } = useStore();
 </script>

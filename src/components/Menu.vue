@@ -41,7 +41,6 @@
 
   onMounted(() => {
     setTimeout(() => {
-      console.log(currentRoute.value);
       active.value = currentRoute.value.name;
     });
   });

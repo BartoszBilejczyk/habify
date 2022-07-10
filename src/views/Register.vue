@@ -31,6 +31,7 @@
   import { useFirebase } from '../useFirebase';
   import { emptyUser } from '../helpers/empty';
   import { User } from '../types';
+  import { useStore } from '../composables/useStore';
 
   const email = ref('');
   const password = ref('');
@@ -40,10 +41,11 @@
   const errorMessage = ref('');
 
   const { push, currentRoute } = useRouter();
-  const { setDoc } = useFirebase();
+  const { setDoc, getCollectionItemsWhere, updateDoc } = useFirebase();
+  const { referrer } = useStore();
 
-  onMounted(() => {
-    const referralCode = currentRoute.value.query.referralCode;
+  onMounted(async () => {
+    const referralCode = currentRoute.value.query.code;
 
     if (referralCode) {
       // @ts-ignore
@@ -51,30 +53,35 @@
     }
   });
 
-  const register = () => {
+  const register = async () => {
     // check if referralCode works
     const userNewReferralCode = Math.random().toString(36).substring(2, 8).toUpperCase();
+
+    // TODO refactor
+    if (usedReferralCode.value) {
+      referrer.value = await getCollectionItemsWhere('users', ['referralCode', '==', usedReferralCode.value]);
+    }
 
     firebase
       .auth()
       .createUserWithEmailAndPassword(email.value, password.value)
-      .then(async userCredential => {
-        const user: User = {
+      .then(async ({ user }) => {
+        const newUser: User = {
           ...emptyUser,
-          id: userCredential?.user?.uid,
-          email: userCredential?.user?.email,
-          name: userCredential?.user?.displayName,
-          phone: userCredential?.user?.phoneNumber,
-          image: userCredential?.user?.photoURL,
+          id: user?.uid,
+          email: user?.email,
+          name: user?.displayName,
+          phone: user?.phoneNumber,
+          image: user?.photoURL,
           referralCode: userNewReferralCode,
           usedReferralCode: usedReferralCode.value,
         };
 
-        await setDoc(`users/${userCredential?.user?.uid}`, user);
+        await setDoc(`users/${user?.uid}`, newUser);
         await setDoc(`referralCodes/${userNewReferralCode}`, {
           referralCode: userNewReferralCode,
-          userId: userCredential?.user?.uid,
-          userEmail: userCredential?.user?.email,
+          userId: newUser.id,
+          userEmail: newUser.email,
         });
       })
       .then(() => {

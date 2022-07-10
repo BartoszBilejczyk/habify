@@ -1,9 +1,10 @@
 import { createGlobalState } from '@vueuse/core';
 import 'firebase/firestore';
-import { reactive } from 'vue';
-import { Challenge } from '../types';
+import { reactive, ref } from 'vue';
+import { Challenge, User } from '../types';
+import { emptyUser } from '../helpers/empty';
 
-export const store = createGlobalState(() => {
+export const useStore = createGlobalState(() => {
   const stepOne = reactive<Partial<Challenge>>({
     title: '',
     duration: '',
@@ -12,5 +13,7 @@ export const store = createGlobalState(() => {
     type: null,
   });
 
-  return { stepOne };
+  const referrer = ref<User>({ ...emptyUser });
+
+  return { stepOne, referrer };
 });

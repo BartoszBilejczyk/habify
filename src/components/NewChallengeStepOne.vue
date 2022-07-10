@@ -39,9 +39,9 @@
   import BaseSelect from '../components/BaseSelect.vue';
   import { ref } from 'vue';
   import BaseTextarea from './BaseTextarea.vue';
-  import useNewChallenge from '../composables/useNewChallenge';
+  import { useStore } from '../composables/useStore';
 
-  const { stepOne } = useNewChallenge();
+  const { stepOne } = useStore();
 
   const typeOptions = ref([
     { label: 'One occurrence', value: 'oneTime' },
