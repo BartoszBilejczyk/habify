@@ -63,7 +63,7 @@
       updatedOn: Date.now(),
       inviterId: firebaseUser.value?.uid,
       inviter: userProfileBasic.value,
-      inviteLink,
+      inviteLink: inviteLink.value,
     };
 
     await setDoc(`challenges/${newChallenge.value.id}`, challenge);
