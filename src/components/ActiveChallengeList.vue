@@ -1,16 +1,14 @@
 <template>
   <div class="">
-    <ActiveChallenge v-for="challenge in challenges" :challenge="challenge">
-      {{ challenge }}
-    </ActiveChallenge>
+    <ActiveChallenge v-for="challenge in challenges" :challenge="challenge"></ActiveChallenge>
   </div>
 </template>
 
 <script setup lang="ts">
   import ActiveChallenge from './ActiveChallenge.vue';
-  import { ChallengeBasic } from '../types';
+  import { Challenge } from '../types';
 
   defineProps<{
-    challenges: ChallengeBasic[];
+    challenges: Challenge[];
   }>();
 </script>

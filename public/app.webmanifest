@@ -51,5 +51,6 @@
       "sizes": "384x384",
       "type": "image/png"
     }
-  ]
+  ],
+  "capture_links": "existing-client-navigate",
 }

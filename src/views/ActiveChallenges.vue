@@ -42,7 +42,7 @@
 
     // sort by newest
 
-    challenges.value = [...inviterChallenges, inviteeChallenges].sort((a, b) => a.updatedOn - b.udpatedOn);
+    challenges.value = [...inviterChallenges, ...inviteeChallenges].sort((a, b) => a.updatedOn - b.udpatedOn);
   });
 
   const handleStart = () => {
