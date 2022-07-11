@@ -4,7 +4,7 @@
     <div class="px-4">
       <NewChallengeMenu class="mt-3 mb-5" :has-friends="hasFriends" :step="step" />
       <NewChallengeStepOne v-show="step === 'basics'" />
-      <NewChallengeStepTwo v-show="step === 'invite'" />
+      <NewChallengeStepTwo v-show="step === 'invite'" :friends="friends" />
       <NewChallengeStepThree v-show="step === 'confirm'" />
       <NewChallengeButtons
         class="mt-3"
@@ -20,7 +20,7 @@
 
 <script setup lang="ts">
   import { ref, computed } from 'vue';
-  import { nanoid } from 'nanoid';
+  import { customAlphabet } from 'nanoid';
 
   import BaseTopNav from '../components/BaseTopNav.vue';
   import NewChallengeStepOne from '../components/NewChallengeStepOne.vue';
@@ -29,49 +29,56 @@
   import NewChallengeMenu from '../components/NewChallengeMenu.vue';
   import NewChallengeButtons from '../components/NewChallengeButtons.vue';
   import { useFirebase } from '../useFirebase';
-  import { Challenge, ChallengeCreateStep } from '../types';
-  import { emptyChallenge } from '../helpers/empty';
+  import { Challenge, ChallengeBasic, ChallengeCreateStep } from '../types';
   import { useStore } from '../composables/useStore';
 
-  const { userProfile, firebaseUser, test, users } = useFirebase();
-  const { stepOne } = useStore();
+  const { userProfile, userProfileBasic, firebaseUser, setDoc, updateDoc } = useFirebase();
+  const { newChallenge } = useStore();
 
-  const hasFriends = computed(() => Boolean(userProfile.value.friends.length));
+  const friends = computed(() => userProfile.value.friends);
+  const hasFriends = computed(() => Boolean(friends.value.length));
 
   const step = ref<ChallengeCreateStep>('basics');
   const done = ref(false);
 
   const handleNext = () => {
     if (step.value === 'basics') {
-      step.value = hasFriends ? 'confirm' : 'invite';
-    }
-
-    if (step.value === 'invite') {
+      step.value = hasFriends.value ? 'invite' : 'confirm';
+    } else if (step.value === 'invite') {
       step.value = 'confirm';
     }
   };
   const handlePrev = () => {
     if (step.value === 'confirm') {
-      step.value = hasFriends ? 'invite' : 'basics';
-    }
-
-    if (step.value === 'invite') {
+      step.value = hasFriends.value ? 'invite' : 'basics';
+    } else if (step.value === 'invite') {
       step.value = 'basics';
     }
   };
 
-  const handleFinish = () => {
+  const handleFinish = async () => {
+    const id = customAlphabet('abcdefghijklmnoprstuvwyz1234567890', 10)();
+
     const challenge: Challenge = {
-      ...emptyChallenge,
-      ...stepOne,
-      status: 'waitsForConfirm',
-      confirmationType: 'manual',
-      points: 500,
-      id: nanoid(),
+      ...newChallenge.value,
+      createdOn: Date.now(),
+      updatedOn: Date.now(),
+      id,
       inviterId: firebaseUser.value?.uid,
-      // inviter: get user from users (keep a separate composable for it during load).
-      // inviteLink: do some generation through jwt?
+      inviter: userProfileBasic.value,
+      inviteLink: `https://habifyapp.netlify.app/invite?code=${id}`,
     };
+
+    await setDoc(`challenges/${id}`, challenge);
+
+    const newChallengesArray: ChallengeBasic[] = [
+      ...userProfile.value.challenges,
+      { id: challenge.id, points: challenge.points, title: challenge.title },
+    ];
+
+    await updateDoc(`users/${userProfileBasic.value.id}`, {
+      challenges: newChallengesArray,
+    });
 
     done.value = true;
     console.log(challenge);

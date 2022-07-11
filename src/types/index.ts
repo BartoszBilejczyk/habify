@@ -10,7 +10,7 @@ export interface User {
   notificationSettings: string[];
   allowEmails: boolean;
   tasks: Task[];
-  challenges: Challenge[];
+  challenges: ChallengeBasic[];
   feedbackSent: string[];
   profileFinished: boolean;
   onboarded: boolean;
@@ -40,6 +40,12 @@ export type ChallengeType = 'oneTime' | 'duration';
 export type ChallengeConfirmationType = 'manual' | 'automatic';
 export type ChallengeCategory = 'social' | 'financial' | 'sport' | 'other';
 
+export interface ChallengeBasic {
+  id: string;
+  title: string;
+  points: number;
+}
+
 export interface Challenge {
   id: string;
   inviter: UserBasic;
@@ -61,6 +67,8 @@ export interface Challenge {
   status: ChallengeStatus | null;
   confirmationPhotos: string[];
   confirmationType: ChallengeConfirmationType | null;
+  createdOn: number | Date;
+  updatedOn: number | Date;
 }
 
 export type CharityCategory = 'kids' | 'animals' | 'environment' | 'other';

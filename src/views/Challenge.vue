@@ -1,6 +1,6 @@
 <template>
   <div class="w-full h-full flex flex-col flex-1">
-    <BaseTopNav title="Challenge details" />
+    <BaseTopNav title="Challenge details" back-route="active-challenges" />
   </div>
 </template>
 

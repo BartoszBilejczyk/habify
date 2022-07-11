@@ -1,16 +1,16 @@
 <template>
   <div class="flex justify-center">
-    <div class="mx-2 py-1 px-5 rounded-2xl" :class="{ 'bg-primary text-white font-bold': step === 'basics' }">
+    <div class="mx-2 py-1 px-2 rounded-2xl text-sm" :class="{ 'bg-primary text-white font-bold': step === 'basics' }">
       1. Basics
     </div>
     <div
-      class="mx-2 py-1 px-5 rounded-2xl"
+      class="mx-2 py-1 px-2 rounded-2xl text-sm"
       v-if="hasFriends"
       :class="{ 'bg-primary text-white font-bold': step === 'invite' }"
     >
       2. Invite
     </div>
-    <div class="mx-2 py-1 px-5 rounded-2xl" :class="{ 'bg-primary text-white font-bold': step === 'confirm' }">
+    <div class="mx-2 py-1 px-2 rounded-2xl text-sm" :class="{ 'bg-primary text-white font-bold': step === 'confirm' }">
       {{ hasFriends ? '3. Confirm' : '2. Confirm' }}
     </div>
   </div>

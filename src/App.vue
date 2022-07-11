@@ -13,11 +13,11 @@
       'bg-coral': currentRoute.name === 'onboarding' && currentRoute.query.step === '4',
     }"
   >
-    <div class="flex flex-col flex-1">
+    <div class="flex flex-col flex-1" :class="showMenu && 'app-content-with-padding'">
       <div v-if="loading"></div>
       <router-view v-else />
     </div>
-    <Menu v-if="!loading && !noMenu.includes(currentRoute.name)" />
+    <Menu v-if="showMenu" />
   </div>
 </template>
 
@@ -25,7 +25,7 @@
   import Menu from './components/Menu.vue';
   import { useRouter } from 'vue-router';
   import firebase from 'firebase';
-  import { onMounted, ref, watch } from 'vue';
+  import { computed, onMounted, ref, watch } from 'vue';
   import { useFirebase } from './useFirebase';
   import { emptyUser } from './helpers/empty';
   import { User } from './types';
@@ -37,6 +37,9 @@
   const { currentRoute, push } = useRouter();
   const { userProfile, firebaseUser, getDoc } = useFirebase();
   const loading = ref(true);
+
+  // @ts-ignore
+  const showMenu = computed(() => !loading.value && !noMenu.includes(currentRoute.value.name));
 
   onMounted(() => {
     firebase.auth().onAuthStateChanged(async user => {
@@ -60,3 +63,11 @@
     }
   });
 </script>
+
+<style>
+  @media (display-mode: browser) {
+    .app-content-with-padding {
+      padding-bottom: 65px;
+    }
+  }
+</style>

@@ -1,10 +1,9 @@
 import firebase from 'firebase';
 import 'firebase/firestore';
-import { User } from './types';
-import { ref } from 'vue';
+import { User, UserBasic } from './types';
+import { computed, ref } from 'vue';
 import { emptyUser } from './helpers/empty';
 import { User as FirebaseUser } from '@firebase/auth-types';
-import { useFirestore } from '@vueuse/firebase/useFirestore';
 import { createGlobalState } from '@vueuse/core';
 
 const db = firebase
@@ -21,8 +20,16 @@ const db = firebase
 export const useFirebase = createGlobalState(() => {
   const userProfile = ref<User>({ ...emptyUser });
   const firebaseUser = ref<FirebaseUser | null>(null);
-  const test = useFirestore(db.collection('test'));
-  const users = useFirestore(db.collection('users'));
+
+  // @ts-ignore
+  const userProfileBasic = computed<UserBasic>(() => ({
+    id: userProfile.value.id,
+    email: userProfile.value.email,
+    phone: userProfile.value.phone,
+    name: userProfile.value.name,
+    points: userProfile.value.points,
+    image: userProfile.value.image,
+  }));
 
   const getDoc = async (path: string) => {
     return await db
@@ -42,7 +49,7 @@ export const useFirebase = createGlobalState(() => {
       });
   };
 
-  const getCollectionItemsWhere = async (path: string, where: any[]) => {
+  const getCollectionFirstItemWhere = async (path: string, where: any[]) => {
     return await db
       .collection(path)
       .where(where[0], where[1], where[2])
@@ -55,6 +62,22 @@ export const useFirebase = createGlobalState(() => {
         });
 
         return resultArray[0];
+      });
+  };
+
+  const getCollectionItemsWhere = async (path: string, where: any[]) => {
+    return await db
+      .collection(path)
+      .where(where[0], where[1], where[2])
+      .get()
+      .then((querySnapshot: any) => {
+        const resultArray: any = [];
+
+        querySnapshot.forEach((doc: any) => {
+          resultArray.push({ id: doc.id, ...doc.data() });
+        });
+
+        return resultArray;
       });
   };
 
@@ -97,9 +120,10 @@ export const useFirebase = createGlobalState(() => {
   };
 
   return {
-    test,
-    users,
+    db,
     firebaseUser,
+    userProfile,
+    userProfileBasic,
     getDoc,
     getCollection,
     getCollectionFirstItem,
@@ -107,8 +131,6 @@ export const useFirebase = createGlobalState(() => {
     addDoc,
     setDoc,
     getCollectionItemsWhere,
-    userProfile,
+    getCollectionFirstItemWhere,
   };
 });
-
-// export { useFirebase };

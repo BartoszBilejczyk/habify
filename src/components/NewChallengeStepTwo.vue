@@ -1,28 +1,35 @@
 <template>
   <div class="">
-    <BaseSection title="Challenge existing friends">You don't have any friends added yet.</BaseSection>
-    <BaseSection title="Challenge new person">
-      <BaseInfoToCopy>{{ link }}</BaseInfoToCopy>
-      <div class="mt-8 flex flex-col items-center">
-        <div v-if="copied" class="text-lg font-semibold text-white">Copied</div>
-        <BaseButton v-else white @click="copy(link)">Copy link to challenge</BaseButton>
+    <BaseSection title="Challenge existing friends">
+      <div
+        v-for="friend in friends"
+        :key="friend.id"
+        class="bg-white-500 my-3 py-1 px-3 rounded-lg"
+        :class="stepTwo.inviteeId === friend.id && 'bg-white-100'"
+        @click="handleChooseFriend(friend)"
+      >
+        {{ friend.name }}
       </div>
-      <div class="text-center mt-5">
-        <b>Click next.</b>
-        <br />
-        <div class="mt-2 w-64 mx-auto">We will show you the link and share options on the next step.</div>
-      </div>
+    </BaseSection>
+    <BaseSection title="Choose later">
+      <BaseButton primary>Choose later</BaseButton>
     </BaseSection>
   </div>
 </template>
 
 <script setup lang="ts">
   import BaseSection from './BaseSection.vue';
-  import BaseInfoToCopy from './BaseInfoToCopy.vue';
   import BaseButton from './BaseButton.vue';
-  import { ref } from 'vue';
-  import { useClipboard } from '@vueuse/core';
+  import { useStore } from '../composables/useStore';
+  import { UserBasic } from '../types';
 
-  const link = ref('https://habify.com/sad7891789ds');
-  const { copy, copied } = useClipboard();
+  const { stepTwo } = useStore();
+
+  const handleChooseFriend = (friend: UserBasic) => {
+    stepTwo.value = { invitee: friend, inviteeId: friend.id };
+  };
+
+  defineProps<{
+    friends: any[];
+  }>();
 </script>

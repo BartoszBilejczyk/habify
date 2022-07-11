@@ -131,8 +131,8 @@ const router = createRouter({
       component: () => import('./views/Charities.vue'),
     },
     {
-      path: '/invitation',
-      name: 'invitation',
+      path: '/invite',
+      name: 'invite',
       component: () => import('./views/Invitation.vue'),
     },
     {

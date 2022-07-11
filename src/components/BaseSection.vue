@@ -1,5 +1,5 @@
 <template>
-  <div class="my-6">
+  <div class="mb-6">
     <div class="flex justify-between items-center my-4">
       <h2 class="text-xl text-white-900 dark:text-white">{{ title }}</h2>
       <BaseButton text-secondary @click="handleClick" v-if="seeMore">See more</BaseButton>

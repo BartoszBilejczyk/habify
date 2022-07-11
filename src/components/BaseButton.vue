@@ -12,7 +12,7 @@
       'p-1 h-auto underline text-white text-sm font-normal': textWhite,
       'h-8 px-4 font-normal': small,
       'font-bold': !small,
-      'px-8': !textPrimary && !textWhite && !textSecondary,
+      'px-8': !textPrimary && !textWhite && !textSecondary && !small,
       'text-lg': !(small || textPrimary || textSecondary || textWhite),
       'h-10 w-full': full,
     }"

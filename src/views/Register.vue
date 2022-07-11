@@ -41,7 +41,7 @@
   const errorMessage = ref('');
 
   const { push, currentRoute } = useRouter();
-  const { setDoc, getCollectionItemsWhere, updateDoc } = useFirebase();
+  const { setDoc, getCollectionFirstItemWhere, updateDoc } = useFirebase();
   const { referrer } = useStore();
 
   onMounted(async () => {
@@ -59,7 +59,7 @@
 
     // TODO refactor
     if (usedReferralCode.value) {
-      referrer.value = await getCollectionItemsWhere('users', ['referralCode', '==', usedReferralCode.value]);
+      referrer.value = await getCollectionFirstItemWhere('users', ['referralCode', '==', usedReferralCode.value]);
     }
 
     firebase

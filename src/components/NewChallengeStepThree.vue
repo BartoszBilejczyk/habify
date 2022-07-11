@@ -1,14 +1,14 @@
 <template>
   <div class="">
     <BaseSection title="Confirm Details">
-      <ChallengeDetails :data="stepOne"></ChallengeDetails>
+      <ChallengeDetails :data="newChallenge" invite-key="invitee"></ChallengeDetails>
     </BaseSection>
-    <BaseSection title="Share">
-      <BaseInfoToCopy>https://habify.com/sad7891789ds</BaseInfoToCopy>
-      <div class="flex justify-center mt-4 mb-10">
-        <BaseButton text-secondary>Copy share link</BaseButton>
-      </div>
-    </BaseSection>
+    <!--    <BaseSection title="Share">-->
+    <!--      <BaseInfoToCopy>https://habify.com/sad7891789ds</BaseInfoToCopy>-->
+    <!--      <div class="flex justify-center mt-4 mb-10">-->
+    <!--        <BaseButton text-secondary>Copy share link</BaseButton>-->
+    <!--      </div>-->
+    <!--    </BaseSection>-->
   </div>
 </template>
 
@@ -19,5 +19,5 @@
   import ChallengeDetails from './ChallengeDetails.vue';
   import { useStore } from '../composables/useStore';
 
-  const { stepOne } = useStore();
+  const { newChallenge } = useStore();
 </script>

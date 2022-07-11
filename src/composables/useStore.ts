@@ -1,10 +1,12 @@
 import { createGlobalState } from '@vueuse/core';
 import 'firebase/firestore';
-import { reactive, ref } from 'vue';
+import { computed, reactive, ref } from 'vue';
 import { Challenge, User } from '../types';
-import { emptyUser } from '../helpers/empty';
+import { emptyChallenge, emptyUser, emptyUserBasic } from '../helpers/empty';
 
 export const useStore = createGlobalState(() => {
+  const challenges = ref<Challenge[]>([]);
+
   const stepOne = reactive<Partial<Challenge>>({
     title: '',
     duration: '',
@@ -13,7 +15,21 @@ export const useStore = createGlobalState(() => {
     type: null,
   });
 
+  const stepTwo = ref({
+    invitee: { ...emptyUserBasic },
+    inviteeId: '',
+  });
+
+  const newChallenge = computed<Challenge>(() => ({
+    ...emptyChallenge,
+    ...stepOne,
+    ...stepTwo.value,
+    status: 'waitsForConfirm',
+    confirmationType: 'manual',
+    points: 500,
+  }));
+
   const referrer = ref<User>({ ...emptyUser });
 
-  return { stepOne, referrer };
+  return { stepOne, stepTwo, newChallenge, referrer, challenges };
 });
