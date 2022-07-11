@@ -33,7 +33,7 @@
   import { useStore } from '../composables/useStore';
 
   const { userProfile, userProfileBasic, firebaseUser, setDoc, updateDoc } = useFirebase();
-  const { newChallenge } = useStore();
+  const { newChallenge, inviteLink } = useStore();
 
   const friends = computed(() => userProfile.value.friends);
   const hasFriends = computed(() => Boolean(friends.value.length));
@@ -57,19 +57,16 @@
   };
 
   const handleFinish = async () => {
-    const id = customAlphabet('abcdefghijklmnoprstuvwyz1234567890', 10)();
-
     const challenge: Challenge = {
       ...newChallenge.value,
       createdOn: Date.now(),
       updatedOn: Date.now(),
-      id,
       inviterId: firebaseUser.value?.uid,
       inviter: userProfileBasic.value,
-      inviteLink: `https://habbi.app/invite?code=${id}`,
+      inviteLink,
     };
 
-    await setDoc(`challenges/${id}`, challenge);
+    await setDoc(`challenges/${newChallenge.value.id}`, challenge);
 
     const newChallengesArray: ChallengeBasic[] = [
       ...userProfile.value.challenges,

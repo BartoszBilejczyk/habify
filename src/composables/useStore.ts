@@ -8,6 +8,7 @@ export const useStore = createGlobalState(() => {
   const challenges = ref<Challenge[]>([]);
 
   const stepOne = reactive<Partial<Challenge>>({
+    id: '',
     title: '',
     duration: '',
     betCategory: null,
@@ -20,6 +21,8 @@ export const useStore = createGlobalState(() => {
     inviteeId: '',
   });
 
+  const inviteLink = computed(() => `https://habbi.app/invite?code=${stepOne.id}`);
+
   const newChallenge = computed<Challenge>(() => ({
     ...emptyChallenge,
     ...stepOne,
@@ -31,5 +34,5 @@ export const useStore = createGlobalState(() => {
 
   const referrer = ref<User>({ ...emptyUser });
 
-  return { stepOne, stepTwo, newChallenge, referrer, challenges };
+  return { stepOne, stepTwo, newChallenge, referrer, challenges, inviteLink };
 });

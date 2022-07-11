@@ -37,11 +37,16 @@
   import BaseSection from '../components/BaseSection.vue';
   import BaseInput from '../components/BaseInput.vue';
   import BaseSelect from '../components/BaseSelect.vue';
-  import { ref } from 'vue';
+  import { onMounted, ref } from 'vue';
   import BaseTextarea from './BaseTextarea.vue';
   import { useStore } from '../composables/useStore';
+  import { customAlphabet } from 'nanoid';
 
   const { stepOne } = useStore();
+
+  onMounted(() => {
+    stepOne.id = customAlphabet('abcdefghijklmnoprstuvwyz1234567890', 10)();
+  });
 
   const typeOptions = ref([
     { label: 'One occurrence', value: 'oneTime' },

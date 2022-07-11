@@ -4,9 +4,9 @@
       <ChallengeDetails :data="newChallenge" invite-key="invitee"></ChallengeDetails>
     </BaseSection>
     <BaseSection title="Share">
-      <BaseInfoToCopy>{{ newChallenge.inviteLink }}</BaseInfoToCopy>
+      <BaseInfoToCopy>{{ inviteLink }}</BaseInfoToCopy>
       <div class="flex justify-center mt-4 mb-10">
-        <BaseButton outline-white @click="share">Share the link</BaseButton>
+        <BaseButton outline @click="share">Share the link</BaseButton>
       </div>
     </BaseSection>
   </div>
@@ -24,6 +24,7 @@
 
   const { copy, copied } = useClipboard();
   const { userProfile } = useFirebase();
+  const { newChallenge, inviteLink } = useStore();
 
   const shareData = computed(() => ({
     title: 'Zaakceptuj challenge!',
@@ -38,6 +39,4 @@
       copy(newChallenge.value.inviteLink);
     }
   };
-
-  const { newChallenge } = useStore();
 </script>
