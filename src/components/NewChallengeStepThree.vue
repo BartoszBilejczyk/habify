@@ -29,14 +29,14 @@
   const shareData = computed(() => ({
     title: 'Zaakceptuj challenge!',
     text: 'Zaakceptuj challenge!',
-    url: newChallenge.value.inviteLink,
+    url: inviteLink.value,
   }));
 
   const share = () => {
     if (navigator.share) {
       navigator.share(shareData.value);
     } else {
-      copy(newChallenge.value.inviteLink);
+      copy(inviteLink.value);
     }
   };
 </script>
