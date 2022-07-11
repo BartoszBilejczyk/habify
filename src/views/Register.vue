@@ -13,7 +13,7 @@
         v-model="confirmPassword"
       />
       <BaseInput class="mb-2" full type="text" label="Referral" placeholder="Referral" v-model="usedReferralCode" />
-      <BaseButton class="mt-4" @click="register" primary>Register</BaseButton>
+      <BaseButton class="mt-4" @click="register" primary>{{ loading ? 'Loading...' : 'Register' }}</BaseButton>
       <div class="mt-3 text-center text-sm ml-auto">
         <span class="text-white-700 dark:text-white">Already have an account?</span>
         <BaseButton text-secondary @click="push({ name: 'login' })">Sign in</BaseButton>
@@ -39,6 +39,7 @@
   const usedReferralCode = ref('');
   const errorCode = ref('');
   const errorMessage = ref('');
+  const loading = ref(false);
 
   const { push, currentRoute } = useRouter();
   const { setDoc, getCollectionFirstItemWhere, updateDoc } = useFirebase();
@@ -54,6 +55,11 @@
   });
 
   const register = async () => {
+    if (loading.value) {
+      return;
+    }
+
+    loading.value = true;
     // check if referralCode works
     const userNewReferralCode = Math.random().toString(36).substring(2, 8).toUpperCase();
 
@@ -91,6 +97,9 @@
         console.error(error);
         errorCode.value = error.code;
         errorMessage.value = error.message;
+      })
+      .finally(() => {
+        loading.value = false;
       });
   };
 </script>

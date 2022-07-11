@@ -1,5 +1,5 @@
 <template>
-  <div class="w-full h-full flex flex-col flex-1">
+  <div v-if="userProfile.id" class="w-full h-full flex flex-col flex-1">
     <BaseTopNav title="Dashboard" :icon="null">
       <NotificationIcon class="w-5 h-5" />
     </BaseTopNav>
