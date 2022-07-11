@@ -13,20 +13,20 @@
         <button @click="handleStart">START</button>
       </div>
       <BaseSection see-more title="Your friends" route-name="friends">
-        <div class="bg-white dark:bg-white-400 px-4 py-12 shadow-lg rounded-3xl">
+        <div class="bg-white dark:bg-dark-800 px-4 py-12 shadow-lg rounded-3xl">
           <div v-for="friend in userProfile.friends">
             {{ friend.name }}
           </div>
         </div>
       </BaseSection>
       <BaseSection see-more title="Challenge examples" route-name="challenge-examples">
-        <div class="bg-white dark:bg-white-400 p-16 shadow-lg rounded-3xl">slot</div>
+        <div class="bg-white dark:bg-dark-800 p-16 shadow-lg rounded-3xl">slot</div>
       </BaseSection>
       <BaseSection see-more title="How it works" route-name="how-it-works">
-        <div class="bg-white dark:bg-white-400 p-16 shadow-lg rounded-3xl">slot</div>
+        <div class="bg-white dark:bg-dark-800 p-16 shadow-lg rounded-3xl">slot</div>
       </BaseSection>
       <BaseSection see-more title="Charities we recommend" route-name="charities">
-        <div class="bg-white dark:bg-white-400 p-16 shadow-lg rounded-3xl">slot</div>
+        <div class="bg-white dark:bg-dark-800 p-16 shadow-lg rounded-3xl">slot</div>
       </BaseSection>
     </div>
   </div>

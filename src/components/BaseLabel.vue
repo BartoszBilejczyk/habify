@@ -1,6 +1,6 @@
 <template>
   <div
-    class="text-xs font-semibold py-1 px-3 rounded-full"
+    class="text-xs font-bold py-1 px-3 rounded-full"
     :class="{
       'bg-primary-100 text-primary-900': color === 'primary',
       'bg-coral-100 text-coral-900': color === 'coral',

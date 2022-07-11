@@ -2,7 +2,7 @@
   <div class="flex flex-col">
     <label v-if="label" class="text-white-800 dark:text-white mb-1">{{ label }}</label>
     <select
-      class="h-10 border outline-none focus:outline-none border-white-600 hover:border-white-800 focus:border-primary rounded-lg w-auto px-3 text-white-800 dark:bg-white-400 dark:text-white dark:border-white-400 dark:hover:border-white dark:focus:border-white"
+      class="h-12 border outline-none focus:outline-none border-white-10 bg-white-10 focus:border-white-10 rounded-lg w-auto px-3 text-white-700 dark:bg-dark-800 dark:text-white dark:border-dark-800 dark:hover:border-dark-800 dark:focus:border-dark-800 placeholder-white-500 dark:placeholder-white-30"
       :class="{ 'w-full': full, 'w-fit': !full }"
       :value="modelValue"
       @change="updateValue"

@@ -4,8 +4,8 @@
     <div class="mt-6 text-center px-10">
       Provide us with some details, so that your friends can easily identify you.
     </div>
-    <BaseInput class="w-full mt-6" v-model="name" label="Name*" placeholder="Name*" full required />
-    <BaseInput class="w-full mt-3" v-model="surname" label="Surname" placeholder="Surname" full />
+    <BaseInput class="w-full mt-6" v-model="name" placeholder="Name*" full required />
+    <BaseInput class="w-full mt-3" v-model="surname" placeholder="Surname" full />
     <BaseCheckbox
       class="mt-5"
       v-model="allowEmails"

@@ -3,7 +3,7 @@
     <div>{{ challenge.title }}</div>
     <div>{{ challenge.points }}</div>
     <div>{{ challenge.status }}</div>
-    <div>{{ challenge.invitee.name }}</div>
+    <div>{{ challenge.invitee?.name }}</div>
     <div>{{ challenge.inviteLink }}</div>
   </div>
 </template>

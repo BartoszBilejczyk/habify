@@ -1,5 +1,8 @@
 <template>
-  <BaseBox class="dark:bg-white-20 dark:text-white-900 py-3" :class="onDark && 'bg-white text-white-900 py-3'">
+  <BaseBox
+    class="bg-white-10 dark:bg-dark-800 dark:text-white-20 py-3"
+    :class="onDark && 'bg-white text-white-900 py-3'"
+  >
     <div class="flex mb-2">
       <div class="font-bold grow-0 shrink-0 basis-28">Challenge</div>
       <div>{{ data.title }}</div>

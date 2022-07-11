@@ -2,8 +2,8 @@
   <div class="flex flex-col justify-center items-center h-screen px-4">
     <h1 class="text-2xl text-center text-white-800">Login to Your Account</h1>
     <div class="mt-8 flex flex-col w-full">
-      <BaseInput class="mb-2" full type="text" label="Email" placeholder="Email" v-model="email" />
-      <BaseInput class="mb-2" full type="password" label="Password" placeholder="Password" v-model="password" />
+      <BaseInput class="mb-2" full type="text" placeholder="Email" v-model="email" />
+      <BaseInput class="mb-2" full type="password" placeholder="Password" v-model="password" />
       <BaseButton class="mt-4" @click="login" primary>Sign in</BaseButton>
       <BaseButton class="mt-3 ml-auto" @click="push({ name: 'register' })" text-secondary>
         Don't have an account?

@@ -14,7 +14,7 @@
           {{ userProfile.referralCode }}
         </div>
         <div class="mt-8 flex flex-col items-center">
-          <div v-if="copied" class="text-lg font-semibold text-white">Copied</div>
+          <div v-if="copied" class="text-lg font-bold text-white">Copied</div>
           <BaseButton v-else white @click="copy(url)">Copy referral code</BaseButton>
           <BaseButton white @click="invite">Invite</BaseButton>
         </div>

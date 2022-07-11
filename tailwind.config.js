@@ -10,7 +10,7 @@ module.exports = {
       black: '#000000',
 
       white: {
-        10: '#f9f9f9',
+        10: '#F7F7F9',
         20: '#e0e0e0',
         30: '#c6c6c6',
         40: '#adadad',
@@ -24,7 +24,7 @@ module.exports = {
         700: '#1e1e1e',
         800: '#161616',
         900: '#0e0e0e',
-        DEFAULT: '#eee',
+        DEFAULT: '#FFF',
       },
 
       primary: {
@@ -126,8 +126,9 @@ module.exports = {
       },
 
       dark: {
-        900: '#1e1e1e',
-        DEFAULT: '#202023',
+        800: '#20232D',
+        900: '#16181F',
+        DEFAULT: '#16181F',
       },
     },
     extend: {

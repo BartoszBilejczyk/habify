@@ -4,8 +4,8 @@
       <div
         v-for="friend in friends"
         :key="friend.id"
-        class="bg-white-500 my-3 py-1 px-3 rounded-lg"
-        :class="stepTwo.inviteeId === friend.id && 'bg-white-100'"
+        class="bg-white-10 dark:bg-dark-800 my-3 py-1 px-3 rounded-lg cursor-pointer"
+        :class="stepTwo.inviteeId === friend.id && 'bg-white-20 dark:bg-white-20 dark:text-white-500'"
         @click="handleChooseFriend(friend)"
       >
         {{ friend.name }}
