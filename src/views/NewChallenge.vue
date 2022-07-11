@@ -66,7 +66,7 @@
       id,
       inviterId: firebaseUser.value?.uid,
       inviter: userProfileBasic.value,
-      inviteLink: `https://habifyapp.netlify.app/invite?code=${id}`,
+      inviteLink: `https://habbi.app/invite?code=${id}`,
     };
 
     await setDoc(`challenges/${id}`, challenge);

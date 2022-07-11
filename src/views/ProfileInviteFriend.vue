@@ -33,7 +33,7 @@
   const { copy, copied } = useClipboard();
   const { userProfile } = useFirebase();
 
-  const url = computed(() => `https://habifyapp.netlify.app/register?code=${userProfile.value.referralCode}`);
+  const url = computed(() => `https://habbi.app/register?code=${userProfile.value.referralCode}`);
 
   const shareData = computed(() => ({
     title: 'Dołącz do Habbi!',

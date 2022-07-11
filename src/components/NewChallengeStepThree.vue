@@ -3,12 +3,12 @@
     <BaseSection title="Confirm Details">
       <ChallengeDetails :data="newChallenge" invite-key="invitee"></ChallengeDetails>
     </BaseSection>
-    <!--    <BaseSection title="Share">-->
-    <!--      <BaseInfoToCopy>https://habify.com/sad7891789ds</BaseInfoToCopy>-->
-    <!--      <div class="flex justify-center mt-4 mb-10">-->
-    <!--        <BaseButton text-secondary>Copy share link</BaseButton>-->
-    <!--      </div>-->
-    <!--    </BaseSection>-->
+    <BaseSection title="Share">
+      <BaseInfoToCopy>{{ newChallenge.inviteLink }}</BaseInfoToCopy>
+      <div class="flex justify-center mt-4 mb-10">
+        <BaseButton outline-white @click="share">Share the link</BaseButton>
+      </div>
+    </BaseSection>
   </div>
 </template>
 
@@ -18,6 +18,26 @@
   import BaseButton from './BaseButton.vue';
   import ChallengeDetails from './ChallengeDetails.vue';
   import { useStore } from '../composables/useStore';
+  import { useClipboard } from '@vueuse/core';
+  import { useFirebase } from '../useFirebase';
+  import { computed } from 'vue';
+
+  const { copy, copied } = useClipboard();
+  const { userProfile } = useFirebase();
+
+  const shareData = computed(() => ({
+    title: 'Zaakceptuj challenge!',
+    text: 'Zaakceptuj challenge!',
+    url: newChallenge.value.inviteLink,
+  }));
+
+  const share = () => {
+    if (navigator.share) {
+      navigator.share(shareData.value);
+    } else {
+      copy(newChallenge.value.inviteLink);
+    }
+  };
 
   const { newChallenge } = useStore();
 </script>
