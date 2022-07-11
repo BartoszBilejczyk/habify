@@ -31,7 +31,7 @@
   import { User } from './types';
   import { useDark } from '@vueuse/core';
 
-  const noMenu = ['login', 'register', 'forgot-password', 'onboarding', 'auth-start', 'invitation'];
+  const noMenu = ['login', 'register', 'forgot-password', 'onboarding', 'auth-start', 'invite'];
 
   const isDark = useDark();
   const { currentRoute, push } = useRouter();

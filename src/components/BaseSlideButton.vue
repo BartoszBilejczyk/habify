@@ -2,7 +2,7 @@
   <div class="swipe-button">
     <div
       class="container"
-      :class="{ 'container-unlocked': unlocked, 'bg-white-20': onDark, 'bg-primary-300': !onDark }"
+      :class="{ 'container-unlocked': unlocked, 'bg-white-10': onDark, 'bg-primary-300': !onDark }"
       ref="container"
     >
       <div class="slider" ref="slider" :class="onDark ? 'bg-white' : 'bg-primary-800'" @touchstart="startDrag">

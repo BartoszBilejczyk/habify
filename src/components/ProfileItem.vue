@@ -8,11 +8,10 @@
 
 <script setup lang="ts">
   import { PropType } from 'vue';
-  import UserSingle from '../assets/icons/user-single.svg?component';
   import { MenuItem } from '../views/Profile.vue';
   import ChevronRight from '../assets/icons/chevron-right.svg?component';
 
   defineProps({
-    item: Object as PropType<MenuItem>
+    item: Object as PropType<MenuItem>,
   });
 </script>
