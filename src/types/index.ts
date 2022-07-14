@@ -128,7 +128,7 @@ export interface ChallengeExample {
   points: number;
 }
 
-export type ChallengeCreateStep = 'basics' | 'invite' | 'confirm';
+export type ChallengeCreateStep = 'challenge' | 'bet' | 'invite' | 'confirm';
 
 // collections
 

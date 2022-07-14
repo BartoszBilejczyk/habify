@@ -9,7 +9,9 @@
       done-text="Challenge created"
       slide-text="Slide to start!"
     />
-    <BaseButton v-if="step !== 'basics' && !done" class="mt-4" text-secondary @click="$emit('prev')">Back</BaseButton>
+    <BaseButton v-if="step !== 'challenge' && !done" class="mt-4" text-secondary @click="$emit('prev')">
+      Back
+    </BaseButton>
   </div>
 </template>
 

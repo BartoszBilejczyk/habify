@@ -18,7 +18,7 @@
     modelValue: string;
     full?: boolean;
     options?: {
-      value: string;
+      value: string | number;
       label: string;
     }[];
   }>();

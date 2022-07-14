@@ -3,6 +3,7 @@
     <BaseSection title="Confirm Details">
       <ChallengeDetails :data="newChallenge" invite-key="invitee"></ChallengeDetails>
     </BaseSection>
+    <!--    Move to step 5, last step success -->
     <BaseSection title="Share">
       <BaseInfoToCopy>{{ inviteLink }}</BaseInfoToCopy>
       <div class="flex justify-center mt-4 mb-10">

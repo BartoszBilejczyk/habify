@@ -10,7 +10,7 @@
       />
       <BaseSelect v-model="stepOne.type" class="mb-3" placeholder="Type" label="Type" full :options="typeOptions" />
       <BaseSelect
-        v-if="stepOne.duration === 'B'"
+        v-if="stepOne.type === 'duration'"
         v-model="stepOne.duration"
         class="mb-3"
         placeholder="Duration"
@@ -50,10 +50,10 @@
 
   const typeOptions = ref([
     { label: 'One occurrence', value: 'oneTime' },
-    { label: 'Time-boxed', value: 'duration' },
+    { label: 'Time-based', value: 'duration' },
   ]);
 
-  const durationOptions = ref(Array.from({ length: 14 }, (v, i) => ({ label: `${i + 1} days`, value: i + 1 })));
+  const durationOptions = ref(Array.from({ length: 30 }, (v, i) => ({ label: `${i + 1} days`, value: i + 1 })));
 
   const betCategoryOptions = ref([
     { label: 'Social', value: 'social' },

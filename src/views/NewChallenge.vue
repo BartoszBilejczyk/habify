@@ -1,9 +1,10 @@
 <template>
-  <div class="w-full h-full flex flex-col flex-1">
+  <div class="w-full h-full flex flex-col flex-1 pb-6">
     <BaseTopNav title="New Challenge" />
     <div class="px-4">
       <NewChallengeMenu class="mt-3 mb-5" :has-friends="hasFriends" :step="step" />
-      <NewChallengeStepOne v-show="step === 'basics'" />
+      <NewChallengeStepOne v-show="step === 'challenge'" />
+      <!--       make new step - for bet -->
       <NewChallengeStepTwo v-show="step === 'invite'" :friends="friends" />
       <NewChallengeStepThree v-show="step === 'confirm'" />
       <NewChallengeButtons
@@ -20,7 +21,6 @@
 
 <script setup lang="ts">
   import { ref, computed } from 'vue';
-  import { customAlphabet } from 'nanoid';
 
   import BaseTopNav from '../components/BaseTopNav.vue';
   import NewChallengeStepOne from '../components/NewChallengeStepOne.vue';
@@ -38,11 +38,11 @@
   const friends = computed(() => userProfile.value.friends);
   const hasFriends = computed(() => Boolean(friends.value.length));
 
-  const step = ref<ChallengeCreateStep>('basics');
+  const step = ref<ChallengeCreateStep>('challenge');
   const done = ref(false);
 
   const handleNext = () => {
-    if (step.value === 'basics') {
+    if (step.value === 'challenge') {
       step.value = hasFriends.value ? 'invite' : 'confirm';
     } else if (step.value === 'invite') {
       step.value = 'confirm';
@@ -50,9 +50,9 @@
   };
   const handlePrev = () => {
     if (step.value === 'confirm') {
-      step.value = hasFriends.value ? 'invite' : 'basics';
+      step.value = hasFriends.value ? 'invite' : 'challenge';
     } else if (step.value === 'invite') {
-      step.value = 'basics';
+      step.value = 'challenge';
     }
   };
 

@@ -138,7 +138,7 @@ const charities: Charity[] = [
   },
   {
     id: '',
-    name: '',
+    name: 'Fundacja Bahati',
     link: '',
     logo: '',
     description: '',
@@ -147,7 +147,7 @@ const charities: Charity[] = [
   },
   {
     id: '',
-    name: '',
+    name: 'Fundacja Serce dla Zwierząt',
     link: '',
     logo: '',
     description: '',
@@ -156,7 +156,7 @@ const charities: Charity[] = [
   },
   {
     id: '',
-    name: '',
+    name: 'Fundacja Czarna Owca Pana Kota',
     link: '',
     logo: '',
     description: '',
@@ -165,7 +165,7 @@ const charities: Charity[] = [
   },
   {
     id: '',
-    name: '',
+    name: 'Fundacja na Rzecz Ochrony Praw Zwierząt EX LEGE',
     link: '',
     logo: '',
     description: '',
@@ -174,7 +174,7 @@ const charities: Charity[] = [
   },
   {
     id: '',
-    name: '',
+    name: 'Ogólnopolska Fundacja dla Zwierząt',
     link: '',
     logo: '',
     description: '',
@@ -183,7 +183,7 @@ const charities: Charity[] = [
   },
   {
     id: '',
-    name: '',
+    name: 'Fundacja Viva! Akcja dla zwierząt',
     link: '',
     logo: '',
     description: '',
@@ -192,7 +192,7 @@ const charities: Charity[] = [
   },
   {
     id: '',
-    name: '',
+    name: 'https://zbieram.pl/',
     link: '',
     logo: '',
     description: '',
@@ -201,7 +201,7 @@ const charities: Charity[] = [
   },
   {
     id: '',
-    name: '',
+    name: 'siepomaga.pl',
     link: '',
     logo: '',
     description: '',
@@ -210,7 +210,7 @@ const charities: Charity[] = [
   },
   {
     id: '',
-    name: '',
+    name: 'unicef',
     link: '',
     logo: '',
     description: '',
@@ -219,7 +219,7 @@ const charities: Charity[] = [
   },
   {
     id: '',
-    name: '',
+    name: 'Stowarzyszenie Ochrony Zwierząt Eko Straż Wrocław.',
     link: '',
     logo: '',
     description: '',

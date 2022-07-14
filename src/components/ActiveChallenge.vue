@@ -1,8 +1,5 @@
 <template>
-  <div
-    class="mt-1 mb-4 px-4 py-3 bg-white-10 dark:bg-dark-800 rounded-xl text-white-900 dark:text-white relative"
-    @click="goToChallengeDetails"
-  >
+  <BaseBox @click="goToChallengeDetails" class="mt-1 mb-4">
     <div class="flex flex-nowrap justify-between mb-5">
       <div>{{ challenge.title }}</div>
       <div class="flex flex-col items-end">
@@ -22,13 +19,14 @@
     </div>
     <!--    <div>{{ challenge.inviteLink }}</div>-->
     <ChevronRight class="absolute w-4 h-4 text-white-700 dark:text-white right-3 bottom-3" />
-  </div>
+  </BaseBox>
 </template>
 
 <script setup lang="ts">
   import ChevronRight from '../assets/icons/chevron-right.svg?component';
   import { useRouter } from 'vue-router';
   import BaseLabel from './BaseLabel.vue';
+  import BaseBox from './BaseBox.vue';
 
   import { Challenge, UserBasic } from '../types';
   import { computed } from 'vue';

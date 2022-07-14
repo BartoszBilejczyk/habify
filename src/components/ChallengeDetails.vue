@@ -3,27 +3,27 @@
     class="bg-white-10 dark:bg-dark-800 dark:text-white-20 py-3"
     :class="onDark && 'bg-white text-white-900 py-3'"
   >
-    <div class="flex mb-2">
+    <div class="flex mb-1.5">
       <div class="font-bold grow-0 shrink-0 basis-28">Challenge</div>
       <div>{{ data.title }}</div>
     </div>
-    <div v-if="data.type === 'oneTime'" class="flex mb-2">
+    <div v-if="data.type === 'oneTime'" class="flex mb-1.5">
       <div class="font-bold grow-0 shrink-0 basis-28">Type</div>
       <div>One time</div>
     </div>
-    <div v-if="data.type === 'duration'" class="flex mb-2">
+    <div v-if="data.type === 'duration'" class="flex mb-1.5">
       <div class="font-bold grow-0 shrink-0 basis-28">Duration</div>
       <div>{{ data.duration }}</div>
     </div>
-    <div class="flex mb-2">
+    <div class="flex mb-1.5">
       <div class="font-bold grow-0 shrink-0 basis-28">Bet</div>
       <div>{{ data.betCategory }}, manual confirmation.</div>
     </div>
-    <div class="flex mb-2">
+    <div class="flex mb-1.5">
       <div class="font-bold grow-0 shrink-0 basis-28">Details</div>
       <div>{{ data.betDetails }}</div>
     </div>
-    <div v-if="data[keyId]" class="flex mb-2">
+    <div v-if="data[keyId]" class="flex mb-1.5">
       <div class="font-bold grow-0 shrink-0 basis-28">Friend</div>
       <div>{{ data[inviteKey].name }}</div>
     </div>

@@ -1,5 +1,7 @@
 <template>
-  <div class="fixed left-0 bottom-0 pt-3 px-10 w-full border-t border-t-white-50 bg-white dark:bg-dark-900 menu">
+  <div
+    class="fixed left-0 bottom-0 pt-3 px-10 w-full border-t border-t-white-20 dark:border-t-white-300 bg-white dark:bg-dark-900 menu"
+  >
     <div class="flex justify-center">
       <div
         v-for="item in menuItems"
@@ -81,6 +83,7 @@
 <style>
   .menu {
     padding-bottom: calc(env(safe-inset-area-bottom) - 8px);
+    z-index: 10000;
   }
 
   @media (display-mode: browser) {

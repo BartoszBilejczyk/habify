@@ -15,7 +15,7 @@
         :class="{
           'text-high': unlocked,
           'pl-6': !unlocked,
-          'text-primary dark:text-white': unlocked && !onDark,
+          'text-white dark:text-white': unlocked && !onDark,
           'text-primary': onDark,
           'text-white': !onDark && !unlocked,
         }"
