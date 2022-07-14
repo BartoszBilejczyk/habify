@@ -66,7 +66,7 @@ const router = createRouter({
       component: () => import('./views/ActiveChallenges.vue'),
     },
     {
-      path: '/challenge',
+      path: '/active-challenges/:id',
       name: 'challenge',
       component: () => import('./views/Challenge.vue'),
     },

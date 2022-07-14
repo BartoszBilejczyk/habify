@@ -1,5 +1,5 @@
 <template>
-  <div class="flex items-center">
+  <div class="flex items-center text-sm">
     <component :is="item.icon" class="w-5 h-5 mr-3" />
     {{ item.title }}
   </div>

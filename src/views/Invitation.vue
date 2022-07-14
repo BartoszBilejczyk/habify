@@ -2,9 +2,7 @@
   <div v-if="challenge.id" class="w-full h-full flex flex-col flex-1">
     <BaseTopNav title="New challenge" back-route="home" background />
     <div class="px-4 py-2 w-full h-full flex-1 flex flex-col justify-center bg-primary dark:bg-dark-900 text-white">
-      <h1 class="text-2xl text-center text-white-800 dark:text-white">
-        You have been challenged by {{ challenge.inviter?.name }}!
-      </h1>
+      <h1 class="text-2xl text-center text-white">You have been challenged by {{ challenge.inviter?.name }}!</h1>
       <div class="mt-8 text-sm text-center">
         Lorem ipsum dolor sit amet, consectetur adipisicing elit. A ab ad, aperiam eius esse, exercitationem fuga harum
       </div>
@@ -12,8 +10,8 @@
         <ChallengeDetails class="w-full" on-dark :data="challenge" invite-key="inviter" />
         <div class="mt-8 flex flex-col items-center w-full px-6">
           <BaseSlideButton done-text="Accepted" slide-text="Accept Challenge" on-dark @success="handleAccept" />
-          <div v-if="!done" class="my-2">or</div>
-          <BaseButton v-if="!done" text-white>Propose changes</BaseButton>
+          <!--          <div v-if="!done" class="my-2">or</div>-->
+          <!--          <BaseButton v-if="!done" text-white>Propose changes</BaseButton>-->
         </div>
       </div>
     </div>

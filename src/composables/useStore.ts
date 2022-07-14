@@ -3,9 +3,11 @@ import 'firebase/firestore';
 import { computed, reactive, ref } from 'vue';
 import { Challenge, User } from '../types';
 import { emptyChallenge, emptyUser, emptyUserBasic } from '../helpers/empty';
+import { useFirebase } from '../useFirebase';
 
 export const useStore = createGlobalState(() => {
   const challenges = ref<Challenge[]>([]);
+  const { userProfileBasic, getCollectionItemsWhere } = useFirebase();
 
   const stepOne = reactive<Partial<Challenge>>({
     id: '',
@@ -34,5 +36,21 @@ export const useStore = createGlobalState(() => {
 
   const referrer = ref<User>({ ...emptyUser });
 
-  return { stepOne, stepTwo, newChallenge, referrer, challenges, inviteLink };
+  const getChallenges = async () => {
+    // TODO is there better way?
+    const inviterChallenges = await getCollectionItemsWhere('challenges', [
+      'inviterId',
+      '==',
+      userProfileBasic.value.id,
+    ]);
+    const inviteeChallenges = await getCollectionItemsWhere('challenges', [
+      'inviteeId',
+      '==',
+      userProfileBasic.value.id,
+    ]);
+
+    challenges.value = [...inviterChallenges, ...inviteeChallenges].sort((a, b) => b.updatedOn - a.updatedOn);
+  };
+
+  return { stepOne, stepTwo, newChallenge, referrer, challenges, inviteLink, getChallenges };
 });

@@ -57,9 +57,13 @@
 
   watch(loading, async newValue => {
     if (!newValue) {
-      if (!firebaseUser.value && currentRoute.value.path === '/') {
-        await push({ name: 'auth-start' });
-      }
+      setTimeout(async () => {
+        console.log(currentRoute.value);
+
+        if (!firebaseUser.value && currentRoute.value.path === '/') {
+          await push({ name: 'auth-start' });
+        }
+      }, 50);
     }
   });
 </script>
