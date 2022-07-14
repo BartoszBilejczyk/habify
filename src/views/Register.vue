@@ -1,15 +1,23 @@
 <template>
   <div class="flex flex-col justify-center items-center h-screen pb-16">
-    <h1 class="text-2xl text-center text-white-800">Register for Habbi</h1>
+    <h1 class="text-2xl text-center text-white-800">{{ $t('auth.registerTitle') }}</h1>
     <div class="mt-8 flex flex-col w-full px-6">
-      <BaseInput class="mb-2" full type="text" placeholder="Email" v-model="email" />
-      <BaseInput class="mb-2" full type="password" placeholder="Password" v-model="password" />
-      <BaseInput class="mb-2" full type="password" placeholder="Confirm Password" v-model="confirmPassword" />
-      <BaseInput class="mb-2" full type="text" placeholder="Referral" v-model="usedReferralCode" />
-      <BaseButton class="mt-4" @click="register" primary>{{ loading ? 'Loading...' : 'Register' }}</BaseButton>
+      <BaseInput class="mb-2" full type="text" :placeholder="$t('auth.email')" v-model="email" />
+      <BaseInput class="mb-2" full type="password" :placeholder="$t('auth.password')" v-model="password" />
+      <BaseInput
+        class="mb-2"
+        full
+        type="password"
+        :placeholder="$t('auth.confirmPassword')"
+        v-model="confirmPassword"
+      />
+      <BaseInput class="mb-2" full type="text" :placeholder="$t('auth.referralCode')" v-model="usedReferralCode" />
+      <BaseButton class="mt-4" @click="register" :primary>
+        {{ loading ? $t('common.loading') : $t('auth.register') }}
+      </BaseButton>
       <div class="mt-3 text-center text-sm ml-auto">
-        <span class="text-white-700 dark:text-white">Already have an account?</span>
-        <BaseButton text-secondary @click="push({ name: 'login' })">Sign in</BaseButton>
+        <span class="text-white-700 dark:text-white">{{ $t('auth.alreadyHaveAccount') }}</span>
+        <BaseButton text-secondary @click="push({ name: 'login' })">{{ $t('auth.login') }}</BaseButton>
       </div>
     </div>
   </div>

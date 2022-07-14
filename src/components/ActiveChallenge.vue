@@ -27,6 +27,7 @@
   import { useRouter } from 'vue-router';
   import BaseLabel from './BaseLabel.vue';
   import BaseBox from './BaseBox.vue';
+  import { CHALLENGE_STATUS } from '../helpers/constants';
 
   import { Challenge, UserBasic } from '../types';
   import { computed } from 'vue';
@@ -43,19 +44,19 @@
   };
 
   const statusColor = computed(() => {
-    if (props.challenge.status === 'waitsForConfirm') {
-      return 'yellow';
-    }
-    if (props.challenge.status === 'done') {
-      return 'green';
-    }
-    if (props.challenge.status === 'pending') {
+    if (props.challenge.status === CHALLENGE_STATUS.waitsForConfirm.value) {
       return 'coral';
     }
-    if (props.challenge.status === 'active') {
+    if (props.challenge.status === CHALLENGE_STATUS.done.value) {
+      return 'green';
+    }
+    if (props.challenge.status === CHALLENGE_STATUS.pending.value) {
+      return 'yellow';
+    }
+    if (props.challenge.status === CHALLENGE_STATUS.active.value) {
       return 'primary';
     }
-    if (props.challenge.status === 'closed') {
+    if (props.challenge.status === CHALLENGE_STATUS.closed.value) {
       return 'red';
     }
 

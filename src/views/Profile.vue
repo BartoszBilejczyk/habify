@@ -1,12 +1,12 @@
 <template>
   <div class="w-full h-full justify-between pb-20">
     <div class="">
-      <BaseTopNav title="Profile" background />
-      <div class="h-40 w-full bg-gradient-to-t from-primary-600 to-primary dark:from-dark-900 dark:to-dark relative">
+      <BaseTopNav :title="$t('titles.profile')" background />
+      <div class="h-40 w-full bg-gradient-to-t from-primary-600 to-primary dark:from-dark dark:to-dark relative">
         <div class="text-white px-10 pt-5 flex flex-col items-center">
           <div class="text-xl">{{ userProfile.name }}</div>
           <div class="mt-2">
-            Points:
+            {{ $t('common.points') }}:
             <b>{{ userProfile.points }}</b>
           </div>
           <!--          <div class="mt-1">-->
@@ -73,11 +73,11 @@
       title: 'Challenge History',
       name: 'profile-challenge-history',
     },
-    {
-      icon: ShieldStar,
-      title: 'Friends',
-      name: 'profile-friends',
-    },
+    // {
+    //   icon: ShieldStar,
+    //   title: 'Friends',
+    //   name: 'friends',
+    // },
     {
       icon: UserSingle,
       title: 'Notification Settings',

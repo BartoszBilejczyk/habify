@@ -1,5 +1,5 @@
 <template>
-  <div class="">FRIENDS</div>
+  <div class="">How it works item</div>
 </template>
 
 <script setup lang="ts"></script>

@@ -1,6 +1,6 @@
 <template>
   <div class="w-full h-full flex flex-col flex-1">
-    <BaseTopNav title="Friends" back-route="profile" />
+    <BaseTopNav :title="$t('titles.friends')" back-route="profile" />
     <div v-for="friend in userProfile.friends">
       {{ friend.name }}
     </div>

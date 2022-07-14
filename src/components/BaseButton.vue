@@ -3,8 +3,8 @@
     class="outline-none rounded-lg"
     :class="{
       'h-12 bg-gradient-to-r from-primary-700 to-primary text-white': primary,
-      'h-12 bg-gradient-to-r from-coral-900 to-coral text-white': secondary,
-      'h-12 border border-primary bg-transparent text-primary dark:border-white dark:text-white': outline,
+      'h-12 bg-gradient-to-r from-coral-800 to-coral-700 text-white': secondary,
+      'h-12 border border-primary bg-transparent text-primary dark:border-white-100 dark:text-white-20': outline,
       'h-12 border border-white bg-transparent text-white': outlineWhite,
       'h-12 border border-white bg-white text-white-800': white,
       'p-1 h-auto underline text-white-900 text-sm font-normal': textPrimary,

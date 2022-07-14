@@ -15,7 +15,7 @@ export type RouteName =
   | 'onboarding'
   | 'challenge-examples'
   | 'profile-challenge-history'
-  | 'profile-friends'
+  | 'friends'
   | 'profile-invite'
   | 'profile-settings'
   | 'profile-notification-settings'
@@ -99,11 +99,6 @@ const router = createRouter({
       path: '/profile-challenge-history',
       name: 'profile-challenge-history',
       component: () => import('./views/ProfileChallengeHistory.vue'),
-    },
-    {
-      path: '/profile-friends',
-      name: 'profile-friends',
-      component: () => import('./views/ProfileFriendsManagement.vue'),
     },
     {
       path: '/profile-invite',

@@ -1,6 +1,6 @@
 <template>
   <div class="w-full h-full flex flex-col flex-1">
-    <BaseTopNav title="Task Center" back-route="profile" />
+    <BaseTopNav :title="$t('titles.taskCenter')" back-route="profile" />
   </div>
 </template>
 

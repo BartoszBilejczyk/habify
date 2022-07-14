@@ -1,9 +1,9 @@
 <template>
   <div class="w-full h-full flex flex-col flex-1">
-    <BaseTopNav title="Invite Friend" back-route="profile" background />
+    <BaseTopNav :title="$t('titles.inviteFriend')" back-route="profile" background />
     <div class="px-4 pt-4 w-full h-full flex-1 flex flex-col justify-center pb-20 bg-primary dark:bg-dark text-white">
       <div class="text-sm text-center">
-        Lorem ipsum dolor sit amet, consectetur adipisicing elit. A ab ad, aperiam eius esse, exercitationem fuga harum
+        {{ $t('profile.inviteDescription') }}
       </div>
       <div class="flex flex-col items-center">
         <img :src="image" alt="Invite friend illustration" class="my-8 h-56" />
@@ -14,9 +14,9 @@
           {{ userProfile.referralCode }}
         </div>
         <div class="mt-8 flex flex-col items-center">
-          <div v-if="copied" class="text-lg font-bold text-white">Copied</div>
-          <BaseButton v-else white @click="copy(url)">Copy referral code</BaseButton>
-          <BaseButton white @click="invite">Invite</BaseButton>
+          <div v-if="copied" class="text-lg font-bold text-white">{{ $t('profile.copied') }}</div>
+          <BaseButton v-else white @click="copy(url)">{{ $t('profile.copyReferralCode') }}</BaseButton>
+          <BaseButton white @click="invite">{{ $t('common.invite') }}</BaseButton>
         </div>
       </div>
     </div>
@@ -29,15 +29,17 @@
   import { computed } from 'vue';
   import { useClipboard } from '@vueuse/core';
   import { useFirebase } from '../useFirebase';
+  import { useI18n } from 'vue-i18n';
 
   const { copy, copied } = useClipboard();
   const { userProfile } = useFirebase();
+  const { t } = useI18n();
 
   const url = computed(() => `https://habbi.app/register?code=${userProfile.value.referralCode}`);
 
   const shareData = computed(() => ({
-    title: 'Dołącz do Habbi!',
-    text: 'Wyzwij mnie na pojedynek i pomagajmy razem.',
+    title: `${t('profile.inviteShareTitle')}!`,
+    text: `${t('profile.inviteShareDescription')}!`,
     url: url.value,
   }));
 

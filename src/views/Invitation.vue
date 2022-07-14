@@ -1,15 +1,20 @@
 <template>
   <div v-if="challenge.id" class="w-full h-full flex flex-col flex-1">
-    <BaseTopNav title="New challenge" back-route="home" background />
+    <BaseTopNav :title="$t('titles.newChallenge')" back-route="home" background />
     <div class="px-4 py-2 w-full h-full flex-1 flex flex-col justify-center bg-primary dark:bg-dark-900 text-white">
-      <h1 class="text-2xl text-center text-white">You have been challenged by {{ challenge.inviter?.name }}!</h1>
+      <h1 class="text-2xl text-center text-white">{{ $t('invite.challengedBy') }}{{ challenge.inviter?.name }}!</h1>
       <div class="mt-8 text-sm text-center">
-        Lorem ipsum dolor sit amet, consectetur adipisicing elit. A ab ad, aperiam eius esse, exercitationem fuga harum
+        {{ $t('invite.inviteDescription') }}
       </div>
       <div class="mt-8 flex flex-col items-center">
         <ChallengeDetails class="w-full" on-dark :data="challenge" invite-key="inviter" />
         <div class="mt-8 flex flex-col items-center w-full px-6">
-          <BaseSlideButton done-text="Accepted" slide-text="Accept Challenge" on-dark @success="handleAccept" />
+          <BaseSlideButton
+            :done-text="$t('invite.accepted')"
+            :slide-text="$t('invite.accept')"
+            on-dark
+            @success="handleAccept"
+          />
           <!--          <div v-if="!done" class="my-2">or</div>-->
           <!--          <BaseButton v-if="!done" text-white>Propose changes</BaseButton>-->
         </div>
@@ -20,7 +25,7 @@
 
 <script setup lang="ts">
   import BaseTopNav from '../components/BaseTopNav.vue';
-  import BaseButton from '../components/BaseButton.vue';
+  // import BaseButton from '../components/BaseButton.vue';
   import BaseSlideButton from '../components/BaseSlideButton.vue';
   import ChallengeDetails from '../components/ChallengeDetails.vue';
   import { onMounted, ref } from 'vue';
@@ -28,10 +33,12 @@
   import { useRouter } from 'vue-router';
   import { Challenge, ChallengeBasic } from '../types';
   import { emptyChallenge } from '../helpers/empty';
+  import { useI18n } from 'vue-i18n';
 
   const challenge = ref<Challenge>({ ...emptyChallenge });
   const { updateDoc, getDoc, userProfile, userProfileBasic } = useFirebase();
   const { push, currentRoute } = useRouter();
+  const { t } = useI18n();
 
   const done = ref(false);
 
@@ -42,7 +49,7 @@
     if (fetchedChallenge.inviteeId === userProfile.value.id) {
       challenge.value = fetchedChallenge;
     } else {
-      alert('You are not the user invited for this challenge');
+      alert(t('invite.notInvitedUser'));
     }
   });
 
@@ -58,6 +65,7 @@
       inviteeId: userProfileBasic.value.id,
       status: 'active',
       updatedOn: Date.now(),
+      acceptedOn: Date.now(),
     });
 
     const newChallengesArray: ChallengeBasic[] = [

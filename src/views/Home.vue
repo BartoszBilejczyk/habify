@@ -1,31 +1,31 @@
 <template>
   <div v-if="userProfile.id" class="w-full h-full flex flex-col flex-1">
-    <BaseTopNav title="Dashboard" :icon="null">
+    <BaseTopNav :title="$t('titles.dashboard')" :icon="null">
       <NotificationIcon class="w-5 h-5" />
     </BaseTopNav>
     <div class="px-4 pb-20">
       <div class="px-5 py-4 mt-4 bg-primary text-white font-bold flex justify-between rounded-lg shadow-lg">
         <span class="text-lg">
-          Create your first challenge.
+          {{ $t('home.createFirstChallenge') }}
           <br />
-          Build good habits.
+          {{ $t('home.buildHabits') }}
         </span>
-        <button @click="handleStart">START</button>
+        <button @click="handleStart">{{ $t('home.start') }}</button>
       </div>
-      <BaseSection see-more title="Your friends" route-name="friends">
+      <BaseSection see-more :title="$t('titles.friends')" route-name="friends">
         <div class="bg-white dark:bg-dark-800 px-4 py-12 shadow-lg rounded-3xl">
           <div v-for="friend in userProfile.friends">
             {{ friend.name }}
           </div>
         </div>
       </BaseSection>
-      <BaseSection see-more title="Challenge examples" route-name="challenge-examples">
+      <BaseSection see-more :title="$t('titles.examples')" route-name="challenge-examples">
         <div class="bg-white dark:bg-dark-800 p-16 shadow-lg rounded-3xl">slot</div>
       </BaseSection>
-      <BaseSection see-more title="How it works" route-name="how-it-works">
+      <BaseSection see-more :title="$t('titles.howItWorks')" route-name="how-it-works">
         <div class="bg-white dark:bg-dark-800 p-16 shadow-lg rounded-3xl">slot</div>
       </BaseSection>
-      <BaseSection see-more title="Charities we recommend" route-name="charities">
+      <BaseSection see-more :title="$t('titles.charitiesRecommended')" route-name="charities">
         <div class="bg-white dark:bg-dark-800 p-16 shadow-lg rounded-3xl">slot</div>
       </BaseSection>
     </div>

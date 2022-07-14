@@ -1,6 +1,6 @@
 <template>
   <div class="w-full h-full flex flex-col flex-1 pb-6">
-    <BaseTopNav title="New Challenge" />
+    <BaseTopNav :title="$t('titles.newChallenge')" />
     <div class="px-4">
       <NewChallengeMenu class="mt-3 mb-5" :has-friends="hasFriends" :step="step" />
       <NewChallengeStepOne v-show="step === 'challenge'" />

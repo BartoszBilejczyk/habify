@@ -1,6 +1,6 @@
 <template>
   <div class="">
-    <BaseSection title="Challenge existing friends">
+    <BaseSection :title="$t('titles.challengeExistingFriends')">
       <div
         v-for="friend in friends"
         :key="friend.id"
@@ -11,8 +11,8 @@
         {{ friend.name }}
       </div>
     </BaseSection>
-    <BaseSection title="Choose later">
-      <BaseButton primary>Choose later</BaseButton>
+    <BaseSection :title="$t('titles.chooseLater')">
+      <BaseButton primary>{{ $t('titles.chooseLater') }}r</BaseButton>
     </BaseSection>
   </div>
 </template>

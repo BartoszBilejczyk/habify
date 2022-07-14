@@ -52,10 +52,10 @@ export interface Challenge {
   inviterId: string | undefined;
   invitee: UserBasic;
   inviteeId: string;
-  winner: UserBasic;
-  winnerId: string;
-  loser: UserBasic;
-  loserId: string;
+  inviterSelectedWinner: UserBasic | null;
+  inviterSelectedLoser: UserBasic | null;
+  inviteeSelectedWinner: UserBasic | null;
+  inviteeSelectedLoser: UserBasic | null;
   title: string;
   duration: string;
   type: ChallengeType | null;
@@ -69,6 +69,7 @@ export interface Challenge {
   confirmationType: ChallengeConfirmationType | null;
   createdOn: number | Date;
   updatedOn: number | Date;
+  acceptedOn: number | Date;
 }
 
 export type CharityCategory = 'kids' | 'animals' | 'environment' | 'other';

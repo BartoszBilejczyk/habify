@@ -1,7 +1,7 @@
 <template>
   <div class="w-full h-full flex flex-col flex-1">
-    <BaseTopNav title="Friends" back-route="home">
-      <BaseLabel color="primary" @click="push({ name: 'profile-invite' })">(icon) Invite</BaseLabel>
+    <BaseTopNav :title="$t('titles.friends')" back-route="home">
+      <BaseLabel color="primary" @click="push({ name: 'profile-invite' })">(icon) {{ $t('common.invite') }}</BaseLabel>
     </BaseTopNav>
     <div class="px-4 flex flex-col flex-1 pt-4 pb-8">
       <div
@@ -23,7 +23,7 @@
               {{ friend.name }}
             </div>
           </div>
-          <BaseButton outline-white small>Challenge</BaseButton>
+          <BaseButton outline small>{{ $t('common.challenge') }}</BaseButton>
         </div>
       </div>
     </div>

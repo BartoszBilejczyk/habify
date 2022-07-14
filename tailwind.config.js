@@ -28,6 +28,8 @@ module.exports = {
       },
 
       primary: {
+        10: '#eae4fc',
+        20: '#cdc0f7',
         50: '#bba9f4',
         100: '#ad97f2',
         200: '#a58ef0',
@@ -42,6 +44,8 @@ module.exports = {
       },
 
       'primary-other': {
+        10: '#bde2db',
+        20: '#acdad1',
         50: '#9ad2c7',
         100: '#8fcec1',
         200: '#85c9bb',
@@ -56,6 +60,8 @@ module.exports = {
       },
 
       blue: {
+        10: '#d9f2f9',
+        20: '#99dced',
         50: '#83d5e9',
         100: '#76d1e6',
         200: '#69cce4',
@@ -70,6 +76,8 @@ module.exports = {
       },
 
       green: {
+        10: '#bdfffe',
+        20: '#0bfffc',
         50: '#00f0ed',
         100: '#00e0dd',
         200: '#00d1ce',
@@ -84,7 +92,9 @@ module.exports = {
       },
 
       coral: {
-        50: '#f69380',
+        10: '#fde4df',
+        20: '#fbd0c7',
+        50: '#fac4b9',
         100: '#fbd0c7',
         200: '#fac4b9',
         300: '#f9b7ab',
@@ -98,6 +108,8 @@ module.exports = {
       },
 
       red: {
+        10: '#db898e',
+        20: '#c94e55',
         50: '#c33b43',
         100: '#b7373f',
         200: '#ab343b',
@@ -112,6 +124,8 @@ module.exports = {
       },
 
       yellow: {
+        10: '#fff7e2',
+        20: '#fee296',
         50: '#fedb7d',
         100: '#fdd568',
         200: '#fdd25e',

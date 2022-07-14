@@ -4,6 +4,7 @@ import { computed, reactive, ref } from 'vue';
 import { Challenge, User } from '../types';
 import { emptyChallenge, emptyUser, emptyUserBasic } from '../helpers/empty';
 import { useFirebase } from '../useFirebase';
+import { CHALLENGE_STATUS } from '../helpers/constants';
 
 export const useStore = createGlobalState(() => {
   const challenges = ref<Challenge[]>([]);
@@ -29,7 +30,7 @@ export const useStore = createGlobalState(() => {
     ...emptyChallenge,
     ...stepOne,
     ...stepTwo.value,
-    status: 'waitsForConfirm',
+    status: CHALLENGE_STATUS.pending.value,
     confirmationType: 'manual',
     points: 500,
   }));
@@ -52,5 +53,22 @@ export const useStore = createGlobalState(() => {
     challenges.value = [...inviterChallenges, ...inviteeChallenges].sort((a, b) => b.updatedOn - a.updatedOn);
   };
 
-  return { stepOne, stepTwo, newChallenge, referrer, challenges, inviteLink, getChallenges };
+  const modalComponent = ref<any>(false);
+
+  const setModalComponent = (value: any) => {
+    console.log(value);
+    modalComponent.value = value;
+  };
+
+  return {
+    stepOne,
+    stepTwo,
+    newChallenge,
+    referrer,
+    challenges,
+    inviteLink,
+    modalComponent,
+    getChallenges,
+    setModalComponent,
+  };
 });

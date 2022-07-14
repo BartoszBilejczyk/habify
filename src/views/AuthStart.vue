@@ -2,9 +2,9 @@
   <div class="flex flex-col items-center justify-between w-full flex-1 pt-8 px-6 pb-8">
     <div class="flex flex-col flex-1 items-center">
       <img :src="imagePath" alt="Onboarding illustration" class="w-48 h-auto" />
-      <h2 class="mt-10 text-3xl">Welcome to Habbi</h2>
+      <h2 class="mt-10 text-3xl">{{ $t('auth.welcome') }}</h2>
       <div class="mt-5 px-6 text-center">
-        Build bla bla Build bla bla bla bla Build bla blabla bla Build bla blabla bla Build bla bla
+        {{ $t('auth.welcomDescription') }}
       </div>
       <div class="flex mt-8">
         <div
@@ -16,10 +16,10 @@
       </div>
     </div>
 
-    <BaseButton primary full class="mt-10" @click="push({ name: 'register' })">Register</BaseButton>
+    <BaseButton primary full class="mt-10" @click="push({ name: 'register' })">{{ $t('auth.register') }}</BaseButton>
     <div class="mt-5 text-center text-sm">
-      <span class="text-white-700 dark:text-white">Already have an account?</span>
-      <BaseButton text-secondary @click="push({ name: 'login' })">Sign in</BaseButton>
+      <span class="text-white-700 dark:text-white">{{ $t('auth.alreadyHaveAccount') }}</span>
+      <BaseButton text-secondary @click="push({ name: 'login' })">{{ $t('auth.login') }}</BaseButton>
     </div>
   </div>
 </template>

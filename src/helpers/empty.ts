@@ -54,10 +54,10 @@ export const emptyChallenge: Challenge = {
   inviterId: '',
   invitee: { ...emptyUserBasic },
   inviteeId: '',
-  winner: { ...emptyUserBasic },
-  winnerId: '',
-  loser: { ...emptyUserBasic },
-  loserId: '',
+  inviterSelectedWinner: null,
+  inviterSelectedLoser: null,
+  inviteeSelectedWinner: null,
+  inviteeSelectedLoser: null,
   title: '',
   duration: '',
   type: null,
@@ -69,6 +69,9 @@ export const emptyChallenge: Challenge = {
   status: null,
   confirmationPhotos: [],
   confirmationType: null,
+  createdOn: 0,
+  updatedOn: 0,
+  acceptedOn: 0,
 };
 
 export const emptyCharity: Charity = {

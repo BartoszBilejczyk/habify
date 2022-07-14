@@ -14,7 +14,7 @@
     }"
   >
     <div class="flex flex-col flex-1" :class="showMenu && 'app-content-with-padding'">
-      <div v-if="loading">Loading...</div>
+      <div v-if="loading">{{ $t('common.loading') }}</div>
       <router-view v-else />
     </div>
     <Menu v-if="showMenu" />

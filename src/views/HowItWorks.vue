@@ -1,6 +1,6 @@
 <template>
   <div class="w-full h-full flex flex-col flex-1">
-    <BaseTopNav title="How it works" back-route="home" />
+    <BaseTopNav :title="$t('titles.howItWorks')" back-route="home" />
   </div>
 </template>
 

@@ -1,20 +1,20 @@
 <template>
   <div class="w-full h-full flex flex-col flex-1">
-    <BaseTopNav title="Active Challenges" back-route="home">
-      <BaseLabel color="primary" @click="handleStartNewChallenge">(icon) New</BaseLabel>
+    <BaseTopNav :title="$t('titles.activeChallenges')" back-route="home">
+      <BaseLabel color="primary" @click="handleStartNewChallenge">(icon) {{ $t('common.new') }}</BaseLabel>
     </BaseTopNav>
     <div class="px-4 flex flex-col flex-1 pt-4 pb-8">
-      <div v-if="loading">Loading...</div>
+      <div v-if="loading">{{ $t('common.loading') }}</div>
       <div
         v-else-if="!challenges.length"
         class="px-5 py-4 mt-4 bg-primary text-white font-bold flex justify-between items-center rounded-lg shadow-lg"
       >
         <span class="text-lg">
-          Create your first challenge.
+          {{ $t('home.createFirstChallenge') }}
           <br />
-          Build good habits.
+          {{ $t('home.buildHabits') }}
         </span>
-        <BaseButton outline-white small @click="handleStartNewChallenge">START</BaseButton>
+        <BaseButton outline-white small @click="handleStartNewChallenge">{{ $t('home.start') }}</BaseButton>
       </div>
       <ActiveChallengeList :challenges="challenges" />
     </div>

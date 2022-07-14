@@ -1,13 +1,13 @@
 <template>
   <div class="">
-    <BaseSection title="Confirm Details">
-      <ChallengeDetails :data="newChallenge" invite-key="invitee"></ChallengeDetails>
+    <BaseSection :title="$t('titles.confirmDetails')">
+      <ChallengeDetails :data="newChallenge" invite-key="invitee" />
     </BaseSection>
     <!--    Move to step 5, last step success -->
-    <BaseSection title="Share">
+    <BaseSection :title="$t('common.share')">
       <BaseInfoToCopy>{{ inviteLink }}</BaseInfoToCopy>
       <div class="flex justify-center mt-4 mb-10">
-        <BaseButton outline @click="share">Share the link</BaseButton>
+        <BaseButton outline @click="share">{{ $t('common.shareLink') }}</BaseButton>
       </div>
     </BaseSection>
   </div>
@@ -22,14 +22,16 @@
   import { useClipboard } from '@vueuse/core';
   import { useFirebase } from '../useFirebase';
   import { computed } from 'vue';
+  import { useI18n } from 'vue-i18n';
 
   const { copy, copied } = useClipboard();
   const { userProfile } = useFirebase();
   const { newChallenge, inviteLink } = useStore();
+  const { t } = useI18n();
 
   const shareData = computed(() => ({
-    title: 'Zaakceptuj challenge!',
-    text: 'Zaakceptuj challenge!',
+    title: `${t('invite.accept')}!`,
+    text: `${t('invite.accept')}!`,
     url: inviteLink.value,
   }));
 
