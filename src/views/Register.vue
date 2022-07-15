@@ -12,7 +12,7 @@
         v-model="confirmPassword"
       />
       <BaseInput class="mb-2" full type="text" :placeholder="$t('auth.referralCode')" v-model="usedReferralCode" />
-      <BaseButton class="mt-4" @click="register" :primary>
+      <BaseButton class="mt-4" @click="register" primary>
         {{ loading ? $t('common.loading') : $t('auth.register') }}
       </BaseButton>
       <div class="mt-3 text-center text-sm ml-auto">
