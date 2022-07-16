@@ -53,6 +53,16 @@ export const useStore = createGlobalState(() => {
     challenges.value = [...inviterChallenges, ...inviteeChallenges].sort((a, b) => b.updatedOn - a.updatedOn);
   };
 
+  const updateChallenge = (challengeToUpdate: Challenge) => {
+    const challengeIndex = challenges.value.findIndex(challenge => challenge.id === challengeToUpdate.id);
+
+    challenges.value = [
+      ...challenges.value.slice(0, challengeIndex),
+      challengeToUpdate,
+      ...challenges.value.slice(challengeIndex + 1),
+    ];
+  };
+
   const modalComponent = ref<any>(false);
 
   const setModalComponent = (value: any) => {
@@ -70,5 +80,6 @@ export const useStore = createGlobalState(() => {
     modalComponent,
     getChallenges,
     setModalComponent,
+    updateChallenge,
   };
 });

@@ -10,7 +10,7 @@
           <br />
           {{ $t('home.buildHabits') }}
         </span>
-        <button @click="handleStart">{{ $t('home.start') }}</button>
+        <button @click="handleStart">{{ $t('common.start') }}</button>
       </div>
       <BaseSection see-more :title="$t('titles.friends')" route-name="friends">
         <div class="bg-white dark:bg-dark-800 px-4 py-12 shadow-lg rounded-3xl">

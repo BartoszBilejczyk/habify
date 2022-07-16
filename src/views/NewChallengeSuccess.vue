@@ -1,5 +1,8 @@
 <template>
-  <div class="flex flex-col flex-1 relative pt-32 px-4 justify-center" :class="isStandalone ? 'pt-32' : 'pt-24'">
+  <div
+    class="flex flex-col flex-1 relative pt-32 px-4 justify-center"
+    :class="isStandalone ? 'pt-32 pb-24' : 'pt-24 pb-16'"
+  >
     <LottieAnimation
       :animation-data="confettiAnimation"
       :height="lottieHeight"
@@ -18,8 +21,10 @@
     <div>
       <h1 class="text-2xl text-center text-white-10 mb-6">{{ $t('common.share') }}</h1>
       <BaseInfoToCopy on-dark>{{ inviteLink }}</BaseInfoToCopy>
-      <div class="flex justify-center mt-6 mb-10">
-        <BaseButton outline-white @click="share">{{ $t('common.shareLink') }}</BaseButton>
+      <div class="flex flex-col items-center mt-4 mb-10">
+        <div v-if="copied" class="text-sm font-bold text-white">{{ $t('profile.copied') }}</div>
+        <BaseButton v-else text-white @click="copy(inviteLink)">{{ $t('profile.copyLink') }}</BaseButton>
+        <BaseButton class="mt-6" outline-white @click="share">{{ $t('common.shareLink') }}</BaseButton>
       </div>
     </div>
     <BaseButton text-white class="mt-6" @click="handleBackToChallenge">{{ $t('challenge.goToChallenge') }}</BaseButton>
@@ -51,8 +56,10 @@
   const inviteLink = computed(() => `https://habbi.app/invite?code=${currentRoute.value.query.id}`);
 
   const shareData = computed(() => ({
-    title: `${t('invite.accept')}!`,
-    text: `${t('invite.accept')}!`,
+    title: inviteLink.value,
+    // title: `${t('invite.accept')}!`,
+    text: inviteLink.value,
+    // text: `${t('invite.accept')}!`,
     url: inviteLink.value,
   }));
 

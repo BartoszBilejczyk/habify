@@ -85,6 +85,7 @@
     });
 
     done.value = true;
+
     console.log(challenge);
 
     await push({ name: 'new-challenge-success', query: { id: newChallenge.value.id } });

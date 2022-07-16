@@ -4,8 +4,8 @@
       <div>{{ challenge.title }}</div>
       <div class="flex flex-col items-end">
         <!-- TODO capitalize-->
-        <BaseLabel :color="statusColor">{{ challenge.status }}</BaseLabel>
-        <BaseLabel class="mt-1.5" color="white">{{ challenge.points }} Points</BaseLabel>
+        <BaseLabel :color="statusColor">{{ CHALLENGE_STATUS[challenge.status]?.label }}</BaseLabel>
+        <BaseLabel class="my-2" color="white">{{ challenge.points }} Points</BaseLabel>
       </div>
     </div>
     <div class="flex items-center text-xs">
@@ -64,7 +64,7 @@
   });
 
   const personName = computed(() => {
-    return props.user.id === props.challenge.inviterId ? props.challenge.inviter?.name : props.challenge.invitee?.name;
+    return props.user.id === props.challenge.inviterId ? props.challenge.invitee?.name : props.challenge.inviter?.name;
   });
 
   const getInitials = (name: string) => {

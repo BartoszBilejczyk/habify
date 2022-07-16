@@ -25,7 +25,7 @@
   import UserMultiple from '../assets/icons/user-multiple.svg';
   import UserSingle from '../assets/icons/user-single.svg';
 
-  import { ref, onMounted } from 'vue';
+  import { ref, onMounted, computed } from 'vue';
   import { RouteRecordName, useRouter } from 'vue-router';
   import { RouteName } from '../router';
 
@@ -38,8 +38,6 @@
     title: string;
     name: RouteNameEnhanced;
   }
-
-  const active = ref<RouteNameEnhanced>('home');
 
   onMounted(() => {
     setTimeout(() => {
@@ -74,8 +72,9 @@
     // },
   ]);
 
+  const active = computed(() => currentRoute.value.name);
+
   const handleRouteChange = (name: RouteName) => {
-    active.value = name;
     push({ name });
   };
 </script>

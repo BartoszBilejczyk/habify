@@ -1,6 +1,6 @@
 <template>
   <div v-if="challenge.id" class="w-full h-full flex flex-col flex-1">
-    <BaseTopNav :title="$t('titles.new')" back-route="home" background />
+    <BaseTopNav :title="$t('titles.new')" back-route="home" background icon="null" />
     <div class="px-4 py-2 w-full h-full flex-1 flex flex-col justify-center bg-primary dark:bg-dark-900 text-white">
       <h1 class="text-2xl text-center text-white">{{ $t('invite.challengedBy') }}{{ challenge.inviter?.name }}!</h1>
       <div class="mt-8 text-sm text-center">
@@ -46,18 +46,16 @@
     // do IF, if query invite not there
     const fetchedChallenge = (await getDoc(`challenges/${currentRoute.value.query.code}`)) as Challenge;
 
-    if (fetchedChallenge.inviteeId === userProfile.value.id) {
+    if (fetchedChallenge.inviteeId === userProfile.value.id || !userProfile.value?.id) {
       challenge.value = fetchedChallenge;
-    } else {
+    } else if (fetchedChallenge.inviteeId && fetchedChallenge.inviteeId !== userProfile.value.id) {
       alert(t('invite.notInvitedUser'));
     }
   });
 
-  // const image = computed(() => {
-  //   return new URL('../assets/auth-start.png', import.meta.url);
-  // });
-
   const handleAccept = async () => {
+    // TODO handle login on modal
+
     done.value = true;
 
     await updateDoc(`challenges/${challenge.value.id}`, {

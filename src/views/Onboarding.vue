@@ -11,7 +11,6 @@
         @next="handleNext"
         @skip="handleSkip"
       >
-        <!--        <LottieAnimation :animation-data="girlPhoneAnimation" :height="lottieHeight" />-->
         <LottieAnimation :animation-data="manPhoneAnimation" :height="lottieHeight" />
       </OnboardingBase>
       <OnboardingBase
@@ -63,7 +62,6 @@
   import betAnimation from '../assets/lottie/bet-animation.json';
   import earthAnimation from '../assets/lottie/earth-animation.json';
   import girlChinupAnimation from '../assets/lottie/girl-chinup-animation.json';
-  import girlPhoneAnimation from '../assets/lottie/girl-phone-animation.json';
   import manPhoneAnimation from '../assets/lottie/man-phone-animation.json';
 
   const { firebaseUser, updateDoc, getDoc, userProfile } = useFirebase();

@@ -1,10 +1,26 @@
 <template>
   <div class="w-full h-full flex flex-col flex-1">
     <BaseTopNav :title="$t('titles.friends')" back-route="home">
-      <BaseLabel color="primary" @click="push({ name: 'profile-invite' })">(icon) {{ $t('common.invite') }}</BaseLabel>
+      <BaseLabel color="primary" @click="handleAddNewFriend">
+        <PlusIcon class="text-primary basis-3 w-3 h-3 mr-1.5" />
+        {{ $t('common.invite') }}
+      </BaseLabel>
     </BaseTopNav>
     <div class="px-4 flex flex-col flex-1 pt-4 pb-8">
+      <div v-if="loading">{{ $t('common.loading') }}</div>
       <div
+        v-else-if="!userProfile.friends?.length"
+        class="px-5 py-4 mt-4 bg-coral-800 text-white flex justify-between items-center rounded-lg shadow-lg"
+      >
+        <div class="text-lg">
+          <span class="font-bold">{{ $t('friends.addFirstFriend.0') }}</span>
+          <br />
+          <span>{{ $t('friends.addFirstFriend.1') }}</span>
+        </div>
+        <BaseButton outline-white small @click="handleAddNewFriend">{{ $t('common.invite') }}</BaseButton>
+      </div>
+      <div
+        v-else
         v-for="friend in userProfile.friends"
         class="bg-white-10 dark:bg-dark-800 text-white-700 dark:text-white-10 rounded-lg mb-4 p-3"
       >
@@ -36,14 +52,22 @@
   import BaseButton from '../components/BaseButton.vue';
   import { useFirebase } from '../useFirebase';
   import { useRouter } from 'vue-router';
+  import PlusIcon from '../assets/icons/plus.svg?component';
   import ChevronRight from '../assets/icons/chevron-right.svg?component';
+  import { ref } from 'vue';
 
   const { userProfile } = useFirebase();
   const { push } = useRouter();
+
+  const loading = ref(false);
 
   const getInitials = (name: string) => {
     const splitted: string[] = name.split(' ');
     // @ts-ignore
     return splitted.shift().charAt(0) + splitted.pop().charAt(0);
+  };
+
+  const handleAddNewFriend = async () => {
+    await push({ name: 'profile-invite' });
   };
 </script>

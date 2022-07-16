@@ -14,10 +14,11 @@
       'bg-green': currentRoute.name === 'onboarding' && currentRoute.query.step === '5',
     }"
   >
-    <div class="flex flex-col flex-1" :class="showMenu && 'app-content-with-padding'">
+    <div class="flex flex-col flex-1" :class="{ 'app-content-with-padding': showMenu }">
       <div v-if="loading">{{ $t('common.loading') }}</div>
       <router-view v-else />
     </div>
+    <!--    TODO find out why it's visible on reload (e.g. invitation view)-->
     <Menu v-if="showMenu" />
   </div>
 </template>
@@ -37,35 +38,29 @@
   const isDark = useDark();
   const { currentRoute, push } = useRouter();
   const { userProfile, firebaseUser, getDoc } = useFirebase();
-  const loading = ref(true);
+  const loading = ref(false);
 
   // @ts-ignore
   const showMenu = computed(() => !loading.value && !noMenu.includes(currentRoute.value.name));
 
   onMounted(() => {
+    loading.value = true;
+
     firebase.auth().onAuthStateChanged(async user => {
       if (!user?.email) {
         userProfile.value = { ...emptyUser };
         firebaseUser.value = null;
         loading.value = false;
+
+        if (window.location.pathname === '/') {
+          await push({ name: 'auth-start' });
+        }
       } else {
         userProfile.value = (await getDoc(`users/${user.uid}`)) as User;
         firebaseUser.value = user;
         loading.value = false;
       }
     });
-  });
-
-  watch(loading, async newValue => {
-    if (!newValue) {
-      setTimeout(async () => {
-        console.log(currentRoute.value);
-
-        if (!firebaseUser.value && currentRoute.value.path === '/') {
-          await push({ name: 'auth-start' });
-        }
-      }, 50);
-    }
   });
 </script>
 

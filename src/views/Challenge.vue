@@ -5,19 +5,51 @@
     <div v-else-if="challenge" class="px-4 flex flex-col flex-1 pt-4 pb-8">
       <h1 class="font-bold text-2xl">{{ challenge.title }}</h1>
       <div class="flex mt-3">
-        <BaseLabel class="capitalize" :color="statusColor">{{ challenge.status }}</BaseLabel>
+        <BaseLabel class="capitalize" :color="statusColor">{{ CHALLENGE_STATUS[challenge.status]?.label }}</BaseLabel>
         <BaseLabel color="white" class="ml-3">{{ challenge.points }} {{ $t('common.points') }}</BaseLabel>
-        <BaseLabel class="ml-3" color="white">{{ CHALLENGE_TYPES[challenge.type].label }}</BaseLabel>
+        <BaseLabel class="ml-3" color="white">{{ CHALLENGE_TYPES[challenge.type]?.label }}</BaseLabel>
       </div>
       <!-- actions -->
+      <BaseBox class="my-6 text-sm">
+        <div v-if="showDecisions">
+          <div v-if="decisions?.you">{{ $t('challenge.youChoseWinner') }} {{ decisions.you.name }}</div>
+          <div class="mt-2" v-if="decisions?.challenger">
+            {{ $t('challenge.challengerChoseWinner', { name: decisions.challenger.name }) }}
+            {{ decisions.challenger.name }}
+          </div>
+        </div>
+        <div
+          class="text-green font-bold dark:text-green-20"
+          v-if="theSameWinner && userProfileBasic.id === challenge.inviterSelectedWinner?.id"
+        >
+          {{ $t('challenge.youWon', { name: challenge.inviterSelectedLoser?.name }) }}
+        </div>
+        <div v-else-if="theSameWinner">
+          {{ $t('challenge.winnerIs', { name: decisions.you.name }) }}
+        </div>
+        <div
+          class="mt-2 text-red dark:text-red-50 font-bold"
+          v-if="theSameWinner && userProfileBasic.id === challenge.inviterSelectedLoser?.id"
+        >
+          {{ $t('challenge.youLost') }}
+        </div>
+      </BaseBox>
+      <!--      TODO do the bet -->
       <div
         v-if="
-          challenge.type === CHALLENGE_TYPES.oneTime.value ||
-          (challenge.type === CHALLENGE_TYPES.duration.value && timeEnded)
+          challenge.status !== CHALLENGE_STATUS.done.value &&
+          (challenge.type === CHALLENGE_TYPES.oneTime.value ||
+            (challenge.type === CHALLENGE_TYPES.duration.value && timeEnded)) &&
+          !decisions.you
         "
         class="mt-6"
       >
-        <BaseButton full secondary @click="openSelectWinnerModal">{{ $t('challenge.selectWinner') }}</BaseButton>
+        <BaseButton full secondary @click="openSelectWinnerModal">
+          {{ $t('challenge.selectWinner') }}
+        </BaseButton>
+      </div>
+      <div v-if="decisions?.you && decisions?.you !== decisions?.challenger && !theSameWinner">
+        <BaseButton full secondary @click="openSelectWinnerModal">{{ $t('challenge.changeAnswer') }}</BaseButton>
       </div>
       <!-- add accepted date or start/end -->
       <div class="mt-6 mb-2" v-if="challenge.type === CHALLENGE_TYPES.duration.value">
@@ -62,6 +94,7 @@
       </div>
       <div class="mt-3">
         <div class="text-white-600 dark:text-white-20 font-bold">{{ $t('challenge.confirmationType') }}</div>
+        <!-- TODO add a question mark wtf -->
         <BaseBox small class="mt-1.5 capitalize">{{ challenge.confirmationType }}</BaseBox>
       </div>
       <div v-if="challenge.status === CHALLENGE_STATUS.pending.value" class="mt-4">
@@ -74,6 +107,8 @@
       <div class="mt-6 text-xxs">{{ $t('challenge.createdOn') }}: {{ createdOn }}</div>
       <div class="mt-2 text-xxs">{{ $t('challenge.updatedOn') }}: {{ updatedOn }}</div>
     </div>
+    <!--  TODO handle click outside  -->
+    <!--  TODO handle slide down  -->
     <BaseModalFromBottom :is-open="isModalOpen" @hide="hideModal">
       <h1 class="text-2xl text-center text-white-800 dark:text-white-10">{{ $t('challenge.selectWinner') }}</h1>
       <div class="mt-6 flex flex-col items-stretch justify-center" :class="selectLoading && 'pointer-events-none'">
@@ -117,7 +152,7 @@
 
   dayjs.locale(navigator.language);
 
-  const { challenges, getChallenges } = useStore();
+  const { challenges, getChallenges, updateChallenge } = useStore();
   const { currentRoute } = useRouter();
   const loading = ref(false);
   const selectLoading = ref(false);
@@ -182,12 +217,39 @@
   };
 
   const shareData = computed(() => ({
-    title: `${t('invite.accept')}!`,
-    text: `${t('invite.accept')}!`,
+    // title: `${t('invite.accept')}!`,
+    title: challenge.value.inviteLink,
+    // text: `${t('invite.accept')}!`,
+    text: challenge.value.inviteLink,
     url: challenge.value.inviteLink,
   }));
 
+  // TODO
   const timeEnded = computed(() => true);
+
+  const theSameWinner = computed(
+    () => Boolean(decisions.value) && decisions.value?.you?.id === decisions.value?.challenger?.id
+  );
+
+  const showDecisions = computed(() => Boolean(decisions.value) && !theSameWinner.value);
+
+  const decisions = computed(() => {
+    if (userProfileBasic.value.id === challenge.value.inviter?.id) {
+      return {
+        you: challenge.value.inviterSelectedWinner,
+        challenger: challenge.value.inviteeSelectedWinner,
+      };
+    }
+
+    if (userProfileBasic.value.id === challenge.value.invitee?.id) {
+      return {
+        you: challenge.value.inviteeSelectedWinner,
+        challenger: challenge.value.inviterSelectedWinner,
+      };
+    }
+
+    return null;
+  });
 
   const share = () => {
     if (navigator.share) {
@@ -227,14 +289,20 @@
         ? CHALLENGE_STATUS.done.value
         : CHALLENGE_STATUS.waitsForConfirm.value;
 
-    await updateDoc(`challenges/${challenge.value.id}`, {
-      ...updateData,
-      status: updatedStatus,
-      updatedOn: Date.now(),
-    });
+    try {
+      await updateDoc(`challenges/${challenge.value.id}`, {
+        ...updateData,
+        status: updatedStatus,
+        updatedOn: Date.now(),
+      });
+    } catch (e) {
+      console.log(e);
+    }
 
     // update store
     const fetchedChallenge = (await getDoc(`challenges/${challenge.value.id}`)) as Challenge;
+
+    updateChallenge(fetchedChallenge);
 
     if (
       updatedStatus === CHALLENGE_STATUS.done.value &&

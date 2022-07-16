@@ -26,8 +26,10 @@
   const { t } = useI18n();
 
   const shareData = computed(() => ({
-    title: `${t('invite.accept')}!`,
-    text: `${t('invite.accept')}!`,
+    // title: `${t('invite.accept')}!`,
+    title: inviteLink.value,
+    // text: `${t('invite.accept')}!`,
+    text: inviteLink.value,
     url: inviteLink.value,
   }));
 

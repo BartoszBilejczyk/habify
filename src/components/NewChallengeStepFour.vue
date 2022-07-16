@@ -3,7 +3,7 @@
     <BaseSection :title="$t('titles.confirmDetails')">
       <ChallengeDetails :data="newChallenge" invite-key="invitee" />
     </BaseSection>
-    <div class="text-center text-xs text-white-100 mb-8">{{ $t('challenge.shareOnNext') }}</div>
+    <div class="text-center text-xs text-white-200 dark:text-white-20 mb-8">{{ $t('challenge.shareOnNext') }}</div>
   </div>
 </template>
 

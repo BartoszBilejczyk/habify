@@ -1,6 +1,6 @@
 <template>
   <div
-    class="text-xs font-bold py-1 px-3 rounded-full whitespace-nowrap"
+    class="text-xs font-bold py-1 px-3 rounded-full whitespace-nowrap flex items-center"
     :class="{
       'bg-primary-10 text-primary-900': color === 'primary',
       'bg-coral-10 text-coral-900': color === 'coral',

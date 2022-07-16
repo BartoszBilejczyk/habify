@@ -9,6 +9,7 @@ export default {
     shareLink: 'Share the link',
     points: 'Points',
     loading: 'Loading...',
+    you: 'You',
     new: 'New',
     days: 'Days',
     friend: 'Friend',
@@ -18,6 +19,7 @@ export default {
     confirm: 'Confirm',
     category: 'Category',
     seeMore: 'See more',
+    start: 'Start',
   },
   onboarding: {
     skip: 'skip',
@@ -45,7 +47,7 @@ export default {
     onboardingThree: 'Onboarding 3',
     profile: 'Profile',
     friends: 'Friends',
-    invite: 'Invite a Friend',
+    invite: 'Invite Friends',
     notifications: 'Notifications',
     settings: 'Settings',
     taskCenter: 'Task Center',
@@ -73,10 +75,9 @@ export default {
   home: {
     createFirstChallenge: 'Create your first challenge.',
     buildHabits: 'Build good habits.',
-    start: 'Start',
   },
   invite: {
-    challengedBy: 'You have been challenged by',
+    challengedBy: 'You have been challenged by ',
     inviteDescription: 'Build bla bla Build bla bla bla bla Build bla blabla bla Build bla blabla bla ',
     accepted: 'Accepted',
     accept: 'Accept challenge',
@@ -114,9 +115,15 @@ export default {
       other: 'Other',
     },
     selectWinner: 'Select winner',
+    changeAnswer: 'Change answer',
     chooseAfter: `You don't have to choose now. You can invite a friend later.`,
     shareOnNext: 'You will be able to share the link on next view',
     goToChallenge: 'Go back to challenge',
+    youChoseWinner: 'You chose that the winner is ',
+    winnerIs: 'The winner is {name}!',
+    youWon: 'You won the challenge! Make sure that { name } follows the bet you both made.',
+    youLost: 'Unfortunately, you lost the challenge.',
+    challengerChoseWinner: '{ name } chose that the winner is ',
   },
   profile: {
     giveFeedback: 'Give feedback',
@@ -127,6 +134,9 @@ export default {
     inviteShareTitle: 'Dołącz do Habbi!',
     inviteShareDescription: 'Wyzwij mnie na pojedynek i pomagajmy razem.',
     copied: 'Copied',
-    copyReferralCode: 'Copy referral code',
+    copyLink: 'Copy invitation link',
+  },
+  friends: {
+    addFirstFriend: ['Invite first friend.', 'Create challenges together.'],
   },
 };
