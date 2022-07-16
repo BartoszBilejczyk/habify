@@ -44,6 +44,11 @@
   const showMenu = computed(() => !loading.value && !noMenu.includes(currentRoute.value.name));
 
   onMounted(() => {
+    // TODO fix this - texts and some components are cached
+    caches.keys().then(function (names) {
+      for (let name of names) caches.delete(name);
+    });
+
     loading.value = true;
 
     firebase.auth().onAuthStateChanged(async user => {
