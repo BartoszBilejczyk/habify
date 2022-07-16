@@ -1,14 +1,14 @@
 <template>
   <div
-    class="fixed left-0 bottom-0 pt-3 px-10 w-full border-t border-t-white-20 dark:border-t-white-300 bg-white dark:bg-dark-900 menu"
+    class="fixed left-0 bottom-0 pt-2.5 px-10 w-full border-t border-t-white-20 dark:border-t-white-300 bg-white dark:bg-dark-900 menu"
   >
     <div class="flex justify-center">
       <div
         v-for="item in menuItems"
-        class="flex flex-col items-center text-xs px-5 cursor-pointer"
+        class="flex flex-col items-center text-xxs cursor-pointer w-20"
         :class="{
           'text-primary font-black': active === item.name,
-          'text-white-600 dark:text-white': active !== item.name,
+          'text-white-400 dark:text-white': active !== item.name,
         }"
         @click="handleRouteChange(item.name)"
       >
@@ -88,7 +88,7 @@
 
   @media (display-mode: browser) {
     .menu {
-      padding-bottom: 12px;
+      padding-bottom: 8px;
     }
   }
 </style>

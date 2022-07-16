@@ -8,9 +8,9 @@
         currentRoute.name === 'profile' ||
         currentRoute.name === 'invitation' ||
         currentRoute.name === 'profile-invite' ||
-        (currentRoute.name === 'onboarding' && currentRoute.query.step === '2'),
-      'bg-green': currentRoute.name === 'onboarding' && currentRoute.query.step === '3',
-      'bg-coral': currentRoute.name === 'onboarding' && currentRoute.query.step === '4',
+        (currentRoute.name === 'onboarding' && (currentRoute.query.step === '2' || currentRoute.query.step === '3')),
+      'bg-white': currentRoute.name === 'onboarding' && currentRoute.query.step === '4',
+      'bg-green': currentRoute.name === 'onboarding' && currentRoute.query.step === '5',
     }"
   >
     <div class="flex flex-col flex-1" :class="showMenu && 'app-content-with-padding'">

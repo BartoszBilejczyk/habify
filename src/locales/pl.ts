@@ -14,9 +14,16 @@ export default {
     friend: 'Friend',
     type: 'Type',
     details: 'Details',
+    duration: 'Duration',
     confirm: 'Confirm',
     category: 'Category',
     seeMore: 'See more',
+  },
+  onboarding: {
+    skip: 'skip',
+    next: 'Next',
+    slideToFinish: 'Slide to Finish',
+    welcome: 'Welcome to Habbi',
   },
   titles: {
     dashboard: 'Dashboard',
@@ -38,10 +45,10 @@ export default {
     onboardingThree: 'Onboarding 3',
     profile: 'Profile',
     friends: 'Friends',
-    invite: 'Invite a Friend',
+    inviteFriend: 'Invite a Friend',
     notifications: 'Notifications',
     settings: 'Settings',
-    task: 'Task Center',
+    taskCenter: 'Task Center',
   },
   auth: {
     loginTitle: 'Sign in to Habbi',
@@ -58,7 +65,10 @@ export default {
     resetPassword: 'Reset Password',
     backToLogin: 'Back to sign in',
     welcome: 'Welcome to Habbi',
-    welcomeDescription: 'Build bla bla Build bla bla bla bla Build bla blabla bla Build bla blabla bla ',
+    welcomeDescription: [
+      'Challenge your friends and make bets.',
+      'Spread the good energy to the world even if you lose.',
+    ],
   },
   home: {
     createFirstChallenge: 'Create your first challenge.',
@@ -86,14 +96,8 @@ export default {
     slideToStart: 'Slide to start!',
     example: 'e.g. Who will make steps in a week',
     types: {
-      one: 'One occurrence',
-      time: 'Time-based',
-    },
-    categories: {
-      social: 'Social',
-      financial: 'Financial',
-      sport: 'Sport',
-      other: 'Other',
+      oneTime: 'One occurrence',
+      duration: 'Time-based',
     },
     status: {
       waitsForConfirm: 'To be confirmed',
@@ -102,6 +106,13 @@ export default {
       active: 'Active',
       closed: 'Closed',
     },
+    categories: {
+      social: 'Social',
+      financial: 'Financial',
+      sport: 'Sport',
+      other: 'Other',
+    },
+    selectWinner: 'Select winner',
   },
   profile: {
     giveFeedback: 'Give feedback',

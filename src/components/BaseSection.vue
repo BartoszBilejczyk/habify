@@ -1,7 +1,7 @@
 <template>
   <div class="mb-6">
     <div class="flex justify-between items-center my-4">
-      <h2 class="text-xl text-white-900 dark:text-white">{{ title }}</h2>
+      <h2 class="text-lg text-white-600 dark:text-white">{{ title }}</h2>
       <BaseButton text-secondary @click="handleClick" v-if="seeMore">{{ $t('common.seeMore') }}</BaseButton>
     </div>
     <slot></slot>

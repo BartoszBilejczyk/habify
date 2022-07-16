@@ -65,8 +65,8 @@
   });
 
   const typeOptions = ref([
-    { label: CHALLENGE_TYPES.oneTime.value, value: CHALLENGE_TYPES.oneTime.value },
-    { label: CHALLENGE_TYPES.duration.value, value: CHALLENGE_TYPES.duration.value },
+    { label: CHALLENGE_TYPES.oneTime.label, value: CHALLENGE_TYPES.oneTime.value },
+    { label: CHALLENGE_TYPES.duration.label, value: CHALLENGE_TYPES.duration.value },
   ]);
 
   const durationOptions = ref(
@@ -74,9 +74,9 @@
   );
 
   const betCategoryOptions = ref([
-    { label: BET_CATEGORY.social.value, value: BET_CATEGORY.social.value },
-    { label: BET_CATEGORY.financial.value, value: BET_CATEGORY.financial.value },
-    { label: BET_CATEGORY.sport.value, value: BET_CATEGORY.sport.value },
-    { label: BET_CATEGORY.other.value, value: BET_CATEGORY.other.value },
+    { label: BET_CATEGORY.social.label, value: BET_CATEGORY.social.value },
+    { label: BET_CATEGORY.financial.label, value: BET_CATEGORY.financial.value },
+    { label: BET_CATEGORY.sport.label, value: BET_CATEGORY.sport.value },
+    { label: BET_CATEGORY.other.label, value: BET_CATEGORY.other.value },
   ]);
 </script>

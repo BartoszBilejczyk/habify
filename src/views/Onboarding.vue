@@ -10,30 +10,49 @@
         description="Lorem ipsum dolor sit amet sdajl qoipasncvusqad jasdklj"
         @next="handleNext"
         @skip="handleSkip"
-      />
+      >
+        <!--        <LottieAnimation :animation-data="girlPhoneAnimation" :height="lottieHeight" />-->
+        <LottieAnimation :animation-data="manPhoneAnimation" :height="lottieHeight" />
+      </OnboardingBase>
       <OnboardingBase
         v-if="step === 3"
         :step="step"
-        class="bg-green"
+        class="bg-primary"
         :title="$t('titles.onboardingTwo')"
         description="Lorem ipsum dolor sit amet sdajl qoipasncvusqad jasdklj"
         @next="handleNext"
         @skip="handleSkip"
-      />
+      >
+        <LottieAnimation :animation-data="betAnimation" :height="lottieHeight" />
+      </OnboardingBase>
       <OnboardingBase
         v-if="step === 4"
         :step="step"
-        class="bg-coral"
+        class="bg-white"
+        :white="true"
+        :title="$t('titles.onboardingTwo')"
+        description="Lorem ipsum dolor sit amet sdajl qoipasncvusqad jasdklj"
+        @next="handleNext"
+        @skip="handleSkip"
+      >
+        <LottieAnimation :animation-data="girlChinupAnimation" :height="lottieHeight" />
+      </OnboardingBase>
+      <OnboardingBase
+        v-if="step === 5"
+        :step="step"
+        class="bg-green"
         :title="$t('titles.onboardingThree')"
         description="Lorem ipsum dolor sit amet sdajl qoipasncvusqad jasdklj"
         @finish="handleFinish"
-      />
+      >
+        <LottieAnimation :animation-data="earthAnimation" :height="lottieHeight" />
+      </OnboardingBase>
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
-  import { onMounted, ref } from 'vue';
+  import { computed, onMounted, ref } from 'vue';
   import OnboardingFinishProfile from '../components/onboarding/OnboardingFinishProfile.vue';
   import OnboardingBase from '../components/onboarding/OnboardingBase.vue';
   import { useFirebase } from '../useFirebase';
@@ -41,12 +60,25 @@
   import { User } from '../types';
   import { useRouter } from 'vue-router';
   import { useStore } from '../composables/useStore';
+  import betAnimation from '../assets/lottie/bet-animation.json';
+  import earthAnimation from '../assets/lottie/earth-animation.json';
+  import girlChinupAnimation from '../assets/lottie/girl-chinup-animation.json';
+  import girlPhoneAnimation from '../assets/lottie/girl-phone-animation.json';
+  import manPhoneAnimation from '../assets/lottie/man-phone-animation.json';
 
   const { firebaseUser, updateDoc, getDoc, userProfile } = useFirebase();
   const { push, replace, currentRoute } = useRouter();
 
   const step = ref(1);
   const { referrer } = useStore();
+
+  const lottieHeight = computed(() => {
+    if (window.matchMedia('(display-mode: standalone)').matches) {
+      return '40vh';
+    } else {
+      return '40vh';
+    }
+  });
 
   const handleNext = () => {
     replace({ query: { ...currentRoute.value.query, step: String(step.value + 1) } });

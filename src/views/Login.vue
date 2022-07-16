@@ -4,7 +4,9 @@
     <div class="mt-8 flex flex-col w-full">
       <BaseInput class="mb-2" full type="text" :placeholder="$t('auth.email')" v-model="email" />
       <BaseInput class="mb-2" full type="password" :placeholder="$t('auth.password')" v-model="password" />
-      <BaseButton class="mt-4" @click="login" primary>{{ $t('auth.login') }}</BaseButton>
+      <BaseButton class="mt-4" @click="login" primary>
+        {{ loading ? $t('common.loading') : $t('auth.login') }}
+      </BaseButton>
       <BaseButton class="mt-3 ml-auto" @click="push({ name: 'register' })" text-secondary>
         {{ $t('auth.register') }}
       </BaseButton>
@@ -28,8 +30,15 @@
   const password = ref('');
   const { push } = useRouter();
   const { updateDoc, getDoc, userProfile } = useFirebase();
+  const loading = ref(false);
 
   const login = () => {
+    if (loading.value) {
+      return;
+    }
+
+    loading.value = true;
+
     firebase
       .auth()
       .signInWithEmailAndPassword(email.value, password.value)
@@ -41,6 +50,9 @@
         } else {
           push({ name: 'home' });
         }
+      })
+      .finally(() => {
+        loading.value = false;
       });
   };
 </script>

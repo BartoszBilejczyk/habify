@@ -1,15 +1,19 @@
 <template>
-  <div class="flex items-center justify-between w-full px-12" :class="step === 4 ? 'justify-end' : 'justify-between'">
-    <BaseButton text-white small :class="step === 4 && 'hidden'" @click="$emit('skip')">Skip</BaseButton>
-    <BaseButton v-if="step !== 4" outline-white @click="$emit('next')">Next</BaseButton>
+  <div class="flex items-center justify-between w-full px-12" :class="step === 5 ? 'justify-end' : 'justify-between'">
+    <BaseButton :text-white="!white" :text-primary="white" small :class="step === 5 && 'hidden'" @click="$emit('skip')">
+      {{ $t('onboarding.skip') }}
+    </BaseButton>
+    <BaseButton v-if="step !== 5" :outline-white="!white" :outline="white" @click="$emit('next')">
+      {{ $t('onboarding.next') }}
+    </BaseButton>
     <BaseSlideButton
-      v-if="step === 4"
+      v-if="step === 5"
       primary
       full
       class="ml-4"
-      slide-text="Slide to finish"
-      done-text="Welcome to Habbi"
-      on-dark
+      :slide-text="$t('onboarding.slideToFinish')"
+      :done-text="$t('onboarding.welcome')"
+      :on-dark="!white"
       @success="$emit('finish')"
     />
   </div>
@@ -21,5 +25,6 @@
 
   defineProps<{
     step: number;
+    white: boolean;
   }>();
 </script>

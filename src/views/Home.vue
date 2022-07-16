@@ -3,7 +3,7 @@
     <BaseTopNav :title="$t('titles.dashboard')" :icon="null">
       <NotificationIcon class="w-5 h-5" />
     </BaseTopNav>
-    <div class="px-4 pb-20">
+    <div class="px-4 pb-10">
       <div class="px-5 py-4 mt-4 bg-primary text-white font-bold flex justify-between rounded-lg shadow-lg">
         <span class="text-lg">
           {{ $t('home.createFirstChallenge') }}

@@ -6,8 +6,8 @@
       primary
       full
       @success="$emit('finish')"
-      done-text="$t('common.challengeCreated')"
-      slide-text="$t('common.slideToStart')"
+      :done-text="$t('challgen.challengeCreated')"
+      :slide-text="$t('challenge.slideToStart')"
     />
     <BaseButton v-if="step !== 'challenge' && !done" class="mt-4" text-secondary @click="$emit('prev')">
       {{ $t('common.back') }}

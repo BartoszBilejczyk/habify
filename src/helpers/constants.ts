@@ -54,7 +54,7 @@ export const BET_CATEGORY: Record<ChallengeCategory, Constant<ChallengeCategory>
     value: 'sport',
   },
   other: {
-    label: i18n.global.t('challenge.other'),
+    label: i18n.global.t('challenge.categories.other'),
     value: 'other',
   },
 };
