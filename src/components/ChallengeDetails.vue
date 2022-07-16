@@ -4,28 +4,28 @@
     :class="onDark && 'bg-white text-white-900 py-3'"
   >
     <div class="flex mb-1.5">
-      <div class="font-bold grow-0 shrink-0 basis-28">{{ $t('common.challenge') }}</div>
-      <div>{{ data.title }}</div>
+      <div class="font-bold text-sm grow-0 shrink-0 basis-28">{{ $t('common.challenge') }}</div>
+      <div class="text-sm">{{ data.title }}</div>
     </div>
     <div v-if="data.type === 'oneTime'" class="flex mb-1.5">
-      <div class="font-bold grow-0 shrink-0 basis-28">{{ $t('common.type') }}</div>
-      <div>One time</div>
+      <div class="font-bold text-sm grow-0 shrink-0 basis-28">{{ $t('common.type') }}</div>
+      <div class="text-sm">{{ CHALLENGE_TYPES[data.type]?.label }}</div>
     </div>
     <div v-if="data.type === CHALLENGE_TYPES.duration.value" class="flex mb-1.5">
-      <div class="font-bold grow-0 shrink-0 basis-28">{{ $t('challenge.duration') }}</div>
-      <div>{{ data.duration }} {{ $t('common.days') }}</div>
+      <div class="font-bold text-sm grow-0 shrink-0 basis-28">{{ $t('challenge.duration') }}</div>
+      <div class="text-sm">{{ data.duration }} {{ $t('common.days') }}</div>
     </div>
     <div class="flex mb-1.5">
-      <div class="font-bold grow-0 shrink-0 basis-28">{{ $t('common.bet') }}</div>
-      <div>{{ BET_CATEGORY[data.betCategory]?.label }}. {{ $t('challenge.manualConfirmation') }}.</div>
+      <div class="font-bold text-sm grow-0 shrink-0 basis-28">{{ $t('common.bet') }}</div>
+      <div class="text-sm">{{ BET_CATEGORY[data.betCategory]?.label }}. {{ $t('challenge.manualConfirmation') }}.</div>
     </div>
     <div class="flex mb-1.5">
-      <div class="font-bold grow-0 shrink-0 basis-28">{{ $t('common.details') }}</div>
-      <div>{{ data.betDetails }}</div>
+      <div class="font-bold text-sm grow-0 shrink-0 basis-28">{{ $t('common.details') }}</div>
+      <div class="text-sm">{{ data.betDetails }}</div>
     </div>
     <div v-if="data[keyId]" class="flex mb-1.5">
-      <div class="font-bold grow-0 shrink-0 basis-28">{{ $t('common.friend') }}</div>
-      <div>{{ data[inviteKey].name }}</div>
+      <div class="font-bold text-sm grow-0 shrink-0 basis-28">{{ $t('common.friend') }}</div>
+      <div class="text-sm">{{ data[inviteKey].name }}</div>
     </div>
   </BaseBox>
 </template>

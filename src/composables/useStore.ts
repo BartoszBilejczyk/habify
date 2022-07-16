@@ -4,19 +4,21 @@ import { computed, reactive, ref } from 'vue';
 import { Challenge, User } from '../types';
 import { emptyChallenge, emptyUser, emptyUserBasic } from '../helpers/empty';
 import { useFirebase } from '../useFirebase';
-import { CHALLENGE_STATUS } from '../helpers/constants';
+import { BET_CATEGORY, CHALLENGE_STATUS, CHALLENGE_TYPES } from '../helpers/constants';
 
 export const useStore = createGlobalState(() => {
   const challenges = ref<Challenge[]>([]);
-  const { userProfileBasic, getCollectionItemsWhere } = useFirebase();
+  const { userProfileBasic, getCollectionItemsWhere, db } = useFirebase();
+
+  const challenge = ref<Challenge>({ ...emptyChallenge });
 
   const stepOne = reactive<Partial<Challenge>>({
     id: '',
     title: '',
     duration: '',
-    betCategory: null,
+    betCategory: BET_CATEGORY.social.value,
     betDetails: '',
-    type: null,
+    type: CHALLENGE_TYPES.oneTime.value,
   });
 
   const stepTwo = ref({
@@ -53,6 +55,14 @@ export const useStore = createGlobalState(() => {
     challenges.value = [...inviterChallenges, ...inviteeChallenges].sort((a, b) => b.updatedOn - a.updatedOn);
   };
 
+  const getOneChallenge = async (id: string) => {
+    return await db.doc(`challenges/${id}`).onSnapshot(doc => {
+      // @ts-ignore
+      challenge.value = doc.data();
+      challenge.value.id = doc.id;
+    });
+  };
+
   const updateChallenge = (challengeToUpdate: Challenge) => {
     const challengeIndex = challenges.value.findIndex(challenge => challenge.id === challengeToUpdate.id);
 
@@ -78,8 +88,10 @@ export const useStore = createGlobalState(() => {
     challenges,
     inviteLink,
     modalComponent,
+    challenge,
     getChallenges,
     setModalComponent,
     updateChallenge,
+    getOneChallenge,
   };
 });

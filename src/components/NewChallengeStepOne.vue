@@ -28,7 +28,6 @@
 </template>
 
 <script setup lang="ts">
-  import BaseSection from '../components/BaseSection.vue';
   import BaseInput from '../components/BaseInput.vue';
   import BaseSelect from '../components/BaseSelect.vue';
   import { onMounted, ref } from 'vue';

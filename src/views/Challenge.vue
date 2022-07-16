@@ -10,37 +10,40 @@
         <BaseLabel class="ml-3" color="white">{{ CHALLENGE_TYPES[challenge.type]?.label }}</BaseLabel>
       </div>
       <!-- actions -->
-      <BaseBox class="my-6 text-sm">
+      <BaseBox class="my-4 text-sm" v-if="showDecisions || theSameWinner">
         <div v-if="showDecisions">
-          <div v-if="decisions?.you">{{ $t('challenge.youChoseWinner') }} {{ decisions.you.name }}</div>
-          <div class="mt-2" v-if="decisions?.challenger">
+          <div v-if="decisions?.you">{{ $t('challenge.youChoseWinner') }} {{ decisions.you?.name }}</div>
+          <div :class="{ 'mt-2': decisions?.you }" v-if="decisions?.challenger">
             {{ $t('challenge.challengerChoseWinner', { name: decisions.challenger.name }) }}
             {{ decisions.challenger.name }}
           </div>
         </div>
-        <div
-          class="text-green font-bold dark:text-green-20"
-          v-if="theSameWinner && userProfileBasic.id === challenge.inviterSelectedWinner?.id"
-        >
-          {{ $t('challenge.youWon', { name: challenge.inviterSelectedLoser?.name }) }}
+        <div class="text-green font-bold dark:text-green-20" v-if="isWinner">
+          {{ $t('challenge.youWon', { name: challenge.inviterSelectedLoser?.name, points: challenge.points }) }}
         </div>
         <div v-else-if="theSameWinner">
-          {{ $t('challenge.winnerIs', { name: decisions.you.name }) }}
+          {{ $t('challenge.winnerIs', { name: decisions.you?.name, points: challenge.points }) }}
         </div>
-        <div
-          class="mt-2 text-red dark:text-red-50 font-bold"
-          v-if="theSameWinner && userProfileBasic.id === challenge.inviterSelectedLoser?.id"
-        >
-          {{ $t('challenge.youLost') }}
+        <div class="mt-2 text-red dark:text-red-50 font-bold" v-if="isLoser">
+          {{ $t('challenge.youLost', { points: Number(challenge.points / 2).toFixed(0) }) }}
         </div>
       </BaseBox>
-      <!--      TODO do the bet -->
+      <div v-if="isLoser" class="p-3 bg-primary-600 rounded-xl text-white">
+        <!-- TODO add a question mark why this is manual -->
+        {{ $t('challenge.loserDoTheBet') }}
+        <b>"{{ challenge.betDetails }}"</b>
+      </div>
+      <div v-if="isWinner" class="p-3 bg-primary-600 rounded-xl text-white">
+        <!-- TODO add a question mark why this is manual -->
+        {{ $t('challenge.winnerLoserHasToDoBet', { name: challenge.inviterSelectedLoser?.name }) }}
+        <b>"{{ challenge.betDetails }}"</b>
+      </div>
       <div
         v-if="
           challenge.status !== CHALLENGE_STATUS.done.value &&
           (challenge.type === CHALLENGE_TYPES.oneTime.value ||
             (challenge.type === CHALLENGE_TYPES.duration.value && timeEnded)) &&
-          !decisions.you
+          !decisions?.you
         "
         class="mt-6"
       >
@@ -48,7 +51,7 @@
           {{ $t('challenge.selectWinner') }}
         </BaseButton>
       </div>
-      <div v-if="decisions?.you && decisions?.you !== decisions?.challenger && !theSameWinner">
+      <div v-if="allowToChangeAnswer">
         <BaseButton full secondary @click="openSelectWinnerModal">{{ $t('challenge.changeAnswer') }}</BaseButton>
       </div>
       <!-- add accepted date or start/end -->
@@ -152,7 +155,7 @@
 
   dayjs.locale(navigator.language);
 
-  const { challenges, getChallenges, updateChallenge } = useStore();
+  const { challenges, getOneChallenge, updateChallenge, challenge } = useStore();
   const { currentRoute } = useRouter();
   const loading = ref(false);
   const selectLoading = ref(false);
@@ -162,19 +165,16 @@
   const { t } = useI18n();
 
   onMounted(async () => {
-    console.log(challenges.value);
-    if (!challenges.value.length) {
-      loading.value = true;
+    if (challenge.value.id) {
+      return;
     }
 
-    await getChallenges();
+    loading.value = true;
+    console.log(currentRoute.value);
+    await getOneChallenge(currentRoute.value.params.id as string);
 
     loading.value = false;
   });
-
-  const challenge = computed<Challenge>(
-    () => challenges.value.filter((ch: Challenge) => ch.id === currentRoute.value.params.id)[0]
-  );
 
   const updatedOn = computed(() => {
     return dayjs(challenge.value.updatedOn).format('d MMM YYYY HH:mm');
@@ -227,29 +227,53 @@
   // TODO
   const timeEnded = computed(() => true);
 
-  const theSameWinner = computed(
-    () => Boolean(decisions.value) && decisions.value?.you?.id === decisions.value?.challenger?.id
-  );
-
-  const showDecisions = computed(() => Boolean(decisions.value) && !theSameWinner.value);
-
   const decisions = computed(() => {
     if (userProfileBasic.value.id === challenge.value.inviter?.id) {
-      return {
-        you: challenge.value.inviterSelectedWinner,
-        challenger: challenge.value.inviteeSelectedWinner,
-      };
+      if (challenge.value.inviterSelectedWinner || challenge.value.inviteeSelectedWinner) {
+        return {
+          you: challenge.value.inviterSelectedWinner,
+          challenger: challenge.value.inviteeSelectedWinner,
+        };
+      } else {
+        return null;
+      }
     }
 
     if (userProfileBasic.value.id === challenge.value.invitee?.id) {
-      return {
-        you: challenge.value.inviteeSelectedWinner,
-        challenger: challenge.value.inviterSelectedWinner,
-      };
+      if (challenge.value.inviterSelectedWinner || challenge.value.inviteeSelectedWinner) {
+        return {
+          you: challenge.value.inviteeSelectedWinner,
+          challenger: challenge.value.inviterSelectedWinner,
+        };
+      } else {
+        return null;
+      }
     }
 
     return null;
   });
+
+  const theSameWinner = computed(
+    () =>
+      Boolean(decisions.value) &&
+      decisions.value?.you?.id &&
+      decisions.value?.challenger?.id &&
+      decisions.value?.you?.id === decisions.value?.challenger?.id
+  );
+
+  const showDecisions = computed(() => Boolean(decisions.value) && !theSameWinner.value);
+
+  const isLoser = computed(
+    () => theSameWinner.value && userProfileBasic.value.id === challenge.value.inviterSelectedLoser?.id
+  );
+
+  const isWinner = computed(
+    () => theSameWinner.value && userProfileBasic.value.id === challenge.value.inviterSelectedWinner?.id
+  );
+
+  const allowToChangeAnswer = computed(
+    () => decisions?.value?.you && decisions?.value?.you?.id !== decisions?.value.challenger?.id && !theSameWinner.value
+  );
 
   const share = () => {
     if (navigator.share) {
@@ -285,7 +309,7 @@
     }
 
     const updatedStatus =
-      challenge.value.inviteeSelectedWinner || challenge.value.inviterSelectedWinner
+      (challenge.value.inviteeSelectedWinner || challenge.value.inviterSelectedWinner) && !allowToChangeAnswer.value
         ? CHALLENGE_STATUS.done.value
         : CHALLENGE_STATUS.waitsForConfirm.value;
 
@@ -299,7 +323,6 @@
       console.log(e);
     }
 
-    // update store
     const fetchedChallenge = (await getDoc(`challenges/${challenge.value.id}`)) as Challenge;
 
     updateChallenge(fetchedChallenge);
@@ -308,20 +331,17 @@
       updatedStatus === CHALLENGE_STATUS.done.value &&
       fetchedChallenge.inviterSelectedWinner === fetchedChallenge.inviteeSelectedWinner
     ) {
-      // update user points
-      console.log('update user points');
+      // TODO update user points
     } else {
       console.log('first user choice');
     }
 
     // handle UI
 
-    // TODO add change choice in UI
-
     setTimeout(() => {
       hideModal();
       selectLoading.value = false;
       // set timer for the above and then make it 2 seconds total or something.
-    }, 1000);
+    }, 500);
   };
 </script>
