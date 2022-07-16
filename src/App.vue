@@ -44,9 +44,14 @@
   const showMenu = computed(() => !loading.value && !noMenu.includes(currentRoute.value.name));
 
   onMounted(() => {
-    // TODO fix this - texts and some components are cached
-    caches.keys().then(function (names) {
-      for (let name of names) caches.delete(name);
+    self.addEventListener('fetch', function (event) {
+      // @ts-ignore
+      event.respondWith(
+        // @ts-ignore
+        fetch(event.request).then(function (networkResponse) {
+          return networkResponse;
+        })
+      );
     });
 
     loading.value = true;
