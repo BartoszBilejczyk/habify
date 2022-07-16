@@ -6,7 +6,7 @@
       'min-safe-h-fullscreen': noMenu.includes(currentRoute.name),
       'bg-primary dark:bg-dark':
         currentRoute.name === 'profile' ||
-        currentRoute.name === 'invitation' ||
+        currentRoute.name === 'invite' ||
         currentRoute.name === 'profile-invite' ||
         currentRoute.name === 'new-challenge-success' ||
         (currentRoute.name === 'onboarding' && (currentRoute.query.step === '2' || currentRoute.query.step === '3')),
@@ -34,6 +34,7 @@
   import { useDark } from '@vueuse/core';
 
   const noMenu = ['login', 'register', 'forgot-password', 'onboarding', 'auth-start', 'invite'];
+  const noAuthRoutes = ['login', 'register', 'forgot-password', 'auth-start', 'invite'];
 
   const isDark = useDark();
   const { currentRoute, push } = useRouter();
@@ -63,6 +64,13 @@
         loading.value = false;
 
         if (window.location.pathname === '/') {
+          await push({ name: 'auth-start' });
+        }
+
+        if (
+          window.location.pathname !== '/' &&
+          !noAuthRoutes.some(routeName => window.location.pathname.includes(routeName))
+        ) {
           await push({ name: 'auth-start' });
         }
       } else {
