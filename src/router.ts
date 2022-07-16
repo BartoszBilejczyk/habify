@@ -5,13 +5,13 @@ export type RouteName =
   | 'auth-start'
   | 'login'
   | 'register'
-  | 'friends'
   | 'profile'
   | 'active-challenges'
   | 'challenge'
   | 'forgot-password'
   | 'how-it-works'
   | 'new-challenge'
+  | 'new-challenge-success'
   | 'onboarding'
   | 'challenge-examples'
   | 'profile-challenge-history'
@@ -84,6 +84,11 @@ const router = createRouter({
       path: '/new-challenge',
       name: 'new-challenge',
       component: () => import('./views/NewChallenge.vue'),
+    },
+    {
+      path: '/new-challenge-success',
+      name: 'new-challenge-success',
+      component: () => import('./views/NewChallengeSuccess.vue'),
     },
     {
       path: '/onboarding',

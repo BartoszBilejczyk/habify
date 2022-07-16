@@ -65,7 +65,10 @@ export default {
     resetPassword: 'Reset Password',
     backToLogin: 'Back to sign in',
     welcome: 'Welcome to Habbi',
-    welcomeDescription: 'Build bla bla Build bla bla bla bla Build bla blabla bla Build bla blabla bla ',
+    welcomeDescription: [
+      'Challenge your friends and make bets.',
+      'Spread the good energy to the world even if you lose.',
+    ],
   },
   home: {
     createFirstChallenge: 'Create your first challenge.',
@@ -80,6 +83,7 @@ export default {
     notInvitedUser: 'You are not the user invited for this challenge',
   },
   challenge: {
+    challengeTitle: 'Challenge title',
     markDone: 'Mark as done',
     challengeParticipant: 'Challenge participant',
     duration: 'Duration',
@@ -91,7 +95,7 @@ export default {
     manualConfirmation: 'Manual confirmation',
     challengeCreated: 'Challenge created',
     slideToStart: 'Slide to start!',
-    example: 'e.g. Who will make steps in a week',
+    example: 'e.g. Who will make more steps in a week',
     types: {
       oneTime: 'One occurrence',
       duration: 'Time-based',
@@ -110,6 +114,9 @@ export default {
       other: 'Other',
     },
     selectWinner: 'Select winner',
+    chooseAfter: `You don't have to choose now. You can invite a friend later.`,
+    shareOnNext: 'You will be able to share the link on next view',
+    goToChallenge: 'Go back to challenge',
   },
   profile: {
     giveFeedback: 'Give feedback',

@@ -1,12 +1,16 @@
 <template>
   <div class="w-full h-full flex flex-col flex-1 pb-6">
-    <BaseTopNav :title="$t('titles.newChallenge')" />
-    <div class="px-4">
-      <NewChallengeMenu class="mt-3 mb-5" :has-friends="hasFriends" :step="step" />
-      <NewChallengeStepOne v-show="step === 'challenge'" />
-      <!--       make new step - for bet -->
-      <NewChallengeStepTwo v-show="step === 'invite'" :friends="friends" />
-      <NewChallengeStepThree v-show="step === 'confirm'" />
+    <!--    TODO improve UX -->
+    <BaseTopNav :title="$t('titles.new')" back-route="profile" />
+    <div class="flex flex-col flex-1 px-4 pb-12 justify-between">
+      <div>
+        <NewChallengeMenu class="mt-3 mb-8" :has-friends="hasFriends" :step="step" />
+        <NewChallengeStepOne v-show="step === 1" />
+        <!--       make new step - for bet -->
+        <NewChallengeStepTwo v-show="step === 2" />
+        <NewChallengeStepThree v-show="step === 3" :friends="friends" />
+        <NewChallengeStepFour v-show="step === 4" />
+      </div>
       <NewChallengeButtons
         class="mt-3"
         :step="step"
@@ -26,11 +30,13 @@
   import NewChallengeStepOne from '../components/NewChallengeStepOne.vue';
   import NewChallengeStepTwo from '../components/NewChallengeStepTwo.vue';
   import NewChallengeStepThree from '../components/NewChallengeStepThree.vue';
+  import NewChallengeStepFour from '../components/NewChallengeStepFour.vue';
   import NewChallengeMenu from '../components/NewChallengeMenu.vue';
   import NewChallengeButtons from '../components/NewChallengeButtons.vue';
   import { useFirebase } from '../useFirebase';
-  import { Challenge, ChallengeBasic, ChallengeCreateStep } from '../types';
+  import { Challenge, ChallengeBasic } from '../types';
   import { useStore } from '../composables/useStore';
+  import { useRouter } from 'vue-router';
 
   const { userProfile, userProfileBasic, firebaseUser, setDoc, updateDoc } = useFirebase();
   const { newChallenge, inviteLink } = useStore();
@@ -38,21 +44,22 @@
   const friends = computed(() => userProfile.value.friends);
   const hasFriends = computed(() => Boolean(friends.value.length));
 
-  const step = ref<ChallengeCreateStep>('challenge');
+  const step = ref(1);
   const done = ref(false);
+  const { push } = useRouter();
 
   const handleNext = () => {
-    if (step.value === 'challenge') {
-      step.value = hasFriends.value ? 'invite' : 'confirm';
-    } else if (step.value === 'invite') {
-      step.value = 'confirm';
+    if (step.value === 2) {
+      step.value = hasFriends.value ? 3 : 4;
+    } else {
+      step.value++;
     }
   };
   const handlePrev = () => {
-    if (step.value === 'confirm') {
-      step.value = hasFriends.value ? 'invite' : 'challenge';
-    } else if (step.value === 'invite') {
-      step.value = 'challenge';
+    if (step.value === 4) {
+      step.value = hasFriends.value ? 3 : 2;
+    } else {
+      step.value--;
     }
   };
 
@@ -79,5 +86,7 @@
 
     done.value = true;
     console.log(challenge);
+
+    await push({ name: 'new-challenge-success', query: { id: newChallenge.value.id } });
   };
 </script>

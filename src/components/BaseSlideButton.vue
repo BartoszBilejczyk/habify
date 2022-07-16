@@ -2,7 +2,7 @@
   <div class="swipe-button">
     <div
       class="container"
-      :class="{ 'container-unlocked': unlocked, 'bg-white-10': onDark, 'bg-primary-300': !onDark }"
+      :class="{ 'container-unlocked': unlocked, 'bg-white-10': onDark, 'bg-primary': !onDark }"
       ref="container"
     >
       <div class="slider" ref="slider" :class="onDark ? 'bg-white' : 'bg-primary-800'" @touchstart="startDrag">
@@ -14,7 +14,7 @@
         class="text font-bold font-xl"
         :class="{
           'text-high': unlocked,
-          'pl-6': !unlocked,
+          'pl-2': !unlocked,
           'text-white dark:text-white': unlocked && !onDark,
           'text-primary': onDark,
           'text-white': !onDark && !unlocked,

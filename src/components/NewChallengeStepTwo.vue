@@ -1,35 +1,45 @@
 <template>
   <div class="">
-    <BaseSection :title="$t('titles.challengeExistingFriends')">
-      <div
-        v-for="friend in friends"
-        :key="friend.id"
-        class="bg-white-10 dark:bg-dark-800 my-3 py-1 px-3 rounded-lg cursor-pointer"
-        :class="stepTwo.inviteeId === friend.id && 'bg-white-20 dark:bg-white-20 dark:text-white-500'"
-        @click="handleChooseFriend(friend)"
-      >
-        {{ friend.name }}
-      </div>
-    </BaseSection>
-    <BaseSection :title="$t('titles.chooseLater')">
-      <BaseButton primary>{{ $t('titles.chooseLater') }}r</BaseButton>
-    </BaseSection>
+    <div class="text-white-900 dark:text-white mb-10">Dodac jakis box o co chodzi</div>
+    <BaseSelect
+      v-model="stepOne.betCategory"
+      class="mb-3"
+      :placeholder="$t('common.category')"
+      :label="$t('common.category')"
+      full
+      :options="betCategoryOptions"
+    />
+    <BaseTextarea
+      v-model="stepOne.betDetails"
+      class="mb-3"
+      :placeholder="$t('common.details')"
+      :label="$t('common.details')"
+      full
+    />
   </div>
 </template>
 
 <script setup lang="ts">
-  import BaseSection from './BaseSection.vue';
-  import BaseButton from './BaseButton.vue';
+  import BaseSection from '../components/BaseSection.vue';
+  import BaseSelect from '../components/BaseSelect.vue';
+  import { onMounted, ref } from 'vue';
+  import BaseTextarea from './BaseTextarea.vue';
   import { useStore } from '../composables/useStore';
-  import { UserBasic } from '../types';
+  import { customAlphabet } from 'nanoid';
+  import { useI18n } from 'vue-i18n';
+  import { BET_CATEGORY } from '../helpers/constants';
 
-  const { stepTwo } = useStore();
+  const { stepOne } = useStore();
+  const { t } = useI18n();
 
-  const handleChooseFriend = (friend: UserBasic) => {
-    stepTwo.value = { invitee: friend, inviteeId: friend.id };
-  };
+  onMounted(() => {
+    stepOne.id = customAlphabet('abcdefghijklmnoprstuvwyz1234567890', 10)();
+  });
 
-  defineProps<{
-    friends: any[];
-  }>();
+  const betCategoryOptions = ref([
+    { label: BET_CATEGORY.social.label, value: BET_CATEGORY.social.value },
+    { label: BET_CATEGORY.financial.label, value: BET_CATEGORY.financial.value },
+    { label: BET_CATEGORY.sport.label, value: BET_CATEGORY.sport.value },
+    { label: BET_CATEGORY.other.label, value: BET_CATEGORY.other.value },
+  ]);
 </script>

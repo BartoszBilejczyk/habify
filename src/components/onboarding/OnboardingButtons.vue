@@ -3,7 +3,7 @@
     <BaseButton :text-white="!white" :text-primary="white" small :class="step === 5 && 'hidden'" @click="$emit('skip')">
       {{ $t('onboarding.skip') }}
     </BaseButton>
-    <BaseButton v-if="step !== 5" :outline-white="!white" :outline="white" @click="$emit('next')">
+    <BaseButton v-if="step !== 5" :outline-white="!white" :primary="white" @click="$emit('next')">
       {{ $t('onboarding.next') }}
     </BaseButton>
     <BaseSlideButton

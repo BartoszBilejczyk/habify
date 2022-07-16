@@ -1,45 +1,33 @@
 <template>
   <div class="">
-    <BaseSection :title="$t('titles.confirmDetails')">
-      <ChallengeDetails :data="newChallenge" invite-key="invitee" />
-    </BaseSection>
-    <!--    Move to step 5, last step success -->
-    <BaseSection :title="$t('common.share')">
-      <BaseInfoToCopy>{{ inviteLink }}</BaseInfoToCopy>
-      <div class="flex justify-center mt-4 mb-10">
-        <BaseButton outline @click="share">{{ $t('common.shareLink') }}</BaseButton>
+    <BaseSection :title="$t('titles.challengeExistingFriends')">
+      <div
+        v-for="friend in friends"
+        :key="friend.id"
+        class="bg-white-10 dark:bg-dark-800 my-3 py-1 px-3 rounded-lg cursor-pointer"
+        :class="stepTwo.inviteeId === friend.id && 'bg-white-20 dark:bg-white-20 dark:text-white-500'"
+        @click="handleChooseFriend(friend)"
+      >
+        {{ friend.name }}
       </div>
     </BaseSection>
+    <div class="text-center text-xs text-white-200 dark:text-white-30 mb-8">{{ $t('challenge.chooseAfter') }}</div>
   </div>
 </template>
 
 <script setup lang="ts">
   import BaseSection from './BaseSection.vue';
-  import BaseInfoToCopy from './BaseInfoToCopy.vue';
   import BaseButton from './BaseButton.vue';
-  import ChallengeDetails from './ChallengeDetails.vue';
   import { useStore } from '../composables/useStore';
-  import { useClipboard } from '@vueuse/core';
-  import { useFirebase } from '../useFirebase';
-  import { computed } from 'vue';
-  import { useI18n } from 'vue-i18n';
+  import { UserBasic } from '../types';
 
-  const { copy, copied } = useClipboard();
-  const { userProfile } = useFirebase();
-  const { newChallenge, inviteLink } = useStore();
-  const { t } = useI18n();
+  const { stepTwo } = useStore();
 
-  const shareData = computed(() => ({
-    title: `${t('invite.accept')}!`,
-    text: `${t('invite.accept')}!`,
-    url: inviteLink.value,
-  }));
-
-  const share = () => {
-    if (navigator.share) {
-      navigator.share(shareData.value);
-    } else {
-      copy(inviteLink.value);
-    }
+  const handleChooseFriend = (friend: UserBasic) => {
+    stepTwo.value = { invitee: friend, inviteeId: friend.id };
   };
+
+  defineProps<{
+    friends: any[];
+  }>();
 </script>

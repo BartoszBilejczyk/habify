@@ -67,7 +67,7 @@
       <div v-if="challenge.status === CHALLENGE_STATUS.pending.value" class="mt-4">
         <BaseInfoToCopy>{{ challenge.inviteLink }}</BaseInfoToCopy>
         <div class="flex justify-center mt-4 mb-10">
-          <BaseButton outline @click="share">{{ $t('common.shareLink') }}</BaseButton>
+          <BaseButton outline-white @click="share">{{ $t('common.shareLink') }}</BaseButton>
         </div>
       </div>
       <!-- add accepted date or start/end -->

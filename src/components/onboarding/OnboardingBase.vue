@@ -5,8 +5,8 @@
   >
     <div class="flex flex-col flex-1 items-center">
       <slot></slot>
-      <h2 class="mt-10 text-xl">{{ title }}</h2>
-      <div class="mt-4 px-12 text-center">{{ description }}</div>
+      <div class="mt-10 text-2xl font-bold" :class="white ? 'text-white-800' : 'text-white'">{{ title }}</div>
+      <div class="mt-4 px-12 text-center" :class="white ? 'text-white-800' : 'text-white'">{{ description }}</div>
     </div>
 
     <OnboardingButtons

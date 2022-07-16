@@ -8,6 +8,7 @@
         currentRoute.name === 'profile' ||
         currentRoute.name === 'invitation' ||
         currentRoute.name === 'profile-invite' ||
+        currentRoute.name === 'new-challenge-success' ||
         (currentRoute.name === 'onboarding' && (currentRoute.query.step === '2' || currentRoute.query.step === '3')),
       'bg-white': currentRoute.name === 'onboarding' && currentRoute.query.step === '4',
       'bg-green': currentRoute.name === 'onboarding' && currentRoute.query.step === '5',

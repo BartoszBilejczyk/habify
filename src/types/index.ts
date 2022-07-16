@@ -129,8 +129,6 @@ export interface ChallengeExample {
   points: number;
 }
 
-export type ChallengeCreateStep = 'challenge' | 'bet' | 'invite' | 'confirm';
-
 // collections
 
 // 1. Challenges -> any subcollections? Challenges / Invitations / invitations where inviter == userId. Challenges where inviter === userId || invitee === userId.

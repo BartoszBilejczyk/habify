@@ -42,9 +42,10 @@
   import { RouteName } from '../router';
   import { ref } from 'vue';
   import ShieldSearch from '../assets/icons/shield-search.svg';
-  import ShieldStar from '../assets/icons/shield-star.svg';
   import UserMultiple from '../assets/icons/user-multiple.svg';
   import UserSingle from '../assets/icons/user-single.svg';
+  import NotificationIcon from '../assets/icons/bell.svg?component';
+  import TaskIcon from '../assets/icons/task.svg?component';
   import { useRouter } from 'vue-router';
   import { useFirebase } from '../useFirebase';
 
@@ -79,12 +80,12 @@
     //   name: 'friends',
     // },
     {
-      icon: UserSingle,
+      icon: NotificationIcon,
       title: 'Notification Settings',
       name: 'profile-notification-settings',
     },
     {
-      icon: UserSingle,
+      icon: TaskIcon,
       title: 'Task Center',
       name: 'profile-task-center',
     },
