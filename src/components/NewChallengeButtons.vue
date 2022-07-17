@@ -9,8 +9,8 @@
       :done-text="$t('challenge.challengeCreated')"
       :slide-text="$t('challenge.slideToStart')"
     />
-    <div class="h-6 flex justify-center">
-      <BaseButton v-show="step !== 1 && !done" class="mt-4" text-secondary @click="$emit('prev')">
+    <div class="h-6">
+      <BaseButton full v-if="step !== 1 && !done" class="mt-8 mx-auto" text-secondary @click="$emit('prev')">
         {{ $t('common.back') }}
       </BaseButton>
     </div>

@@ -17,7 +17,7 @@
     label?: string;
     modelValue: string;
     full?: boolean;
-    placeholder?: boolean;
+    placeholder?: string;
     rows?: number;
   }>();
 

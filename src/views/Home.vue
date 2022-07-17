@@ -4,10 +4,10 @@
       <div class="relative pr-0.5" @click="openNotificationsModal">
         <NotificationIcon class="w-5 h-5" />
         <div
-          v-if="activeNotificationsCount"
+          v-if="activeNotifications.length"
           class="absolute -top-2 -right-2 h-4 w-4 rounded-full bg-primary text-xs flex items-center justify-center text-white font-bold"
         >
-          {{ activeNotificationsCount }}
+          {{ activeNotifications.length }}
         </div>
       </div>
     </BaseTopNav>
@@ -43,9 +43,8 @@
         <div class="bg-white dark:bg-dark-800 p-16 shadow-lg rounded-2xl">slot</div>
       </BaseSection>
     </div>
-    <BaseModalFromBottom :is-open="isModalOpen" @hide="hideModal">
-      <h1 class="text-2xl text-center text-white-800 dark:text-white-10">{{ $t('notifications.heading') }}</h1>
-      <NotificationList class="mt-4" />
+    <BaseModalFromBottom :is-open="isModalOpen" @hide="hideModal" :heading="$t('notifications.heading')">
+      <NotificationList />
     </BaseModalFromBottom>
   </div>
 </template>
@@ -61,7 +60,7 @@
   import { useUser } from '../composables/useUser';
   import { useStore } from '../composables/useStore';
   import { ref } from 'vue';
-  const { userProfile, activeNotificationsCount } = useUser();
+  const { userProfile, activeNotifications } = useUser();
   const { push } = useRouter();
 
   const { challenges } = useStore();
@@ -73,7 +72,7 @@
   };
 
   const openNotificationsModal = () => {
-    if (activeNotificationsCount) {
+    if (activeNotifications.value.length) {
       isModalOpen.value = true;
     }
   };

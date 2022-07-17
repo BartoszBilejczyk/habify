@@ -25,7 +25,7 @@
   import UserMultiple from '../assets/icons/user-multiple.svg';
   import UserSingle from '../assets/icons/user-single.svg';
 
-  import { ref, onMounted, computed } from 'vue';
+  import { shallowRef, computed } from 'vue';
   import { RouteRecordName, useRouter } from 'vue-router';
   import { RouteName } from '../router';
 
@@ -39,13 +39,7 @@
     name: RouteNameEnhanced;
   }
 
-  onMounted(() => {
-    setTimeout(() => {
-      active.value = currentRoute.value.name;
-    });
-  });
-
-  const menuItems = ref<MenuItem[]>([
+  const menuItems = shallowRef<MenuItem[]>([
     {
       icon: ShieldSearch,
       title: 'Dashboard',

@@ -26,8 +26,8 @@ export const useUser = createGlobalState(() => {
   // TODO
   const sortedNotifications = computed(() => userProfile.value.notifications);
 
-  const activeNotificationsCount = computed(
-    () => userProfile.value.notifications.filter(n => n.status === NOTIFICATION_STATUS.active).length
+  const activeNotifications = computed(() =>
+    userProfile.value.notifications.filter(n => n.status === NOTIFICATION_STATUS.active)
   );
 
   const updatePoints = async (userId: string, points: number) => {
@@ -40,8 +40,6 @@ export const useUser = createGlobalState(() => {
   };
 
   const addNotification = async (data: Partial<Notification>, userId = '') => {
-    console.log(userId);
-    console.log(`users/${userId ? userId : userProfile.value.id}`);
     await updateDoc(`users/${userId ? userId : userProfile.value.id}`, {
       notifications: firebase.firestore.FieldValue.arrayUnion(
         ...[
@@ -53,8 +51,26 @@ export const useUser = createGlobalState(() => {
         ]
       ),
     });
+  };
 
-    console.log('afterAwait');
+  const markNotificationAsDimissed = async (id: string) => {
+    const challengeIndex = userProfile.value.notifications.findIndex(notif => notif.id === id);
+    const notificationToUpdate = userProfile.value.notifications.find(notif => notif.id === id);
+
+    const updatedNotifications = [
+      ...userProfile.value.notifications.slice(0, challengeIndex),
+      {
+        ...notificationToUpdate,
+        status: NOTIFICATION_STATUS.dismissed,
+      },
+      ...userProfile.value.notifications.slice(challengeIndex + 1),
+    ];
+
+    console.log(updatedNotifications);
+
+    await updateDoc(`users/${userProfile.value.id}`, {
+      notifications: updatedNotifications,
+    });
   };
 
   // TODO create update notification function
@@ -87,8 +103,9 @@ export const useUser = createGlobalState(() => {
     userProfile,
     userProfileBasic,
     updatePoints,
-    activeNotificationsCount,
+    activeNotifications,
     sortedNotifications,
+    markNotificationAsDimissed,
     addNotification,
     addTask,
   };

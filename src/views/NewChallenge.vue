@@ -2,7 +2,7 @@
   <div class="w-full h-full flex flex-col flex-1 pb-6">
     <!--    TODO improve UX -->
     <BaseTopNav :title="$t('titles.new')" back-route="profile" />
-    <div class="flex flex-col flex-1 px-4 pb-12 justify-between">
+    <div class="flex flex-col flex-1 px-4 pb-14 justify-between">
       <div>
         <NewChallengeMenu class="mt-3 mb-8" :has-friends="hasFriends" :step="step" />
         <NewChallengeStepOne v-show="step === 1" />

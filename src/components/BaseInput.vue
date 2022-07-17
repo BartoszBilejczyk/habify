@@ -18,7 +18,7 @@
     modelValue: string;
     type?: string;
     full?: boolean;
-    placeholder?: boolean;
+    placeholder?: string;
     required?: boolean;
   }>();
 

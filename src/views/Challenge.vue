@@ -93,7 +93,9 @@
         <div class="text-white-600 dark:text-white-20 font-bold">{{ $t('common.bet') }}</div>
         <BaseBox small class="mt-1.5 relative py-2">
           <div class="w-10/12">{{ challenge.betDetails }}</div>
-          <BaseLabel color="white" class="absolute right-2 top-2">{{ challenge.betCategory }}</BaseLabel>
+          <BaseLabel color="white" class="absolute right-2 top-2">
+            {{ BET_CATEGORY[challenge.betCategory]?.label }}
+          </BaseLabel>
         </BaseBox>
       </div>
       <div class="mt-3">
@@ -123,9 +125,8 @@
     </div>
     <!--  TODO handle click outside  -->
     <!--  TODO handle slide down  -->
-    <BaseModalFromBottom :is-open="isModalOpen" @hide="hideModal">
-      <h1 class="text-2xl text-center text-white-800 dark:text-white-10">{{ $t('challenge.selectWinner') }}</h1>
-      <div class="mt-6 flex flex-col items-stretch justify-center" :class="selectLoading && 'pointer-events-none'">
+    <BaseModalFromBottom :is-open="isModalOpen" @hide="hideModal" :heading="$t('challenge.selectWinner')">
+      <div class="flex flex-col items-stretch justify-center" :class="selectLoading && 'pointer-events-none'">
         <div
           class="m-4 border border-solid rounded-xl border-white-500 dark:border-white-20 p-8 text-center"
           @click="selectWinnerAndLoser(challenge.inviter, challenge.invitee)"
@@ -159,7 +160,7 @@
   import 'dayjs/locale/pl';
   import 'dayjs/locale/en-gb';
   import { useFirebase } from '../composables/useFirebase';
-  import { CHALLENGE_TYPES, NOTIFICATION_CATEGORY, CHALLENGE_STATUS } from '../helpers/constants';
+  import { CHALLENGE_TYPES, NOTIFICATION_CATEGORY, CHALLENGE_STATUS, BET_CATEGORY } from '../helpers/constants';
   import { useClipboard } from '@vueuse/core';
   import { useI18n } from 'vue-i18n';
   import { useUser } from '../composables/useUser';
@@ -186,11 +187,11 @@
   });
 
   const updatedOn = computed(() => {
-    return dayjs(challenge.value.updatedOn).format('d MMM YYYY HH:mm');
+    return dayjs(challenge.value.updatedOn).format('DD MMM YYYY HH:mm');
   });
 
   const createdOn = computed(() => {
-    return dayjs(challenge.value.createdOn).format('d MMM YYYY HH:mm');
+    return dayjs(challenge.value.createdOn).format('DD MMM YYYY HH:mm');
   });
 
   const statusColor = computed(() => {
