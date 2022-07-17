@@ -34,11 +34,13 @@
   import ActiveChallengeList from '../components/ActiveChallengeList.vue';
   import { useStore } from '../composables/useStore';
   import { onMounted, ref } from 'vue';
-  import { useFirebase } from '../useFirebase';
+  import { useFirebase } from '../composables/useFirebase';
+  import { useUser } from '../composables/useUser';
 
   const { challenges, getChallenges } = useStore();
   const { push } = useRouter();
-  const { getCollectionItemsWhere, userProfile } = useFirebase();
+  const { getCollectionItemsWhere } = useFirebase();
+  const { userProfile } = useUser();
   const loading = ref(false);
 
   onMounted(async () => {

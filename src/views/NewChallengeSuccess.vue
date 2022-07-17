@@ -37,7 +37,7 @@
   import BaseButton from '../components/BaseButton.vue';
   import { useStore } from '../composables/useStore';
   import { useClipboard } from '@vueuse/core';
-  import { useFirebase } from '../useFirebase';
+  import { useUser } from '../composables/useUser';
   import { computed, ref } from 'vue';
   import { useI18n } from 'vue-i18n';
   import { useRouter } from 'vue-router';
@@ -47,7 +47,7 @@
   import doneAnimation from '../assets/lottie/done-animation.json';
 
   const { copy, copied } = useClipboard();
-  const { userProfile } = useFirebase();
+  const { userProfile } = useUser();
   const { t } = useI18n();
   const { push, replace, currentRoute } = useRouter();
 

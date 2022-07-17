@@ -28,12 +28,12 @@
   import BaseButton from '../components/BaseButton.vue';
   import { computed } from 'vue';
   import { useClipboard } from '@vueuse/core';
-  import { useFirebase } from '../useFirebase';
+  import { useUser } from '../composables/useUser';
   import { useI18n } from 'vue-i18n';
   import betAnimation from '../assets/lottie/bet-animation.json';
 
   const { copy, copied } = useClipboard();
-  const { userProfile } = useFirebase();
+  const { userProfile } = useUser();
   const { t } = useI18n();
 
   const url = computed(() => `https://habbi.app/register?code=${userProfile.value.referralCode}`);

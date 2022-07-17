@@ -48,6 +48,7 @@ export default {
     profile: 'Profile',
     friends: 'Friends',
     invite: 'Invite Friends',
+    donate: 'Donate',
     notifications: 'Notifications',
     settings: 'Settings',
     taskCenter: 'Task Center',

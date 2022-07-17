@@ -1,4 +1,14 @@
-import { ChallengeCategory, ChallengeStatus, ChallengeType } from '../types';
+import {
+  BetCategory,
+  ChallengeConfirmationType,
+  ChallengeStatus,
+  ChallengeType,
+  CharityCategory,
+  NotificationCategory,
+  NotificationStatus,
+  TaskCategory,
+  TaskStatus,
+} from '../types';
 import { i18n } from '../i18n';
 
 interface Constant<T> {
@@ -40,7 +50,7 @@ export const CHALLENGE_STATUS: Record<ChallengeStatus, Constant<ChallengeStatus>
   },
 };
 
-export const BET_CATEGORY: Record<ChallengeCategory, Constant<ChallengeCategory>> = {
+export const BET_CATEGORY: Record<BetCategory, Constant<BetCategory>> = {
   social: {
     label: i18n.global.t('challenge.categories.social'),
     value: 'social',
@@ -57,4 +67,46 @@ export const BET_CATEGORY: Record<ChallengeCategory, Constant<ChallengeCategory>
     label: i18n.global.t('challenge.categories.other'),
     value: 'other',
   },
+};
+
+export const CHALLENGE_CONFIRMATION_TYPE: Record<ChallengeConfirmationType, Constant<ChallengeConfirmationType>> = {
+  manual: {
+    label: i18n.global.t('challenge.confirmationTypes.manual'),
+    value: 'manual',
+  },
+  automatic: {
+    label: i18n.global.t('challenge.confirmationTypes.automatic'),
+    value: 'automatic',
+  },
+};
+
+export const CHARITY_CATEGORY: Record<CharityCategory, CharityCategory> = {
+  kids: 'kids',
+  animals: 'animals',
+  environment: 'environment',
+  other: 'other',
+};
+
+export const TASK_STATUS: Record<TaskStatus, TaskStatus> = {
+  active: 'active',
+  rewarded: 'rewarded',
+  expired: 'expired',
+};
+
+export const TASK_CATEGORY: Record<TaskCategory, TaskCategory> = {
+  friends: 'friends',
+  challenge: 'challenge',
+  other: 'other',
+};
+
+export const NOTIFICATION_STATUS: Record<NotificationStatus, NotificationStatus> = {
+  active: 'active',
+  seen: 'seen',
+  dismissed: 'dismissed',
+};
+
+export const NOTIFICATION_CATEGORY: Record<NotificationCategory, NotificationCategory> = {
+  friends: 'friends',
+  challenge: 'challenge',
+  other: 'other',
 };

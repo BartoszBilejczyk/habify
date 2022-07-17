@@ -33,12 +33,14 @@
   import NewChallengeStepFour from '../components/NewChallengeStepFour.vue';
   import NewChallengeMenu from '../components/NewChallengeMenu.vue';
   import NewChallengeButtons from '../components/NewChallengeButtons.vue';
-  import { useFirebase } from '../useFirebase';
+  import { useFirebase } from '../composables/useFirebase';
   import { Challenge, ChallengeBasic } from '../types';
   import { useStore } from '../composables/useStore';
   import { useRouter } from 'vue-router';
+  import { useUser } from '../composables/useUser';
 
-  const { userProfile, userProfileBasic, firebaseUser, setDoc, updateDoc } = useFirebase();
+  const { firebaseUser, setDoc, updateDoc } = useFirebase();
+  const { userProfile, userProfileBasic } = useUser();
   const { newChallenge, inviteLink } = useStore();
 
   const friends = computed(() => userProfile.value.friends);

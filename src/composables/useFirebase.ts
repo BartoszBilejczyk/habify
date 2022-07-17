@@ -1,8 +1,6 @@
 import firebase from 'firebase';
 import 'firebase/firestore';
-import { User, UserBasic } from './types';
-import { computed, ref } from 'vue';
-import { emptyUser } from './helpers/empty';
+import { ref } from 'vue';
 import { User as FirebaseUser } from '@firebase/auth-types';
 import { createGlobalState } from '@vueuse/core';
 
@@ -18,18 +16,11 @@ const db = firebase
   .firestore();
 
 export const useFirebase = createGlobalState(() => {
-  const userProfile = ref<User>({ ...emptyUser });
   const firebaseUser = ref<FirebaseUser | null>(null);
 
-  // @ts-ignore
-  const userProfileBasic = computed<UserBasic>(() => ({
-    id: userProfile.value.id,
-    email: userProfile.value.email,
-    phone: userProfile.value.phone,
-    name: userProfile.value.name,
-    points: userProfile.value.points,
-    image: userProfile.value.image,
-  }));
+  const getDocRaw = async (path: string) => {
+    return db.doc(path);
+  };
 
   const getDoc = async (path: string) => {
     return await db
@@ -122,14 +113,13 @@ export const useFirebase = createGlobalState(() => {
   return {
     db,
     firebaseUser,
-    userProfile,
-    userProfileBasic,
     getDoc,
     getCollection,
     getCollectionFirstItem,
     updateDoc,
     addDoc,
     setDoc,
+    getDocRaw,
     getCollectionItemsWhere,
     getCollectionFirstItemWhere,
   };

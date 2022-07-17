@@ -50,13 +50,13 @@
   import BaseTopNav from '../components/BaseTopNav.vue';
   import BaseLabel from '../components/BaseLabel.vue';
   import BaseButton from '../components/BaseButton.vue';
-  import { useFirebase } from '../useFirebase';
+  import { useUser } from '../composables/useUser';
   import { useRouter } from 'vue-router';
   import PlusIcon from '../assets/icons/plus.svg?component';
   import ChevronRight from '../assets/icons/chevron-right.svg?component';
   import { ref } from 'vue';
 
-  const { userProfile } = useFirebase();
+  const { userProfile } = useUser();
   const { push } = useRouter();
 
   const loading = ref(false);

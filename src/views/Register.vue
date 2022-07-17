@@ -29,7 +29,7 @@
   import { useRouter } from 'vue-router';
   import BaseButton from '../components/BaseButton.vue';
   import BaseInput from '../components/BaseInput.vue';
-  import { useFirebase } from '../useFirebase';
+  import { useFirebase } from '../composables/useFirebase';
   import { emptyUser } from '../helpers/empty';
   import { User } from '../types';
   import { useStore } from '../composables/useStore';

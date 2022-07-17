@@ -9,6 +9,6 @@
 
 <script setup lang="ts">
   import BaseTopNav from '../components/BaseTopNav.vue';
-  import { useFirebase } from '../useFirebase';
-  const { userProfile } = useFirebase();
+  import { useUser } from '../composables/useUser';
+  const { userProfile } = useUser();
 </script>

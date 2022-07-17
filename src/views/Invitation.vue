@@ -29,14 +29,16 @@
   import BaseSlideButton from '../components/BaseSlideButton.vue';
   import ChallengeDetails from '../components/ChallengeDetails.vue';
   import { onMounted, ref } from 'vue';
-  import { useFirebase } from '../useFirebase';
+  import { useFirebase } from '../composables/useFirebase';
   import { useRouter } from 'vue-router';
   import { Challenge, ChallengeBasic } from '../types';
   import { emptyChallenge } from '../helpers/empty';
   import { useI18n } from 'vue-i18n';
+  import { useUser } from '../composables/useUser';
 
   const challenge = ref<Challenge>({ ...emptyChallenge });
-  const { updateDoc, getDoc, userProfile, userProfileBasic } = useFirebase();
+  const { updateDoc, getDoc } = useFirebase();
+  const { userProfile, userProfileBasic } = useUser();
   const { push, currentRoute } = useRouter();
   const { t } = useI18n();
 

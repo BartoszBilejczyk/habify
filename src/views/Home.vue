@@ -37,8 +37,8 @@
   import BaseSection from '../components/BaseSection.vue';
   import NotificationIcon from '../assets/icons/bell.svg?component';
   import { useRouter } from 'vue-router';
-  import { useFirebase } from '../useFirebase';
-  const { userProfile } = useFirebase();
+  import { useUser } from '../composables/useUser';
+  const { userProfile } = useUser();
   const { push } = useRouter();
 
   const handleStart = () => {

@@ -20,6 +20,7 @@ export type RouteName =
   | 'profile-settings'
   | 'profile-notification-settings'
   | 'profile-task-center'
+  | 'donate'
   | 'components'
   | 'charities';
 
@@ -124,6 +125,11 @@ const router = createRouter({
       path: '/profile-task-center',
       name: 'profile-task-center',
       component: () => import('./views/ProfileTaskCenter.vue'),
+    },
+    {
+      path: '/donate',
+      name: 'donate',
+      component: () => import('./views/Donate.vue'),
     },
     {
       path: '/charities',

@@ -54,7 +54,7 @@
   import { computed, onMounted, ref } from 'vue';
   import OnboardingFinishProfile from '../components/onboarding/OnboardingFinishProfile.vue';
   import OnboardingBase from '../components/onboarding/OnboardingBase.vue';
-  import { useFirebase } from '../useFirebase';
+  import { useFirebase } from '../composables/useFirebase';
   import firebase from 'firebase';
   import { User } from '../types';
   import { useRouter } from 'vue-router';
@@ -63,10 +63,13 @@
   import earthAnimation from '../assets/lottie/earth-animation.json';
   import girlChinupAnimation from '../assets/lottie/girl-chinup-animation.json';
   import manPhoneAnimation from '../assets/lottie/man-phone-animation.json';
+  import { useUser } from '../composables/useUser';
 
-  const { firebaseUser, updateDoc, getDoc, userProfile } = useFirebase();
+  const { firebaseUser, updateDoc, getDoc } = useFirebase();
+  const { userProfile } = useUser();
   const { push, replace, currentRoute } = useRouter();
 
+  const loading = ref(false);
   const step = ref(1);
   const { referrer } = useStore();
 
@@ -74,7 +77,7 @@
     if (window.matchMedia('(display-mode: standalone)').matches) {
       return '40vh';
     } else {
-      return '40vh';
+      return '35vh';
     }
   });
 
@@ -99,6 +102,7 @@
   };
 
   onMounted(async () => {
+    loading.value = true;
     const user = firebase.auth().currentUser;
 
     if (user) {
@@ -109,11 +113,14 @@
       }
 
       if (userDoc.onboarded) {
+        loading.value = false;
         await push({ name: 'home', query: {} });
       }
 
       handleSetInitialQuery();
     }
+
+    loading.value = false;
   });
 
   const updateProfile = async ({ name, allowEmails }: { name: string; allowEmails: boolean }) => {

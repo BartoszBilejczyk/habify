@@ -24,12 +24,14 @@
   import BaseButton from '../components/BaseButton.vue';
   import BaseInput from '../components/BaseInput.vue';
   import { User } from '../types';
-  import { useFirebase } from '../useFirebase';
+  import { useFirebase } from '../composables/useFirebase';
+  import { useUser } from '../composables/useUser';
 
   const email = ref('');
   const password = ref('');
   const { push } = useRouter();
-  const { updateDoc, getDoc, userProfile } = useFirebase();
+  const { updateDoc, getDocRaw } = useFirebase();
+  const { userProfile } = useUser();
   const loading = ref(false);
 
   const login = () => {
@@ -43,7 +45,10 @@
       .auth()
       .signInWithEmailAndPassword(email.value, password.value)
       .then(async user => {
-        userProfile.value = (await getDoc(`users/${user.user?.uid}`)) as User;
+        (await getDocRaw(`users/${user.user?.uid}`)).onSnapshot(doc => {
+          // @ts-ignore
+          userProfile.value = { ...doc.data(), id: doc.id };
+        });
 
         if (!userProfile.value.profileFinished || !userProfile.value.onboarded) {
           push({ name: 'onboarding', query: { step: '1' } });

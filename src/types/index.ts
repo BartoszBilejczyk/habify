@@ -38,7 +38,7 @@ export interface Friend {
 export type ChallengeStatus = 'waitsForConfirm' | 'done' | 'pending' | 'active' | 'closed';
 export type ChallengeType = 'oneTime' | 'duration';
 export type ChallengeConfirmationType = 'manual' | 'automatic';
-export type ChallengeCategory = 'social' | 'financial' | 'sport' | 'other';
+export type BetCategory = 'social' | 'financial' | 'sport' | 'other';
 
 export interface ChallengeBasic {
   id: string;
@@ -59,7 +59,7 @@ export interface Challenge {
   title: string;
   duration: string;
   type: ChallengeType | null;
-  betCategory: ChallengeCategory | null; // TODO add more
+  betCategory: BetCategory | null; // TODO add more
   betDetails: any; // TODO
   points: number;
   inviteLink: string;
@@ -98,7 +98,7 @@ export interface Task {
   status: TaskStatus;
 }
 
-export type NotificationStatus = 'active' | 'seen';
+export type NotificationStatus = 'active' | 'seen' | 'dismissed';
 export type NotificationCategory = 'friends' | 'challenge' | 'other'; // TODO
 
 export interface Notification {

@@ -11,10 +11,10 @@
   import BaseSection from './BaseSection.vue';
   import ChallengeDetails from './ChallengeDetails.vue';
   import { useStore } from '../composables/useStore';
-  import { useFirebase } from '../useFirebase';
+  import { useUser } from '../composables/useUser';
   import { useI18n } from 'vue-i18n';
 
-  const { userProfile } = useFirebase();
+  const { userProfile } = useUser();
   const { newChallenge } = useStore();
   const { t } = useI18n();
 </script>

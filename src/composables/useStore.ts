@@ -3,12 +3,14 @@ import 'firebase/firestore';
 import { computed, reactive, ref } from 'vue';
 import { Challenge, User } from '../types';
 import { emptyChallenge, emptyUser, emptyUserBasic } from '../helpers/empty';
-import { useFirebase } from '../useFirebase';
+import { useFirebase } from './useFirebase';
 import { BET_CATEGORY, CHALLENGE_STATUS, CHALLENGE_TYPES } from '../helpers/constants';
+import { useUser } from './useUser';
 
 export const useStore = createGlobalState(() => {
+  const { getCollectionItemsWhere, db } = useFirebase();
+  const { userProfileBasic } = useUser();
   const challenges = ref<Challenge[]>([]);
-  const { userProfileBasic, getCollectionItemsWhere, db } = useFirebase();
 
   const challenge = ref<Challenge>({ ...emptyChallenge });
 
@@ -27,6 +29,12 @@ export const useStore = createGlobalState(() => {
   });
 
   const inviteLink = computed(() => `https://habbi.app/invite?code=${stepOne.id}`);
+  const challengeLoggedInUser = computed(() =>
+    userProfileBasic.value.id === challenge.value.inviterId ? challenge.value.inviter : challenge.value.invitee
+  );
+  const challengeOtherUser = computed(() =>
+    userProfileBasic.value.id === challenge.value.inviterId ? challenge.value.invitee : challenge.value.inviter
+  );
 
   const newChallenge = computed<Challenge>(() => ({
     ...emptyChallenge,
@@ -56,10 +64,9 @@ export const useStore = createGlobalState(() => {
   };
 
   const getOneChallenge = async (id: string) => {
-    return await db.doc(`challenges/${id}`).onSnapshot(doc => {
+    return db.doc(`challenges/${id}`).onSnapshot(doc => {
       // @ts-ignore
-      challenge.value = doc.data();
-      challenge.value.id = doc.id;
+      challenge.value = { ...doc.data(), id: doc.id };
     });
   };
 
@@ -73,13 +80,6 @@ export const useStore = createGlobalState(() => {
     ];
   };
 
-  const modalComponent = ref<any>(false);
-
-  const setModalComponent = (value: any) => {
-    console.log(value);
-    modalComponent.value = value;
-  };
-
   return {
     stepOne,
     stepTwo,
@@ -87,10 +87,10 @@ export const useStore = createGlobalState(() => {
     referrer,
     challenges,
     inviteLink,
-    modalComponent,
     challenge,
+    challengeLoggedInUser,
+    challengeOtherUser,
     getChallenges,
-    setModalComponent,
     updateChallenge,
     getOneChallenge,
   };

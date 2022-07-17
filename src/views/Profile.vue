@@ -46,8 +46,9 @@
   import UserSingle from '../assets/icons/user-single.svg';
   import NotificationIcon from '../assets/icons/bell.svg?component';
   import TaskIcon from '../assets/icons/task.svg?component';
+  import HeartIcon from '../assets/icons/heart.svg?component';
   import { useRouter } from 'vue-router';
-  import { useFirebase } from '../useFirebase';
+  import { useUser } from '../composables/useUser';
 
   export interface MenuItem {
     icon: String;
@@ -56,8 +57,9 @@
   }
 
   const { push } = useRouter();
-  const { userProfile } = useFirebase();
+  const { userProfile } = useUser();
 
+  // TODO translations
   const menuItems = ref<MenuItem[]>([
     {
       icon: UserSingle,
@@ -88,6 +90,11 @@
       icon: TaskIcon,
       title: 'Task Center',
       name: 'profile-task-center',
+    },
+    {
+      icon: HeartIcon,
+      title: 'Donate to appreciate authors',
+      name: 'donate',
     },
   ]);
 

@@ -143,24 +143,26 @@
   import { useStore } from '../composables/useStore';
   import { computed, onMounted, ref } from 'vue';
   import { useRouter } from 'vue-router';
-  import { Challenge, UserBasic } from '../types';
+  import { Challenge, Notification, UserBasic } from '../types';
   import dayjs from 'dayjs';
   import 'dayjs/locale/pl';
   import 'dayjs/locale/en-gb';
-  import { useFirebase } from '../useFirebase';
-  import { CHALLENGE_TYPES } from '../helpers/constants';
+  import { useFirebase } from '../composables/useFirebase';
+  import { CHALLENGE_TYPES, NOTIFICATION_CATEGORY, CHALLENGE_STATUS } from '../helpers/constants';
   import { useClipboard } from '@vueuse/core';
   import { useI18n } from 'vue-i18n';
-  import { CHALLENGE_STATUS } from '../helpers/constants';
+  import { useUser } from '../composables/useUser';
 
   dayjs.locale(navigator.language);
 
-  const { challenges, getOneChallenge, updateChallenge, challenge } = useStore();
+  const { challenges, getOneChallenge, updateChallenge, challenge, challengeOtherUser, challengeLoggedInUser } =
+    useStore();
   const { currentRoute } = useRouter();
   const loading = ref(false);
   const selectLoading = ref(false);
   const isModalOpen = ref(false);
-  const { userProfileBasic, updateDoc, getDoc } = useFirebase();
+  const { updateDoc, getDoc } = useFirebase();
+  const { userProfileBasic, updatePoints, addNotification } = useUser();
   const { copy, copied } = useClipboard();
   const { t } = useI18n();
 
@@ -331,17 +333,38 @@
       updatedStatus === CHALLENGE_STATUS.done.value &&
       fetchedChallenge.inviterSelectedWinner === fetchedChallenge.inviteeSelectedWinner
     ) {
-      // TODO update user points
-    } else {
-      console.log('first user choice');
-    }
+      await updatePoints(winner.id, challenge.value.points);
+      await updatePoints(loser.id, challenge.value.points / 2);
 
-    // handle UI
+      const notificationData: Partial<Notification> = {
+        name: `Challenge "${challenge.value.title}" finished.`,
+
+        description: `${userProfileBasic.value.id === winner.id ? 'You' : winner.name} won the challenge and got ${
+          challenge.value.points
+        } points. ${userProfileBasic.value.id === loser.id ? 'You' : loser.name} lost, but got ${
+          challenge.value.points / 2
+        }. Create new challenge to build good habits and give back to the community!`,
+        points: challenge.value.points,
+        category: NOTIFICATION_CATEGORY.challenge,
+      };
+      await addNotification(notificationData);
+      await addNotification(notificationData, challengeOtherUser.value.id);
+    } else {
+      await addNotification(
+        {
+          name: `${challengeLoggedInUser.value.name} selected the winner of "${challenge.value.title}" challenge`,
+          description: '',
+          points: 0,
+          category: NOTIFICATION_CATEGORY.challenge,
+        },
+        challengeOtherUser.value.id
+      );
+    }
 
     setTimeout(() => {
       hideModal();
       selectLoading.value = false;
-      // set timer for the above and then make it 2 seconds total or something.
+      // TODO set timer for the above and then make it 2 seconds total or something.
     }, 500);
   };
 </script>

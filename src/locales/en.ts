@@ -114,6 +114,10 @@ export default {
       sport: 'Sport',
       other: 'Other',
     },
+    confirmationTypes: {
+      manual: 'Manual',
+      automatic: 'Automatic',
+    },
     selectWinner: 'Select winner',
     changeAnswer: 'Change answer',
     chooseAfter: `You don't have to choose now. You can invite a friend later.`,

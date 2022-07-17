@@ -7,9 +7,9 @@
 <script setup lang="ts">
   import ActiveChallenge from './ActiveChallenge.vue';
   import { Challenge } from '../types';
-  import { useFirebase } from '../useFirebase';
+  import { useUser } from '../composables/useUser';
 
-  const { userProfileBasic } = useFirebase();
+  const { userProfileBasic } = useUser();
 
   defineProps<{
     challenges: Challenge[];

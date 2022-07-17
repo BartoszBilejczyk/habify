@@ -27,10 +27,10 @@
   import Menu from './components/Menu.vue';
   import { useRouter } from 'vue-router';
   import firebase from 'firebase';
-  import { computed, onMounted, ref, watch } from 'vue';
-  import { useFirebase } from './useFirebase';
+  import { computed, onMounted, ref } from 'vue';
+  import { useFirebase } from './composables/useFirebase';
+  import { useUser } from './composables/useUser';
   import { emptyUser } from './helpers/empty';
-  import { User } from './types';
   import { useDark } from '@vueuse/core';
 
   const noMenu = ['login', 'register', 'forgot-password', 'onboarding', 'auth-start', 'invite'];
@@ -38,7 +38,8 @@
 
   const isDark = useDark();
   const { currentRoute, push } = useRouter();
-  const { userProfile, firebaseUser, getDoc } = useFirebase();
+  const { firebaseUser, getDocRaw } = useFirebase();
+  const { userProfile } = useUser();
   const loading = ref(false);
 
   // @ts-ignore
@@ -74,7 +75,10 @@
           await push({ name: 'auth-start' });
         }
       } else {
-        userProfile.value = (await getDoc(`users/${user.uid}`)) as User;
+        (await getDocRaw(`users/${user.uid}`)).onSnapshot(doc => {
+          // @ts-ignore
+          userProfile.value = { ...doc.data(), id: doc.id };
+        });
         firebaseUser.value = user;
         loading.value = false;
       }
