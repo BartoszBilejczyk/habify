@@ -10,7 +10,7 @@
       'p-1 h-auto underline text-white-900 text-sm font-normal': textPrimary,
       'p-1 h-auto underline text-coral text-sm font-normal': textSecondary,
       'p-1 h-auto underline text-white text-sm font-normal': textWhite,
-      'h-8 px-4 font-normal': small,
+      'h-8 px-3 font-sm': small,
       'font-bold': !(small || textPrimary || textSecondary || textWhite),
       'px-8': !textPrimary && !textWhite && !textSecondary && !small,
       'text-normal': small || textPrimary || textSecondary || textWhite,

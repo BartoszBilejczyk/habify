@@ -1,8 +1,10 @@
 <template>
   <div class="flex flex-col items-center justify-center px-6">
-    <h2 class="text-2xl">Finish your profile</h2>
+    <h2 class="text-2xl">
+      {{ $t('onboarding.finishProfileHeading') }}
+    </h2>
     <div class="mt-6 text-center px-10">
-      Provide us with some details, so that your friends can easily identify you.
+      {{ $t('onboarding.finishProfileDescription') }}
     </div>
     <BaseInput class="w-full mt-6" v-model="name" placeholder="Name*" full required />
     <BaseInput class="w-full mt-3" v-model="surname" placeholder="Surname" full />
@@ -13,7 +15,9 @@
 important actions in the app
 (challenge invitation, challenge finish)."
     />
-    <BaseButton class="mt-8" primary full @click="updateProfile">Update profile</BaseButton>
+    <BaseButton class="mt-8" primary full @click="updateProfile">
+      {{ loading ? $t('common.loading') : $t('onboarding.finishProfile') }}
+    </BaseButton>
   </div>
 </template>
 
@@ -29,10 +33,16 @@ important actions in the app
   // add photo
   const fullName = computed(() => `${name.value}${surname.value ? ` ${surname.value}` : ''}`);
 
+  defineProps<{
+    loading: boolean;
+  }>();
+
   const emit = defineEmits(['updateProfile']);
 
   const updateProfile = () => {
-    emit('updateProfile', { name: fullName.value, allowEmails: allowEmails.value });
+    if (name.value) {
+      emit('updateProfile', { name: fullName.value, allowEmails: allowEmails.value });
+    }
   };
 </script>
 

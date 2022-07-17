@@ -35,10 +35,11 @@
   import { emptyChallenge } from '../helpers/empty';
   import { useI18n } from 'vue-i18n';
   import { useUser } from '../composables/useUser';
+  import { NOTIFICATION_CATEGORY } from '../helpers/constants';
 
   const challenge = ref<Challenge>({ ...emptyChallenge });
   const { updateDoc, getDoc } = useFirebase();
-  const { userProfile, userProfileBasic } = useUser();
+  const { userProfile, userProfileBasic, addNotification } = useUser();
   const { push, currentRoute } = useRouter();
   const { t } = useI18n();
 
@@ -80,6 +81,18 @@
     await updateDoc(`users/${userProfileBasic.value.id}`, {
       challenges: newChallengesArray,
     });
+
+    await addNotification(
+      {
+        name: `${userProfileBasic.value.name} accepted "${challenge.value.title}" challenge`,
+        description: '',
+        points: 0,
+        category: NOTIFICATION_CATEGORY.challenge.value,
+        challengeId: challenge.value.id,
+        actions: ['goToChallenge'],
+      },
+      challenge.value?.inviterId
+    );
 
     await push({ name: 'active-challenges' });
     // TODO move to proper challenge and send new notification

@@ -2,7 +2,7 @@
   <div class="w-full h-full flex flex-col flex-1">
     <BaseTopNav :title="$t('titles.challengeDetails')" back-route="active-challenges" />
     <div v-if="loading">{{ $t('common.loading') }}</div>
-    <div v-else-if="challenge" class="px-4 flex flex-col flex-1 pt-4 pb-8">
+    <div v-else-if="challenge?.id" class="px-4 flex flex-col flex-1 pt-4 pb-8">
       <h1 class="font-bold text-2xl">{{ challenge.title }}</h1>
       <div class="flex mt-3">
         <BaseLabel class="capitalize" :color="statusColor">{{ CHALLENGE_STATUS[challenge.status]?.label }}</BaseLabel>
@@ -40,6 +40,7 @@
       </div>
       <div
         v-if="
+          challenge.status !== CHALLENGE_STATUS.pending.value &&
           challenge.status !== CHALLENGE_STATUS.done.value &&
           (challenge.type === CHALLENGE_TYPES.oneTime.value ||
             (challenge.type === CHALLENGE_TYPES.duration.value && timeEnded)) &&
@@ -100,11 +101,21 @@
         <!-- TODO add a question mark wtf -->
         <BaseBox small class="mt-1.5 capitalize">{{ challenge.confirmationType }}</BaseBox>
       </div>
-      <div v-if="challenge.status === CHALLENGE_STATUS.pending.value" class="mt-4">
+      <div
+        v-if="challenge.status === CHALLENGE_STATUS.pending.value && userProfileBasic.id === challenge.inviterId"
+        class="mt-4"
+      >
         <BaseInfoToCopy>{{ challenge.inviteLink }}</BaseInfoToCopy>
-        <div class="flex justify-center mt-4 mb-10">
+        <div class="flex justify-center mt-6 mb-10">
           <BaseButton outline-white @click="share">{{ $t('common.shareLink') }}</BaseButton>
         </div>
+      </div>
+      <div
+        v-else-if="challenge.status === CHALLENGE_STATUS.pending.value && userProfileBasic.id === challenge.inviteeId"
+        class="mt-6 mb-10"
+      >
+        <BaseButton primary full @click="goToInvite">View invitation</BaseButton>
+        <BaseButton class="mt-6" text-secondary full>Refuse challenge</BaseButton>
       </div>
       <!-- add accepted date or start/end -->
       <div class="mt-6 text-xxs">{{ $t('challenge.createdOn') }}: {{ createdOn }}</div>
@@ -152,12 +163,13 @@
   import { useClipboard } from '@vueuse/core';
   import { useI18n } from 'vue-i18n';
   import { useUser } from '../composables/useUser';
+  import { emptyChallenge } from '../helpers/empty';
 
   dayjs.locale(navigator.language);
 
   const { challenges, getOneChallenge, updateChallenge, challenge, challengeOtherUser, challengeLoggedInUser } =
     useStore();
-  const { currentRoute } = useRouter();
+  const { currentRoute, push } = useRouter();
   const loading = ref(false);
   const selectLoading = ref(false);
   const isModalOpen = ref(false);
@@ -167,14 +179,9 @@
   const { t } = useI18n();
 
   onMounted(async () => {
-    if (challenge.value.id) {
-      return;
-    }
-
+    challenge.value = { ...emptyChallenge };
     loading.value = true;
-    console.log(currentRoute.value);
     await getOneChallenge(currentRoute.value.params.id as string);
-
     loading.value = false;
   });
 
@@ -208,8 +215,8 @@
 
   const personName = computed(() => {
     return userProfileBasic.value.id === challenge.value.inviterId
-      ? challenge.value.inviter?.name
-      : challenge.value.invitee?.name;
+      ? challenge.value.invitee?.name
+      : challenge.value.inviter?.name;
   });
 
   const getInitials = (name: string) => {
@@ -329,9 +336,12 @@
 
     updateChallenge(fetchedChallenge);
 
+    console.log(updatedStatus);
+    fetchedChallenge.inviterSelectedWinner === fetchedChallenge.inviteeSelectedWinner;
+
     if (
       updatedStatus === CHALLENGE_STATUS.done.value &&
-      fetchedChallenge.inviterSelectedWinner === fetchedChallenge.inviteeSelectedWinner
+      fetchedChallenge.inviterSelectedWinner?.id === fetchedChallenge.inviteeSelectedWinner?.id
     ) {
       await updatePoints(winner.id, challenge.value.points);
       await updatePoints(loser.id, challenge.value.points / 2);
@@ -343,10 +353,14 @@
           challenge.value.points
         } points. ${userProfileBasic.value.id === loser.id ? 'You' : loser.name} lost, but got ${
           challenge.value.points / 2
-        }. Create new challenge to build good habits and give back to the community!`,
+        } points. Create new challenge to build good habits and give back to the community!`,
         points: challenge.value.points,
-        category: NOTIFICATION_CATEGORY.challenge,
+        category: NOTIFICATION_CATEGORY.challenge.value,
+        challengeId: challenge.value.id,
+        actions: ['createNewChallenge'],
       };
+
+      console.log(notificationData);
       await addNotification(notificationData);
       await addNotification(notificationData, challengeOtherUser.value.id);
     } else {
@@ -355,7 +369,9 @@
           name: `${challengeLoggedInUser.value.name} selected the winner of "${challenge.value.title}" challenge`,
           description: '',
           points: 0,
-          category: NOTIFICATION_CATEGORY.challenge,
+          category: NOTIFICATION_CATEGORY.challenge.value,
+          challengeId: challenge.value.id,
+          actions: [],
         },
         challengeOtherUser.value.id
       );
@@ -366,5 +382,9 @@
       selectLoading.value = false;
       // TODO set timer for the above and then make it 2 seconds total or something.
     }, 500);
+  };
+
+  const goToInvite = () => {
+    push({ name: 'invite', query: { code: challenge.value.id } });
   };
 </script>

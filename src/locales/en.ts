@@ -19,6 +19,7 @@ export default {
     confirm: 'Confirm',
     category: 'Category',
     seeMore: 'See more',
+    seeAll: 'See all',
     start: 'Start',
   },
   onboarding: {
@@ -26,6 +27,9 @@ export default {
     next: 'Next',
     slideToFinish: 'Slide to finish',
     welcome: 'Welcome to Habbi',
+    finishProfile: 'Finish Profile',
+    finishProfileHeading: 'Finish your profile',
+    finishProfileDescription: 'Provide us with some details, so that your friends can easily identify you.',
   },
   titles: {
     dashboard: 'Dashboard',
@@ -37,7 +41,7 @@ export default {
     confirmDetails: 'Confirm details',
     challengeExistingFriends: 'Challenge existing friends',
     chooseLater: 'Choose later',
-    activeChallenges: 'Active Challenges',
+    activeChallenges: 'Challenges',
     challengeDetails: 'Challenge details',
     challengeExamples: 'Challenge examples',
     charities: 'Charities',
@@ -48,9 +52,10 @@ export default {
     profile: 'Profile',
     friends: 'Friends',
     invite: 'Invite Friends',
-    notifications: 'Notifications',
+    notifications: 'Notification settings',
     settings: 'Settings',
     taskCenter: 'Task Center',
+    donate: 'Donate',
   },
   auth: {
     loginTitle: 'Sign in to Habbi',
@@ -144,5 +149,13 @@ export default {
   },
   friends: {
     addFirstFriend: ['Invite first friend.', 'Create challenges together.'],
+  },
+  notifications: {
+    heading: 'Notifications',
+    categories: {
+      friends: 'Friends',
+      challenge: 'Challenge',
+      other: 'Cther',
+    },
   },
 };

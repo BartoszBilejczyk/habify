@@ -18,7 +18,6 @@
 
 <script setup lang="ts">
   import BaseSection from './BaseSection.vue';
-  import BaseButton from './BaseButton.vue';
   import { useStore } from '../composables/useStore';
   import { UserBasic } from '../types';
 

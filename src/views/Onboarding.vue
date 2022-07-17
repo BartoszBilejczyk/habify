@@ -1,7 +1,7 @@
 <template>
   <div class="w-full flex-1 flex flex-col">
     <div class="flex-1 flex flex-col items-center justify-center">
-      <OnboardingFinishProfile v-if="step === 1" @update-profile="updateProfile" />
+      <OnboardingFinishProfile v-if="step === 1" @update-profile="updateProfile" :loading="finishProfileLoading" />
       <OnboardingBase
         v-if="step === 2"
         :step="step"
@@ -64,12 +64,14 @@
   import girlChinupAnimation from '../assets/lottie/girl-chinup-animation.json';
   import manPhoneAnimation from '../assets/lottie/man-phone-animation.json';
   import { useUser } from '../composables/useUser';
+  import { NOTIFICATION_CATEGORY } from '../helpers/constants';
 
   const { firebaseUser, updateDoc, getDoc } = useFirebase();
-  const { userProfile } = useUser();
+  const { userProfile, addNotification } = useUser();
   const { push, replace, currentRoute } = useRouter();
 
   const loading = ref(false);
+  const finishProfileLoading = ref(false);
   const step = ref(1);
   const { referrer } = useStore();
 
@@ -127,6 +129,7 @@
     if (!firebaseUser.value) {
       return;
     }
+    finishProfileLoading.value = true;
 
     await firebaseUser.value.updateProfile({ displayName: name }).catch(err => console.error(err));
 
@@ -142,6 +145,17 @@
           },
         ],
       });
+
+      await addNotification(
+        {
+          name: `${name} accepted your invitation to Habbi.`,
+          description: '',
+          points: 0,
+          category: NOTIFICATION_CATEGORY.friends.value,
+          challengeId: '',
+        },
+        referrer.value?.id
+      );
     } else {
       await updateDoc(`users/${firebaseUser.value?.uid}`, { name, allowEmails, profileFinished: true });
     }
@@ -164,6 +178,7 @@
       ...{ name, allowEmails, profileFinished: true },
     };
 
+    finishProfileLoading.value = false;
     handleNext();
   };
 </script>

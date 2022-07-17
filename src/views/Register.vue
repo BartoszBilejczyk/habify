@@ -33,6 +33,7 @@
   import { emptyUser } from '../helpers/empty';
   import { User } from '../types';
   import { useStore } from '../composables/useStore';
+  import { useUser } from '../composables/useUser';
 
   const email = ref('');
   const password = ref('');
@@ -45,6 +46,7 @@
   const { push, currentRoute } = useRouter();
   const { setDoc, getCollectionFirstItemWhere, updateDoc } = useFirebase();
   const { referrer } = useStore();
+  const { userProfile } = useUser();
 
   onMounted(async () => {
     const referralCode = currentRoute.value.query.code;
@@ -85,17 +87,19 @@
         };
 
         await setDoc(`users/${user?.uid}`, newUser);
+        userProfile.value = { ...newUser };
         await setDoc(`referralCodes/${userNewReferralCode}`, {
           referralCode: userNewReferralCode,
           userId: newUser.id,
           userEmail: newUser.email,
         });
       })
-      .then(() => {
-        push({ name: 'onboarding' });
+      .then(async () => {
+        await push({ name: 'onboarding' });
       })
       .catch(error => {
         console.error(error);
+        alert(error.message);
         errorCode.value = error.code;
         errorMessage.value = error.message;
       })

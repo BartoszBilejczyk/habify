@@ -34,14 +34,15 @@
   import NewChallengeMenu from '../components/NewChallengeMenu.vue';
   import NewChallengeButtons from '../components/NewChallengeButtons.vue';
   import { useFirebase } from '../composables/useFirebase';
-  import { Challenge, ChallengeBasic } from '../types';
+  import { Challenge, ChallengeBasic, Notification } from '../types';
   import { useStore } from '../composables/useStore';
   import { useRouter } from 'vue-router';
   import { useUser } from '../composables/useUser';
+  import { NOTIFICATION_ACTION, NOTIFICATION_CATEGORY } from '../helpers/constants';
 
   const { firebaseUser, setDoc, updateDoc } = useFirebase();
-  const { userProfile, userProfileBasic } = useUser();
-  const { newChallenge, inviteLink } = useStore();
+  const { userProfile, userProfileBasic, addNotification } = useUser();
+  const { newChallenge, inviteLink, stepTwo } = useStore();
 
   const friends = computed(() => userProfile.value.friends);
   const hasFriends = computed(() => Boolean(friends.value.length));
@@ -85,6 +86,25 @@
     await updateDoc(`users/${userProfileBasic.value.id}`, {
       challenges: newChallengesArray,
     });
+
+    if (stepTwo.value.inviteeId) {
+      console.log(stepTwo.value.inviteeId);
+      const notificationData: Partial<Notification> = {
+        name: `You have been challenged by ${stepTwo.value.invitee?.name}.`,
+        // TODO update
+        description: `Challenge is ${challenge.title} and bet is ${challenge.betDetails}.`,
+        points: challenge.points,
+        category: NOTIFICATION_CATEGORY.challenge.value,
+        challengeId: challenge.id,
+        actions: [
+          NOTIFICATION_ACTION.showInvite,
+          NOTIFICATION_ACTION.acceptChallenge,
+          NOTIFICATION_ACTION.refuseChallenge,
+        ],
+      };
+
+      await addNotification(notificationData, stepTwo.value.inviteeId);
+    }
 
     done.value = true;
 

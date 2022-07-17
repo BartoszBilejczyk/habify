@@ -1,16 +1,16 @@
 <template>
   <div class="w-full h-full flex flex-col flex-1">
     <BaseTopNav :title="$t('titles.friends')" back-route="home">
-      <BaseLabel color="primary" @click="handleAddNewFriend">
-        <PlusIcon class="text-primary basis-3 w-3 h-3 mr-1.5" />
+      <BaseLabel color="coral" @click="handleAddNewFriend">
+        <PlusIcon class="text-coral-800 basis-3 w-3 h-3 mr-1.5" />
         {{ $t('common.invite') }}
       </BaseLabel>
     </BaseTopNav>
-    <div class="px-4 flex flex-col flex-1 pt-4 pb-8">
+    <div class="px-4 flex flex-col flex-1 mt-4 pb-8">
       <div v-if="loading">{{ $t('common.loading') }}</div>
       <div
         v-else-if="!userProfile.friends?.length"
-        class="px-5 py-4 mt-4 bg-coral-800 text-white flex justify-between items-center rounded-lg shadow-lg"
+        class="px-5 py-4 mt-2 bg-coral-800 text-white flex justify-between items-center rounded-lg shadow-lg"
       >
         <div class="text-lg">
           <span class="font-bold">{{ $t('friends.addFirstFriend.0') }}</span>
@@ -39,7 +39,7 @@
               {{ friend.name }}
             </div>
           </div>
-          <BaseButton outline small>{{ $t('common.challenge') }}</BaseButton>
+          <BaseButton outline small @click="handleStartNewChallenge(friend)">{{ $t('common.challenge') }}</BaseButton>
         </div>
       </div>
     </div>
@@ -55,7 +55,10 @@
   import PlusIcon from '../assets/icons/plus.svg?component';
   import ChevronRight from '../assets/icons/chevron-right.svg?component';
   import { ref } from 'vue';
+  import { useStore } from '../composables/useStore';
+  import { emptyUserBasic } from '../helpers/empty';
 
+  const { stepTwo } = useStore();
   const { userProfile } = useUser();
   const { push } = useRouter();
 
@@ -69,5 +72,16 @@
 
   const handleAddNewFriend = async () => {
     await push({ name: 'profile-invite' });
+  };
+
+  const handleStartNewChallenge = (friend: { id: string; name: string }) => {
+    stepTwo.value = {
+      invitee: {
+        ...emptyUserBasic,
+        ...friend,
+      },
+      inviteeId: friend.id,
+    };
+    push({ name: 'new-challenge' });
   };
 </script>

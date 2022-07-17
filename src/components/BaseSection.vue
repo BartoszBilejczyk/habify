@@ -3,6 +3,7 @@
     <div class="flex justify-between items-center my-4">
       <h2 class="text-lg text-white-600 dark:text-white">{{ title }}</h2>
       <BaseButton text-secondary @click="handleClick" v-if="seeMore">{{ $t('common.seeMore') }}</BaseButton>
+      <BaseButton text-secondary @click="handleClick" v-if="seeAll">{{ $t('common.seeAll') }}</BaseButton>
     </div>
     <slot></slot>
   </div>
@@ -16,6 +17,7 @@
     title: string;
     routeName?: string;
     seeMore?: boolean;
+    seeAll?: boolean;
   }>();
 
   const { push } = useRouter();

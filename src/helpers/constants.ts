@@ -6,6 +6,7 @@ import {
   CharityCategory,
   NotificationCategory,
   NotificationStatus,
+  NotificationAction,
   TaskCategory,
   TaskStatus,
 } from '../types';
@@ -105,8 +106,26 @@ export const NOTIFICATION_STATUS: Record<NotificationStatus, NotificationStatus>
   dismissed: 'dismissed',
 };
 
-export const NOTIFICATION_CATEGORY: Record<NotificationCategory, NotificationCategory> = {
-  friends: 'friends',
-  challenge: 'challenge',
+export const NOTIFICATION_CATEGORY: Record<NotificationCategory, Constant<NotificationCategory>> = {
+  friends: {
+    label: i18n.global.t('notifications.categories.friends'),
+    value: 'friends',
+  },
+  challenge: {
+    label: i18n.global.t('notifications.categories.challenge'),
+    value: 'challenge',
+  },
+  other: {
+    label: i18n.global.t('notifications.categories.other'),
+    value: 'other',
+  },
+};
+
+export const NOTIFICATION_ACTION: Record<NotificationAction, NotificationAction> = {
+  acceptChallenge: 'acceptChallenge',
+  refuseChallenge: 'refuseChallenge',
+  showInvite: 'showInvite',
   other: 'other',
+  createNewChallenge: 'createNewChallenge',
+  goToChallenge: 'goToChallenge',
 };

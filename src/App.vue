@@ -32,6 +32,7 @@
   import { useUser } from './composables/useUser';
   import { emptyUser } from './helpers/empty';
   import { useDark } from '@vueuse/core';
+  import { useStore } from './composables/useStore';
 
   const noMenu = ['login', 'register', 'forgot-password', 'onboarding', 'auth-start', 'invite'];
   const noAuthRoutes = ['login', 'register', 'forgot-password', 'auth-start', 'invite'];
@@ -40,6 +41,7 @@
   const { currentRoute, push } = useRouter();
   const { firebaseUser, getDocRaw } = useFirebase();
   const { userProfile } = useUser();
+  const { getChallenges } = useStore();
   const loading = ref(false);
 
   // @ts-ignore
@@ -79,6 +81,7 @@
           // @ts-ignore
           userProfile.value = { ...doc.data(), id: doc.id };
         });
+        await getChallenges();
         firebaseUser.value = user;
         loading.value = false;
       }

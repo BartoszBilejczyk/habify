@@ -23,6 +23,13 @@ export const useUser = createGlobalState(() => {
     image: userProfile.value.image,
   }));
 
+  // TODO
+  const sortedNotifications = computed(() => userProfile.value.notifications);
+
+  const activeNotificationsCount = computed(
+    () => userProfile.value.notifications.filter(n => n.status === NOTIFICATION_STATUS.active).length
+  );
+
   const updatePoints = async (userId: string, points: number) => {
     // TODO move to backend
     const userToUpdate = (await getDoc(`users/${userId}`)) as User;
@@ -32,21 +39,22 @@ export const useUser = createGlobalState(() => {
     });
   };
 
-  const addNotification = async ({ name, description, points, category }: Partial<Notification>, userId = '') => {
+  const addNotification = async (data: Partial<Notification>, userId = '') => {
+    console.log(userId);
+    console.log(`users/${userId ? userId : userProfile.value.id}`);
     await updateDoc(`users/${userId ? userId : userProfile.value.id}`, {
       notifications: firebase.firestore.FieldValue.arrayUnion(
         ...[
           {
             id: nanoid(),
-            name,
-            description,
-            points,
-            category,
+            ...data,
             status: NOTIFICATION_STATUS.active,
           },
         ]
       ),
     });
+
+    console.log('afterAwait');
   };
 
   // TODO create update notification function
@@ -79,6 +87,8 @@ export const useUser = createGlobalState(() => {
     userProfile,
     userProfileBasic,
     updatePoints,
+    activeNotificationsCount,
+    sortedNotifications,
     addNotification,
     addTask,
   };

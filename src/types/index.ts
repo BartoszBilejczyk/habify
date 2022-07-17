@@ -100,12 +100,21 @@ export interface Task {
 
 export type NotificationStatus = 'active' | 'seen' | 'dismissed';
 export type NotificationCategory = 'friends' | 'challenge' | 'other'; // TODO
+export type NotificationAction =
+  | 'acceptChallenge'
+  | 'refuseChallenge'
+  | 'showInvite'
+  | 'createNewChallenge'
+  | 'goToChallenge'
+  | 'other'; // TODO
 
 export interface Notification {
   id: string;
   name: string;
   description: string;
   points: number;
+  challengeId: string;
+  actions: NotificationAction[];
   category: NotificationCategory;
   status: NotificationStatus;
 }

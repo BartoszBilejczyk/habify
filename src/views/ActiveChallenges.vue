@@ -44,9 +44,7 @@
   const loading = ref(false);
 
   onMounted(async () => {
-    if (!challenges.value.length) {
-      loading.value = true;
-    }
+    loading.value = true;
 
     await getChallenges();
 

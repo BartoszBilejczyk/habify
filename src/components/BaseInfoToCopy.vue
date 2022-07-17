@@ -1,6 +1,6 @@
 <template>
   <div
-    class="border border-2 border-dashed rounded-3xl px-8 py-4 text-center font-bold text-sm"
+    class="border border-2 border-dashed rounded-2xl px-8 py-4 text-center font-bold text-sm"
     :class="
       onDark
         ? 'border-white-10 dark:border-white-30 text-white-10 dark:text-white-10'
