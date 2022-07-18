@@ -1,0 +1,4 @@
+[[headers]]
+  for = "/app.webmanifest"
+  [headers.values]
+    Content-Type = "application/manifest+json"

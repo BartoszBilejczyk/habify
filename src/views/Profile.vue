@@ -72,6 +72,11 @@
       name: 'profile-invite',
     },
     {
+      icon: UserMultiple,
+      title: 'Invite Friends',
+      name: 'profile-invite',
+    },
+    {
       icon: ShieldSearch,
       title: 'Challenge History',
       name: 'profile-challenge-history',

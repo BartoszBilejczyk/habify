@@ -48,17 +48,18 @@
   const showMenu = computed(() => !loading.value && !noMenu.includes(currentRoute.value.name));
 
   onMounted(() => {
-    self.addEventListener('fetch', function (event) {
-      // @ts-ignore
-      event.respondWith(
-        // @ts-ignore
-        fetch(event.request).then(function (networkResponse) {
-          return networkResponse;
-        })
-      );
-    });
-
     loading.value = true;
+
+    if ('serviceWorker' in navigator) {
+      console.log('in');
+      caches.keys().then(function (cacheNames) {
+        console.log(caches, caches.keys());
+        cacheNames.forEach(function (cacheName) {
+          console.log(cacheName);
+          caches.delete(cacheName);
+        });
+      });
+    }
 
     firebase.auth().onAuthStateChanged(async user => {
       if (!user?.email) {

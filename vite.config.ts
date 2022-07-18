@@ -10,17 +10,19 @@ export default defineConfig({
     alias: [
       {
         find: '@',
-        replacement: path.resolve(__dirname, 'src')
-      }
-    ]
+        replacement: path.resolve(__dirname, 'src'),
+      },
+    ],
   },
   plugins: [
     vue(),
-    VitePWA({}),
+    VitePWA({
+      registerType: 'autoUpdate',
+    }),
     svgLoader({
       svgoConfig: {
-        plugins: ['removeDimensions', 'prefixIds']
-      }
-    })
-  ]
+        plugins: ['removeDimensions', 'prefixIds'],
+      },
+    }),
+  ],
 });
