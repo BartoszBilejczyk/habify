@@ -47,17 +47,17 @@ export const useStore = createGlobalState(() => {
 
   const referrer = ref<User>({ ...emptyUser });
 
-  const getChallenges = async () => {
+  const getChallenges = async (overrideId = '') => {
     // TODO is there better way?
     const inviterChallenges = await getCollectionItemsWhere('challenges', [
       'inviterId',
       '==',
-      userProfileBasic.value.id,
+      userProfileBasic.value.id || overrideId,
     ]);
     const inviteeChallenges = await getCollectionItemsWhere('challenges', [
       'inviteeId',
       '==',
-      userProfileBasic.value.id,
+      userProfileBasic.value.id || overrideId,
     ]);
 
     challenges.value = [...inviterChallenges, ...inviteeChallenges].sort((a, b) => b.updatedOn - a.updatedOn);

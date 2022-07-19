@@ -3,6 +3,7 @@ export interface User {
   email: string | null | undefined;
   phone: string | null | undefined;
   name: string | null | undefined;
+  nickname: string | null | undefined;
   points: number;
   image: string | null | undefined;
   friends: Friend[];
@@ -32,6 +33,7 @@ export interface Friend {
   email: string;
   phone: string;
   name: string;
+  nickname: string;
   addedDate: string;
 }
 

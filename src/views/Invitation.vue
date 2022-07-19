@@ -1,6 +1,6 @@
 <template>
   <div v-if="challenge.id" class="w-full h-full flex flex-col flex-1">
-    <BaseTopNav :title="$t('titles.new')" back-route="home" background icon="null" />
+    <BaseTopNav :title="$t('titles.new')" back-route="home" background :icon="Boolean(userProfile.value?.id)" />
     <div class="px-4 py-2 w-full h-full flex-1 flex flex-col justify-center bg-primary dark:bg-dark-900 text-white">
       <h1 class="text-2xl text-center text-white">{{ $t('invite.challengedBy') }}{{ challenge.inviter?.name }}!</h1>
       <div class="mt-8 text-sm text-center">
@@ -57,7 +57,7 @@
   });
 
   const handleAccept = async () => {
-    // TODO handle login on modal
+    // TODO handle login/register on modal for users who are not logged in
 
     done.value = true;
 
@@ -94,7 +94,6 @@
       challenge.value?.inviterId
     );
 
-    await push({ name: 'active-challenges' });
-    // TODO move to proper challenge and send new notification
+    await push({ name: 'challenge', params: { id: challenge.value.id } });
   };
 </script>

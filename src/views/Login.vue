@@ -51,9 +51,9 @@
         });
 
         if (!userProfile.value.profileFinished || !userProfile.value.onboarded) {
-          push({ name: 'onboarding', query: { step: '1' } });
+          await push({ name: 'onboarding', query: { step: '1' } });
         } else {
-          push({ name: 'home' });
+          await push({ name: 'home' });
         }
       })
       .finally(() => {

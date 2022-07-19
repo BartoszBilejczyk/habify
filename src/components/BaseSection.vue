@@ -2,8 +2,13 @@
   <div class="mb-6">
     <div class="flex justify-between items-center my-4">
       <h2 class="text-lg text-white-600 dark:text-white">{{ title }}</h2>
-      <BaseButton text-secondary @click="handleClick" v-if="seeMore">{{ $t('common.seeMore') }}</BaseButton>
-      <BaseButton text-secondary @click="handleClick" v-if="seeAll">{{ $t('common.seeAll') }}</BaseButton>
+      <div class="flex items-center">
+        <BaseButton text-secondary @click="handleClick" v-if="seeMore">{{ $t('common.seeMore') }}</BaseButton>
+        <BaseButton text-secondary @click="handleClick" v-if="seeAll">{{ $t('common.seeAll') }}</BaseButton>
+        <div class="ml-3" v-if="$slots.additional">
+          <slot name="additional"></slot>
+        </div>
+      </div>
     </div>
     <slot></slot>
   </div>
@@ -22,7 +27,7 @@
 
   const { push } = useRouter();
 
-  const handleClick = () => {
-    push({ name: props.routeName });
+  const handleClick = async () => {
+    await push({ name: props.routeName });
   };
 </script>

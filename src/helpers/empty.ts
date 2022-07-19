@@ -16,6 +16,7 @@ export const emptyUser: User = {
   email: '',
   phone: '',
   name: '',
+  nickname: '',
   points: 0,
   image: '',
   friends: [],
@@ -45,6 +46,7 @@ export const emptyFriend: Friend = {
   email: '',
   phone: '',
   name: '',
+  nickname: '',
   addedDate: '',
 };
 

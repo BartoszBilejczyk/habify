@@ -26,8 +26,12 @@ export const useUser = createGlobalState(() => {
   // TODO
   const sortedNotifications = computed(() => userProfile.value.notifications);
 
-  const activeNotifications = computed(() =>
-    userProfile.value.notifications.filter(n => n.status === NOTIFICATION_STATUS.active)
+  const visibleNotifications = computed(() =>
+    userProfile.value.notifications.filter(n => n.status !== NOTIFICATION_STATUS.dismissed)
+  );
+
+  const activeNotificationsLength = computed(
+    () => userProfile.value.notifications.filter(n => n.status === NOTIFICATION_STATUS.active).length
   );
 
   const updatePoints = async (userId: string, points: number) => {
@@ -73,6 +77,15 @@ export const useUser = createGlobalState(() => {
     });
   };
 
+  const markNotificationsAsSeen = async () => {
+    await updateDoc(`users/${userProfile.value.id}`, {
+      notifications: userProfile.value.notifications.map(n => ({
+        ...n,
+        status: n.status !== NOTIFICATION_STATUS.dismissed ? NOTIFICATION_STATUS.seen : NOTIFICATION_STATUS.dismissed,
+      })),
+    });
+  };
+
   // TODO create update notification function
 
   const addTask = async (
@@ -103,10 +116,12 @@ export const useUser = createGlobalState(() => {
     userProfile,
     userProfileBasic,
     updatePoints,
-    activeNotifications,
+    visibleNotifications,
     sortedNotifications,
     markNotificationAsDimissed,
+    markNotificationsAsSeen,
     addNotification,
     addTask,
+    activeNotificationsLength,
   };
 });

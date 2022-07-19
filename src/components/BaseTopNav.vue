@@ -6,9 +6,9 @@
         :class="{ 'justify-between': icon, 'justify-end': !icon }"
       >
         <span v-if="icon" class="">
-          <BackIcon v-if="icon === 'back'" class="w-3.5 h-3.5" @click="handleBack" />
-          <CloseIcon v-if="icon === 'close'" class="w-5 h-5" />
-          <MenuIcon v-if="icon === 'menu'" class="w-5 h-5" />
+          <BackIcon v-if="icon === 'back'" class="text-white-300 dark:text-white-20 w-3.5 h-3.5" @click="handleBack" />
+          <CloseIcon v-if="icon === 'close'" class="text-white-300 dark:text-white-20 w-5 h-5" />
+          <MenuIcon v-if="icon === 'menu'" class="text-white-300 dark:text-white-20 w-5 h-5" />
         </span>
         <span
           class="font-bold absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-center"
@@ -26,10 +26,11 @@
 
 <script setup lang="ts">
   import { PropType } from 'vue';
+  import { useRouter } from 'vue-router';
+
   import BackIcon from '../assets/icons/chevron-left.svg?component';
   import CloseIcon from '../assets/icons/close.svg?component';
   import MenuIcon from '../assets/icons/menu.svg?component';
-  import { useRouter } from 'vue-router';
 
   type TopNavIcon = 'close' | 'back' | 'menu';
 
@@ -54,8 +55,8 @@
     },
   });
 
-  const handleBack = () => {
-    push({ name: props.backRoute });
+  const handleBack = async () => {
+    await push({ name: props.backRoute });
   };
 </script>
 

@@ -21,6 +21,7 @@ export default {
     seeMore: 'See more',
     seeAll: 'See all',
     start: 'Start',
+    create: 'Create',
   },
   onboarding: {
     skip: 'skip',
@@ -79,6 +80,7 @@ export default {
   },
   home: {
     createFirstChallenge: 'Create your first challenge.',
+    createAnotherChallenge: 'Create another challenge.',
     buildHabits: 'Build good habits.',
   },
   invite: {
@@ -152,6 +154,7 @@ export default {
   },
   notifications: {
     heading: 'Notifications',
+    noUnread: 'No unread notifications',
     categories: {
       friends: 'Friends',
       challenge: 'Challenge',

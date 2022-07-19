@@ -5,6 +5,7 @@ import './index.css';
 import { i18n } from './i18n';
 import { useFirebase } from './composables/useFirebase';
 import Vue3Lottie from 'vue3-lottie';
+import 'vue3-lottie/dist/style.css';
 
 // vue use
 // import { OnClickOutside } from '@vueuse/components'

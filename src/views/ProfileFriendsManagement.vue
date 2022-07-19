@@ -1,9 +1,7 @@
 <template>
   <div class="w-full h-full flex flex-col flex-1">
     <BaseTopNav :title="$t('titles.friends')" back-route="profile" />
-    <div v-for="friend in userProfile.friends">
-      {{ friend.name }}
-    </div>
+    <div v-for="friend in userProfile.friends">{{ friend.name }} {{ friend.nickname && `(${friend.nickname})` }}</div>
   </div>
 </template>
 

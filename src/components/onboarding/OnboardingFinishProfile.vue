@@ -7,6 +7,8 @@
       {{ $t('onboarding.finishProfileDescription') }}
     </div>
     <BaseInput class="w-full mt-6" v-model="name" placeholder="Name*" full required />
+    ( add ? why we need nickname)
+    <BaseInput class="w-full mt-6" v-model="nickname" placeholder="Nickname*" full required />
     <BaseInput class="w-full mt-3" v-model="surname" placeholder="Surname" full />
     <BaseCheckbox
       class="mt-5"
@@ -28,6 +30,7 @@ important actions in the app
   import BaseButton from '../BaseButton.vue';
   import BaseCheckbox from '../BaseCheckbox.vue';
   const name = ref('');
+  const nickname = ref('');
   const surname = ref('');
   const allowEmails = ref(false);
   // add photo
@@ -41,7 +44,7 @@ important actions in the app
 
   const updateProfile = () => {
     if (name.value) {
-      emit('updateProfile', { name: fullName.value, allowEmails: allowEmails.value });
+      emit('updateProfile', { name: fullName.value, nickname: nickname.value, allowEmails: allowEmails.value });
     }
   };
 </script>

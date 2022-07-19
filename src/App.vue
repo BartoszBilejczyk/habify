@@ -41,8 +41,8 @@
   const { currentRoute, push } = useRouter();
   const { firebaseUser, getDocRaw } = useFirebase();
   const { userProfile } = useUser();
+  const loading = ref(true);
   const { getChallenges } = useStore();
-  const loading = ref(false);
 
   // @ts-ignore
   const showMenu = computed(() => !loading.value && !noMenu.includes(currentRoute.value.name));
@@ -62,29 +62,28 @@
     }
 
     firebase.auth().onAuthStateChanged(async user => {
-      if (!user?.email) {
-        userProfile.value = { ...emptyUser };
-        firebaseUser.value = null;
-        loading.value = false;
-
-        if (window.location.pathname === '/') {
-          await push({ name: 'auth-start' });
-        }
-
-        if (
-          window.location.pathname !== '/' &&
-          !noAuthRoutes.some(routeName => window.location.pathname.includes(routeName))
-        ) {
-          await push({ name: 'auth-start' });
-        }
-      } else {
-        (await getDocRaw(`users/${user.uid}`)).onSnapshot(doc => {
+      if (user?.email) {
+        (await getDocRaw(`users/${user.uid}`)).onSnapshot(async doc => {
           // @ts-ignore
           userProfile.value = { ...doc.data(), id: doc.id };
+          await getChallenges(doc.id);
         });
-        await getChallenges();
         firebaseUser.value = user;
         loading.value = false;
+
+        return;
+      }
+
+      userProfile.value = { ...emptyUser };
+      firebaseUser.value = null;
+      loading.value = false;
+
+      if (
+        window.location.pathname === '/' ||
+        (window.location.pathname !== '/' &&
+          !noAuthRoutes.some(routeName => window.location.pathname.includes(routeName)))
+      ) {
+        await push({ name: 'auth-start' });
       }
     });
   });

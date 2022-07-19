@@ -8,18 +8,23 @@
     </BaseTopNav>
     <div class="px-4 flex flex-col flex-1 pt-4 pb-8">
       <div v-if="loading">{{ $t('common.loading') }}</div>
+      <ActiveChallenge v-for="challenge in challenges.slice(0, 2)" :challenge="challenge" :user="userProfileBasic" />
       <div
-        v-else-if="!challenges.length"
-        class="px-5 py-4 mt-4 bg-primary text-white flex justify-between items-center rounded-lg shadow-lg"
+        v-if="!loading"
+        class="px-3 py-2 mb-4 bg-primary text-white flex justify-between items-center rounded-lg shadow-lg"
       >
-        <div class="text-lg">
-          <span class="font-bold">{{ $t('home.createFirstChallenge') }}</span>
+        <div>
+          <span class="font-bold">
+            {{ challenges.length ? $t('home.createAnotherChallenge') : $t('home.createFirstChallenge') }}
+          </span>
           <br />
           <span>{{ $t('home.buildHabits') }}</span>
         </div>
-        <BaseButton outline-white small @click="handleStartNewChallenge">{{ $t('common.start') }}</BaseButton>
+        <BaseButton outline-white small @click="handleStartNewChallenge">
+          {{ challenges.length ? $t('common.create') : $t('common.start') }}
+        </BaseButton>
       </div>
-      <ActiveChallengeList :challenges="challenges" />
+      <ActiveChallenge v-for="challenge in challenges.slice(2)" :challenge="challenge" :user="userProfileBasic" />
     </div>
   </div>
 </template>
@@ -31,7 +36,7 @@
   import BaseLabel from '../components/BaseLabel.vue';
   import BaseTopNav from '../components/BaseTopNav.vue';
   import BaseButton from '../components/BaseButton.vue';
-  import ActiveChallengeList from '../components/ActiveChallengeList.vue';
+  import ActiveChallenge from '../components/ActiveChallenge.vue';
   import { useStore } from '../composables/useStore';
   import { onMounted, ref } from 'vue';
   import { useFirebase } from '../composables/useFirebase';
@@ -40,7 +45,7 @@
   const { challenges, getChallenges } = useStore();
   const { push } = useRouter();
   const { getCollectionItemsWhere } = useFirebase();
-  const { userProfile } = useUser();
+  const { userProfileBasic } = useUser();
   const loading = ref(false);
 
   onMounted(async () => {
@@ -51,7 +56,7 @@
     loading.value = false;
   });
 
-  const handleStartNewChallenge = () => {
-    push({ name: 'new-challenge' });
+  const handleStartNewChallenge = async () => {
+    await push({ name: 'new-challenge' });
   };
 </script>

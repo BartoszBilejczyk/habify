@@ -68,8 +68,8 @@
 
   const active = computed(() => currentRoute.value.name);
 
-  const handleRouteChange = (name: RouteName) => {
-    push({ name });
+  const handleRouteChange = async (name: RouteName) => {
+    await push({ name });
   };
 </script>
 

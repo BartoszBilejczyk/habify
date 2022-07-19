@@ -1,15 +1,15 @@
 <template>
   <div
-    class="flex flex-col flex-1 relative pt-32 px-4 justify-center"
-    :class="isStandalone ? 'pt-32 pb-24' : 'pt-24 pb-16'"
+    class="flex flex-col flex-1 relative px-4 justify-center"
+    :class="{ 'pt-32 pb-24 ': isStandalone, 'pb-16': !isStandalone }"
   >
-    <LottieAnimation
-      :animation-data="confettiAnimation"
-      :height="lottieHeight"
-      v-if="!showPaperPlane"
-      class="absolute left-1/2 -translate-x-1/2"
-      :class="isStandalone ? '-top-8' : 'top-9'"
-    />
+    <!--    <LottieAnimation-->
+    <!--      :animation-data="confettiAnimation"-->
+    <!--      :height="lottieHeight"-->
+    <!--      v-if="!showPaperPlane"-->
+    <!--      class="absolute left-1/2 -translate-x-1/2"-->
+    <!--      :class="{ '-top-16 ': isStandalone, 'top-9': !isStandalone }"-->
+    <!--    />-->
     <LottieAnimation
       v-if="!showPaperPlane"
       :loop="false"
@@ -32,10 +32,8 @@
 </template>
 
 <script setup lang="ts">
-  import BaseSection from '../components/BaseSection.vue';
   import BaseInfoToCopy from '../components/BaseInfoToCopy.vue';
   import BaseButton from '../components/BaseButton.vue';
-  import { useStore } from '../composables/useStore';
   import { useClipboard } from '@vueuse/core';
   import { useUser } from '../composables/useUser';
   import { computed, ref } from 'vue';
@@ -43,8 +41,6 @@
   import { useRouter } from 'vue-router';
   import checkAnimation from '../assets/lottie/check-animation.json';
   import paperplaneAnimation from '../assets/lottie/paperplane-animation.json';
-  import confettiAnimation from '../assets/lottie/confetti-animation.json';
-  import doneAnimation from '../assets/lottie/done-animation.json';
 
   const { copy, copied } = useClipboard();
   const { userProfile } = useUser();
@@ -75,14 +71,14 @@
 
   const lottieHeight = computed(() => {
     if (isStandalone.value) {
-      return '30vh';
+      return '35vh';
     } else {
-      return '20vh';
+      return '30vh';
     }
   });
 
-  const handleBackToChallenge = () => {
+  const handleBackToChallenge = async () => {
     // @ts-ignore
-    push({ name: 'challenge', params: { id: currentRoute.value.query.id } });
+    await push({ name: 'challenge', params: { id: currentRoute.value.query.id } });
   };
 </script>

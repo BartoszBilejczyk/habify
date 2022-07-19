@@ -3,11 +3,11 @@
     ref="modal"
     class="w-screen base-modal-from-bottom bg-white dark:bg-dark rounded-t-3xl border border-solid border-white-20 dark:border-dark dark:border-t-white-50 overflow-y-auto"
   >
-    <div ref="modalSwiper" @click="handleHide" class="h-16 pt-6 flex justify-center">
+    <div ref="modalSwiper" @click="handleHide" class="h-14 pt-6 flex justify-center">
       <div class="h-1 w-20 bg-white-30 dark:bg-white-30 rounded-full"></div>
     </div>
     <div class="pb-4 px-6">
-      <h1 ref="headingEl" v-if="heading" class="text-2xl text-center text-white-800 dark:text-white-10 mb-10">
+      <h1 ref="headingEl" v-if="heading" class="text-2xl text-center text-white-800 dark:text-white-10 mb-6">
         {{ heading }}
       </h1>
       <slot></slot>

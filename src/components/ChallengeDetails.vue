@@ -17,7 +17,10 @@
     </div>
     <div class="flex mb-1.5">
       <div class="font-bold text-sm grow-0 shrink-0 basis-28">{{ $t('common.bet') }}</div>
-      <div class="text-sm">{{ BET_CATEGORY[data.betCategory]?.label }}. {{ $t('challenge.manualConfirmation') }}.</div>
+      <div class="text-sm">
+        {{ BET_CATEGORY[data.betCategory]?.label }}.
+        <!--        {{ $t('challenge.manualConfirmation') }}.-->
+      </div>
     </div>
     <div class="flex mb-1.5">
       <div class="font-bold text-sm grow-0 shrink-0 basis-28">{{ $t('common.details') }}</div>

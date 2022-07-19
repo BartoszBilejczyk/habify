@@ -18,7 +18,7 @@
       <div class="ml-1.5">{{ personName }}</div>
     </div>
     <!--    <div>{{ challenge.inviteLink }}</div>-->
-    <ChevronRight class="absolute w-4 h-4 text-white-700 dark:text-white right-3 bottom-3" />
+    <ChevronRight class="absolute w-4 h-4 text-white-100 dark:text-white right-3 bottom-3" />
   </BaseBox>
 </template>
 
@@ -39,8 +39,8 @@
 
   const { push } = useRouter();
 
-  const goToChallengeDetails = () => {
-    push({ name: 'challenge', params: { id: props.challenge.id } });
+  const goToChallengeDetails = async () => {
+    await push({ name: 'challenge', params: { id: props.challenge.id } });
   };
 
   const statusColor = computed(() => {

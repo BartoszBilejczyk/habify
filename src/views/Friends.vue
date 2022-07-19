@@ -19,69 +19,27 @@
         </div>
         <BaseButton outline-white small @click="handleAddNewFriend">{{ $t('common.invite') }}</BaseButton>
       </div>
-      <div
-        v-else
-        v-for="friend in userProfile.friends"
-        class="bg-white-10 dark:bg-dark-800 text-white-700 dark:text-white-10 rounded-lg mb-4 p-3"
-      >
-        <div class="flex items-center justify-between flex-nowrap">
-          <div class="flex items-center">
-            <div
-              v-if="friend.name"
-              class="h-10 w-10 rounded-full bg-white-20 dark:bg-white-400 flex items-center justify-center font-bold"
-            >
-              {{ getInitials(friend.name) }}
-            </div>
-            <div v-else class="h-10 w-10 rounded-full bg-white-20 dark:bg-white-400 flex items-center justify-center">
-              <ChevronRight class="w-4 h-4 text-white" />
-            </div>
-            <div class="ml-2">
-              {{ friend.name }}
-            </div>
-          </div>
-          <BaseButton outline small @click="handleStartNewChallenge(friend)">{{ $t('common.challenge') }}</BaseButton>
-        </div>
-      </div>
+      <BaseFriend v-else v-for="friend in userProfile.friends" :friend="friend"></BaseFriend>
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
   import BaseTopNav from '../components/BaseTopNav.vue';
+  import BaseFriend from '../components/BaseFriend.vue';
   import BaseLabel from '../components/BaseLabel.vue';
   import BaseButton from '../components/BaseButton.vue';
   import { useUser } from '../composables/useUser';
   import { useRouter } from 'vue-router';
   import PlusIcon from '../assets/icons/plus.svg?component';
-  import ChevronRight from '../assets/icons/chevron-right.svg?component';
   import { ref } from 'vue';
-  import { useStore } from '../composables/useStore';
-  import { emptyUserBasic } from '../helpers/empty';
 
-  const { stepTwo } = useStore();
   const { userProfile } = useUser();
   const { push } = useRouter();
 
   const loading = ref(false);
 
-  const getInitials = (name: string) => {
-    const splitted: string[] = name.split(' ');
-    // @ts-ignore
-    return splitted.shift().charAt(0) + splitted.pop().charAt(0);
-  };
-
   const handleAddNewFriend = async () => {
     await push({ name: 'profile-invite' });
-  };
-
-  const handleStartNewChallenge = (friend: { id: string; name: string }) => {
-    stepTwo.value = {
-      invitee: {
-        ...emptyUserBasic,
-        ...friend,
-      },
-      inviteeId: friend.id,
-    };
-    push({ name: 'new-challenge' });
   };
 </script>

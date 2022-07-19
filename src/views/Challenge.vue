@@ -385,7 +385,7 @@
     }, 500);
   };
 
-  const goToInvite = () => {
-    push({ name: 'invite', query: { code: challenge.value.id } });
+  const goToInvite = async () => {
+    await push({ name: 'invite', query: { code: challenge.value.id } });
   };
 </script>

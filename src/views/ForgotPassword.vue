@@ -25,8 +25,8 @@
     firebase
       .auth()
       .sendPasswordResetEmail(email.value)
-      .then(() => {
-        push({ name: 'login' });
+      .then(async () => {
+        await push({ name: 'login' });
       });
   };
 </script>

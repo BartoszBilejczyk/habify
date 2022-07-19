@@ -125,18 +125,17 @@
     loading.value = false;
   });
 
-  const updateProfile = async ({ name, allowEmails }: { name: string; allowEmails: boolean }) => {
+  const updateProfile = async (data: { name: string; nickname: string; allowEmails: boolean }) => {
     if (!firebaseUser.value) {
       return;
     }
     finishProfileLoading.value = true;
 
-    await firebaseUser.value.updateProfile({ displayName: name }).catch(err => console.error(err));
+    await firebaseUser.value.updateProfile({ displayName: data.name }).catch(err => console.error(err));
 
     if (referrer.value.id) {
       await updateDoc(`users/${firebaseUser.value?.uid}`, {
-        name,
-        allowEmails,
+        ...data,
         profileFinished: true,
         friends: [
           {
@@ -148,7 +147,7 @@
 
       await addNotification(
         {
-          name: `${name} accepted your invitation to Habbi.`,
+          name: `${data.name} ${data.nickname && `(${data.nickname})`} accepted your invitation to Habbi.`,
           description: '',
           points: 0,
           category: NOTIFICATION_CATEGORY.friends.value,
@@ -157,7 +156,7 @@
         referrer.value?.id
       );
     } else {
-      await updateDoc(`users/${firebaseUser.value?.uid}`, { name, allowEmails, profileFinished: true });
+      await updateDoc(`users/${firebaseUser.value?.uid}`, { ...data, profileFinished: true });
     }
 
     // TODO refactor to be safer and better and have new user's name. Move finish profile to here, from onboarding
@@ -167,7 +166,8 @@
           ...referrer.value.friends,
           {
             id: userProfile.value.id,
-            name,
+            name: data.name,
+            nickname: data.nickname,
           },
         ],
       });
@@ -175,7 +175,7 @@
 
     userProfile.value = {
       ...userProfile.value,
-      ...{ name, allowEmails, profileFinished: true },
+      ...{ ...data, profileFinished: true },
     };
 
     finishProfileLoading.value = false;

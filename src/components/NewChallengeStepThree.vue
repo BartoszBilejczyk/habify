@@ -9,7 +9,7 @@
         :class="stepTwo.inviteeId === friend.id && 'bg-primary-20 dark:bg-white-10 dark:text-white-500'"
         @click="handleChooseFriend(friend)"
       >
-        {{ friend.name }}
+        {{ friend.name }} {{ friend.nickname && `(${friend.nickname})` }}
       </div>
     </BaseSection>
     <div class="text-center text-xs text-white-200 dark:text-white-30 mb-8">{{ $t('challenge.chooseAfter') }}</div>
