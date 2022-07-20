@@ -6,7 +6,7 @@
         v-for="friend in friends"
         :key="friend.id"
         class="bg-white-10 dark:bg-dark-800 my-3 py-1 px-3 rounded-lg cursor-pointer"
-        :class="stepTwo.inviteeId === friend.id && 'bg-primary-20 dark:bg-white-10 dark:text-white-500'"
+        :class="stepOne.inviteeId === friend.id && 'bg-primary-20 dark:bg-white-10 dark:text-white-500'"
         @click="handleChooseFriend(friend)"
       >
         {{ friend.name }} {{ friend.nickname && `(${friend.nickname})` }}
@@ -20,11 +20,16 @@
   import BaseSection from './BaseSection.vue';
   import { useStore } from '../composables/useStore';
   import { UserBasic } from '../types';
+  import { emptyUserBasic } from '../helpers/empty';
 
-  const { stepTwo } = useStore();
+  const { stepOne } = useStore();
 
   const handleChooseFriend = (friend: UserBasic) => {
-    stepTwo.value = { invitee: friend, inviteeId: friend.id };
+    stepOne.invitee = {
+      ...emptyUserBasic,
+      ...friend,
+    };
+    stepOne.inviteeId = friend.id;
   };
 
   defineProps<{

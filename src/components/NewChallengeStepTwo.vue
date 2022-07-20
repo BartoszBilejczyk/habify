@@ -20,7 +20,6 @@
 </template>
 
 <script setup lang="ts">
-  import BaseSection from '../components/BaseSection.vue';
   import BaseSelect from '../components/BaseSelect.vue';
   import { onMounted, ref } from 'vue';
   import BaseTextarea from './BaseTextarea.vue';

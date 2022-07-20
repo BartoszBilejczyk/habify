@@ -1,7 +1,7 @@
 <template>
   <div
     class="flex flex-col flex-1 relative px-4 justify-center"
-    :class="{ 'pt-32 pb-24 ': isStandalone, 'pb-16': !isStandalone }"
+    :class="{ 'py-16': isStandalone, 'pb-16': !isStandalone }"
   >
     <!--    <LottieAnimation-->
     <!--      :animation-data="confettiAnimation"-->
@@ -23,7 +23,7 @@
       <BaseInfoToCopy on-dark>{{ inviteLink }}</BaseInfoToCopy>
       <div class="flex flex-col items-center mt-4 mb-10">
         <div v-if="copied" class="text-sm font-bold text-white">{{ $t('profile.copied') }}</div>
-        <BaseButton v-else text-white @click="copy(inviteLink)">{{ $t('profile.copyLink') }}</BaseButton>
+        <BaseButton class="mt-2" v-else text-white @click="copy(inviteLink)">{{ $t('profile.copyLink') }}</BaseButton>
         <BaseButton class="mt-6" outline-white @click="share">{{ $t('common.shareLink') }}</BaseButton>
       </div>
     </div>

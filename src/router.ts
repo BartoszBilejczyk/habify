@@ -17,7 +17,7 @@ export type RouteName =
   | 'profile-challenge-history'
   | 'friends'
   | 'profile-invite'
-  | 'profile-settings'
+  | 'profile-preferences'
   | 'profile-notification-settings'
   | 'profile-task-center'
   | 'donate'
@@ -112,9 +112,9 @@ const router = createRouter({
       component: () => import('./views/ProfileInviteFriend.vue'),
     },
     {
-      path: '/profile-settings',
-      name: 'profile-settings',
-      component: () => import('./views/ProfileSettings.vue'),
+      path: '/profile-preferences',
+      name: 'profile-preferences',
+      component: () => import('./views/ProfilePreferences.vue'),
     },
     {
       path: '/profile-notification-settings',

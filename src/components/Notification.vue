@@ -53,7 +53,19 @@
 
   const handleNotificationAction = async (action: NotificationAction) => {
     switch (action) {
-      case NOTIFICATION_ACTION.goToChallenge:
+      // case NOTIFICATION_ACTION.acceptChallenge.value:
+      //   await push({ name: 'challenge', params: { id: props.notification.challengeId } });
+
+      // case NOTIFICATION_ACTION.refuseChallenge.value:
+      // TODO
+
+      case NOTIFICATION_ACTION.showInvite.value:
+        await push({ name: 'invite', query: { code: props.notification.challengeId } });
+
+      case NOTIFICATION_ACTION.createNewChallenge.value:
+        await push({ name: 'new-challenge' });
+
+      case NOTIFICATION_ACTION.goToChallenge.value:
         await push({ name: 'challenge', params: { id: props.notification.challengeId } });
     }
   };

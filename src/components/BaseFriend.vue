@@ -34,7 +34,7 @@
   import { emptyUserBasic } from '../helpers/empty';
   import { Friend } from '../types';
 
-  const { stepTwo } = useStore();
+  const { stepOne } = useStore();
   const { userProfile } = useUser();
   const { push } = useRouter();
 
@@ -52,13 +52,12 @@
   };
 
   const handleStartNewChallenge = async (friend: { id: string; name: string }) => {
-    stepTwo.value = {
-      invitee: {
-        ...emptyUserBasic,
-        ...friend,
-      },
-      inviteeId: friend.id,
+    stepOne.invitee = {
+      ...emptyUserBasic,
+      ...friend,
     };
+    stepOne.inviteeId = friend.id;
+
     await push({ name: 'new-challenge' });
   };
 </script>

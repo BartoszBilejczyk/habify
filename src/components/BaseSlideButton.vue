@@ -43,9 +43,10 @@
     doneText: string;
     slideText: string;
     onDark?: boolean;
+    disabled?: boolean;
   }>();
 
-  const emit = defineEmits(['success']);
+  const emit = defineEmits(['success', 'validate']);
 
   onMounted(() => {
     isTouchDevice.value = 'ontouchstart' in document.documentElement;
@@ -77,6 +78,12 @@
     if (unmounted.value || unlocked.value) return;
     if (isDragging.value) {
       isDragging.value = false;
+
+      if (props.disabled) {
+        reset();
+        emit('validate');
+      }
+
       if (sliderLeft.value > containerWidth.value * 0.9) {
         sliderLeft.value = containerWidth.value;
         onSuccess();

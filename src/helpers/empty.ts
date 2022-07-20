@@ -30,6 +30,10 @@ export const emptyUser: User = {
   onboarded: false,
   referralCode: '',
   usedReferralCode: '',
+  preferences: {
+    darkMode: null,
+    language: null,
+  },
 };
 
 export const emptyUserBasic: UserBasic = {
@@ -37,6 +41,7 @@ export const emptyUserBasic: UserBasic = {
   email: '',
   phone: '',
   name: '',
+  nickname: '',
   points: 0,
   image: '',
 };

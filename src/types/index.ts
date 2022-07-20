@@ -1,3 +1,5 @@
+export type AvailableLanguages = 'pl' | 'en';
+
 export interface User {
   id: string | undefined;
   email: string | null | undefined;
@@ -17,6 +19,10 @@ export interface User {
   onboarded: boolean;
   referralCode: string;
   usedReferralCode: string;
+  preferences: {
+    darkMode: boolean | null;
+    language: AvailableLanguages | null;
+  };
 }
 
 export interface UserBasic {
@@ -24,6 +30,7 @@ export interface UserBasic {
   email: string;
   phone: string;
   name: string;
+  nickname: string;
   points: number;
   image: string;
 }
@@ -108,7 +115,7 @@ export type NotificationAction =
   | 'showInvite'
   | 'createNewChallenge'
   | 'goToChallenge'
-  | 'other'; // TODO
+  | 'goToTaskCenter';
 
 export interface Notification {
   id: string;

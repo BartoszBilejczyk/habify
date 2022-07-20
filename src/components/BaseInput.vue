@@ -3,8 +3,13 @@
     <label v-if="label" class="text-white-800 dark:text-white mb-1">{{ label }}</label>
     <input
       :placeholder="placeholder"
-      class="h-12 mb-2 border outline-none focus:outline-none border-white-10 bg-white-10 rounded-lg w-auto px-3 text-white-700 dark:bg-dark-800 dark:text-white dark:border-dark-800 dark:hover:border-dark-800 dark:focus:border-dark-800 placeholder-white-50 dark:placeholder-white-50"
-      :class="{ 'w-full': full, 'w-fit': !full }"
+      class="h-12 mb-2 border outline-none focus:outline-none bg-white-10 rounded-lg w-auto px-3 text-white-700 dark:bg-dark-800 dark:text-white placeholder-white-50 dark:placeholder-white-50"
+      :class="{
+        'w-full': full,
+        'w-fit': !full,
+        'border-red-10 dark:border-red-700': error,
+        'border-white-10 dark:border-dark-800 dark:focus:border-dark-800': !error,
+      }"
       :type="type || 'text'"
       :value="modelValue"
       @input="updateValue"
@@ -20,6 +25,7 @@
     full?: boolean;
     placeholder?: string;
     required?: boolean;
+    error?: boolean;
   }>();
 
   const emit = defineEmits(['update:modelValue']);

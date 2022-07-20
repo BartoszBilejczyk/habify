@@ -68,6 +68,15 @@
           </div>
         </div>
       </div>
+      <div class="mt-3">
+        <div class="text-white-600 dark:text-white-20 font-bold">{{ $t('common.bet') }}</div>
+        <BaseBox small class="mt-1.5 relative py-2">
+          <div class="w-10/12">{{ challenge.betDetails }}</div>
+          <!--          <BaseLabel color="white" class="absolute right-2 top-2">-->
+          <!--            {{ BET_CATEGORY[challenge.betCategory]?.label }}-->
+          <!--          </BaseLabel>-->
+        </BaseBox>
+      </div>
       <div>
         <div
           class="text-white-600 dark:text-white-20 font-bold"
@@ -89,27 +98,18 @@
         <div class="text-white-600 dark:text-white-20 font-bold">{{ $t('challenge.duration') }}:</div>
         <BaseBox small class="mt-2">{{ challenge.duration }} {{ $t('common.days') }}</BaseBox>
       </div>
-      <div class="mt-3">
-        <div class="text-white-600 dark:text-white-20 font-bold">{{ $t('common.bet') }}</div>
-        <BaseBox small class="mt-1.5 relative py-2">
-          <div class="w-10/12">{{ challenge.betDetails }}</div>
-          <BaseLabel color="white" class="absolute right-2 top-2">
-            {{ BET_CATEGORY[challenge.betCategory]?.label }}
-          </BaseLabel>
-        </BaseBox>
-      </div>
-      <div class="mt-3">
-        <div class="text-white-600 dark:text-white-20 font-bold">{{ $t('challenge.confirmationType') }}</div>
-        <!-- TODO add a question mark wtf -->
-        <BaseBox small class="mt-1.5 capitalize">{{ challenge.confirmationType }}</BaseBox>
-      </div>
+      <!--      <div class="mt-3">-->
+      <!--        <div class="text-white-600 dark:text-white-20 font-bold">{{ $t('challenge.confirmationType') }}</div>-->
+      <!-- TODO add a question mark wtf -->
+      <!--        <BaseBox small class="mt-1.5 capitalize">{{ challenge.confirmationType }}</BaseBox>-->
+      <!--      </div>-->
       <div
         v-if="challenge.status === CHALLENGE_STATUS.pending.value && userProfileBasic.id === challenge.inviterId"
         class="mt-4"
       >
         <BaseInfoToCopy>{{ challenge.inviteLink }}</BaseInfoToCopy>
         <div class="flex justify-center mt-6 mb-10">
-          <BaseButton outline-white @click="share">{{ $t('common.shareLink') }}</BaseButton>
+          <BaseButton outline @click="share">{{ $t('common.shareLink') }}</BaseButton>
         </div>
       </div>
       <div
@@ -160,7 +160,13 @@
   import 'dayjs/locale/pl';
   import 'dayjs/locale/en-gb';
   import { useFirebase } from '../composables/useFirebase';
-  import { CHALLENGE_TYPES, NOTIFICATION_CATEGORY, CHALLENGE_STATUS, BET_CATEGORY } from '../helpers/constants';
+  import {
+    CHALLENGE_TYPES,
+    NOTIFICATION_CATEGORY,
+    NOTIFICATION_ACTION,
+    CHALLENGE_STATUS,
+    BET_CATEGORY,
+  } from '../helpers/constants';
   import { useClipboard } from '@vueuse/core';
   import { useI18n } from 'vue-i18n';
   import { useUser } from '../composables/useUser';
@@ -358,7 +364,7 @@
         points: challenge.value.points,
         category: NOTIFICATION_CATEGORY.challenge.value,
         challengeId: challenge.value.id,
-        actions: ['createNewChallenge'],
+        actions: [NOTIFICATION_ACTION.createNewChallenge.value],
       };
 
       console.log(notificationData);

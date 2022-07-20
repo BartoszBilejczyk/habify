@@ -6,9 +6,22 @@
         :class="{ 'justify-between': icon, 'justify-end': !icon }"
       >
         <span v-if="icon" class="">
-          <BackIcon v-if="icon === 'back'" class="text-white-300 dark:text-white-20 w-3.5 h-3.5" @click="handleBack" />
-          <CloseIcon v-if="icon === 'close'" class="text-white-300 dark:text-white-20 w-5 h-5" />
-          <MenuIcon v-if="icon === 'menu'" class="text-white-300 dark:text-white-20 w-5 h-5" />
+          <BackIcon
+            v-if="icon === 'back'"
+            class="w-3.5 h-3.5"
+            :class="background ? 'text-white-10' : 'text-white-300 dark:text-white-20'"
+            @click="handleBack"
+          />
+          <CloseIcon
+            v-if="icon === 'close'"
+            class="w-5 h-5"
+            :class="background ? 'text-white-10' : 'text-white-300 dark:text-white-20'"
+          />
+          <MenuIcon
+            v-if="icon === 'menu'"
+            class="w-5 h-5"
+            :class="background ? 'text-white-10' : 'text-white-300 dark:text-white-20'"
+          />
         </span>
         <span
           class="font-bold absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-center"

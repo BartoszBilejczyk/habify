@@ -121,11 +121,29 @@ export const NOTIFICATION_CATEGORY: Record<NotificationCategory, Constant<Notifi
   },
 };
 
-export const NOTIFICATION_ACTION: Record<NotificationAction, NotificationAction> = {
-  acceptChallenge: 'acceptChallenge',
-  refuseChallenge: 'refuseChallenge',
-  showInvite: 'showInvite',
-  other: 'other',
-  createNewChallenge: 'createNewChallenge',
-  goToChallenge: 'goToChallenge',
+export const NOTIFICATION_ACTION: Record<NotificationAction, Constant<NotificationAction>> = {
+  acceptChallenge: {
+    label: i18n.global.t('notifications.actions.acceptChallenge'),
+    value: 'acceptChallenge',
+  },
+  refuseChallenge: {
+    label: i18n.global.t('notifications.actions.refuseChallenge'),
+    value: 'refuseChallenge',
+  },
+  showInvite: {
+    label: i18n.global.t('notifications.actions.showInvite'),
+    value: 'showInvite',
+  },
+  createNewChallenge: {
+    label: i18n.global.t('notifications.actions.createNewChallenge'),
+    value: 'createNewChallenge',
+  },
+  goToChallenge: {
+    label: i18n.global.t('notifications.actions.goToChallenge'),
+    value: 'goToChallenge',
+  },
+  goToTaskCenter: {
+    label: i18n.global.t('notifications.actions.goToTaskCenter'),
+    value: 'goToTaskCenter',
+  },
 };

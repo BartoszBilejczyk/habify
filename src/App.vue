@@ -31,13 +31,12 @@
   import { useFirebase } from './composables/useFirebase';
   import { useUser } from './composables/useUser';
   import { emptyUser } from './helpers/empty';
-  import { useDark } from '@vueuse/core';
+
   import { useStore } from './composables/useStore';
 
   const noMenu = ['login', 'register', 'forgot-password', 'onboarding', 'auth-start', 'invite'];
   const noAuthRoutes = ['login', 'register', 'forgot-password', 'auth-start', 'invite'];
 
-  const isDark = useDark();
   const { currentRoute, push } = useRouter();
   const { firebaseUser, getDocRaw } = useFirebase();
   const { userProfile } = useUser();

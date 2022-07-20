@@ -63,23 +63,13 @@
   const menuItems = ref<MenuItem[]>([
     {
       icon: UserSingle,
-      title: 'Profile Settings',
-      name: 'profile-settings',
+      title: 'Profile Preferences',
+      name: 'profile-preferences',
     },
     {
       icon: UserMultiple,
       title: 'Invite Friends',
       name: 'profile-invite',
-    },
-    {
-      icon: UserMultiple,
-      title: 'Invite Friends',
-      name: 'profile-invite',
-    },
-    {
-      icon: ShieldSearch,
-      title: 'Challenge History',
-      name: 'profile-challenge-history',
     },
     // {
     //   icon: ShieldStar,
@@ -97,10 +87,15 @@
       name: 'profile-task-center',
     },
     {
-      icon: HeartIcon,
-      title: 'Donate to appreciate authors',
-      name: 'donate',
+      icon: ShieldSearch,
+      title: 'Challenge History',
+      name: 'profile-challenge-history',
     },
+    // {
+    //   icon: HeartIcon,
+    //   title: 'Donate to appreciate authors',
+    //   name: 'donate',
+    // },
   ]);
 
   const handleRouteChange = async (name: RouteName) => {

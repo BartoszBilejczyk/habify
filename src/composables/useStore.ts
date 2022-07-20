@@ -18,12 +18,9 @@ export const useStore = createGlobalState(() => {
     id: '',
     title: '',
     duration: '',
-    betCategory: BET_CATEGORY.social.value,
+    betCategory: BET_CATEGORY.other.value,
     betDetails: '',
     type: CHALLENGE_TYPES.oneTime.value,
-  });
-
-  const stepTwo = ref({
     invitee: { ...emptyUserBasic },
     inviteeId: '',
   });
@@ -39,7 +36,6 @@ export const useStore = createGlobalState(() => {
   const newChallenge = computed<Challenge>(() => ({
     ...emptyChallenge,
     ...stepOne,
-    ...stepTwo.value,
     status: CHALLENGE_STATUS.pending.value,
     confirmationType: 'manual',
     points: 500,
@@ -82,7 +78,6 @@ export const useStore = createGlobalState(() => {
 
   return {
     stepOne,
-    stepTwo,
     newChallenge,
     referrer,
     challenges,

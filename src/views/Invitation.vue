@@ -35,7 +35,7 @@
   import { emptyChallenge } from '../helpers/empty';
   import { useI18n } from 'vue-i18n';
   import { useUser } from '../composables/useUser';
-  import { NOTIFICATION_CATEGORY } from '../helpers/constants';
+  import { NOTIFICATION_CATEGORY, NOTIFICATION_ACTION } from '../helpers/constants';
 
   const challenge = ref<Challenge>({ ...emptyChallenge });
   const { updateDoc, getDoc } = useFirebase();
@@ -89,7 +89,7 @@
         points: 0,
         category: NOTIFICATION_CATEGORY.challenge.value,
         challengeId: challenge.value.id,
-        actions: ['goToChallenge'],
+        actions: [NOTIFICATION_ACTION.goToChallenge.value],
       },
       challenge.value?.inviterId
     );
