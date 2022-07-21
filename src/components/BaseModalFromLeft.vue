@@ -1,15 +1,17 @@
 <template>
   <div
     ref="modal"
-    class="w-screen base-modal-from-left bg-white dark:bg-dark rounded-r-3xl overflow-y-auto relative flex flex-col"
+    class="p-safe w-screen base-modal-from-left bg-white dark:bg-dark rounded-r-3xl overflow-y-auto flex flex-col"
   >
-    <div class="absolute right-2.5 top-2">
-      <CloseIcon class="w-8 h-8 text-white-200 dark:text-white-20" @click="$emit('hide')" />
+    <div class="relative">
+      <div class="absolute right-2.5 top-2">
+        <CloseIcon class="w-8 h-8 text-white-200 dark:text-white-20" @click="$emit('hide')" />
+      </div>
+      <div class="pb-4 px-6 p-6">
+        <slot></slot>
+      </div>
+      <div ref="modalEl" class="flex-1" />
     </div>
-    <div class="pb-4 px-6 p-6">
-      <slot></slot>
-    </div>
-    <div ref="modalEl" class="flex-1" />
   </div>
 </template>
 

@@ -5,7 +5,6 @@
       'min-safe-h-screen max-safe-h-screen': !noMenu.includes(currentRoute.name),
       'min-safe-h-fullscreen': noMenu.includes(currentRoute.name),
       'bg-primary dark:bg-dark':
-        currentRoute.name === 'profile' ||
         currentRoute.name === 'invite' ||
         currentRoute.name === 'profile-invite' ||
         currentRoute.name === 'new-challenge-success' ||
@@ -123,13 +122,13 @@
   .route-enter-active {
     transition: all 0.15s ease-out;
   }
-  .route-leave-to {
-    opacity: 0;
-    transform: translateX(50px);
-  }
-  .route-leave-active {
-    transition: all 0.15s ease-in;
-  }
+  /*.route-leave-to {*/
+  /*  opacity: 0;*/
+  /*  transform: translateX(50px);*/
+  /*}*/
+  /*.route-leave-active {*/
+  /*  transition: all 0.15s ease-in;*/
+  /*}*/
 
   /* route transitions */
   .child-route-enter-from {
@@ -139,11 +138,11 @@
   .child-route-enter-active {
     transition: all 0.15s ease-out;
   }
-  .child-route-leave-to {
-    opacity: 0;
-    transform: translateX(-50px);
-  }
-  .child-route-leave-active {
-    transition: all 0.15s ease-in;
-  }
+  /*.child-route-leave-to {*/
+  /*  opacity: 0;*/
+  /*  transform: translateX(-50px);*/
+  /*}*/
+  /*.child-route-leave-active {*/
+  /*  transition: all 0.15s ease-in;*/
+  /*}*/
 </style>

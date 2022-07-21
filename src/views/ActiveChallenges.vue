@@ -101,17 +101,7 @@
   };
 
   const openNotificationsModal = () => {
-    if (isNotificationModalOpen.value) {
-      return;
-    }
-
-    if (isLeftMenuModalOpen.value) {
-      setTimeout(() => {
-        isNotificationModalOpen.value = true;
-      }, 100);
-    } else {
-      isNotificationModalOpen.value = true;
-    }
+    isNotificationModalOpen.value = true;
 
     isLeftMenuModalOpen.value = false;
   };
@@ -123,13 +113,7 @@
   };
 
   const openLeftMenuModal = () => {
-    if (isNotificationModalOpen.value) {
-      setTimeout(() => {
-        isLeftMenuModalOpen.value = true;
-      }, 100);
-    } else {
-      isLeftMenuModalOpen.value = true;
-    }
+    isLeftMenuModalOpen.value = true;
 
     isNotificationModalOpen.value = false;
   };

@@ -2,7 +2,7 @@
   <div class="w-full h-full flex flex-col flex-1 pb-6">
     <!--    TODO improve UX -->
     <BaseTopNav :title="$t('titles.new')" :back-route="currentRoute.query.forceBack || 'active-challenges'" />
-    <div class="flex flex-col flex-1 mt-6 px-4 justify-between">
+    <div class="flex flex-col flex-1 mt-6 px-4 pb-8 justify-between">
       <div>
         <!--        <NewChallengeMenu class="mt-3 mb-8" :has-friends="hasFriends" :step="step" />-->
         <!--       make new step - for bet -->
