@@ -33,6 +33,9 @@
   import { emptyUser } from './helpers/empty';
 
   import { useStore } from './composables/useStore';
+  import { useDark } from '@vueuse/core';
+
+  const isDark = useDark();
 
   const noMenu = ['login', 'register', 'forgot-password', 'onboarding', 'auth-start', 'invite'];
   const noAuthRoutes = ['login', 'register', 'forgot-password', 'auth-start', 'invite'];

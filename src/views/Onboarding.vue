@@ -93,13 +93,13 @@
   };
 
   const handleSkip = async () => {
-    await push({ name: 'home' });
+    await push({ name: 'active-challenges' });
   };
 
   const handleFinish = async () => {
     setTimeout(async () => {
       await updateDoc(`users/${firebaseUser.value?.uid}`, { onboarded: true });
-      await push({ name: 'home' });
+      await push({ name: 'active-challenges' });
     }, 800);
   };
 
@@ -116,7 +116,7 @@
 
       if (userDoc.onboarded) {
         loading.value = false;
-        await push({ name: 'home', query: {} });
+        await push({ name: 'active-challenges', query: {} });
       }
 
       handleSetInitialQuery();

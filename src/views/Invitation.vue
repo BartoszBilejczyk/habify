@@ -1,6 +1,11 @@
 <template>
   <div v-if="challenge.id" class="w-full h-full flex flex-col flex-1">
-    <BaseTopNav :title="$t('titles.new')" back-route="home" background :icon="Boolean(userProfile.value?.id)" />
+    <BaseTopNav
+      :title="$t('titles.new')"
+      back-route="active-challenges"
+      background
+      :icon="Boolean(userProfile.value?.id)"
+    />
     <div class="px-4 py-2 w-full h-full flex-1 flex flex-col justify-center bg-primary dark:bg-dark-900 text-white">
       <h1 class="text-2xl text-center text-white">{{ $t('invite.challengedBy') }}{{ challenge.inviter?.name }}!</h1>
       <div class="mt-8 text-sm text-center">

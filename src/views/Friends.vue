@@ -1,6 +1,6 @@
 <template>
   <div class="w-full h-full flex flex-col flex-1">
-    <BaseTopNav :title="$t('titles.friends')" back-route="home">
+    <BaseTopNav :title="$t('titles.friends')" back-route="active-challenges">
       <BaseLabel color="coral" @click="handleAddNewFriend">
         <PlusIcon class="text-coral-800 basis-3 w-3 h-3 mr-1.5" />
         {{ $t('common.invite') }}

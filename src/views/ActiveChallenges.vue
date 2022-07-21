@@ -1,10 +1,15 @@
 <template>
   <div class="w-full h-full flex flex-col flex-1">
-    <BaseTopNav :title="$t('titles.activeChallenges')" back-route="home">
-      <BaseLabel color="primary" @click="handleStartNewChallenge">
-        <PlusIcon class="text-primary basis-3 w-3 h-3 mr-1.5" />
-        {{ $t('common.new') }}
-      </BaseLabel>
+    <BaseTopNav :title="$t('titles.dashboard')" icon="menu" @openModal="openLeftMenuModal">
+      <div class="relative pr-0.5" @click="openNotificationsModal">
+        <NotificationIcon class="w-5 h-5" />
+        <div
+          v-if="activeNotificationsLength"
+          class="absolute -top-2 -right-2 h-4 w-4 rounded-full bg-primary text-xs flex items-center justify-center text-white font-bold"
+        >
+          {{ activeNotificationsLength }}
+        </div>
+      </div>
     </BaseTopNav>
     <div class="px-4 flex flex-col flex-1 pt-4 pb-8">
       <div v-if="loading">{{ $t('common.loading') }}</div>
@@ -26,14 +31,27 @@
       </div>
       <ActiveChallenge v-for="challenge in challenges.slice(2)" :challenge="challenge" :user="userProfileBasic" />
     </div>
+    <BaseModalFromBottom
+      :is-open="isNotificationModalOpen"
+      @hide="hideNotificationModal"
+      :heading="$t('notifications.heading')"
+    >
+      <NotificationList v-if="isNotificationModalOpen" />
+    </BaseModalFromBottom>
+    <BaseModalFromLeft :is-open="isLeftMenuModalOpen" @hide="hideLeftMenuModal">
+      <HomeLeftMenu @hide="hideLeftMenuModal" />
+    </BaseModalFromLeft>
   </div>
 </template>
 
 <script setup lang="ts">
   import { useRouter } from 'vue-router';
 
-  import PlusIcon from '../assets/icons/plus.svg?component';
-  import BaseLabel from '../components/BaseLabel.vue';
+  import NotificationIcon from '../assets/icons/bell.svg?component';
+  import BaseModalFromBottom from '../components/BaseModalFromBottom.vue';
+  import BaseModalFromLeft from '../components/BaseModalFromLeft.vue';
+  import HomeLeftMenu from '../components/HomeLeftMenu.vue';
+  import NotificationList from '../components/NotificationList.vue';
   import BaseTopNav from '../components/BaseTopNav.vue';
   import BaseButton from '../components/BaseButton.vue';
   import ActiveChallenge from '../components/ActiveChallenge.vue';
@@ -45,7 +63,8 @@
   const { challenges, getChallenges } = useStore();
   const { push } = useRouter();
   const { getCollectionItemsWhere } = useFirebase();
-  const { userProfileBasic } = useUser();
+  const { userProfile, userProfileBasic, visibleNotifications, activeNotificationsLength, markNotificationsAsSeen } =
+    useUser();
   const loading = ref(false);
 
   onMounted(async () => {
@@ -58,5 +77,42 @@
 
   const handleStartNewChallenge = async () => {
     await push({ name: 'new-challenge' });
+  };
+
+  const isNotificationModalOpen = ref(false);
+  const isLeftMenuModalOpen = ref(false);
+
+  onMounted(async () => {
+    if (userProfile.value.id) {
+      await getChallenges();
+    }
+  });
+
+  const hideNotificationModal = async () => {
+    isNotificationModalOpen.value = false;
+
+    await markNotificationsAsSeen();
+  };
+
+  const openNotificationsModal = () => {
+    if (visibleNotifications.value.length) {
+      isLeftMenuModalOpen.value = false;
+      setTimeout(() => {
+        isNotificationModalOpen.value = true;
+      }, 100);
+    }
+  };
+
+  const hideLeftMenuModal = async () => {
+    isLeftMenuModalOpen.value = false;
+
+    await markNotificationsAsSeen();
+  };
+
+  const openLeftMenuModal = () => {
+    isNotificationModalOpen.value = false;
+    setTimeout(() => {
+      isLeftMenuModalOpen.value = true;
+    }, 100);
   };
 </script>

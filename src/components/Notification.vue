@@ -28,7 +28,7 @@
         :text-secondary="index > 0"
         @click="handleNotificationAction(action)"
       >
-        {{ action }}
+        {{ $t(`notifications.actions.${action}`) }}
       </BaseButton>
     </div>
   </BaseBox>

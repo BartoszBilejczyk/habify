@@ -7,7 +7,7 @@
         v-for="item in menuItems"
         class="flex flex-col items-center text-xxs cursor-pointer w-20"
         :class="{
-          'text-primary font-black': active === item.name,
+          'text-primary-200 font-black': active === item.name,
           'text-white-400 dark:text-white': active !== item.name,
         }"
         @click="handleRouteChange(item.name)"
@@ -20,7 +20,6 @@
 </template>
 
 <script setup lang="ts">
-  import ShieldSearch from '../assets/icons/shield-search.svg';
   import ShieldStar from '../assets/icons/shield-star.svg';
   import UserMultiple from '../assets/icons/user-multiple.svg';
   import UserSingle from '../assets/icons/user-single.svg';
@@ -40,11 +39,6 @@
   }
 
   const menuItems = shallowRef<MenuItem[]>([
-    {
-      icon: ShieldSearch,
-      title: 'Dashboard',
-      name: 'home',
-    },
     {
       icon: ShieldStar,
       title: 'Challenges',

@@ -1,6 +1,6 @@
 <template>
   <div v-if="userProfile.id" class="w-full h-full flex flex-col flex-1">
-    <BaseTopNav :title="$t('titles.dashboard')" icon="menu">
+    <BaseTopNav :title="$t('titles.dashboard')" icon="menu" @openModal="openLeftMenuModal">
       <div class="relative pr-0.5" @click="openNotificationsModal">
         <NotificationIcon class="w-5 h-5" />
         <div
@@ -45,9 +45,6 @@
         <div class="bg-white dark:bg-dark-800 p-16 shadow-lg rounded-2xl">slot</div>
       </BaseSection>
     </div>
-    <BaseModalFromBottom :is-open="isModalOpen" @hide="hideModal" :heading="$t('notifications.heading')">
-      <NotificationList v-if="isModalOpen" />
-    </BaseModalFromBottom>
   </div>
 </template>
 
@@ -60,6 +57,8 @@
   import BaseFriend from '../components/BaseFriend.vue';
   import BaseSection from '../components/BaseSection.vue';
   import BaseModalFromBottom from '../components/BaseModalFromBottom.vue';
+  import BaseModalFromLeft from '../components/BaseModalFromLeft.vue';
+  import HomeLeftMenu from '../components/HomeLeftMenu.vue';
   import NotificationList from '../components/NotificationList.vue';
   import ActiveChallenge from '../components/ActiveChallenge.vue';
   import { useRouter } from 'vue-router';
@@ -71,7 +70,8 @@
   const { push } = useRouter();
   const { challenges, getChallenges } = useStore();
 
-  const isModalOpen = ref(false);
+  const isNotificationModalOpen = ref(false);
+  const isLeftMenuModalOpen = ref(false);
 
   onMounted(async () => {
     if (userProfile.value.id) {
@@ -79,16 +79,32 @@
     }
   });
 
-  const hideModal = async () => {
-    isModalOpen.value = false;
+  const hideNotificationModal = async () => {
+    isNotificationModalOpen.value = false;
 
     await markNotificationsAsSeen();
   };
 
   const openNotificationsModal = () => {
     if (visibleNotifications.value.length) {
-      isModalOpen.value = true;
+      isLeftMenuModalOpen.value = false;
+      setTimeout(() => {
+        isNotificationModalOpen.value = true;
+      }, 100);
     }
+  };
+
+  const hideLeftMenuModal = async () => {
+    isLeftMenuModalOpen.value = false;
+
+    await markNotificationsAsSeen();
+  };
+
+  const openLeftMenuModal = () => {
+    isNotificationModalOpen.value = false;
+    setTimeout(() => {
+      isLeftMenuModalOpen.value = true;
+    }, 100);
   };
 
   const handleStart = async () => {

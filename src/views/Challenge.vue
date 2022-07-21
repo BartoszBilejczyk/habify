@@ -105,11 +105,19 @@
       <!--      </div>-->
       <div
         v-if="challenge.status === CHALLENGE_STATUS.pending.value && userProfileBasic.id === challenge.inviterId"
-        class="mt-4"
+        class="mt-8"
       >
         <BaseInfoToCopy>{{ challenge.inviteLink }}</BaseInfoToCopy>
-        <div class="flex justify-center mt-6 mb-10">
-          <BaseButton outline @click="share">{{ $t('common.shareLink') }}</BaseButton>
+        <div class="flex justify-center mb-6">
+          <div class="mt-4 flex flex-col items-center w-full">
+            <div v-if="copied" class="text-sm font-bold text-white-500 dark:text-white-10">
+              {{ $t('profile.copied') }}
+            </div>
+            <BaseButton v-else :text-white="isDark" :text-primary="!isDark" @click="copy(challenge.inviteLink)">
+              {{ $t('profile.copyLink') }}
+            </BaseButton>
+            <BaseButton class="mt-5" full outline @click="share">{{ $t('common.shareLink') }}</BaseButton>
+          </div>
         </div>
       </div>
       <div
@@ -160,17 +168,12 @@
   import 'dayjs/locale/pl';
   import 'dayjs/locale/en-gb';
   import { useFirebase } from '../composables/useFirebase';
-  import {
-    CHALLENGE_TYPES,
-    NOTIFICATION_CATEGORY,
-    NOTIFICATION_ACTION,
-    CHALLENGE_STATUS,
-    BET_CATEGORY,
-  } from '../helpers/constants';
+  import { CHALLENGE_TYPES, NOTIFICATION_CATEGORY, NOTIFICATION_ACTION, CHALLENGE_STATUS } from '../helpers/constants';
   import { useClipboard } from '@vueuse/core';
   import { useI18n } from 'vue-i18n';
   import { useUser } from '../composables/useUser';
   import { emptyChallenge } from '../helpers/empty';
+  import { useDark } from '@vueuse/core';
 
   dayjs.locale(navigator.language);
 
@@ -184,7 +187,7 @@
   const { userProfileBasic, updatePoints, addNotification } = useUser();
   const { copy, copied } = useClipboard();
   const { t } = useI18n();
-
+  const isDark = useDark();
   onMounted(async () => {
     challenge.value = { ...emptyChallenge };
     loading.value = true;

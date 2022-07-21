@@ -22,6 +22,7 @@ export type RouteName =
   | 'profile-task-center'
   | 'donate'
   | 'components'
+  | 'leaderboard'
   | 'charities';
 
 const router = createRouter({
@@ -31,11 +32,6 @@ const router = createRouter({
     return { top: 0 };
   },
   routes: [
-    {
-      path: '/',
-      name: 'home',
-      component: () => import('./views/Home.vue'),
-    },
     {
       path: '/auth-start',
       name: 'auth-start',
@@ -62,12 +58,12 @@ const router = createRouter({
       component: () => import('./views/Profile.vue'),
     },
     {
-      path: '/active-challenges',
+      path: '/',
       name: 'active-challenges',
       component: () => import('./views/ActiveChallenges.vue'),
     },
     {
-      path: '/active-challenges/:id',
+      path: '/challenge/:id',
       name: 'challenge',
       component: () => import('./views/Challenge.vue'),
     },

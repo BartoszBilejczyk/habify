@@ -1,6 +1,6 @@
 <template>
   <div
-    class="bg-white-10 dark:bg-dark-800 text-white-700 dark:text-white-10 rounded-lg"
+    class="bg-white-10 dark:bg-dark-800 text-white-700 dark:text-white-20 rounded-lg"
     :class="{ 'mb-2 p-1.5': small, 'mb-4 p-3': !small }"
   >
     <div class="flex items-center justify-between flex-nowrap">

@@ -1,7 +1,7 @@
 <template>
   <div
     ref="modal"
-    class="w-screen base-modal-from-bottom bg-white dark:bg-dark rounded-t-3xl border border-solid border-white-20 dark:border-dark dark:border-t-white-50 overflow-y-auto"
+    class="w-screen base-modal-from-bottom bg-white dark:bg-dark rounded-t-3xl border border-solid border-white dark:border-dark overflow-y-auto"
   >
     <div ref="modalSwiper" @click="handleHide" class="h-14 pt-6 flex justify-center">
       <div class="h-1 w-20 bg-white-30 dark:bg-white-30 rounded-full"></div>

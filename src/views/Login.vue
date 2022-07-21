@@ -53,7 +53,7 @@
         if (!userProfile.value.profileFinished || !userProfile.value.onboarded) {
           await push({ name: 'onboarding', query: { step: '1' } });
         } else {
-          await push({ name: 'home' });
+          await push({ name: 'active-challenges' });
         }
       })
       .finally(() => {

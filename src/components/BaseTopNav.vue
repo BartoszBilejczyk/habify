@@ -1,5 +1,5 @@
 <template>
-  <div class="w-full nav pb-3" :class="background && 'bg-primary dark:bg-dark text-white-10'">
+  <div class="w-full nav pb-3" :class="background && 'bg-primary dark:bg-dark text-white'">
     <div class="nav-content">
       <div
         class="px-4 w-full flex items-center relative h-6"
@@ -9,18 +9,19 @@
           <BackIcon
             v-if="icon === 'back'"
             class="w-3.5 h-3.5"
-            :class="background ? 'text-white-10' : 'text-white-300 dark:text-white-20'"
+            :class="background ? 'text-white-20' : 'text-white-300 dark:text-white-20'"
             @click="handleBack"
           />
           <CloseIcon
             v-if="icon === 'close'"
             class="w-5 h-5"
-            :class="background ? 'text-white-10' : 'text-white-300 dark:text-white-20'"
+            :class="background ? 'text-white-20' : 'text-white-300 dark:text-white-20'"
           />
           <MenuIcon
             v-if="icon === 'menu'"
             class="w-5 h-5"
-            :class="background ? 'text-white-10' : 'text-white-300 dark:text-white-20'"
+            :class="background ? 'text-white-20' : 'text-white-300 dark:text-white-20'"
+            @click="$emit('openModal')"
           />
         </span>
         <span
@@ -60,11 +61,11 @@
     },
     title: {
       type: String,
-      default: 'Home',
+      default: '',
     },
     backRoute: {
       type: String,
-      default: 'home',
+      default: 'active-challenges',
     },
   });
 
