@@ -29,7 +29,7 @@
         :step="step"
         class="bg-white"
         :white="true"
-        :title="$t('titles.onboardingTwo')"
+        :title="$t('titles.onboardingThree')"
         description="Lorem ipsum dolor sit amet sdajl qoipasncvusqad jasdklj"
         @next="handleNext"
         @skip="handleSkip"
@@ -40,7 +40,7 @@
         v-if="step === 5"
         :step="step"
         class="bg-green"
-        :title="$t('titles.onboardingThree')"
+        :title="$t('titles.onboardingFour')"
         description="Lorem ipsum dolor sit amet sdajl qoipasncvusqad jasdklj"
         @finish="handleFinish"
       >

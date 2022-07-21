@@ -16,7 +16,11 @@
   >
     <div class="flex flex-col flex-1" :class="{ 'app-content-with-padding': showMenu }">
       <div v-if="loading">{{ $t('common.loading') }}</div>
-      <router-view v-else />
+      <router-view v-else v-slot="{ Component }">
+        <transition :name="isParentRoute ? 'route' : 'child-route'" mode="out-in">
+          <component :is="Component"></component>
+        </transition>
+      </router-view>
     </div>
     <!--    TODO find out why it's visible on reload (e.g. invitation view)-->
     <Menu v-if="showMenu" />
@@ -40,6 +44,17 @@
   const noMenu = ['login', 'register', 'forgot-password', 'onboarding', 'auth-start', 'invite'];
   const noAuthRoutes = ['login', 'register', 'forgot-password', 'auth-start', 'invite'];
 
+  const parentRoutes = [
+    'active-challenges',
+    'friends',
+    'profile',
+    'auth-start',
+    'login',
+    'register',
+    'onboarding',
+    'finish-profile',
+  ];
+
   const { currentRoute, push } = useRouter();
   const { firebaseUser, getDocRaw } = useFirebase();
   const { userProfile } = useUser();
@@ -48,6 +63,8 @@
 
   // @ts-ignore
   const showMenu = computed(() => !loading.value && !noMenu.includes(currentRoute.value.name));
+  // @ts-ignore
+  const isParentRoute = computed(() => parentRoutes.includes(currentRoute.value.name));
 
   onMounted(() => {
     loading.value = true;
@@ -96,5 +113,37 @@
     .app-content-with-padding {
       padding-bottom: 65px;
     }
+  }
+
+  /* route transitions */
+  .route-enter-from {
+    opacity: 0;
+    transform: translateX(-50px);
+  }
+  .route-enter-active {
+    transition: all 0.15s ease-out;
+  }
+  .route-leave-to {
+    opacity: 0;
+    transform: translateX(50px);
+  }
+  .route-leave-active {
+    transition: all 0.15s ease-in;
+  }
+
+  /* route transitions */
+  .child-route-enter-from {
+    opacity: 0;
+    transform: translateX(50px);
+  }
+  .child-route-enter-active {
+    transition: all 0.15s ease-out;
+  }
+  .child-route-leave-to {
+    opacity: 0;
+    transform: translateX(-50px);
+  }
+  .child-route-leave-active {
+    transition: all 0.15s ease-in;
   }
 </style>

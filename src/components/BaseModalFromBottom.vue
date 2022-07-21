@@ -18,6 +18,7 @@
 <script setup lang="ts">
   import { computed, ref, watch } from 'vue';
   import { SwipeDirection, useSwipe } from '@vueuse/core';
+  import { onClickOutside } from '@vueuse/core';
 
   const props = defineProps<{
     isOpen: boolean;
@@ -30,6 +31,12 @@
   const modalSwiper = ref<HTMLElement | null>(null);
   const headingEl = ref<HTMLElement | null>(null);
   const modalHeight = computed(() => modal.value?.offsetHeight);
+
+  onClickOutside(modal, () => {
+    if (props.isOpen) {
+      emit('hide');
+    }
+  });
 
   const { direction, lengthY } = useSwipe(modalSwiper, {
     passive: false,

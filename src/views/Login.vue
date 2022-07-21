@@ -35,6 +35,10 @@
   const loading = ref(false);
 
   const login = () => {
+    if (!email.value || !password.value) {
+      return;
+    }
+
     if (loading.value) {
       return;
     }

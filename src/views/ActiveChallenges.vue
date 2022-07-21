@@ -11,12 +11,13 @@
         </div>
       </div>
     </BaseTopNav>
-    <div class="px-4 flex flex-col flex-1 pt-4 pb-8">
+    <div class="px-4 flex flex-col flex-1 pt-5 pb-8">
       <div v-if="loading">{{ $t('common.loading') }}</div>
       <ActiveChallenge v-for="challenge in challenges.slice(0, 2)" :challenge="challenge" :user="userProfileBasic" />
       <div
         v-if="!loading"
-        class="px-3 py-2 mb-4 bg-primary text-white flex justify-between items-center rounded-lg shadow-lg"
+        class="mb-4 bg-primary text-white flex justify-between items-center rounded-lg shadow-lg"
+        :class="{ 'px-3 py-2': challenges.length, 'px-5 py-4': !challenges.length }"
       >
         <div>
           <span class="font-bold">
@@ -61,7 +62,7 @@
   import { useUser } from '../composables/useUser';
 
   const { challenges, getChallenges } = useStore();
-  const { push } = useRouter();
+  const { push, currentRoute, replace } = useRouter();
   const { getCollectionItemsWhere } = useFirebase();
   const { userProfile, userProfileBasic, visibleNotifications, activeNotificationsLength, markNotificationsAsSeen } =
     useUser();
@@ -83,6 +84,11 @@
   const isLeftMenuModalOpen = ref(false);
 
   onMounted(async () => {
+    if (currentRoute.value.query?.back === 'menu') {
+      openLeftMenuModal();
+      await replace({ query: {} });
+    }
+
     if (userProfile.value.id) {
       await getChallenges();
     }
@@ -95,12 +101,19 @@
   };
 
   const openNotificationsModal = () => {
-    if (visibleNotifications.value.length) {
-      isLeftMenuModalOpen.value = false;
+    if (isNotificationModalOpen.value) {
+      return;
+    }
+
+    if (isLeftMenuModalOpen.value) {
       setTimeout(() => {
         isNotificationModalOpen.value = true;
       }, 100);
+    } else {
+      isNotificationModalOpen.value = true;
     }
+
+    isLeftMenuModalOpen.value = false;
   };
 
   const hideLeftMenuModal = async () => {
@@ -110,9 +123,14 @@
   };
 
   const openLeftMenuModal = () => {
-    isNotificationModalOpen.value = false;
-    setTimeout(() => {
+    if (isNotificationModalOpen.value) {
+      setTimeout(() => {
+        isLeftMenuModalOpen.value = true;
+      }, 100);
+    } else {
       isLeftMenuModalOpen.value = true;
-    }, 100);
+    }
+
+    isNotificationModalOpen.value = false;
   };
 </script>

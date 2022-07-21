@@ -64,7 +64,6 @@
   ]);
 
   const handleRouteChange = async (name: RouteName) => {
-    console.log('elo');
-    await push({ name });
+    await push({ name, query: { back: 'menu' } });
   };
 </script>

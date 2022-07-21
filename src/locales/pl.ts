@@ -46,6 +46,7 @@ export default {
     onboardingOne: 'Onboarding 1',
     onboardingTwo: 'Onboarding 2',
     onboardingThree: 'Onboarding 3',
+    onboardingFour: 'Onboarding 4',
     profile: 'Profile',
     friends: 'Friends',
     invite: 'Invite Friends',

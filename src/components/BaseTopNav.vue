@@ -48,7 +48,7 @@
 
   type TopNavIcon = 'close' | 'back' | 'menu';
 
-  const { push } = useRouter();
+  const { push, currentRoute } = useRouter();
 
   const props = defineProps({
     icon: {
@@ -70,7 +70,7 @@
   });
 
   const handleBack = async () => {
-    await push({ name: props.backRoute });
+    await push({ name: props.backRoute, query: { ...currentRoute.value.query } });
   };
 </script>
 

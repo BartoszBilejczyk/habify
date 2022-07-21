@@ -2,8 +2,8 @@
   <div class="w-full h-full flex flex-col flex-1">
     <BaseTopNav :title="$t('titles.preferences')" back-route="profile" />
     <div class="mt-6 px-5">
-      <div class="flex mb-4 justify-between">
-        <div class="text-lg font-bold">Dark mode</div>
+      <div class="flex mb-6 justify-between">
+        <div class="font-bold">Dark mode</div>
         <label for="default-toggle" class="inline-flex relative items-center cursor-pointer">
           <input type="checkbox" v-model="isDark" id="default-toggle" class="sr-only peer" />
           <div
@@ -11,8 +11,8 @@
           />
         </label>
       </div>
-      <div class="flex mb-4 justify-between">
-        <div class="text-lg font-bold">Language</div>
+      <div class="flex mb-6 justify-between">
+        <div class="font-bold">Language</div>
         <div class="flex">
           <div
             class="h-8 w-10 rounded border border-solid flex items-center justify-center"

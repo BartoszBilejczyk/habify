@@ -1,6 +1,6 @@
 <template>
   <div class="w-full h-full flex flex-col flex-1">
-    <BaseTopNav :title="$t('titles.donate')" back-route="profile" />
+    <BaseTopNav :title="$t('titles.donate')" back-route="active-challenges" />
     <div class="px-8 pt-4 w-full h-full flex-1 flex flex-col justify-center pb-20 dark:bg-dark text-white">
       <LottieAnimation :animation-data="donateAnimation" class="-mt-24" />
       <div class="mt-10 text-xl font-bold text-white-700 dark:text-white-10 text-center mt-4 mb-6">

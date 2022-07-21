@@ -1,6 +1,7 @@
-import { Charity, CharityCategory } from '../types';
+import { Charity } from '../types';
+import { CHARITY_CATEGORY } from './constants';
 
-const charities: Charity[] = [
+export const charities: Charity[] = [
   {
     id: '',
     name: 'Zrzutka',
@@ -8,7 +9,7 @@ const charities: Charity[] = [
     logo: '',
     description: '',
     image: '',
-    category: '',
+    category: CHARITY_CATEGORY.kids.value,
   },
   {
     id: '',
@@ -17,7 +18,7 @@ const charities: Charity[] = [
     logo: '',
     description: '',
     image: '',
-    category: '',
+    category: CHARITY_CATEGORY.kids.value,
   },
   {
     id: '',
@@ -26,7 +27,7 @@ const charities: Charity[] = [
     logo: '',
     description: '',
     image: '',
-    category: '',
+    category: CHARITY_CATEGORY.kids.value,
   },
   {
     id: '',
@@ -35,7 +36,7 @@ const charities: Charity[] = [
     logo: '',
     description: '',
     image: '',
-    category: '',
+    category: CHARITY_CATEGORY.kids.value,
   },
   {
     id: '',
@@ -44,7 +45,7 @@ const charities: Charity[] = [
     logo: '',
     description: '',
     image: '',
-    category: '',
+    category: CHARITY_CATEGORY.kids.value,
   },
   {
     id: '',
@@ -53,7 +54,7 @@ const charities: Charity[] = [
     logo: '',
     description: '',
     image: '',
-    category: '',
+    category: CHARITY_CATEGORY.animals.value,
   },
   {
     id: '',
@@ -62,7 +63,7 @@ const charities: Charity[] = [
     logo: '',
     description: '',
     image: '',
-    category: '',
+    category: CHARITY_CATEGORY.animals.value,
   },
   {
     id: '',
@@ -71,7 +72,7 @@ const charities: Charity[] = [
     logo: '',
     description: '',
     image: '',
-    category: '',
+    category: CHARITY_CATEGORY.animals.value,
   },
   {
     id: '',
@@ -80,7 +81,7 @@ const charities: Charity[] = [
     logo: '',
     description: '',
     image: '',
-    category: '',
+    category: CHARITY_CATEGORY.animals.value,
   },
   {
     id: '',
@@ -89,7 +90,7 @@ const charities: Charity[] = [
     logo: '',
     description: '',
     image: '',
-    category: '',
+    category: CHARITY_CATEGORY.animals.value,
   },
   {
     id: '',
@@ -98,7 +99,7 @@ const charities: Charity[] = [
     logo: '',
     description: '',
     image: '',
-    category: '',
+    category: CHARITY_CATEGORY.environment.value,
   },
   {
     id: '',
@@ -107,7 +108,7 @@ const charities: Charity[] = [
     logo: '',
     description: '',
     image: '',
-    category: '',
+    category: CHARITY_CATEGORY.environment.value,
   },
   {
     id: '',
@@ -116,7 +117,7 @@ const charities: Charity[] = [
     logo: '',
     description: '',
     image: '',
-    category: '',
+    category: CHARITY_CATEGORY.environment.value,
   },
   {
     id: '',
@@ -125,7 +126,7 @@ const charities: Charity[] = [
     logo: '',
     description: '',
     image: '',
-    category: '',
+    category: CHARITY_CATEGORY.environment.value,
   },
   {
     id: '',
@@ -134,7 +135,7 @@ const charities: Charity[] = [
     logo: '',
     description: '',
     image: '',
-    category: '',
+    category: CHARITY_CATEGORY.other.value,
   },
   {
     id: '',
@@ -143,7 +144,7 @@ const charities: Charity[] = [
     logo: '',
     description: '',
     image: '',
-    category: '',
+    category: CHARITY_CATEGORY.other.value,
   },
   {
     id: '',
@@ -152,7 +153,7 @@ const charities: Charity[] = [
     logo: '',
     description: '',
     image: '',
-    category: '',
+    category: CHARITY_CATEGORY.other.value,
   },
   {
     id: '',
@@ -161,7 +162,7 @@ const charities: Charity[] = [
     logo: '',
     description: '',
     image: '',
-    category: '',
+    category: CHARITY_CATEGORY.other.value,
   },
   {
     id: '',
@@ -170,7 +171,7 @@ const charities: Charity[] = [
     logo: '',
     description: '',
     image: '',
-    category: '',
+    category: CHARITY_CATEGORY.other.value,
   },
   {
     id: '',
@@ -179,7 +180,7 @@ const charities: Charity[] = [
     logo: '',
     description: '',
     image: '',
-    category: '',
+    category: CHARITY_CATEGORY.other.value,
   },
   {
     id: '',
@@ -188,7 +189,7 @@ const charities: Charity[] = [
     logo: '',
     description: '',
     image: '',
-    category: '',
+    category: CHARITY_CATEGORY.other.value,
   },
   {
     id: '',
@@ -197,7 +198,7 @@ const charities: Charity[] = [
     logo: '',
     description: '',
     image: '',
-    category: '',
+    category: CHARITY_CATEGORY.other.value,
   },
   {
     id: '',
@@ -206,7 +207,7 @@ const charities: Charity[] = [
     logo: '',
     description: '',
     image: '',
-    category: '',
+    category: CHARITY_CATEGORY.other.value,
   },
   {
     id: '',
@@ -215,7 +216,7 @@ const charities: Charity[] = [
     logo: '',
     description: '',
     image: '',
-    category: '',
+    category: CHARITY_CATEGORY.other.value,
   },
   {
     id: '',
@@ -224,7 +225,7 @@ const charities: Charity[] = [
     logo: '',
     description: '',
     image: '',
-    category: '',
+    category: CHARITY_CATEGORY.other.value,
   },
   {
     id: '',
@@ -233,7 +234,7 @@ const charities: Charity[] = [
     logo: '',
     description: '',
     image: '',
-    category: '',
+    category: CHARITY_CATEGORY.other.value,
   },
   {
     id: '',
@@ -242,7 +243,7 @@ const charities: Charity[] = [
     logo: '',
     description: '',
     image: '',
-    category: '',
+    category: CHARITY_CATEGORY.other.value,
   },
   {
     id: '',
@@ -251,7 +252,7 @@ const charities: Charity[] = [
     logo: '',
     description: '',
     image: '',
-    category: '',
+    category: CHARITY_CATEGORY.other.value,
   },
   {
     id: '',
@@ -260,7 +261,7 @@ const charities: Charity[] = [
     logo: '',
     description: '',
     image: '',
-    category: '',
+    category: CHARITY_CATEGORY.other.value,
   },
   {
     id: '',
@@ -269,7 +270,7 @@ const charities: Charity[] = [
     logo: '',
     description: '',
     image: '',
-    category: '',
+    category: CHARITY_CATEGORY.other.value,
   },
   {
     id: '',
@@ -278,7 +279,7 @@ const charities: Charity[] = [
     logo: '',
     description: '',
     image: '',
-    category: '',
+    category: CHARITY_CATEGORY.other.value,
   },
   {
     id: '',
@@ -287,7 +288,7 @@ const charities: Charity[] = [
     logo: '',
     description: '',
     image: '',
-    category: '',
+    category: CHARITY_CATEGORY.other.value,
   },
   {
     id: '',
@@ -296,7 +297,7 @@ const charities: Charity[] = [
     logo: '',
     description: '',
     image: '',
-    category: '',
+    category: CHARITY_CATEGORY.other.value,
   },
   {
     id: '',
@@ -305,7 +306,7 @@ const charities: Charity[] = [
     logo: '',
     description: '',
     image: '',
-    category: '',
+    category: CHARITY_CATEGORY.other.value,
   },
   {
     id: '',
@@ -314,7 +315,7 @@ const charities: Charity[] = [
     logo: '',
     description: '',
     image: '',
-    category: '',
+    category: CHARITY_CATEGORY.other.value,
   },
   {
     id: '',
@@ -323,6 +324,6 @@ const charities: Charity[] = [
     logo: '',
     description: '',
     image: '',
-    category: '',
+    category: CHARITY_CATEGORY.other.value,
   },
 ];

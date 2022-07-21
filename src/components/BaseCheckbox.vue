@@ -2,11 +2,11 @@
   <div class="flex">
     <input
       type="checkbox"
-      class="h-5 w-5 border outline-none focus:outline-none border-white-600 hover:border-white-800 checked:border-primary"
+      class="h-5 w-5 shrink-0 border outline-none focus:outline-none border-white-600 hover:border-white-800 checked:border-primary mt-1"
       :value="modelValue"
       @input="updateValue"
     />
-    <label v-if="label" class="ml-1.5 text-white-800 dark:text-white leading-5 text-sm">{{ label }}</label>
+    <label v-if="label" class="ml-2.5 text-white-800 dark:text-white leading-5 text-sm">{{ label }}</label>
   </div>
 </template>
 

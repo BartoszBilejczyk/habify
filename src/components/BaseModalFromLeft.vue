@@ -9,7 +9,7 @@
     <div class="pb-4 px-6 p-6">
       <slot></slot>
     </div>
-    <div ref="modalEl" class="flex-1"></div>
+    <div ref="modalEl" class="flex-1" />
   </div>
 </template>
 
@@ -17,6 +17,7 @@
   import { computed, ref, watch } from 'vue';
   import { SwipeDirection, useSwipe } from '@vueuse/core';
   import CloseIcon from '../assets/icons/close.svg?component';
+  import { onClickOutside } from '@vueuse/core';
 
   const props = defineProps<{
     isOpen: boolean;
@@ -29,6 +30,12 @@
   const modalEl = ref<HTMLElement | null>(null);
   const headingEl = ref<HTMLElement | null>(null);
   const modalWidth = computed(() => modal.value?.offsetWidth);
+
+  onClickOutside(modal, () => {
+    if (props.isOpen) {
+      emit('hide');
+    }
+  });
 
   const { direction, lengthX } = useSwipe(modalEl, {
     passive: false,

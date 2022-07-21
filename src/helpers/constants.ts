@@ -81,13 +81,6 @@ export const CHALLENGE_CONFIRMATION_TYPE: Record<ChallengeConfirmationType, Cons
   },
 };
 
-export const CHARITY_CATEGORY: Record<CharityCategory, CharityCategory> = {
-  kids: 'kids',
-  animals: 'animals',
-  environment: 'environment',
-  other: 'other',
-};
-
 export const TASK_STATUS: Record<TaskStatus, TaskStatus> = {
   active: 'active',
   rewarded: 'rewarded',
@@ -145,5 +138,24 @@ export const NOTIFICATION_ACTION: Record<NotificationAction, Constant<Notificati
   goToTaskCenter: {
     label: i18n.global.t('notifications.actions.goToTaskCenter'),
     value: 'goToTaskCenter',
+  },
+};
+
+export const CHARITY_CATEGORY: Record<CharityCategory, Constant<CharityCategory>> = {
+  kids: {
+    label: i18n.global.t('charities.categories.kids'),
+    value: 'kids',
+  },
+  animals: {
+    label: i18n.global.t('charities.categories.animals'),
+    value: 'animals',
+  },
+  environment: {
+    label: i18n.global.t('charities.categories.environment'),
+    value: 'environment',
+  },
+  other: {
+    label: i18n.global.t('charities.categories.other'),
+    value: 'other',
   },
 };

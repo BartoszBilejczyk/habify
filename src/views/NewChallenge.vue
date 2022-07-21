@@ -1,7 +1,7 @@
 <template>
   <div class="w-full h-full flex flex-col flex-1 pb-6">
     <!--    TODO improve UX -->
-    <BaseTopNav :title="$t('titles.new')" back-route="profile" />
+    <BaseTopNav :title="$t('titles.new')" :back-route="currentRoute.query.forceBack || 'active-challenges'" />
     <div class="flex flex-col flex-1 mt-6 px-4 justify-between">
       <div>
         <!--        <NewChallengeMenu class="mt-3 mb-8" :has-friends="hasFriends" :step="step" />-->
@@ -10,29 +10,44 @@
         <!--        <NewChallengeStepThree v-show="step === 3" :friends="friends" />-->
         <!--        <NewChallengeStepFour v-show="step === 4" />-->
 
-        <BaseInput
-          v-model="stepOne.title"
-          class="mb-3"
-          :label="$t('common.challenge')"
-          :placeholder="$t('challenge.example')"
-          :error="formInvalid && !stepOne.title"
-          full
-        />
-        <BaseTextarea
-          v-model="stepOne.betDetails"
-          class="mb-3"
-          :label="$t('common.bet')"
-          :placeholder="$t('challenge.betDetails')"
-          :error="formInvalid && !stepOne.betDetails"
-          full
-        />
+        <div class="relative">
+          <div class="absolute right-1">
+            <BaseButton :text-white="isDark" :text-primary="!isDark" @click="openModal('challenge-examples')">
+              Browse challenge examples
+            </BaseButton>
+          </div>
+          <BaseTextarea
+            v-model="stepOne.title"
+            class="mb-3"
+            :label="$t('common.challenge')"
+            :placeholder="$t('challenge.example')"
+            :error="formInvalid && !stepOne.title"
+            full
+          />
+        </div>
+
+        <div class="relative">
+          <div class="absolute right-1">
+            <BaseButton :text-white="isDark" :text-primary="!isDark" @click="openModal('bet-examples')">
+              Browse bet examples
+            </BaseButton>
+          </div>
+          <BaseTextarea
+            v-model="stepOne.betDetails"
+            class="mb-3"
+            :label="$t('common.bet')"
+            :placeholder="$t('challenge.betDetails')"
+            :error="formInvalid && !stepOne.betDetails"
+            full
+          />
+        </div>
         <div v-if="friends.length" class="flex flex-col items-center">
           <div class="text-center text-lg text-white-700 dark:text-white-10 mb-6">
             {{ stepOne.invitee?.name }} {{ stepOne.invitee?.nickname && `(${stepOne.invitee.nickname})` }}
           </div>
-          <BaseButton v-if="stepOne.inviteeId" small primary @click="openChooseFriend">Change friend</BaseButton>
+          <BaseButton v-if="stepOne.inviteeId" small primary @click="openModal">Change friend</BaseButton>
           <template v-else>
-            <BaseButton small primary @click="openChooseFriend">Choose friend for challenge</BaseButton>
+            <BaseButton small primary @click="openModal">Choose friend for challenge</BaseButton>
             <div class="text-center text-xs text-white-200 dark:text-white-30 mt-3 mb-4">
               {{ $t('challenge.chooseAfter') }}
             </div>
@@ -48,14 +63,14 @@
         full
         :disabled="!stepOne.title || !stepOne.betDetails"
         @success="handleFinish"
-        @validate="invlidateForm"
+        @validate="invalidateForm"
         :done-text="$t('challenge.challengeCreated')"
         :slide-text="$t('challenge.slideToStart')"
       />
     </div>
 
-    <BaseModalFromBottom :is-open="isModalOpen" @hide="hideModal" :heading="$t('notifications.heading')">
-      <BaseSection :title="$t('titles.challengeExistingFriends')">
+    <BaseModalFromBottom :is-open="isModalOpen" @hide="hideModal" :heading="modalHeading">
+      <BaseSection v-if="modalContent === 'friends'" :title="$t('titles.challengeExistingFriends')">
         <!--  TODO add icon that friend has been selected-->
         <div
           v-for="friend in friends"
@@ -67,6 +82,8 @@
           {{ friend.name }} {{ friend.nickname && `(${friend.nickname})` }}
         </div>
       </BaseSection>
+      <div v-if="modalContent === 'challenge-examples'">Challenge examples</div>
+      <div v-if="modalContent === 'bet-examples'">Bet examples</div>
     </BaseModalFromBottom>
   </div>
 </template>
@@ -75,7 +92,6 @@
   import { ref, computed, onMounted } from 'vue';
 
   import BaseTopNav from '../components/BaseTopNav.vue';
-  import BaseInput from '../components/BaseInput.vue';
   import BaseModalFromBottom from '../components/BaseModalFromBottom.vue';
   import BaseSection from '../components/BaseSection.vue';
   import BaseTextarea from '../components/BaseTextarea.vue';
@@ -89,10 +105,12 @@
   import { NOTIFICATION_ACTION, NOTIFICATION_CATEGORY } from '../helpers/constants';
   import { emptyUserBasic } from '../helpers/empty';
   import { customAlphabet } from 'nanoid';
+  import { useDark } from '@vueuse/core';
 
   const { firebaseUser, setDoc, updateDoc } = useFirebase();
   const { userProfile, userProfileBasic, addNotification } = useUser();
   const { newChallenge, inviteLink, stepOne } = useStore();
+  const isDark = useDark();
 
   const friends = computed(() => userProfile.value.friends);
 
@@ -100,7 +118,8 @@
   const done = ref(false);
   const isModalOpen = ref(false);
   const formInvalid = ref(false);
-  const { push } = useRouter();
+  const modalContent = ref<string>(null);
+  const { push, currentRoute } = useRouter();
 
   // const handleNext = () => {
   //   if (step.value === 2) {
@@ -117,6 +136,17 @@
   //   }
   // };
 
+  const modalHeading = computed(() => {
+    switch (modalContent.value) {
+      case 'friends':
+        return 'Choose a friend to challenge';
+      case 'challenge-examples':
+        return 'Browse Challenge Examples';
+      case 'bet-examples':
+        return 'Browse Bet Examples';
+    }
+  });
+
   onMounted(() => {
     stepOne.id = customAlphabet('abcdefghijklmnoprstuvwyz1234567890', 10)();
   });
@@ -125,11 +155,12 @@
     isModalOpen.value = false;
   };
 
-  const openChooseFriend = () => {
+  const openModal = (content: string) => {
+    modalContent.value = content;
     isModalOpen.value = true;
   };
 
-  const invlidateForm = () => {
+  const invalidateForm = () => {
     formInvalid.value = true;
   };
 

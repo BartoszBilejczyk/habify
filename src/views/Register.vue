@@ -58,6 +58,10 @@
   });
 
   const register = async () => {
+    if (!email.value || !password.value || !confirmPassword.value) {
+      return;
+    }
+
     if (loading.value) {
       return;
     }

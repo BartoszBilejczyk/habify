@@ -28,13 +28,25 @@
           {{ $t('challenge.youLost', { points: Number(challenge.points / 2).toFixed(0) }) }}
         </div>
       </BaseBox>
-      <div v-if="isLoser" class="p-3 bg-primary-600 rounded-xl text-white">
-        <!-- TODO add a question mark why this is manual -->
+      <div v-if="isLoser" class="p-3 bg-primary-600 rounded-xl text-white relative pr-12">
+        <div class="absolute top-3 right-3">
+          <BaseTooltip
+            content="Since you lost the challenge, you are obliged to finish the bet. We are unable to check if you did it, so we believe in your good will."
+          >
+            <BaseQuestionMark on-dark />
+          </BaseTooltip>
+        </div>
         {{ $t('challenge.loserDoTheBet') }}
         <b>"{{ challenge.betDetails }}"</b>
       </div>
-      <div v-if="isWinner" class="p-3 bg-primary-600 rounded-xl text-white">
-        <!-- TODO add a question mark why this is manual -->
+      <div v-if="isWinner" class="p-3 bg-primary-600 rounded-xl text-white relative pr-12">
+        <div class="absolute top-3 right-3">
+          <BaseTooltip
+            content="Since you won the challenge, the loser is obliged to finish the bet. We are unable to check they did it, so we believe in their good will."
+          >
+            <BaseQuestionMark on-dark />
+          </BaseTooltip>
+        </div>
         {{ $t('challenge.winnerLoserHasToDoBet', { name: challenge.inviterSelectedLoser?.name }) }}
         <b>"{{ challenge.betDetails }}"</b>
       </div>
@@ -48,9 +60,16 @@
         "
         class="mt-6"
       >
-        <BaseButton full secondary @click="openSelectWinnerModal">
-          {{ $t('challenge.selectWinner') }}
-        </BaseButton>
+        <div class="relative">
+          <BaseButton full secondary @click="openSelectWinnerModal">
+            {{ $t('challenge.selectWinner') }}
+          </BaseButton>
+          <div class="absolute top-3 right-3">
+            <BaseTooltip content="We are unable to automatically check who won yet, so we believe in your good will.">
+              <BaseQuestionMark on-dark />
+            </BaseTooltip>
+          </div>
+        </div>
       </div>
       <div v-if="allowToChangeAnswer">
         <BaseButton full secondary @click="openSelectWinnerModal">{{ $t('challenge.changeAnswer') }}</BaseButton>
@@ -160,6 +179,9 @@
   import BaseInfoToCopy from '../components/BaseInfoToCopy.vue';
   import BaseButton from '../components/BaseButton.vue';
   import BaseModalFromBottom from '../components/BaseModalFromBottom.vue';
+  import BaseTooltip from '../components/BaseTooltip.vue';
+  import BaseQuestionMark from '../components/BaseQuestionMark.vue';
+
   import { useStore } from '../composables/useStore';
   import { computed, onMounted, ref } from 'vue';
   import { useRouter } from 'vue-router';
