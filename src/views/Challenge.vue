@@ -58,7 +58,7 @@
             (challenge.type === CHALLENGE_TYPES.duration.value && timeEnded)) &&
           !decisions?.you
         "
-        class="mt-6"
+        class="mt-2"
       >
         <div class="relative">
           <BaseButton full secondary @click="openSelectWinnerModal">
@@ -409,11 +409,7 @@
       );
     }
 
-    setTimeout(() => {
-      hideModal();
-      selectLoading.value = false;
-      // TODO set timer for the above and then make it 2 seconds total or something.
-    }, 500);
+    hideModal();
   };
 
   const goToInvite = async () => {

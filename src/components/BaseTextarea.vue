@@ -7,7 +7,7 @@
       :class="{
         'w-full': full,
         'w-fit': !full,
-        'border-red-10 dark:border-red-700': error,
+        'border-red-10 dark:border-red-300': error,
         'border-white-10 dark:border-dark-800 dark:focus:border-dark-800': !error,
       }"
       :value="modelValue"

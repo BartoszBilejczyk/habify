@@ -7,11 +7,12 @@
       :class="{
         'w-full': full,
         'w-fit': !full,
-        'border-red-10 dark:border-red-700': error,
+        'border-red-10 dark:border-red-300': error,
         'border-white-10 dark:border-dark-800 dark:focus:border-dark-800': !error,
       }"
       :type="type || 'text'"
       :value="modelValue"
+      :disabled="disabled"
       @input="updateValue"
     />
   </div>
@@ -26,6 +27,7 @@
     placeholder?: string;
     required?: boolean;
     error?: boolean;
+    disabled?: boolean;
   }>();
 
   const emit = defineEmits(['update:modelValue']);

@@ -1,15 +1,8 @@
 <template>
   <div class="w-full h-full flex flex-col flex-1 pb-6">
-    <!--    TODO improve UX -->
     <BaseTopNav :title="$t('titles.new')" :back-route="currentRoute.query.forceBack || 'active-challenges'" />
     <div class="flex flex-col flex-1 mt-6 px-4 pb-8 justify-between">
       <div>
-        <!--        <NewChallengeMenu class="mt-3 mb-8" :has-friends="hasFriends" :step="step" />-->
-        <!--       make new step - for bet -->
-        <!--        <NewChallengeStepTwo v-show="step === 2" />-->
-        <!--        <NewChallengeStepThree v-show="step === 3" :friends="friends" />-->
-        <!--        <NewChallengeStepFour v-show="step === 4" />-->
-
         <div class="relative">
           <div class="absolute right-1">
             <BaseButton :text-white="isDark" :text-primary="!isDark" @click="openModal('challenge-examples')">
@@ -41,13 +34,17 @@
             full
           />
         </div>
-        <div v-if="friends.length" class="flex flex-col items-center">
-          <div class="text-center text-lg text-white-700 dark:text-white-10 mb-6">
-            {{ stepOne.invitee?.name }} {{ stepOne.invitee?.nickname && `(${stepOne.invitee.nickname})` }}
-          </div>
-          <BaseButton v-if="stepOne.inviteeId" small primary @click="openModal">Change friend</BaseButton>
-          <template v-else>
-            <BaseButton small primary @click="openModal">Choose friend for challenge</BaseButton>
+        <div v-if="friends.length" class="flex flex-col items-stretch">
+          <BaseSelect
+            full
+            :model-value="stepOne.inviteeId"
+            disabled
+            :options="friends.map(f => ({ label: getNameAndNickname(f), value: f.id }))"
+            label="Friend"
+            class="mb-3"
+            @update:modelValue="handleChooseFriend"
+          />
+          <template v-if="!stepOne.inviteeId">
             <div class="text-center text-xs text-white-200 dark:text-white-30 mt-3 mb-4">
               {{ $t('challenge.chooseAfter') }}
             </div>
@@ -70,18 +67,6 @@
     </div>
 
     <BaseModalFromBottom :is-open="isModalOpen" @hide="hideModal" :heading="modalHeading">
-      <BaseSection v-if="modalContent === 'friends'" :title="$t('titles.challengeExistingFriends')">
-        <!--  TODO add icon that friend has been selected-->
-        <div
-          v-for="friend in friends"
-          :key="friend.id"
-          class="bg-white-10 dark:bg-dark-800 my-3 py-1 px-3 rounded-lg cursor-pointer"
-          :class="stepOne.inviteeId === friend.id && 'bg-primary-20 dark:bg-white-10 dark:text-white-500'"
-          @click="handleChooseFriend(friend)"
-        >
-          {{ friend.name }} {{ friend.nickname && `(${friend.nickname})` }}
-        </div>
-      </BaseSection>
       <div v-if="modalContent === 'challenge-examples'">Challenge examples</div>
       <div v-if="modalContent === 'bet-examples'">Bet examples</div>
     </BaseModalFromBottom>
@@ -93,7 +78,7 @@
 
   import BaseTopNav from '../components/BaseTopNav.vue';
   import BaseModalFromBottom from '../components/BaseModalFromBottom.vue';
-  import BaseSection from '../components/BaseSection.vue';
+  import BaseSelect from '../components/BaseSelect.vue';
   import BaseTextarea from '../components/BaseTextarea.vue';
   import BaseButton from '../components/BaseButton.vue';
   import BaseSlideButton from '../components/BaseSlideButton.vue';
@@ -104,6 +89,7 @@
   import { useUser } from '../composables/useUser';
   import { NOTIFICATION_ACTION, NOTIFICATION_CATEGORY } from '../helpers/constants';
   import { emptyUserBasic } from '../helpers/empty';
+  import { getNameAndNickname } from '../helpers';
   import { customAlphabet } from 'nanoid';
   import { useDark } from '@vueuse/core';
 
@@ -138,8 +124,6 @@
 
   const modalHeading = computed(() => {
     switch (modalContent.value) {
-      case 'friends':
-        return 'Choose a friend to challenge';
       case 'challenge-examples':
         return 'Browse Challenge Examples';
       case 'bet-examples':
@@ -168,12 +152,13 @@
     formInvalid.value = true;
   };
 
-  const handleChooseFriend = (friend: Friend) => {
+  const handleChooseFriend = (id: string) => {
+    const friend = friends.value.find(f => f.id === id);
     stepOne.invitee = {
       ...emptyUserBasic,
       ...friend,
     };
-    stepOne.inviteeId = friend.id;
+    stepOne.inviteeId = id;
     hideModal();
   };
 
@@ -228,3 +213,9 @@
     await push({ name: 'new-challenge-success', query: { id: newChallenge.value.id } });
   };
 </script>
+
+<!--        <NewChallengeMenu class="mt-3 mb-8" :has-friends="hasFriends" :step="step" />-->
+<!--       make new step - for bet -->
+<!--        <NewChallengeStepTwo v-show="step === 2" />-->
+<!--        <NewChallengeStepThree v-show="step === 3" :friends="friends" />-->
+<!--        <NewChallengeStepFour v-show="step === 4" />-->

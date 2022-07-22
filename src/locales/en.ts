@@ -129,7 +129,7 @@ export default {
     },
     selectWinner: 'Select winner',
     changeAnswer: 'Change answer',
-    chooseAfter: `You don't have to choose now. You can invite a friend later.`,
+    chooseAfter: `You don't have to choose the friend now.`,
     shareOnNext: 'You will be able to share the link on next view',
     goToChallenge: 'Go back to challenge',
     youChoseWinner: 'You chose that the winner is {name}',

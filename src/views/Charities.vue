@@ -3,10 +3,17 @@
     <BaseTopNav :title="$t('titles.charities')" back-route="active-challenges" />
     <div class="px-5">
       <div class="flex justify-between mb-4">
-        <BaseLabel :active="filter === 'all'" color="primary" class="mx-0.5" @click="filter = 'all'">All</BaseLabel>
+        <BaseLabel
+          :active="filter === 'all'"
+          :color="filter === 'all' ? 'primary' : 'white'"
+          class="mx-0.5"
+          @click="filter = 'all'"
+        >
+          All
+        </BaseLabel>
         <BaseLabel
           :active="filter === CHARITY_CATEGORY.kids.value"
-          color="coral"
+          :color="filter === CHARITY_CATEGORY.kids.value ? 'primary' : 'white'"
           class="mx-0.5"
           @click="filter = CHARITY_CATEGORY.kids.value"
         >
@@ -14,7 +21,7 @@
         </BaseLabel>
         <BaseLabel
           :active="filter === CHARITY_CATEGORY.environment.value"
-          color="green"
+          :color="filter === CHARITY_CATEGORY.environment.value ? 'primary' : 'white'"
           class="mx-0.5"
           @click="filter = CHARITY_CATEGORY.environment.value"
         >
@@ -22,7 +29,7 @@
         </BaseLabel>
         <BaseLabel
           :active="filter === CHARITY_CATEGORY.animals.value"
-          color="yellow"
+          :color="filter === CHARITY_CATEGORY.animals.value ? 'primary' : 'white'"
           class="mx-0.5"
           @click="filter = CHARITY_CATEGORY.animals.value"
         >
@@ -30,7 +37,7 @@
         </BaseLabel>
         <BaseLabel
           :active="filter === CHARITY_CATEGORY.other.value"
-          color="white"
+          :color="filter === CHARITY_CATEGORY.other.value ? 'primary' : 'white'"
           class="mx-0.5"
           @click="filter = CHARITY_CATEGORY.other.value"
         >
