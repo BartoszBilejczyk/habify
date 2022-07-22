@@ -4,7 +4,7 @@ import { computed, reactive, ref } from 'vue';
 import { Challenge, User } from '../types';
 import { emptyChallenge, emptyUser, emptyUserBasic } from '../helpers/empty';
 import { useFirebase } from './useFirebase';
-import { BET_CATEGORY, CHALLENGE_STATUS, CHALLENGE_TYPES } from '../helpers/constants';
+import { CHALLENGE_CATEGORY, CHALLENGE_STATUS, CHALLENGE_TYPES } from '../helpers/constants';
 import { useUser } from './useUser';
 
 export const useStore = createGlobalState(() => {
@@ -18,7 +18,7 @@ export const useStore = createGlobalState(() => {
     id: '',
     title: '',
     duration: '',
-    betCategory: BET_CATEGORY.other.value,
+    challengeCategory: CHALLENGE_CATEGORY.other.value,
     betDetails: '',
     type: CHALLENGE_TYPES.oneTime.value,
     invitee: { ...emptyUserBasic },
@@ -49,7 +49,7 @@ export const useStore = createGlobalState(() => {
     stepOne.id = '';
     stepOne.title = '';
     stepOne.duration = '';
-    stepOne.betCategory = BET_CATEGORY.other.value;
+    stepOne.betCategory = CHALLENGE_CATEGORY.other.value;
     stepOne.betDetails = '';
     stepOne.type = CHALLENGE_TYPES.oneTime.value;
     stepOne.invitee = { ...emptyUserBasic };

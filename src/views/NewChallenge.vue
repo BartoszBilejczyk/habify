@@ -67,8 +67,12 @@
     </div>
 
     <BaseModalFromBottom :is-open="isModalOpen" @hide="hideModal" :heading="modalHeading">
-      <div v-if="modalContent === 'challenge-examples'">Challenge examples</div>
-      <div v-if="modalContent === 'bet-examples'">Bet examples</div>
+      <div v-if="modalContent === 'challenge-examples'">
+        <ChallengeExamplesList @hide="hideModal" />
+      </div>
+      <div v-if="modalContent === 'bet-examples'">
+        <BetExamplesList @hide="hideModal" />
+      </div>
     </BaseModalFromBottom>
   </div>
 </template>
@@ -82,6 +86,8 @@
   import BaseTextarea from '../components/BaseTextarea.vue';
   import BaseButton from '../components/BaseButton.vue';
   import BaseSlideButton from '../components/BaseSlideButton.vue';
+  import ChallengeExamplesList from '../components/ChallengeExamplesList.vue';
+  import BetExamplesList from '../components/BetExamplesList.vue';
   import { useFirebase } from '../composables/useFirebase';
   import { Challenge, ChallengeBasic, Friend, Notification } from '../types';
   import { useStore } from '../composables/useStore';
@@ -214,7 +220,7 @@
       event: 'NEW_CHALLENGE_CREATED',
       category: 'challenge',
       action: 'click',
-      value: newChallenge.value,
+      value: challenge,
       label: 'New challenge has been created',
       noninteraction: false,
     });

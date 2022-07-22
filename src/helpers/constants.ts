@@ -1,5 +1,5 @@
 import {
-  BetCategory,
+  ChallengeCategory,
   ChallengeConfirmationType,
   ChallengeStatus,
   ChallengeType,
@@ -51,14 +51,14 @@ export const CHALLENGE_STATUS: Record<ChallengeStatus, Constant<ChallengeStatus>
   },
 };
 
-export const BET_CATEGORY: Record<BetCategory, Constant<BetCategory>> = {
+export const CHALLENGE_CATEGORY: Record<ChallengeCategory, Constant<ChallengeCategory>> = {
   social: {
     label: i18n.global.t('challenge.categories.social'),
     value: 'social',
   },
-  financial: {
-    label: i18n.global.t('challenge.categories.financial'),
-    value: 'financial',
+  education: {
+    label: i18n.global.t('challenge.categories.education'),
+    value: 'education',
   },
   sport: {
     label: i18n.global.t('challenge.categories.sport'),

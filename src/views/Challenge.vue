@@ -92,7 +92,7 @@
         <BaseBox small class="mt-1.5 relative py-2">
           <div class="w-10/12">{{ challenge.betDetails }}</div>
           <!--          <BaseLabel color="white" class="absolute right-2 top-2">-->
-          <!--            {{ BET_CATEGORY[challenge.betCategory]?.label }}-->
+          <!--            {{ CHALLENGE_CATEGORY[challenge.betCategory]?.label }}-->
           <!--          </BaseLabel>-->
         </BaseBox>
       </div>
@@ -104,13 +104,15 @@
           {{ $t('challenge.challengeParticipant') }}
         </div>
         <BaseBox small class="flex items-center mt-1.5">
-          <div
-            v-if="personName"
-            class="h-6 w-6 text-xs rounded-full bg-white-20 dark:bg-white-400 flex items-center justify-center font-bold"
-          >
-            {{ getInitials(personName) }}
+          <div v-if="personName">
+            <div
+              class="h-6 w-6 text-xs rounded-full bg-white-20 dark:bg-white-400 flex items-center justify-center font-bold"
+            >
+              {{ getInitials(personName) }}
+            </div>
+            <div class="font-bold text-sm ml-2">{{ personName }}</div>
           </div>
-          <div class="font-bold text-sm ml-2">{{ personName }}</div>
+          <div v-else>TBD</div>
         </BaseBox>
       </div>
       <div class="mt-3" v-if="challenge.type === CHALLENGE_TYPES.duration.value">

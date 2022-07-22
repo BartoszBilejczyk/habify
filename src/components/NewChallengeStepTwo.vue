@@ -26,7 +26,7 @@
   import { useStore } from '../composables/useStore';
   import { customAlphabet } from 'nanoid';
   import { useI18n } from 'vue-i18n';
-  import { BET_CATEGORY } from '../helpers/constants';
+  import { CHALLENGE_CATEGORY } from '../helpers/constants';
 
   const { stepOne } = useStore();
   const { t } = useI18n();
@@ -36,9 +36,9 @@
   });
 
   const betCategoryOptions = ref([
-    { label: BET_CATEGORY.social.label, value: BET_CATEGORY.social.value },
-    { label: BET_CATEGORY.financial.label, value: BET_CATEGORY.financial.value },
-    { label: BET_CATEGORY.sport.label, value: BET_CATEGORY.sport.value },
-    { label: BET_CATEGORY.other.label, value: BET_CATEGORY.other.value },
+    { label: CHALLENGE_CATEGORY.social.label, value: CHALLENGE_CATEGORY.social.value },
+    { label: CHALLENGE_CATEGORY.financial.label, value: CHALLENGE_CATEGORY.financial.value },
+    { label: CHALLENGE_CATEGORY.sport.label, value: CHALLENGE_CATEGORY.sport.value },
+    { label: CHALLENGE_CATEGORY.other.label, value: CHALLENGE_CATEGORY.other.value },
   ]);
 </script>

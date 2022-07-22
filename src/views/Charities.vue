@@ -2,7 +2,7 @@
   <div class="w-full h-full flex flex-col flex-1">
     <BaseTopNav :title="$t('titles.charities')" back-route="active-challenges" />
     <div class="px-5">
-      <div class="flex justify-between mb-4">
+      <div class="flex justify-between mt-2 mb-6">
         <BaseLabel
           :active="filter === 'all'"
           :color="filter === 'all' ? 'primary' : 'white'"

@@ -18,7 +18,7 @@
     <div class="flex mb-1.5">
       <div class="font-bold text-sm grow-0 shrink-0 basis-28">{{ $t('common.bet') }}</div>
       <div class="text-sm">
-        {{ BET_CATEGORY[data.betCategory]?.label }}.
+        {{ CHALLENGE_CATEGORY[data.betCategory]?.label }}.
         <!--        {{ $t('challenge.manualConfirmation') }}.-->
       </div>
     </div>
@@ -38,7 +38,7 @@
   import { Challenge } from '../types';
   import { computed } from 'vue';
   import { CHALLENGE_TYPES } from '../helpers/constants';
-  import { BET_CATEGORY } from '../helpers/constants';
+  import { CHALLENGE_CATEGORY } from '../helpers/constants';
 
   const props = defineProps<{
     onDark?: boolean;

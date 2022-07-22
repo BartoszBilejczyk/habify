@@ -1,7 +1,7 @@
 <template>
   <div
     ref="modal"
-    class="w-screen base-modal-from-bottom bg-white dark:bg-dark rounded-t-3xl border border-solid border-white dark:border-dark overflow-y-auto"
+    class="w-screen base-modal-from-bottom bg-white dark:bg-dark rounded-t-3xl border border-solid border-white dark:border-dark"
   >
     <div ref="modalSwiper" @click="handleHide" class="h-14 pt-6 flex justify-center">
       <div class="h-1 w-20 bg-white-30 dark:bg-white-30 rounded-full"></div>
@@ -10,7 +10,9 @@
       <h1 ref="headingEl" v-if="heading" class="text-2xl text-center text-white-800 dark:text-white-10 mb-6">
         {{ heading }}
       </h1>
-      <slot></slot>
+      <div class="content overflow-y-auto">
+        <slot></slot>
+      </div>
     </div>
   </div>
 </template>
@@ -93,6 +95,10 @@
     box-shadow: rgba(17, 17, 26, 0.4) 0 8px 24px, rgba(17, 17, 26, 0.4) 0 16px 56px, rgba(17, 17, 26, 0.4) 0 24px 80px;
   }
 
+  .base-modal-from-bottom .content {
+    max-height: calc(78vh - 130px);
+  }
+
   .dark .base-modal-from-bottom {
     box-shadow: rgba(255, 255, 255, 0.04) 0 8px 24px, rgba(255, 255, 255, 0.04) 0 16px 56px,
       rgba(255, 255, 255, 0.04) 0 24px 80px;
@@ -100,8 +106,12 @@
 
   @media (display-mode: standalone) {
     .base-modal-from-bottom {
-      height: 70vh;
-      bottom: -80vh;
+      height: 82vh;
+      bottom: -90vh;
+    }
+
+    .base-modal-from-bottom .content {
+      max-height: calc(82vh - 130px);
     }
   }
 </style>

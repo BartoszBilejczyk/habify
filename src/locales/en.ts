@@ -119,7 +119,7 @@ export default {
     },
     categories: {
       social: 'Social',
-      financial: 'Financial',
+      education: 'Education',
       sport: 'Sport',
       other: 'Other',
     },

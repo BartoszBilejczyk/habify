@@ -59,13 +59,39 @@ const router = createRouter({
     {
       path: '/profile',
       name: 'profile',
-      meta: { gtm: 'Profile' },
+      meta: {
+        gtm: 'Profile',
+        title: 'Profile Page Name',
+        metaTags: [
+          {
+            name: 'description',
+            content: 'The Profile page of our example app.',
+          },
+          {
+            property: 'og:description',
+            content: 'The Profile page of our example app.',
+          },
+        ],
+      },
       component: () => import('./views/Profile.vue'),
     },
     {
       path: '/',
       name: 'active-challenges',
-      meta: { gtm: 'Active Challenges' },
+      meta: {
+        gtm: 'Active Challenges',
+        title: 'Challenges Page - Example App',
+        metaTags: [
+          {
+            name: 'description',
+            content: 'The Challenges page of our example app.',
+          },
+          {
+            property: 'og:description',
+            content: 'The Challenges page of our example app.',
+          },
+        ],
+      },
       component: () => import('./views/ActiveChallenges.vue'),
     },
     {

@@ -68,7 +68,7 @@ export const emptyChallenge: Challenge = {
   title: '',
   duration: '',
   type: null,
-  betCategory: null,
+  challengeCategory: null,
   betDetails: null, // TODO
   points: 0,
   inviteLink: '',
@@ -124,9 +124,10 @@ export const emptyInvitationForChallenge: InvitationForChallenge = {
 };
 
 export const emptyChallengeExample: ChallengeExample = {
-  id: '',
-  title: '',
-  duration: '',
-  type: null,
+  titles: {
+    en: '',
+    pl: '',
+  },
+  category: null,
   points: 0,
 };
