@@ -92,11 +92,13 @@
   import { getNameAndNickname } from '../helpers';
   import { customAlphabet } from 'nanoid';
   import { useDark } from '@vueuse/core';
+  import { useGtm } from '@gtm-support/vue-gtm';
 
   const { firebaseUser, setDoc, updateDoc } = useFirebase();
   const { userProfile, userProfileBasic, addNotification } = useUser();
   const { newChallenge, inviteLink, stepOne, resetStepOne } = useStore();
   const isDark = useDark();
+  const gtm = useGtm();
 
   const friends = computed(() => userProfile.value.friends);
 
@@ -208,7 +210,14 @@
 
     done.value = true;
 
-    console.log(challenge);
+    gtm?.trackEvent({
+      event: 'NEW_CHALLENGE_CREATED',
+      category: 'challenge',
+      action: 'click',
+      value: newChallenge.value,
+      label: 'New challenge has been created',
+      noninteraction: false,
+    });
 
     await push({ name: 'new-challenge-success', query: { id: newChallenge.value.id } });
   };
