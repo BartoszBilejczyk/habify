@@ -12,10 +12,10 @@
       </div>
     </BaseTopNav>
     <div class="px-4 flex flex-col flex-1 pt-5 pb-8">
-      <div v-if="loading">{{ $t('common.loading') }}</div>
+      <!--      <div v-if="loading">{{ $t('common.loading') }}</div>-->
       <ActiveChallenge v-for="challenge in challenges.slice(0, 2)" :challenge="challenge" :user="userProfileBasic" />
       <div
-        v-if="!loading"
+        v-if="!loading || challenges.length"
         class="mb-4 bg-primary text-white flex justify-between items-center rounded-lg shadow-lg"
         :class="{ 'px-3 py-2': challenges.length, 'px-5 py-4': !challenges.length }"
       >

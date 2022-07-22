@@ -1,16 +1,17 @@
 <template>
   <div
     ref="modal"
-    class="p-safe w-screen base-modal-from-left bg-white dark:bg-dark rounded-r-3xl overflow-y-auto flex flex-col"
+    class="p-safe w-screen base-modal-from-left bg-white dark:bg-dark rounded-r-3xl overflow-y-auto flex flex-col justify-center items-center"
   >
-    <div class="relative">
+    <div class="relative flex flex-col flex-1 w-full">
+      <div ref="modalEl" class="flex flex-1 w-full"></div>
       <div class="absolute right-2.5 top-2">
         <CloseIcon class="w-8 h-8 text-white-200 dark:text-white-20" @click="$emit('hide')" />
       </div>
-      <div class="pb-4 px-6 p-6">
+      <div class="pb-4 px-8 p-6">
         <slot></slot>
       </div>
-      <div ref="modalEl" class="flex-1" />
+      <div ref="modalEl2" class="flex flex-1 w-full"></div>
     </div>
   </div>
 </template>
@@ -30,6 +31,7 @@
 
   const modal = ref<HTMLElement | null>(null);
   const modalEl = ref<HTMLElement | null>(null);
+  const modalEl2 = ref<HTMLElement | null>(null);
   const headingEl = ref<HTMLElement | null>(null);
   const modalWidth = computed(() => modal.value?.offsetWidth);
 
@@ -39,7 +41,7 @@
     }
   });
 
-  const { direction, lengthX } = useSwipe(modalEl, {
+  const { lengthX } = useSwipe(modalEl, {
     passive: false,
     onSwipeEnd(e: TouchEvent, direction: SwipeDirection) {
       if (
@@ -47,6 +49,19 @@
         lengthX.value > 0 &&
         modalWidth.value &&
         Math.abs(lengthX.value) / modalWidth.value >= 0.01
+      ) {
+        handleHide();
+      }
+    },
+  });
+  const { lengthX: lengthXTwo } = useSwipe(modalEl2, {
+    passive: false,
+    onSwipeEnd(e: TouchEvent, direction: SwipeDirection) {
+      if (
+        direction === SwipeDirection.LEFT &&
+        lengthXTwo.value > 0 &&
+        modalWidth.value &&
+        Math.abs(lengthXTwo.value) / modalWidth.value >= 0.01
       ) {
         handleHide();
       }

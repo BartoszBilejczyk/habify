@@ -89,7 +89,7 @@
 </template>
 
 <script setup lang="ts">
-  import { ref, computed, onMounted } from 'vue';
+  import { ref, computed, onMounted, onBeforeUnmount } from 'vue';
 
   import BaseTopNav from '../components/BaseTopNav.vue';
   import BaseModalFromBottom from '../components/BaseModalFromBottom.vue';
@@ -109,7 +109,7 @@
 
   const { firebaseUser, setDoc, updateDoc } = useFirebase();
   const { userProfile, userProfileBasic, addNotification } = useUser();
-  const { newChallenge, inviteLink, stepOne } = useStore();
+  const { newChallenge, inviteLink, stepOne, resetStepOne } = useStore();
   const isDark = useDark();
 
   const friends = computed(() => userProfile.value.friends);
@@ -118,7 +118,7 @@
   const done = ref(false);
   const isModalOpen = ref(false);
   const formInvalid = ref(false);
-  const modalContent = ref<string>(null);
+  const modalContent = ref<string>('');
   const { push, currentRoute } = useRouter();
 
   // const handleNext = () => {
@@ -149,6 +149,10 @@
 
   onMounted(() => {
     stepOne.id = customAlphabet('abcdefghijklmnoprstuvwyz1234567890', 10)();
+  });
+
+  onBeforeUnmount(() => {
+    resetStepOne();
   });
 
   const hideModal = () => {

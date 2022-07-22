@@ -14,7 +14,7 @@ export const useStore = createGlobalState(() => {
 
   const challenge = ref<Challenge>({ ...emptyChallenge });
 
-  const stepOne = reactive<Partial<Challenge>>({
+  const emptyStepOne = {
     id: '',
     title: '',
     duration: '',
@@ -23,7 +23,9 @@ export const useStore = createGlobalState(() => {
     type: CHALLENGE_TYPES.oneTime.value,
     invitee: { ...emptyUserBasic },
     inviteeId: '',
-  });
+  };
+
+  const stepOne = reactive<Partial<Challenge>>({ ...emptyStepOne });
 
   const inviteLink = computed(() => `https://habbi.app/invite?code=${stepOne.id}`);
   const challengeLoggedInUser = computed(() =>
@@ -42,6 +44,17 @@ export const useStore = createGlobalState(() => {
   }));
 
   const referrer = ref<User>({ ...emptyUser });
+
+  const resetStepOne = () => {
+    stepOne.id = '';
+    stepOne.title = '';
+    stepOne.duration = '';
+    stepOne.betCategory = BET_CATEGORY.other.value;
+    stepOne.betDetails = '';
+    stepOne.type = CHALLENGE_TYPES.oneTime.value;
+    stepOne.invitee = { ...emptyUserBasic };
+    stepOne.inviteeId = '';
+  };
 
   const getChallenges = async (overrideId = '') => {
     // TODO is there better way?
@@ -78,6 +91,7 @@ export const useStore = createGlobalState(() => {
 
   return {
     stepOne,
+    resetStepOne,
     newChallenge,
     referrer,
     challenges,

@@ -15,11 +15,12 @@
   >
     <div class="flex flex-col flex-1" :class="{ 'app-content-with-padding': showMenu }">
       <div v-if="loading">{{ $t('common.loading') }}</div>
-      <router-view v-else v-slot="{ Component }">
-        <transition :name="isParentRoute ? 'route' : 'child-route'" mode="out-in">
-          <component :is="Component"></component>
-        </transition>
-      </router-view>
+      <!--      <router-view v-else v-slot="{ Component }">-->
+      <!--        <transition :name="isParentRoute ? 'route' : 'child-route'" mode="out-in">-->
+      <!--          <component :is="Component"></component>-->
+      <!--        </transition>-->
+      <!--      </router-view>-->
+      <router-view v-else></router-view>
     </div>
     <!--    TODO find out why it's visible on reload (e.g. invitation view)-->
     <Menu v-if="showMenu" />
@@ -43,16 +44,7 @@
   const noMenu = ['login', 'register', 'forgot-password', 'onboarding', 'auth-start', 'invite'];
   const noAuthRoutes = ['login', 'register', 'forgot-password', 'auth-start', 'invite'];
 
-  const parentRoutes = [
-    'active-challenges',
-    'friends',
-    'profile',
-    'auth-start',
-    'login',
-    'register',
-    'onboarding',
-    'finish-profile',
-  ];
+  const parentRoutes = ['active-challenges', 'friends', 'profile', 'auth-start', 'onboarding', 'finish-profile'];
 
   const { currentRoute, push } = useRouter();
   const { firebaseUser, getDocRaw } = useFirebase();

@@ -2,11 +2,11 @@
   <div class="">
     <div
       v-for="item in menuItems"
-      class="flex items-center justify-between text-white-600 dark:text-white-20 cursor-pointer border-b border-b-white-20 dark:border-b-white-500 py-2.5"
+      class="flex items-center justify-between text-white-600 dark:text-white-20 cursor-pointer border-b border-b-white-20 dark:border-b-white-500 py-4"
       @click="handleRouteChange(item.name)"
     >
-      <div class="flex items-center text-sm">
-        <component :is="item.icon" class="w-5 h-5 mr-3" />
+      <div class="flex items-center text">
+        <component :is="item.icon" class="w-6 h-6 mr-4" />
         {{ item.title }}
       </div>
     </div>
