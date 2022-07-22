@@ -60,12 +60,15 @@
   import { onMounted, ref } from 'vue';
   import { useFirebase } from '../composables/useFirebase';
   import { useUser } from '../composables/useUser';
+  import { useGtm } from '@gtm-support/vue-gtm';
 
   const { challenges, getChallenges } = useStore();
   const { push, currentRoute, replace } = useRouter();
   const { getCollectionItemsWhere } = useFirebase();
   const { userProfile, userProfileBasic, visibleNotifications, activeNotificationsLength, markNotificationsAsSeen } =
     useUser();
+  const gtm = useGtm();
+
   const loading = ref(false);
 
   onMounted(async () => {
@@ -101,6 +104,15 @@
   };
 
   const openNotificationsModal = () => {
+    console.log(gtm);
+    gtm?.trackEvent({
+      event: 'NOTIFICATION_MODAL_OPEN',
+      category: 'UI navigation',
+      action: 'click',
+      label: 'Notification modal has been opened through bell icon',
+      noninteraction: false,
+    });
+
     isNotificationModalOpen.value = true;
 
     isLeftMenuModalOpen.value = false;
@@ -113,6 +125,15 @@
   };
 
   const openLeftMenuModal = () => {
+    console.log(gtm);
+    gtm?.trackEvent({
+      event: 'LEFT_MENU_OPEN',
+      category: 'UI navigation',
+      action: 'click',
+      label: 'Left hand side menu has been opened through menu icon',
+      noninteraction: false,
+    });
+
     isLeftMenuModalOpen.value = true;
 
     isNotificationModalOpen.value = false;

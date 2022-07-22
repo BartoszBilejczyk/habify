@@ -81,11 +81,11 @@
       title: 'Notification Settings',
       name: 'profile-notification-settings',
     },
-    {
-      icon: TaskIcon,
-      title: 'Task Center',
-      name: 'profile-task-center',
-    },
+    // {
+    //   icon: TaskIcon,
+    //   title: 'Task Center',
+    //   name: 'profile-task-center',
+    // },
     {
       icon: ShieldSearch,
       title: 'Challenge History',

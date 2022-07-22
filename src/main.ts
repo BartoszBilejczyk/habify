@@ -3,6 +3,7 @@ import App from './App.vue';
 import router from './router';
 import './index.css';
 import { i18n } from './i18n';
+import gtm from './gtm';
 import { useFirebase } from './composables/useFirebase';
 import Vue3Lottie from 'vue3-lottie';
 import 'vue3-lottie/dist/style.css';
@@ -17,6 +18,7 @@ const app = createApp(App);
 
 app.use(router);
 app.use(i18n);
+app.use(gtm);
 app.use(Vue3Lottie, { name: 'LottieAnimation' });
 app.use(FloatingVue);
 

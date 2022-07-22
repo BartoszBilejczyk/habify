@@ -5,11 +5,7 @@
 </template>
 
 <script setup lang="ts">
-  import { ref } from 'vue';
-
   defineProps<{
     content: string;
   }>();
-
-  const isOpen = ref(false);
 </script>
