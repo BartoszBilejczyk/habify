@@ -49,7 +49,7 @@
 
   const showPaperPlane = ref(false);
 
-  const inviteLink = computed(() => `https://habbi.app/invite?code=${currentRoute.value.query.id}`);
+  const inviteLink = computed(() => `https://habbi.app/invite?inviteCode=${currentRoute.value.query.id}`);
 
   const shareData = computed(() => ({
     title: inviteLink.value,

@@ -31,7 +31,7 @@
     name: RouteName;
   }
 
-  const { push } = useRouter();
+  const { push, currentRoute } = useRouter();
   const { userProfile } = useUser();
 
   // TODO translations
@@ -64,6 +64,6 @@
   ]);
 
   const handleRouteChange = async (name: RouteName) => {
-    await push({ name, query: { back: 'menu' } });
+    await push({ name, query: { ...currentRoute.value.query, back: 'menu' } });
   };
 </script>

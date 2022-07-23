@@ -58,7 +58,7 @@
             (challenge.type === CHALLENGE_TYPES.duration.value && timeEnded)) &&
           !decisions?.you
         "
-        class="mt-2"
+        class="mt-4"
       >
         <div class="relative">
           <BaseButton full secondary @click="openSelectWinnerModal">
@@ -104,7 +104,7 @@
           {{ $t('challenge.challengeParticipant') }}
         </div>
         <BaseBox small class="flex items-center mt-1.5">
-          <div v-if="personName">
+          <div v-if="personName" class="flex items-center">
             <div
               class="h-6 w-6 text-xs rounded-full bg-white-20 dark:bg-white-400 flex items-center justify-center font-bold"
             >
@@ -197,6 +197,7 @@
   import { useI18n } from 'vue-i18n';
   import { useUser } from '../composables/useUser';
   import { emptyChallenge } from '../helpers/empty';
+  import { getNameAndNickname } from '../helpers';
   import { useDark } from '@vueuse/core';
 
   dayjs.locale(navigator.language);
@@ -248,15 +249,18 @@
   });
 
   const personName = computed(() => {
+    console.log(challenge.value.invitee);
     return userProfileBasic.value.id === challenge.value.inviterId
-      ? challenge.value.invitee?.name
-      : challenge.value.inviter?.name;
+      ? getNameAndNickname(challenge.value.invitee)
+      : getNameAndNickname(challenge.value.inviter);
   });
 
   const getInitials = (name: string) => {
-    const splitted: string[] = name.split(' ');
-    // @ts-ignore
-    return splitted.shift().charAt(0) + splitted.pop().charAt(0);
+    if (name) {
+      return name.split('')[0];
+    } else {
+      return '';
+    }
   };
 
   const shareData = computed(() => ({
@@ -415,6 +419,6 @@
   };
 
   const goToInvite = async () => {
-    await push({ name: 'invite', query: { code: challenge.value.id } });
+    await push({ name: 'invite', query: { ...currentRoute.value.query, inviteCode: challenge.value.id } });
   };
 </script>

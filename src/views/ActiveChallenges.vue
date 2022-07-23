@@ -2,7 +2,7 @@
   <div class="w-full h-full flex flex-col flex-1">
     <BaseTopNav :title="$t('titles.dashboard')" icon="menu" @openModal="openLeftMenuModal">
       <div class="relative pr-0.5" @click="openNotificationsModal">
-        <NotificationIcon class="w-5 h-5" />
+        <NotificationIcon class="w-5 h-5" :class="activeNotificationsLength && 'notification-icon'" />
         <div
           v-if="activeNotificationsLength"
           class="absolute -top-2 -right-2 h-4 w-4 rounded-full bg-primary text-xs flex items-center justify-center text-white font-bold"
@@ -99,11 +99,9 @@
 
   const hideNotificationModal = async () => {
     isNotificationModalOpen.value = false;
-
-    await markNotificationsAsSeen();
   };
 
-  const openNotificationsModal = () => {
+  const openNotificationsModal = async () => {
     console.log(gtm);
     gtm?.trackEvent({
       event: 'NOTIFICATION_MODAL_OPEN',
@@ -116,6 +114,8 @@
     isNotificationModalOpen.value = true;
 
     isLeftMenuModalOpen.value = false;
+
+    await markNotificationsAsSeen();
   };
 
   const hideLeftMenuModal = async () => {
@@ -139,3 +139,12 @@
     isNotificationModalOpen.value = false;
   };
 </script>
+
+<style>
+  .notification-icon {
+    animation: sway 0.6s;
+    animation-iteration-count: 3;
+    animation-timing-function: ease-in-out;
+    transform-origin: top;
+  }
+</style>

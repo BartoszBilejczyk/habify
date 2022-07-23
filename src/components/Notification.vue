@@ -45,7 +45,7 @@
   import { useUser } from '../composables/useUser';
 
   const { markNotificationAsDimissed } = useUser();
-  const { push } = useRouter();
+  const { push, currentRoute } = useRouter();
 
   const props = defineProps<{
     notification: Notification;
@@ -60,13 +60,16 @@
       // TODO
 
       case NOTIFICATION_ACTION.showInvite.value:
-        await push({ name: 'invite', query: { code: props.notification.challengeId } });
+        await push({
+          name: 'invite',
+          query: { ...currentRoute.value.query, inviteCode: props.notification.challengeId },
+        });
         break;
       case NOTIFICATION_ACTION.createNewChallenge.value:
         await push({ name: 'new-challenge' });
         break;
       case NOTIFICATION_ACTION.goToChallenge.value:
-        await push({ name: 'challenge', params: { id: props.notification.challengeId } });
+        await push({ name: 'challenge', params: { ...currentRoute.value.query, id: props.notification.challengeId } });
         break;
     }
   };

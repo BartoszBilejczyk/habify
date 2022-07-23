@@ -19,6 +19,7 @@ export const useUser = createGlobalState(() => {
     email: userProfile.value.email,
     phone: userProfile.value.phone,
     name: userProfile.value.name,
+    nickname: userProfile.value.nickname,
     points: userProfile.value.points,
     image: userProfile.value.image,
   }));

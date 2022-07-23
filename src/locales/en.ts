@@ -58,6 +58,7 @@ export default {
     preferences: 'Preferences',
     taskCenter: 'Task Center',
     donate: 'Donate',
+    invitation: 'Challenge invitation',
   },
   auth: {
     loginTitle: 'Sign in to Habbi',

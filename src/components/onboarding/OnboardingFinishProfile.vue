@@ -7,7 +7,7 @@
       {{ $t('onboarding.finishProfileDescription') }}
     </div>
     <BaseInput class="w-full mt-6" v-model="name" placeholder="Name*" full required :error="formInvalid && !name" />
-    <div class="relative w-full mt-6">
+    <div class="relative w-full mt-3">
       <div class="absolute top-3 right-3">
         <BaseTooltip
           content="We ask for a nickname to distinguish you over other people who might have the same name. We don't require surname."

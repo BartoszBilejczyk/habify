@@ -68,8 +68,10 @@
   });
 
   const getInitials = (name: string) => {
-    const splitted: string[] = name.split(' ');
-    // @ts-ignore
-    return splitted.shift().charAt(0) + splitted.pop().charAt(0);
+    if (name) {
+      return name.split('')[0];
+    } else {
+      return '';
+    }
   };
 </script>

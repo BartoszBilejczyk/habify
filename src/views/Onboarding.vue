@@ -56,7 +56,7 @@
   import OnboardingBase from '../components/onboarding/OnboardingBase.vue';
   import { useFirebase } from '../composables/useFirebase';
   import firebase from 'firebase';
-  import { User } from '../types';
+  import { Notification, User } from '../types';
   import { useRouter } from 'vue-router';
   import { useStore } from '../composables/useStore';
   import betAnimation from '../assets/lottie/bet-animation.json';
@@ -64,7 +64,7 @@
   import girlChinupAnimation from '../assets/lottie/girl-chinup-animation.json';
   import manPhoneAnimation from '../assets/lottie/man-phone-animation.json';
   import { useUser } from '../composables/useUser';
-  import { NOTIFICATION_CATEGORY } from '../helpers/constants';
+  import { NOTIFICATION_ACTION, NOTIFICATION_CATEGORY } from '../helpers/constants';
 
   const { firebaseUser, updateDoc, getDoc } = useFirebase();
   const { userProfile, addNotification } = useUser();
@@ -92,14 +92,24 @@
     replace({ query: { ...currentRoute.value.query, step: String(step.value) } });
   };
 
+  const goToInviteOrHome = async () => {
+    if (currentRoute.value.query.backToInvite) {
+      // @ts-ignore
+      await push({ name: 'invite', query: { inviteCode: currentRoute.value.query.inviteCode } });
+      // add notification so that user can come back to the invitation
+    } else {
+      await push({ name: 'active-challenges' });
+    }
+  };
+
   const handleSkip = async () => {
-    await push({ name: 'active-challenges' });
+    await goToInviteOrHome();
   };
 
   const handleFinish = async () => {
     setTimeout(async () => {
       await updateDoc(`users/${firebaseUser.value?.uid}`, { onboarded: true });
-      await push({ name: 'active-challenges' });
+      await goToInviteOrHome();
     }, 800);
   };
 

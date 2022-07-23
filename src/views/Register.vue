@@ -17,7 +17,9 @@
       </BaseButton>
       <div class="mt-3 text-center text-sm ml-auto">
         <span class="text-white-700 dark:text-white">{{ $t('auth.alreadyHaveAccount') }}</span>
-        <BaseButton text-secondary @click="push({ name: 'login' })">{{ $t('auth.login') }}</BaseButton>
+        <BaseButton text-secondary @click="push({ name: 'login', query: { ...currentRoute.query } })">
+          {{ $t('auth.login') }}
+        </BaseButton>
       </div>
     </div>
   </div>
@@ -84,6 +86,7 @@
           id: user?.uid,
           email: user?.email,
           name: user?.displayName,
+          nickname: '',
           phone: user?.phoneNumber,
           image: user?.photoURL,
           referralCode: userNewReferralCode,
@@ -99,7 +102,7 @@
         });
       })
       .then(async () => {
-        await push({ name: 'onboarding' });
+        await push({ name: 'onboarding', query: { ...currentRoute.value.query } });
       })
       .catch(error => {
         console.error(error);

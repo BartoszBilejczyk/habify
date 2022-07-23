@@ -10,7 +10,7 @@
           class="rounded-full bg-white-20 dark:bg-white-400 flex items-center justify-center font-bold"
           :class="{ 'h-8 w-8 text-sm': small, 'h-10 w-10': !small }"
         >
-          {{ getInitials(friend.name) }}
+          {{ getInitials(friend?.name) }}
         </div>
         <div v-else class="h-10 w-10 rounded-full bg-white-20 dark:bg-white-400 flex items-center justify-center">
           <ChevronRight class="w-4 h-4 text-white" />
@@ -46,11 +46,12 @@
   const loading = ref(false);
 
   const getInitials = (name: string) => {
-    const splitted: string[] = name.split(' ');
-    // @ts-ignore
-    return splitted.shift().charAt(0) + splitted.pop().charAt(0);
+    if (name) {
+      return name.split('')[0];
+    } else {
+      return '';
+    }
   };
-
   const handleStartNewChallenge = async (friend: { id: string; name: string }) => {
     stepOne.invitee = {
       ...emptyUserBasic,

@@ -31,15 +31,4 @@
     step: number;
     white?: boolean;
   }>();
-
-  const imagePath = computed(() => {
-    switch (props.step) {
-      case 2:
-        return new URL('../../assets/onboarding-illustration.png', import.meta.url);
-      case 3:
-        return new URL('../../assets/onboarding-illustration.png', import.meta.url);
-      case 4:
-        return new URL('../../assets/onboarding-illustration.png', import.meta.url);
-    }
-  });
 </script>

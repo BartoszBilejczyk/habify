@@ -196,9 +196,8 @@
     });
 
     if (stepOne.inviteeId) {
-      console.log(stepOne.inviteeId);
       const notificationData: Partial<Notification> = {
-        name: `You have been challenged by ${stepOne.invitee?.name}.`,
+        name: `You have been challenged by ${stepOne.inviter?.name}.`,
         // TODO update
         description: `Challenge is ${challenge.title} and bet is ${challenge.betDetails}.`,
         points: challenge.points,
@@ -225,7 +224,7 @@
       noninteraction: false,
     });
 
-    await push({ name: 'new-challenge-success', query: { id: newChallenge.value.id } });
+    await push({ name: 'new-challenge-success', query: { ...currentRoute.value.query, id: newChallenge.value.id } });
   };
 </script>
 

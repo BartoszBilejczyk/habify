@@ -114,3 +114,9 @@ h1, h2, h3, h4, h5, h6 {
   border-color: #20232D !important;
 }
 
+@keyframes sway {
+  0% { transform: rotate(0deg); }
+  25% { transform: rotate(-8deg); }
+  75% { transform: rotate(8deg); }
+  97% { transform: rotate(1deg); }
+}
